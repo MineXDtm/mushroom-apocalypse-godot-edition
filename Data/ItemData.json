@@ -1,0 +1,115 @@
+{
+  "wooden_exe": {
+    "ItemCategory": "instrument",
+    "StackSize": 1,
+    "Description": "A sturdy tree branch that can be used for crafting."
+  },
+   "block_beta": {
+    "ItemCategory": "build",
+	"rotation": true,
+	"layer":1,
+    "StackSize": 99,
+    "Description": "A sturdy tree branch that can be used for crafting."
+  },
+    "kust_fruit_in_pot": {
+    "ItemCategory": "build",
+	"rotation": false,
+	"layer":1,
+    "StackSize": 16,
+    "Description": "A sturdy tree branch that can be used for crafting."
+  },
+    "drop_wood": {
+    "ItemCategory": "resurse",
+    "StackSize": 99,
+    "Description": "A sturdy tree branch that can be used for crafting."
+  },
+    "apple": {
+    "ItemCategory": "food",
+    "StackSize": 99,
+    "Description": "A sturdy tree branch that can be used for crafting."
+  },
+  "wooden_pickaxe": {
+    "ItemCategory": "instrument",
+    "StackSize": 1,
+    "Description": "A sturdy tree branch that can be used for crafting."
+  },
+  "cobblestone": {
+    "ItemCategory": "resurse",
+    "StackSize": 99,
+    "Description": "A sturdy tree branch that can be used for crafting."
+  },
+  "build_block": {
+    "ItemCategory": "build",
+	"rotation": false,
+	"layer":1,
+    "StackSize": 99,
+    "Description": "A sturdy tree branch that can be used for crafting."
+  },
+  "stone_pickaxe": {
+    "ItemCategory": "instrument",
+    "StackSize": 1,
+    "Description": "A sturdy tree branch that can be used for crafting."
+  },
+  "stone_exe": {
+    "ItemCategory": "instrument",
+    "StackSize": 1,
+    "Description": "A sturdy tree branch that can be used for crafting."
+  },
+  "torch": {
+    "ItemCategory": "build",
+	"rotation": false,
+	"layer":1,
+    "StackSize": 99,
+    "Description": "A sturdy tree branch that can be used for crafting."
+  },
+  "wooden_floor": {
+    "ItemCategory": "build",
+	"rotation": false,
+	"layer":0,
+    "StackSize": 99,
+    "Description": "A sturdy tree branch that can be used for crafting."
+  },
+  "coal": {
+    "ItemCategory": "resurse",
+    "StackSize": 99,
+    "Description": "A sturdy tree branch that can be used for crafting."
+  },
+  "door": {
+    "ItemCategory": "build",
+	"rotation": true,
+	"layer":1,
+    "StackSize": 99,
+    "Description": "A sturdy tree branch that can be used for crafting."
+  },
+  "iron": {
+    "ItemCategory": "resurse",
+    "StackSize": 99,
+    "Description": "A sturdy tree branch that can be used for crafting."
+  },
+  "piece_of_rust": {
+    "ItemCategory": "resurse",
+    "StackSize": 99,
+    "Description": "A sturdy tree branch that can be used for crafting."
+  },
+  "wooden_trap": {
+    "ItemCategory": "build",
+	"rotation": false,
+	"layer":0,
+    "StackSize": 99,
+    "Description": "A sturdy tree branch that can be used for crafting."
+  },
+  "stove": {
+    "ItemCategory": "build",
+	"rotation": false,
+    "StackSize": 99,
+	"layer":1,
+    "Description": "A sturdy tree branch that can be used for crafting."
+  },
+  "stone_block": {
+    "ItemCategory": "build",
+	"rotation": true,
+	"layer":1,
+    "StackSize": 99,
+    "Description": "A sturdy tree branch that can be used for crafting."
+  },
+}

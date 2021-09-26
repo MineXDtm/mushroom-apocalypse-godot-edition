@@ -1,0 +1,238 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://settings/menu.gd" type="Script" id=1]
+[ext_resource path="res://textures/gui/text.png" type="Texture" id=2]
+[ext_resource path="res://textures/gui/bu31tton_on_clicked.png" type="Texture" id=3]
+[ext_resource path="res://textures/gui/bu31tton_on_mause.png" type="Texture" id=4]
+[ext_resource path="res://textures/gui/bu31tton.png" type="Texture" id=5]
+[ext_resource path="res://textures/gui/menu.png" type="Texture" id=6]
+[ext_resource path="res://settings/settings.gd" type="Script" id=7]
+[ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://settings/screen_size.gd" type="Script" id=9]
+[ext_resource path="res://textures/gui/bar.png" type="Texture" id=10]
+[ext_resource path="res://textures/gui/menu21.png" type="Texture" id=11]
+[ext_resource path="res://textures/gui/text5.png" type="Texture" id=12]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=2]
+use_mipmaps = true
+font_data = ExtResource( 8 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+
+[sub_resource type="Theme" id=4]
+OptionButton/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+OptionButton/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+OptionButton/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
+OptionButton/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+OptionButton/constants/arrow_margin = 2
+OptionButton/constants/hseparation = 2
+OptionButton/fonts/font = null
+OptionButton/icons/arrow = null
+OptionButton/styles/disabled = null
+OptionButton/styles/focus = null
+OptionButton/styles/hover = null
+OptionButton/styles/normal = SubResource( 3 )
+OptionButton/styles/pressed = null
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.290196, 0.227451, 0.4, 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+border_width_top = 5
+border_color = Color( 0.105882, 0.0588235, 0.168627, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[node name="game_menu" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -159.5
+margin_top = -90.0
+margin_right = 159.5
+margin_bottom = 90.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="bg" type="TextureRect" parent="."]
+margin_left = 95.0
+margin_top = 28.0
+margin_right = 159.0
+margin_bottom = 92.0
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="menu" type="TextureRect" parent="bg"]
+visible = false
+margin_left = -46.75
+margin_top = -14.0
+margin_right = 113.25
+margin_bottom = 77.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="TextureRect" parent="bg/menu"]
+margin_left = 48.25
+margin_top = 16.0
+margin_right = 88.25
+margin_bottom = 32.0
+mouse_filter = 2
+texture = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="but" type="VBoxContainer" parent="bg/menu"]
+margin_left = 52.25
+margin_top = 36.0
+margin_right = 92.25
+margin_bottom = 62.0
+custom_constants/separation = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="settings_but" type="TextureButton" parent="bg/menu/but"]
+margin_right = 40.0
+margin_bottom = 12.0
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="text_image" type="TextureRect" parent="bg/menu/but/settings_but"]
+margin_left = 6.0
+margin_top = 3.0
+margin_right = 46.0
+margin_bottom = 8.0
+rect_scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="exit" type="TextureButton" parent="bg/menu/but"]
+margin_top = 14.0
+margin_right = 40.0
+margin_bottom = 26.0
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="text_image" type="TextureRect" parent="bg/menu/but/exit"]
+margin_left = 13.9286
+margin_top = 3.14285
+margin_right = 27.9286
+margin_bottom = 8.14285
+rect_scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="settings" type="TextureRect" parent="bg"]
+margin_left = -46.75
+margin_top = -14.0
+margin_right = 113.25
+margin_bottom = 77.0
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="fullscreen" type="TextureButton" parent="bg/settings"]
+margin_left = 51.0
+margin_top = 64.0
+margin_right = 91.0
+margin_bottom = 76.0
+rect_scale = Vector2( 0.7, 0.7 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="bg/settings/fullscreen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -5.0
+margin_right = 38.0
+margin_bottom = 8.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 0.960784, 0, 1 )
+text = "fullscreen"
+
+[node name="title" type="Label" parent="bg/settings"]
+margin_left = 51.0
+margin_top = 48.0
+margin_right = 111.0
+margin_bottom = 61.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 0.984314, 0, 1 )
+text = "Screen Size"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="screen_size" type="OptionButton" parent="bg/settings/title"]
+margin_left = -1.0
+margin_top = 14.0
+margin_right = 121.0
+margin_bottom = 34.0
+rect_scale = Vector2( 0.5, 0.5 )
+theme = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+text = "1920x1080"
+items = [ "1920x1080", null, false, 0, null, "640x480", null, false, 1, null, "1280x720", null, false, 2, null, "800x600", null, false, 3, null ]
+selected = 0
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSlider" type="HSlider" parent="bg/settings"]
+margin_left = 52.0
+margin_top = 25.0
+margin_right = 162.0
+margin_bottom = 40.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_icons/tick = ExtResource( 10 )
+custom_icons/grabber_disabled = ExtResource( 10 )
+custom_icons/grabber_highlight = ExtResource( 10 )
+custom_icons/grabber = ExtResource( 10 )
+custom_styles/slider = SubResource( 6 )
+custom_styles/grabber_area_highlight = SubResource( 7 )
+custom_styles/grabber_area = SubResource( 8 )
+ticks_on_borders = true
+
+[connection signal="button_down" from="bg/menu/but/settings_but" to="bg/menu" method="_on_settings_but_button_down"]
+[connection signal="button_up" from="bg/menu/but/settings_but" to="bg/menu" method="_on_settings_but_button_up"]
+[connection signal="pressed" from="bg/menu/but/settings_but" to="bg/menu" method="_on_settings_but_pressed"]
+[connection signal="button_down" from="bg/menu/but/exit" to="bg/menu" method="_on_exit_button_down"]
+[connection signal="pressed" from="bg/settings/fullscreen" to="bg/settings" method="_on_fullscreen_pressed"]
+[connection signal="item_selected" from="bg/settings/title/screen_size" to="bg/settings/title/screen_size" method="_on_screen_size_item_selected"]

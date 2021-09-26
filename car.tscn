@@ -1,0 +1,97 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://textures/car.png" type="Texture" id=1]
+[ext_resource path="res://car.gd" type="Script" id=10]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 40, 24 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 18, 2 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 4, 4 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 21, 8 )
+
+[node name="car" type="Area2D" groups=[
+"car",
+]]
+script = ExtResource( 10 )
+
+[node name="car_area" type="Area2D" parent="." groups=[
+"car_area",
+]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="car_area"]
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -2, 0 )
+shape = SubResource( 2 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2( 0, -2 )
+scale = Vector2( 1, 1.00781 )
+polygon = PoolVector2Array( -22, 8, -22, -5.95349, 18, -5.9535, 18, 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="pos1" type="Area2D" parent="." groups=[
+"area_car",
+]]
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pos1"]
+position = Vector2( -16, 0 )
+shape = SubResource( 3 )
+
+[node name="car_area2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="car_area2"]
+position = Vector2( -2, -1 )
+shape = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="pos2" type="Area2D" parent="." groups=[
+"area_car",
+]]
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pos2"]
+position = Vector2( -4, 0 )
+shape = SubResource( 3 )
+
+[node name="pos3" type="Area2D" parent="." groups=[
+"area_car",
+]]
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pos3"]
+position = Vector2( 8, 0 )
+shape = SubResource( 3 )
+
+[node name="area" type="Area2D" parent="." groups=[
+"car_damage_zone",
+]]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="area"]
+polygon = PoolVector2Array( -24, 9, 22, 9, 22, -16, -24, -16 )
+
+[connection signal="area_entered" from="pos1" to="." method="_on_area_car_area_entered"]
+[connection signal="area_entered" from="area" to="." method="_on_area_car_area_entered"]

@@ -1,0 +1,10 @@
+[gd_scene format=2]
+
+[node name="wood" type="RichTextLabel"]
+margin_left = -28.0
+margin_top = -10.5
+margin_right = 27.0
+margin_bottom = 12.5
+__meta__ = {
+"_edit_use_anchors_": false
+}

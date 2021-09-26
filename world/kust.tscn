@@ -1,0 +1,129 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://textures/kust/kust.png" type="Texture" id=1]
+[ext_resource path="res://world/kust.gd" type="Script" id=2]
+[ext_resource path="res://textures/kust/kust_destroy1.png" type="Texture" id=3]
+[ext_resource path="res://textures/kust/kust_destroy2.png" type="Texture" id=4]
+[ext_resource path="res://textures/kust/kust_destroy3.png" type="Texture" id=5]
+[ext_resource path="res://textures/kust/kust_destroy5.png" type="Texture" id=6]
+[ext_resource path="res://textures/kust/kust_destroy4.png" type="Texture" id=7]
+[ext_resource path="res://textures/kust/kust_broked4.png" type="Texture" id=8]
+[ext_resource path="res://textures/kust/kust_broked1.png" type="Texture" id=9]
+[ext_resource path="res://textures/kust/kust_broked5.png" type="Texture" id=10]
+[ext_resource path="res://textures/kust/kust_broked6.png" type="Texture" id=11]
+[ext_resource path="res://textures/kust/kust_broked2.png" type="Texture" id=12]
+[ext_resource path="res://textures/kust/kust_broked3.png" type="Texture" id=13]
+[ext_resource path="res://builds/broke_bar.tres" type="StyleBox" id=14]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": false,
+"name": "default",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": false,
+"name": "broked",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 6 ) ],
+"loop": false,
+"name": "broke",
+"speed": 9.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10.3626, 15.1757 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 178.264, 44.4813 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 182.098, 56.6535 )
+
+[sub_resource type="CanvasItemMaterial" id=5]
+light_mode = 1
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.380392, 0.670588, 0.180392, 1 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+emission_shape = 1
+emission_sphere_radius = 76.63
+flag_disable_z = true
+direction = Vector3( 99, 99, 99 )
+gravity = Vector3( 0, 98, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 12.36
+color = Color( 0.109804, 0.34902, 0.0745098, 1 )
+
+[node name="kust" type="Area2D" groups=[
+"kust",
+]]
+visible = false
+show_behind_parent = true
+scale = Vector2( -0.0672904, 0.194948 )
+gravity_vec = Vector2( 0, 0 )
+gravity = 0.0
+collision_layer = 3
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+light_mask = 2
+scale = Vector2( 12, 4 )
+frames = SubResource( 1 )
+playing = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 2.12999, 7.7411 )
+scale = Vector2( 6, 4 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 12.2735, 4.84167 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 10.7904, 7.00062 )
+shape = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+visible = false
+material = SubResource( 5 )
+margin_left = -179.5
+margin_top = -78.9407
+margin_right = 195.5
+margin_bottom = -57.9407
+custom_styles/fg = SubResource( 6 )
+custom_styles/bg = ExtResource( 14 )
+custom_colors/font_color = Color( 0.431373, 1, 0, 1 )
+custom_colors/font_color_shadow = Color( 0.313726, 1, 0, 1 )
+max_value = 5.0
+value = 5.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Particles2D" type="Particles2D" parent="."]
+scale = Vector2( 1.87055, 0.635187 )
+emitting = false
+amount = 4
+lifetime = 1.5
+one_shot = true
+speed_scale = 7.22
+process_material = SubResource( 7 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_kust_area_entered"]
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

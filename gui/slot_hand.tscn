@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://textures/gui/slot_on.png" type="Texture" id=1]
+[ext_resource path="res://textures/items/wooden_pickaxe.png" type="Texture" id=2]
+[ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://gui/slot_hand.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 3 )
+
+[node name="slot" type="Sprite"]
+texture = ExtResource( 1 )
+script = ExtResource( 4 )
+
+[node name="item" type="TextureRect" parent="."]
+margin_left = -8.0
+margin_top = -9.0
+margin_right = 8.0
+margin_bottom = 7.0
+mouse_filter = 2
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="item"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 17.0
+margin_bottom = 18.0
+rect_scale = Vector2( 0.8, 0.8 )
+custom_fonts/font = SubResource( 1 )
+text = " 9"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

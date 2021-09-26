@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://TileMap.gd" type="Script" id=1]
+[ext_resource path="res://textures/build_player/block_beta_true.png" type="Texture" id=2]
+[ext_resource path="res://textures/items/tile.png" type="Texture" id=6]
+
+[node name="TileMap" type="TileMap"]
+cell_size = Vector2( 32, 32 )
+cell_quadrant_size = 32
+cell_custom_transform = Transform2D( 30, 32, 32, 32, 32, 32 )
+cell_tile_origin = 1
+format = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 0.0, 32.0 ],
+"_edit_vertical_guides_": [ 0.0, 32.0 ]
+}
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Node2D"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+
+[node name="Sprite2" type="Sprite" parent="Node2D"]
+show_behind_parent = true
+position = Vector2( 16, 16 )
+texture = ExtResource( 6 )
+
+[node name="checker" type="RayCast2D" parent="Node2D"]
+position = Vector2( 16, 5 )
+enabled = true
+cast_to = Vector2( 0, 16 )
+collision_mask = 2
+collide_with_areas = true

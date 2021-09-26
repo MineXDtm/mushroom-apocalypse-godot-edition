@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://textures/gui/slot2.png" type="Texture" id=1]
+[ext_resource path="res://gui/slot.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 1 )
+region_rect = Rect2( 6, 6, 20, 20 )
+margin_left = 2.91989
+margin_right = 5.28295
+margin_top = 3.50387
+margin_bottom = 15.0
+
+[node name="slot" type="Panel"]
+margin_right = 20.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+rect_pivot_offset = Vector2( 134.113, 16.8911 )
+mouse_default_cursor_shape = 6
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

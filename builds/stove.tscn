@@ -1,0 +1,93 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://textures/build/stove_on.png" type="Texture" id=1]
+[ext_resource path="res://builds/stove.gd" type="Script" id=2]
+[ext_resource path="res://textures/build/stove_off.png" type="Texture" id=7]
+[ext_resource path="res://textures/build/light.png" type="Texture" id=8]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 7 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "texture",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 12 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.207843, 1, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 8, 15 )
+
+[node name="stove" type="Area2D" groups=[
+"buildblock",
+]]
+collision_layer = 7
+script = ExtResource( 2 )
+
+[node name="stove" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "texture"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 2 )
+shape = SubResource( 2 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 0, 2 )
+shape = SubResource( 2 )
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+visible = false
+margin_left = -16.5999
+margin_top = -25.4182
+margin_right = 16.4001
+margin_bottom = -21.4182
+custom_styles/fg = SubResource( 3 )
+custom_styles/bg = SubResource( 4 )
+max_value = 12.0
+value = 12.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="blocked" type="Area2D" parent="." groups=[
+"blocked",
+]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="blocked"]
+position = Vector2( 0, 5 )
+shape = SubResource( 5 )
+
+[node name="Light2D" type="Light2D" parent="."]
+visible = false
+light_mask = -2147483645
+position = Vector2( 0.265155, 0.530328 )
+scale = Vector2( 2.46933, 2.38301 )
+texture = ExtResource( 8 )
+texture_scale = 0.01
+color = Color( 0.490196, 0.184314, 0, 1 )
+energy = 1.62
+range_item_cull_mask = 3
+shadow_enabled = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="prog" type="Timer" parent="."]
+
+[node name="fire" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="area_entered" from="." to="." method="_on_stove_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_stove_area_exited"]
+[connection signal="timeout" from="prog" to="." method="_on_prog_timeout"]
+[connection signal="timeout" from="fire" to="." method="_on_fire_timeout"]

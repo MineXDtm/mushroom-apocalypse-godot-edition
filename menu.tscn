@@ -1,0 +1,299 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://textures/GRIB_ATAKYET.png" type="Texture" id=2]
+[ext_resource path="res://worlds_list.gd" type="Script" id=3]
+[ext_resource path="res://menu.gd" type="Script" id=4]
+[ext_resource path="res://textures/gui/menu_bg.png" type="Texture" id=5]
+[ext_resource path="res://Fonts/FFFFORWA.TTF" type="DynamicFontData" id=6]
+[ext_resource path="res://textures/gui/name_edit.png" type="Texture" id=7]
+
+[sub_resource type="ParticlesMaterial" id=1]
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 104.99
+flag_align_y = true
+flag_rotate_y = true
+flag_disable_z = true
+direction = Vector3( 200, 0, 0 )
+spread = 119.25
+flatness = 0.68
+gravity = Vector3( 0, -98, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_random = 0.46
+color = Color( 0.956863, 0.831373, 0.254902, 1 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=6]
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=7]
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=8]
+font_data = ExtResource( 6 )
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.537255, 0.356863, 0.0705882, 1 )
+border_width_top = 5
+border_color = Color( 0.341176, 0.215686, 0.00392157, 1 )
+expand_margin_top = 5.0
+
+[sub_resource type="DynamicFont" id=11]
+use_filter = true
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=12]
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=13]
+font_data = ExtResource( 6 )
+
+[node name="menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bg" type="TextureRect" parent="."]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 156, 145 )
+scale = Vector2( -1.15821, 0.756622 )
+lifetime = 7.64
+process_material = SubResource( 1 )
+
+[node name="menu_1" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="title" type="TextureRect" parent="menu_1"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -112.0
+margin_right = 112.0
+margin_bottom = 24.0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="buttons" type="VBoxContainer" parent="menu_1"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -92.0
+margin_top = -98.0
+margin_right = -9.0
+margin_bottom = -10.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="play" type="Button" parent="menu_1/buttons"]
+margin_right = 83.0
+margin_bottom = 19.0
+custom_fonts/font = SubResource( 2 )
+text = "play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="join" type="Button" parent="menu_1/buttons"]
+margin_top = 23.0
+margin_right = 83.0
+margin_bottom = 42.0
+custom_fonts/font = SubResource( 3 )
+disabled = true
+text = "join"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="settings" type="Button" parent="menu_1/buttons"]
+margin_top = 46.0
+margin_right = 83.0
+margin_bottom = 65.0
+custom_fonts/font = SubResource( 4 )
+disabled = true
+text = "settings"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="quit" type="Button" parent="menu_1/buttons"]
+margin_top = 69.0
+margin_right = 83.0
+margin_bottom = 88.0
+custom_fonts/font = SubResource( 4 )
+text = "quit game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="worlds_list" type="Control" parent="."]
+visible = false
+margin_right = 320.0
+margin_bottom = 180.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="container" type="ScrollContainer" parent="worlds_list"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -26.0
+margin_top = -45.0
+margin_right = 21.0
+margin_bottom = -2.0
+rect_scale = Vector2( 2, 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="worlds_list/container"]
+
+[node name="create" type="Button" parent="worlds_list"]
+margin_left = 181.0
+margin_top = 139.0
+margin_right = 325.0
+margin_bottom = 167.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 5 )
+text = "create world"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="remove" type="Button" parent="worlds_list"]
+margin_left = 130.0
+margin_top = 139.0
+margin_right = 221.0
+margin_bottom = 167.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 6 )
+text = "remove"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="join" type="Button" parent="worlds_list"]
+margin_left = 77.0
+margin_top = 139.0
+margin_right = 168.0
+margin_bottom = 167.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 7 )
+text = "join"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="back" type="Button" parent="worlds_list"]
+margin_left = 4.0
+margin_top = 3.0
+margin_right = 40.0
+margin_bottom = 23.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 8 )
+text = "back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="worlds_list"]
+visible = false
+margin_top = -1.0
+margin_right = 320.0
+margin_bottom = 179.0
+color = Color( 0, 0, 0, 0.301961 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gui" type="TextureRect" parent="worlds_list/ColorRect"]
+margin_left = 101.0
+margin_top = 53.0
+margin_right = 140.0
+margin_bottom = 73.0
+rect_scale = Vector2( 3, 3 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="name_edit" type="LineEdit" parent="worlds_list/ColorRect/gui"]
+margin_left = 4.0
+margin_top = 10.0
+margin_right = 317.0
+margin_bottom = 42.0
+rect_scale = Vector2( 0.1, 0.1 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
+custom_fonts/font = SubResource( 11 )
+placeholder_text = "world_name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="worlds_list/ColorRect/gui"]
+margin_left = 15.0
+margin_top = 14.0
+margin_right = 112.0
+margin_bottom = 42.0
+rect_scale = Vector2( 0.1, 0.1 )
+custom_fonts/font = SubResource( 12 )
+text = "ok"
+
+[node name="Label" type="Label" parent="worlds_list/ColorRect/gui"]
+margin_left = 11.0
+margin_top = 5.66666
+margin_right = 191.0
+margin_bottom = 27.6667
+rect_scale = Vector2( 0.1, 0.1 )
+custom_fonts/font = SubResource( 13 )
+text = "Write world name"
+
+[connection signal="pressed" from="menu_1/buttons/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="menu_1/buttons/quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="worlds_list/create" to="worlds_list" method="_on_create_pressed"]
+[connection signal="pressed" from="worlds_list/remove" to="worlds_list" method="_on_remove_pressed"]
+[connection signal="pressed" from="worlds_list/join" to="worlds_list" method="_on_join_pressed"]
+[connection signal="pressed" from="worlds_list/back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="worlds_list/ColorRect/gui/Button" to="worlds_list" method="_on_Button_pressed"]

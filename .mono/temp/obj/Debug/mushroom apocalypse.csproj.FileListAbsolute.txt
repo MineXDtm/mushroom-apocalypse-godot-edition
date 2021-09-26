@@ -1,0 +1,14 @@
+C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\bin\Debug\mushroom apocalypse.dll
+C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\bin\Debug\mushroom apocalypse.pdb
+C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\obj\Debug\mushroom apocalypse.csproj.AssemblyReference.cache
+C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\obj\Debug\mushroom apocalypse.AssemblyInfoInputs.cache
+C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\obj\Debug\mushroom apocalypse.AssemblyInfo.cs
+C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\obj\Debug\mushroom apocalypse.csproj.CoreCompileInputs.cache
+C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\obj\Debug\mushroom apocalypse.dll
+C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\obj\Debug\mushroom apocalypse.pdb
+C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\bin\Debug\DiscordRPC.dll
+C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\bin\Debug\Newtonsoft.Json.dll
+C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\obj\Debug\mushroom apocalypse.csproj.CopyComplete
+C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\bin\Debug\Microsoft.Win32.Registry.dll
+C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\bin\Debug\System.Security.AccessControl.dll
+C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\bin\Debug\System.Security.Principal.Windows.dll

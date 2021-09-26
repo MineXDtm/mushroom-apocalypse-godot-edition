@@ -1,0 +1,8 @@
+[gd_scene format=2]
+
+[node name="end" type="Control"]
+margin_top = 26.0
+margin_bottom = 26.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
