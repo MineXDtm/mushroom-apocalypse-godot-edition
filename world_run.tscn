@@ -41,12 +41,6 @@ bg_color = Color( 1, 1, 1, 1 )
 border_width_bottom = 1
 border_color = Color( 0.662745, 0.662745, 0.662745, 1 )
 
-[sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 0.27451, 0.784314, 0.164706, 1 )
-
-[sub_resource type="DynamicFont" id=6]
-font_data = ExtResource( 27 )
-
 [sub_resource type="StyleBoxTexture" id=7]
 texture = ExtResource( 16 )
 region_rect = Rect2( 0, 0, 17, 18 )
@@ -58,6 +52,12 @@ region_rect = Rect2( 0, 0, 17, 18 )
 [sub_resource type="StyleBoxTexture" id=9]
 texture = ExtResource( 17 )
 region_rect = Rect2( 0, 0, 17, 18 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.27451, 0.784314, 0.164706, 1 )
+
+[sub_resource type="DynamicFont" id=6]
+font_data = ExtResource( 27 )
 
 [node name="world" type="Node2D"]
 position = Vector2( -1, 0 )
@@ -222,6 +222,47 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="hand_slots" type="GridContainer" parent="UI2"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -33.0
+margin_top = -32.0
+margin_right = 63.0
+margin_bottom = -1.0
+rect_clip_content = true
+mouse_filter = 0
+custom_constants/hseparation = 3
+columns = 3
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="slot1" type="Panel" parent="UI2/hand_slots"]
+margin_right = 20.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+custom_styles/panel = SubResource( 7 )
+script = ExtResource( 11 )
+
+[node name="slot2" type="Panel" parent="UI2/hand_slots"]
+margin_left = 23.0
+margin_right = 43.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+custom_styles/panel = SubResource( 8 )
+script = ExtResource( 11 )
+
+[node name="slot3" type="Panel" parent="UI2/hand_slots"]
+margin_left = 46.0
+margin_right = 66.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+custom_styles/panel = SubResource( 9 )
+script = ExtResource( 11 )
+
 [node name="energy" type="Control" parent="UI2"]
 visible = false
 margin_left = 20.0
@@ -349,47 +390,6 @@ script = ExtResource( 25 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="hand_slots" type="GridContainer" parent="UI2"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -33.0
-margin_top = -32.0
-margin_right = 63.0
-margin_bottom = -1.0
-rect_clip_content = true
-mouse_filter = 0
-custom_constants/hseparation = 3
-columns = 3
-script = ExtResource( 10 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="slot1" type="Panel" parent="UI2/hand_slots"]
-margin_right = 20.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 20, 20 )
-custom_styles/panel = SubResource( 7 )
-script = ExtResource( 11 )
-
-[node name="slot2" type="Panel" parent="UI2/hand_slots"]
-margin_left = 23.0
-margin_right = 43.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 20, 20 )
-custom_styles/panel = SubResource( 8 )
-script = ExtResource( 11 )
-
-[node name="slot3" type="Panel" parent="UI2/hand_slots"]
-margin_left = 46.0
-margin_right = 66.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 20, 20 )
-custom_styles/panel = SubResource( 9 )
-script = ExtResource( 11 )
 
 [node name="game_menu" parent="UI2" instance=ExtResource( 33 )]
 visible = false

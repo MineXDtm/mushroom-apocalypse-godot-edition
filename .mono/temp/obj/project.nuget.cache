@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Q7hwUrNdYn6yZXTYjf8XTWAgRH8asubknjzIj1D9C6UZfFU3+TO+mlXhCna+/Rrnv71xzR3SwINp6CFF7rIjQA==",
+  "dgSpecHash": "thOMeXiA6fL7MjahR7CsfPGUwvHADZtOcBeKo/8D3YiHo3JhT+BKdBLeNcAnqBUDQ8jta0yyltiqRZISy7vCkQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\andrey\\OneDrive\\Рабочий стол\\The CUBEZ — копия\\mushroom apocalypse.csproj",
+  "projectFilePath": "C:\\Users\\andrey\\OneDrive\\Документы\\GitHub\\mushroom-apocalypse\\mushroom apocalypse.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\andrey\\.nuget\\packages\\discordrichpresence\\1.0.175\\discordrichpresence.1.0.175.nupkg.sha512",
     "C:\\Users\\andrey\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",

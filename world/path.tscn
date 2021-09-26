@@ -22,4 +22,5 @@ clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="area_entered" from="." to="." method="_on_path_area_entered"]

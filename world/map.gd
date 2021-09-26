@@ -13,6 +13,16 @@ var number = 0
 var number2 = 0
 var check
 var chunks = 0
+var types = {
+	"forrest":{
+		"structures":{
+			"kust":100,
+			"kust_fruit":50,
+			"stone":100
+			},
+		"graund": "dirt"
+	}
+}
 const SAVE_DIR = "user://worlds/"
 const SAVE_DIR2 = "user://screen_shot/"
 var save_path = SAVE_DIR + WorldData.world_name + "/world/objects.json"
@@ -52,22 +62,13 @@ func _ready():
 	$time_move.wait_time = $time.wait_time / 15
 	$time_move.start()
 	if WorldData.new == true:
-		var enemyscene = load("res://world/kust.tscn")
-		for _i in range(0,100):
-			Ganaretor.kustes += 1
-			var enemy = enemyscene.instance()
-			get_node("sort").add_child(enemy)
-		
-		var fruit = load("res://world/kust_fruit.tscn")
-		for _i in range(0,50):
-			Ganaretor.fruit_kustes += 1
-			var fruits = fruit.instance()
-			get_node("sort").add_child(fruits)
-		var stone = load("res://world/stone.tscn")
-		for _i in range(0,100):
-			var stones = stone.instance()
-			get_node("sort").add_child(stones)
-		pre_save()
+		for structure in types[WorldData.world_type]["structures"].keys():
+			var enemyscene = load("res://world/"+ structure+".tscn")
+			for _i in range(0,types[WorldData.world_type]["structures"][structure]):
+				yield(get_tree().create_timer(0.01), "timeout")
+				var enemy = enemyscene.instance()
+				get_node("sort").add_child(enemy)
+			pre_save()
 	else:
 		load_chunks()
 		load_virables()

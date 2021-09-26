@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\andrey\\OneDrive\\Рабочий стол\\The CUBEZ — копия\\mushroom apocalypse.csproj": {}
+    "C:\\Users\\andrey\\OneDrive\\Документы\\GitHub\\mushroom-apocalypse\\mushroom apocalypse.csproj": {}
   },
   "projects": {
-    "C:\\Users\\andrey\\OneDrive\\Рабочий стол\\The CUBEZ — копия\\mushroom apocalypse.csproj": {
+    "C:\\Users\\andrey\\OneDrive\\Документы\\GitHub\\mushroom-apocalypse\\mushroom apocalypse.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\andrey\\OneDrive\\Рабочий стол\\The CUBEZ — копия\\mushroom apocalypse.csproj",
+        "projectUniqueName": "C:\\Users\\andrey\\OneDrive\\Документы\\GitHub\\mushroom-apocalypse\\mushroom apocalypse.csproj",
         "projectName": "mushroom apocalypse",
-        "projectPath": "C:\\Users\\andrey\\OneDrive\\Рабочий стол\\The CUBEZ — копия\\mushroom apocalypse.csproj",
+        "projectPath": "C:\\Users\\andrey\\OneDrive\\Документы\\GitHub\\mushroom-apocalypse\\mushroom apocalypse.csproj",
         "packagesPath": "C:\\Users\\andrey\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\andrey\\OneDrive\\Рабочий стол\\The CUBEZ — копия\\.mono\\temp\\obj\\",
+        "outputPath": "C:\\Users\\andrey\\OneDrive\\Документы\\GitHub\\mushroom-apocalypse\\.mono\\temp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
