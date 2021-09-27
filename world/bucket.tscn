@@ -12,12 +12,12 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 1 ) ],
 "loop": false,
-"name": "broke",
+"name": "broked",
 "speed": 1.0
 }, {
 "frames": [ ExtResource( 1 ) ],
 "loop": false,
-"name": "broked",
+"name": "broke",
 "speed": 1.0
 } ]
 

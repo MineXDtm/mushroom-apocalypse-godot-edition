@@ -203,7 +203,7 @@ func get_input():
 	inventory()
 
 func inventory():
-	if arm != "arm" and JsonData.item_data[arm]["ItemCategory"] == "build":
+	if arm != "arm" and JsonData.item_data[arm]["ItemCategory"] == "build"  and JsonData.item_data[arm]["layer"] == 1:
 		var block = get_parent().get_parent().get_parent().get_node("TileMap")
 		block.visible = true
 		if block.empty != load("res://textures/build_player/" + arm +"_true.png"):
@@ -234,6 +234,38 @@ func inventory():
 				inventory1.place("slot3")
 	else:
 		var block = get_parent().get_parent().get_parent().get_node("TileMap")
+		block.visible = false
+	if arm != "arm" and JsonData.item_data[arm]["ItemCategory"] == "build" and JsonData.item_data[arm]["layer"] == 0:
+		var block = get_parent().get_parent().get_node("b/TileMap")
+		block.visible = true
+		if block.empty != load("res://textures/build_player/" + arm +"_true.png"):
+			block.empty = load("res://textures/build_player/" + arm +"_true.png")
+			if JsonData.item_data[arm]["rotation"]:
+				block.empty_rotare = load("res://textures/build_player/" + arm +"_rotare_true.png")
+				block.full_rotare = load("res://textures/build_player/" + arm +"_rotare_false.png")
+			block.full  = load("res://textures/build_player/" + arm +"_false.png")
+			block.type = arm
+		if Input.is_action_just_pressed("click_left") and full2 ==  false and opened == false and inventory_opened == false and died == false:
+			var _map = get_parent().get_parent().get_node("b/builds")
+			var fruit = load("res://builds/"+arm+".tscn")
+			var fruits = fruit.instance()
+			fruits.position = get_parent().get_parent().get_node("b/TileMap").position
+			fruits.position.x += 16
+			if WorldData.map != "map":
+				fruits.position.x -= 2048
+			fruits.position.y += 16
+			_map.add_child(fruits)
+			if invenory_slot == "1":
+				var inventory1 = get_parent().get_parent().get_parent().get_node("UI2/inventory")
+				inventory1.place("slot1")
+			elif  invenory_slot == "2":
+				var inventory1 = get_parent().get_parent().get_parent().get_node("UI2/inventory")
+				inventory1.place("slot2")
+			elif  invenory_slot == "3":
+				var inventory1 = get_parent().get_parent().get_parent().get_node("UI2/inventory")
+				inventory1.place("slot3")
+	else:
+		var block = get_parent().get_parent().get_node("b/TileMap")
 		block.visible = false
 func animate():
 	var anim

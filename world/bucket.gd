@@ -135,17 +135,18 @@ func _ready():
 		added2 += 32
 		cords.append(added)
 		cords2.append(added2)
-	randomize()
-	for i in range(randi() % cords.size()):
-		random_x = cords[i]
-		number = i
-	for i in range(randi() % cords.size()):
-		random_y = cords[i]
-		number2 = i
-	var random_pos = Vector2(random_x,random_y)
-	position = random_pos
-	
-	
-	
+	if WorldData.new == true:
+		randomize()
+		for i in range(randi() % cords.size()):
+			random_x = cords[i]
+			number = i
+		for i in range(randi() % cords.size()):
+			random_y = cords[i]
+			number2 = i
+		var random_pos = Vector2(random_x,random_y)
+		position = random_pos
+		
+		
+		
 
 

@@ -79,8 +79,9 @@ func _ready():
 	$time_move.wait_time = $time.wait_time / 15
 	$time_move.start()
 	var file = File.new()
-	get_node("b/Sprite").texture = load("res://textures/" + types[WorldData.world_type]["graund"]+".png")
 	if not file.file_exists(save_path):
+		WorldData.new = true
+		WorldData.new2 = true
 		var dir = Directory.new()
 		dir.open("user://worlds")
 		var num = ""
@@ -102,18 +103,22 @@ func _ready():
 				var enemy = enemyscene.instance()
 				get_node("sort").add_child(enemy)
 		pre_save()
+		WorldData.new = false
+		WorldData.new2 = false
 		load_menu.visible = false
 		$new_screen_shot.start()
-		print("work")
 	else:
+		WorldData.new = false
+		WorldData.new2 = false
+		load_menu.get_node("Label").text = "loading virables.."
+		load_menu.get_node("ProgressBar").value += 1
+		load_virables()
+		yield(get_tree().create_timer(0.01), "timeout")
+		yield(get_tree(), 'idle_frame')
 		load_menu.get_node("Label").text = "loading chunks.."
 		load_menu.get_node("ProgressBar").max_value = 4
 		yield(get_tree().create_timer(0.01), "timeout")
 		load_chunks()
-		load_menu.get_node("Label").text = "loading virables.."
-		load_menu.get_node("ProgressBar").value += 1
-		yield(get_tree().create_timer(0.01), "timeout")
-		load_virables()
 		load_menu.get_node("Label").text = "loading player.."
 		load_menu.get_node("ProgressBar").value += 1
 		yield(get_tree().create_timer(0.01), "timeout")
@@ -124,6 +129,8 @@ func _ready():
 		load_car()
 		load_menu.get_node("ProgressBar").value += 1
 		load_menu.visible = false
+	get_node("b/Sprite").texture = load("res://textures/" + types[WorldData.world_type]["graund"]+".png")
+	get_node("zombies").reloaddec()
 	discord_rpc.details = str("In World: " ,WorldData.world_name)
 	discord_rpc.icon = WorldData.world_type
 	discord_rpc.icon_desc =  WorldData.world_type
@@ -207,7 +214,56 @@ func _on_zombie_spawn_timeout():
 						cooldown = true
 				get_node("sort").add_child(zombiess)
 
-
+func change_biome():
+	get_node("b/Sprite").texture = load("res://textures/" + types[WorldData.world_type]["graund"]+".png")
+	get_node("zombies").reloaddec()
+	load_menu.visible = true
+	load_menu.get_node("ProgressBar").value = 0
+	load_menu.get_node("ProgressBar").max_value = 0
+	for n in get_node("sort").get_children():
+		if n.type == "player" || n.type == "car":
+			continue
+		n.queue_free()
+	var file = File.new()
+	save_path = SAVE_DIR + WorldData.world_name + "/"+WorldData.world_type+"/objects.json"
+	if not file.file_exists(save_path):
+		WorldData.new = true
+		WorldData.new2 = true
+		for structure_val in types[WorldData.world_type]["structures"]:
+			load_menu.get_node("ProgressBar").max_value += types[WorldData.world_type]["structures"][structure_val]
+		for structure in types[WorldData.world_type]["structures"].keys():
+			var enemyscene = load("res://world/"+ structure+".tscn")
+			for _i in range(0,types[WorldData.world_type]["structures"][structure]):
+				yield(get_tree().create_timer(0.01), "timeout")
+				load_menu.get_node("ProgressBar").value += 1
+				var enemy = enemyscene.instance()
+				get_node("sort").add_child(enemy)
+		pre_save()
+		WorldData.new = false
+		WorldData.new2 = false
+		load_menu.visible = false
+		$new_screen_shot.start()
+	else:
+		load_menu.get_node("Label").text = "loading chunks.."
+		load_menu.get_node("ProgressBar").max_value = 4
+		yield(get_tree().create_timer(0.01), "timeout")
+		load_chunks()
+		load_menu.get_node("Label").text = "loading player.."
+		load_menu.get_node("ProgressBar").value += 1
+		yield(get_tree().create_timer(0.01), "timeout")
+		load_players()
+		load_menu.get_node("ProgressBar").value += 1
+		load_menu.get_node("Label").text = "loading car.."
+		yield(get_tree().create_timer(0.01), "timeout")
+		load_car()
+		load_menu.get_node("ProgressBar").value += 1
+		load_menu.visible = false
+	discord_rpc.details = str("In World: " ,WorldData.world_name)
+	discord_rpc.icon = WorldData.world_type
+	discord_rpc.icon_desc =  WorldData.world_type
+	discord_rpc.small_icon = "icon"
+	discord_rpc.small_icon_desc = "Game Icon"
+	discord_rpc.UpdatePresence()
 func _on_time_move_timeout():
 	get_parent().get_node("UI2/time/bg/ViewportContainer/Viewport/CLockBar").next_step()
 #	get_parent().get_node("UI2/time/bg/ScrollContainer").scroll_horizontal += 1
@@ -312,6 +368,7 @@ func update_chunks():
 		save_data.clear()
 func load_chunks():
 	var file = File.new()
+	save_path = SAVE_DIR + WorldData.world_name + "/"+WorldData.world_type+"/objects.json"
 	#var error = file.open(save_path, File.READ)
 	var error = file.open_encrypted_with_pass(save_path, File.READ, "P@paB3ar6969")
 	var text = file.get_as_text()
@@ -451,7 +508,9 @@ func save_virables():
 	dir.make_dir(WorldData.world_type)
 	virables_data["time"] = time
 	virables_data["timer_max_time"] = $time.wait_time
-	virables_data["new2"] = WorldData.new2
+	virables_data["type"] =  WorldData.world_type
+	virables_data["getted"] = get_parent().get_node("UI2/map").getted
+	virables_data["completed"] = get_parent().get_node("UI2/map").completed
 	save_data2 = virables_data.duplicate(true)
 	var file = File.new()
 	#var error = file.open(save_path, File.WRITE)
@@ -532,16 +591,12 @@ func screen_shot_save():
 	var img = get_tree().get_root().get_texture().get_data()
 	img.flip_y()
 	img.save_png(SAVE_DIR + WorldData.world_name + "/icon.png")
-	WorldData.new2 = false
 func _on_new_screen_shot_timeout():
 	var img = get_tree().get_root().get_texture().get_data()
 	img.flip_y()
 	img.save_png(SAVE_DIR + WorldData.world_name + "/icon.png")
 func pre_save():
-	if WorldData.new == true:
-		save_chunks()
-		save_virables()
-		WorldData.new = false
+	save_chunks()
 func load_virables():
 	var file = File.new()
 	#var error = file.open(save_path, File.READ)
@@ -551,8 +606,13 @@ func load_virables():
 	file.close()
 	save_data2 = parse_json(text)
 	time = save_data2["time"]
+	for i in save_data2["getted"].keys():
+		for ii in save_data2["getted"][i].size():
+			get_parent().get_node("UI2/map").getted[int(i)][ii -1] = int(save_data2["getted"][i][ii -1])
+	for i in save_data2["completed"].keys():
+		get_parent().get_node("UI2/map").completed[int(i)] =save_data2["completed"][i]
 	if time == "night":
 		get_parent().get_node("UI2/time/bg/ViewportContainer/Viewport/CLockBar").set_clock(1)
 		$CanvasModulate.color = Color(0.294118, 0.294118, 0.294118)
 	$time.wait_time = save_data2["timer_max_time"]
-	WorldData.new2 = save_data2["new2"]
+	WorldData.world_type = save_data2["type"]

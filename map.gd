@@ -49,6 +49,7 @@ func _on_point_pressed():
 	if WorldData.world_type == names[int(point)] :
 		get_parent().get_parent().get_node(str(WorldData.map,"/sort/player")).opened = false
 		visible = false
+		return
 	elif point2[int(point)][0] == "off":
 		for i in point2:
 			point2[i][0] = "off"
@@ -121,9 +122,8 @@ func _on_but_pressed():
 	get_node(str("buttons/point",pointss)).texture_pressed = load("res://textures/gui/point/point-here_clicked.png")
 	get_node(str("buttons/point",pointss)).texture_hover = load("res://textures/gui/point/point-here_ON_mause.png")
 	$list.visible = false
-	get_parent().get_parent().get_node(WorldData.map).queue_free()
-	yield(get_tree(), 'idle_frame')
 	WorldData.world_type = names[int(pointss)]
-	var biome = load("res://world/load_biome.tscn").instance()
-	get_parent().get_parent().add_child(biome)
+	yield(get_tree(), 'idle_frame')
+	get_parent().get_parent().get_node(WorldData.map).change_biome()
+	get_parent().get_parent().get_node(WorldData.map+"/sort/player").opened = false
 	visible = false
