@@ -66,5 +66,6 @@ percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="area_entered" from="." to="." method="_on_bucket_area_entered"]
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

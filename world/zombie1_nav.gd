@@ -48,7 +48,7 @@ func _ready():
 			add_child(nav_instance)
 		o += 1
 	var decoration = load("res://world/decorashon.tscn")
-	for _i in range(0,500):
+	for _i in range(0,get_parent().types[WorldData.world_type]["decs_number"]):
 		var dec = decoration.instance()
 		randomize()
 		var random_x = cords[randi() % cords.size()]
@@ -56,15 +56,8 @@ func _ready():
 		var random_pos = Vector2(random_x,random_y)
 		dec.position = random_pos
 		var rand = randi() % 5
-		if rand == 1:
-			dec.texture = load("res://textures/grass.png")
-		elif rand == 2:
-			dec.texture = load("res://textures/flowers.png")
-		elif rand == 3:
-			dec.texture = load("res://textures/flowers2.png")
-		elif rand == 4:
-			dec.texture = load("res://textures/small_stone.png")
-		get_parent().get_node("b").add_child(dec)
+		dec.texture = load("res://textures/"+get_parent().types[WorldData.world_type]["decs"][rand -1]+".png")
+		get_parent().get_node("b/decorations").add_child(dec)
 	for points in walk_zone:
 		var point = walk_zone[points]
 		var indexes = [Vector2(point.position.x + 32 ,point.position.y ),

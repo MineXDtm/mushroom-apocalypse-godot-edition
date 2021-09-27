@@ -50,17 +50,25 @@ func _on_join_pressed():
 
 func _on_remove_pressed():
 	if selected != null:
-		var dir = Directory.new()
-		dir.remove(str(SAVE_DIR,selected,"/world/objects.json"))
-		dir.remove(str(SAVE_DIR,selected,"/world/save_virables.json"))
-		dir.remove(str(SAVE_DIR,selected,"/world"))
-		dir.remove(str(SAVE_DIR,selected,"/icon.png"))
-		dir.remove(str(SAVE_DIR,selected))
+		dir_contents(str(SAVE_DIR,selected))
 		get_node(str("container/VBoxContainer/",selected)).queue_free()
 		selected = null
-		
 
-
+func dir_contents(path):
+	var dir = Directory.new()
+	if dir.open(path) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				if not file_name.begins_with("."):
+					dir_contents(str(path,"/",file_name))
+			else:
+				dir.remove(path+"/"+file_name)
+			file_name = dir.get_next()
+		dir.remove(path)
+	else:
+		print("An error occurred when trying to access the path.")
 func _on_Button_pressed():
 	WorldData.new = true
 	if $ColorRect/gui/name_edit.text.empty():

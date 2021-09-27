@@ -13,6 +13,7 @@ var number = 0
 var number2 = 0
 var check
 var chunks = 0
+onready var load_menu = get_tree().get_root().get_node("world").get_node("UI2/loding_world")
 var types = {
 	"forrest":{
 		"structures":{
@@ -20,14 +21,26 @@ var types = {
 			"kust_fruit":50,
 			"stone":100
 			},
+		"decs_number":500,
+		"decs":["grass","flowers","flowers2","small_stone"],
 		"graund": "dirt"
+	},
+	"desert":{
+		"structures":{
+			"bucket":100,
+			},
+		"decs_number":0,
+		"decs":[],
+		"graund": "sand"
 	}
+	
 }
 const SAVE_DIR = "user://worlds/"
 const SAVE_DIR2 = "user://screen_shot/"
-var save_path = SAVE_DIR + WorldData.world_name + "/world/objects.json"
-var save_path3 = SAVE_DIR + WorldData.world_name + "/world/save_virables.json"
+var save_path = SAVE_DIR + WorldData.world_name + "/"+WorldData.world_type+"/objects.json"
+var save_path3 = SAVE_DIR + WorldData.world_name + "/save_virables.json"
 var save_path2 = SAVE_DIR + WorldData.world_name
+var save_path4 = SAVE_DIR + WorldData.world_name + "/players/player_beta.json"
 var zombies = {
 	
 }
@@ -49,8 +62,11 @@ var virables_data = {
 	"new2":[]
 }
 var zombie = 0
-
+var player_data = {
+	
+}
 func _ready():
+	load_menu.visible = true
 	Console.add_command('time', self, 'settime')\
 			.set_description('setting time')\
 			.add_argument('day/night', TYPE_STRING)\
@@ -61,23 +77,53 @@ func _ready():
 			.register()
 	$time_move.wait_time = $time.wait_time / 15
 	$time_move.start()
-	if WorldData.new == true:
+	var file = File.new()
+	print(save_path)
+	print(WorldData.world_type)
+	get_node("b/Sprite").texture = load("res://textures/" + types[WorldData.world_type]["graund"]+".png")
+	if not file.file_exists(save_path):
+		var dir = Directory.new()
+		dir.open("user://worlds")
+		var num = ""
+		while file.file_exists(save_path):
+			if str(num) == "":
+				num = 2
+			else:
+				num += 1
+			save_path = SAVE_DIR + str(WorldData.world_name,num) + "/"+WorldData.world_type+"/objects.json"
+		WorldData.world_name = str(WorldData.world_name,num)
+		dir.make_dir(WorldData.world_name)
+		for structure_val in types[WorldData.world_type]["structures"]:
+			load_menu.get_node("ProgressBar").max_value += types[WorldData.world_type]["structures"][structure_val]
 		for structure in types[WorldData.world_type]["structures"].keys():
 			var enemyscene = load("res://world/"+ structure+".tscn")
 			for _i in range(0,types[WorldData.world_type]["structures"][structure]):
 				yield(get_tree().create_timer(0.01), "timeout")
+				load_menu.get_node("ProgressBar").value += 1
 				var enemy = enemyscene.instance()
 				get_node("sort").add_child(enemy)
-			pre_save()
+		pre_save()
 	else:
+		load_menu.get_node("Label").text = "loading chunks.."
+		load_menu.get_node("ProgressBar").max_value = 4
 		load_chunks()
+		load_menu.get_node("Label").text = "loading virables.."
+		load_menu.get_node("ProgressBar").value += 1
 		load_virables()
+		load_menu.get_node("Label").text = "loading player.."
+		load_menu.get_node("ProgressBar").value += 1
+		load_players()
+		load_menu.get_node("ProgressBar").value += 1
+		load_menu.get_node("Label").text = "loading car.."
+		load_car()
+		load_menu.get_node("ProgressBar").value += 1
 	discord_rpc.details = str("In World: " ,WorldData.world_name)
-	discord_rpc.icon = "forrest"
-	discord_rpc.icon_desc = "forrest"
+	discord_rpc.icon = WorldData.world_type
+	discord_rpc.icon_desc =  WorldData.world_type
 	discord_rpc.small_icon = "icon"
 	discord_rpc.small_icon_desc = "Game Icon"
 	discord_rpc.UpdatePresence()
+	load_menu.visible = false
 func _on_kust_spawn_timeout():
 	if Ganaretor.kustes < 100 :
 		var enemyscene = load("res://world/kust.tscn")
@@ -161,11 +207,19 @@ func _on_time_move_timeout():
 func save_chunks():
 	var world = $sort.get_children()
 	save_path2 = SAVE_DIR + WorldData.world_name
-	save_path = SAVE_DIR + WorldData.world_name + "/world/objects.json"
+	save_path = SAVE_DIR + WorldData.world_name + "/"+WorldData.world_type+"/objects.json"
 	var dir = Directory.new()
 	dir.open(save_path2)
-	dir.make_dir("world")
+	dir.make_dir(WorldData.world_type)
 	for i in world.size():
+		if world[i].type == "skip":
+			continue
+		if world[i].type == "player":
+			save_player(world[i])
+			continue
+		if world[i].type == "car":
+			save_car(world[i])
+			continue
 		object_data["type"] = world[i].type
 		if world[i].type == "drop":
 			object_data["drop_name"] = world[i].item_name
@@ -180,9 +234,6 @@ func save_chunks():
 			object_data["level"] = world[i].level
 		object_data["position_x"] = world[i].position.x
 		object_data["position_y"] = world[i].position.y
-		if world[i].type == "player":
-			object_data["inventory"] = PlayerInventory.inventory
-			object_data["inventory1"] = PlayerInventory.inventory1
 		save_data[str("object",i)] = object_data.duplicate(true)
 		if object_data.has("drop_name"):
 			object_data.erase("drop_name")
@@ -204,11 +255,17 @@ func save_chunks():
 func update_chunks():
 	var world = $sort.get_children()
 	save_path2 = SAVE_DIR + WorldData.world_name
-	save_path = SAVE_DIR + WorldData.world_name + "/world/objects.json"
+	save_path = SAVE_DIR + WorldData.world_name + "/"+WorldData.world_type+"/objects.json"
 	var dir = Directory.new()
 	dir.open(save_path2)
-	dir.make_dir("world")
+	dir.make_dir(WorldData.world_type)
 	for i in world.size():
+		if world[i].type == "player":
+			save_player(world[i])
+			continue
+		if world[i].type == "car":
+			save_car(world[i])
+			continue
 		if world[i].type == "skip":
 			continue
 		object_data["type"] = world[i].type
@@ -249,28 +306,25 @@ func update_chunks():
 func load_chunks():
 	var file = File.new()
 	#var error = file.open(save_path, File.READ)
-	save_path = WorldData.world_path + "/world/objects.json"
+	save_path = WorldData.world_path + "/"+WorldData.world_type+"/objects.json"
 	var error = file.open_encrypted_with_pass(save_path, File.READ, "P@paB3ar6969")
 	var text = file.get_as_text()
 	file.close()
 	save_data = parse_json(text)
 	for i in save_data:
-		if save_data[i]["type"] == "player" and WorldData.map == "map":
-			for ii in save_data[i]["inventory"]:
-				PlayerInventory.inventory[int(ii)] = [save_data[i]["inventory"][ii][0],int(save_data[i]["inventory"][ii][1])]
-			for ii in save_data[i]["inventory1"]:
-				PlayerInventory.inventory1[int(ii)] = [save_data[i]["inventory1"][ii][0],int(save_data[i]["inventory1"][ii][1])]
-			get_node("sort/player").position.x = int(save_data[i]["position_x"])
-			get_node("sort/player").position.y = int(save_data[i]["position_y"])
-			get_node("sort/player").health = int(save_data[i]["health"])
-			get_parent().get_node("UI2/bars/health/bg/bar_health").value = int(save_data[i]["health"])
-		if save_data[i]["type"] == "car" and WorldData.map == "map":
-			get_node("sort/car").position.x = int(save_data[i]["position_x"])
-			get_node("sort/car").position.y = int(save_data[i]["position_y"])
-			get_node("sort/car").health = int(save_data[i]["health"])
-			get_parent().get_node("UI2/bars/car/bg/bar_health").value = int(save_data[i]["health"])
 		if save_data[i]["type"] == "build_block":
 			var enemyscene = load("res://builds/build_block.tscn")
+			var enemy = enemyscene.instance()
+			enemy.position.x = int(save_data[i]["position_x"])
+			enemy.position.y = int(save_data[i]["position_y"])
+			if enemy.health > int(save_data[i]["health"]):
+				enemy.get_node("ProgressBar").visible = true
+				enemy.get_node("ProgressBar").value = int(save_data[i]["health"])
+			enemy.health = int(save_data[i]["health"])
+			enemy.name = save_data[i]["name"]
+			get_node("sort").add_child(enemy)
+		if save_data[i]["type"] == "bucket":
+			var enemyscene = load("res://world/bucket.tscn")
 			var enemy = enemyscene.instance()
 			enemy.position.x = int(save_data[i]["position_x"])
 			enemy.position.y = int(save_data[i]["position_y"])
@@ -384,11 +438,11 @@ func load_chunks():
 
 func save_virables():
 	save_path2 = SAVE_DIR + WorldData.world_name
-	save_path = SAVE_DIR + WorldData.world_name + "/world/objects.json"
-	save_path3 = SAVE_DIR + WorldData.world_name + "/world/save_virables.json"
+	save_path = SAVE_DIR + WorldData.world_name + "/"+WorldData.world_type+"/objects.json"
+	save_path3 = SAVE_DIR + WorldData.world_name + "/save_virables.json"
 	var dir = Directory.new()
 	dir.open(save_path2)
-	dir.make_dir("world")
+	dir.make_dir(WorldData.world_type)
 	virables_data["time"] = time
 	virables_data["timer_max_time"] = $time.wait_time
 	virables_data["new2"] = WorldData.new2
@@ -400,7 +454,23 @@ func save_virables():
 		file.store_line(to_json(save_data2))
 		file.close()
 		save_data2.clear()
-
+var save_path5 = SAVE_DIR + WorldData.world_name + "/car.json"
+func save_car(car):
+	save_path5 = SAVE_DIR + WorldData.world_name + "/car.json"
+	var dir = Directory.new()
+	dir.open(save_path2)
+	dir.make_dir(WorldData.world_type)
+	var car_data = {}
+	car_data["health"] = car.health
+	print('sdadsadasdasdad')
+	var save_data3 = virables_data.duplicate(true)
+	var file = File.new()
+	#var error = file.open(save_path, File.WRITE)
+	var error = file.open_encrypted_with_pass(save_path5, File.WRITE, "P@paB3ar6969")
+	if error == OK:
+		file.store_line(to_json(save_data2))
+		file.close()
+		save_data3.clear()
 
 func _on_save_timeout():
 	update_chunks()
@@ -410,8 +480,51 @@ func _on_screen_shot_icon_timeout():
 	var img = get_tree().get_root().get_texture().get_data()
 	img.flip_y()
 	img.save_png(SAVE_DIR + WorldData.world_name + "/icon.png")
-
-
+func save_player(player):
+	save_path4 = SAVE_DIR + WorldData.world_name + "/players/player_beta.json"
+	var dir = Directory.new()
+	dir.open(save_path2)
+	dir.make_dir("players")
+	player_data["position_x"] = player.position.x
+	player_data["position_y"] = player.position.y
+	player_data["inv"] = PlayerInventory.inventory
+	player_data["inv1"] = PlayerInventory.inventory1
+	player_data["health"] = player.health
+	var save_data3 = player_data.duplicate(true)
+	var file = File.new()
+	#var error = file.open(save_path, File.WRITE)
+	var error = file.open_encrypted_with_pass(save_path4, File.WRITE, "P@paB3ar6969")
+	if error == OK:
+		file.store_line(to_json(save_data3))
+		file.close()
+		save_data3.clear()
+func load_car():
+	var file = File.new()
+	#var error = file.open(save_path, File.READ)
+	save_path5 = SAVE_DIR + WorldData.world_name + "/car.json"
+	var error = file.open_encrypted_with_pass(save_path5, File.READ, "P@paB3ar6969")
+	var text = file.get_as_text()
+	file.close()
+	var save_data3 = parse_json(text)
+	print(save_data3)
+	get_node("sort/car").health = int(save_data3["health"])
+	get_parent().get_node("UI2/bars/car/bg/bar_health").value = int(save_data3["health"])
+func load_players():
+	var file = File.new()
+	#var error = file.open(save_path, File.READ)
+	save_path4 = SAVE_DIR + WorldData.world_name + "/players/player_beta.json"
+	var error = file.open_encrypted_with_pass(save_path4, File.READ, "P@paB3ar6969")
+	var text = file.get_as_text()
+	file.close()
+	var save_data3 = parse_json(text)
+	get_node("sort/player").position.x = int(save_data3["position_x"])
+	get_node("sort/player").position.y = int(save_data3["position_y"])
+	get_node("sort/player").health = int(save_data3["health"])
+	get_parent().get_node("UI2/bars/health/bg/bar_health").value = int(save_data3["health"])
+	for ii in save_data3["inv"]:
+		PlayerInventory.inventory[int(ii)] = [save_data3["inv"][ii][0],int(save_data3["inv"][ii][1])]
+	for ii in save_data3["inv1"]:
+		PlayerInventory.inventory1[int(ii)] = [save_data3["inv1"][ii][0],int(save_data3["inv1"][ii][1])]
 func screen_shot_save():
 	var img = get_tree().get_root().get_texture().get_data()
 	img.flip_y()
@@ -425,25 +538,13 @@ func _on_new_screen_shot_timeout():
 		WorldData.new2 = false
 func pre_save():
 	if WorldData.new == true:
-		var dir = Directory.new()
-		dir.open("user://worlds")
-		var file = File.new()
-		var num = ""
-		while file.file_exists(save_path):
-			if str(num) == "":
-				num = 2
-			else:
-				num += 1
-			save_path = SAVE_DIR + str(WorldData.world_name,num) + "/world/objects.json"
-		WorldData.world_name = str(WorldData.world_name,num)
-		dir.make_dir(WorldData.world_name)
 		save_chunks()
 		save_virables()
 		WorldData.new = false
 func load_virables():
 	var file = File.new()
 	#var error = file.open(save_path, File.READ)
-	save_path3 = SAVE_DIR + WorldData.world_name + "/world/save_virables.json"
+	save_path3 = SAVE_DIR + WorldData.world_name + "/save_virables.json"
 	var error = file.open_encrypted_with_pass(save_path3, File.READ, "P@paB3ar6969")
 	var text = file.get_as_text()
 	file.close()

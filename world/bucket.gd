@@ -13,6 +13,7 @@ var needed = 0
 var added = 16
 var skip = 0
 var added2 = 0
+var type = "bucket"
 func _on_bucket_area_entered(area):
 	if area.is_in_group("kust"):
 		randomize()

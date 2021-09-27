@@ -16,7 +16,7 @@ b = Vector2( 512, 0 )
 a = Vector2( 512, 512 )
 b = Vector2( -1024, 512 )
 
-[node name="map" type="YSort"]
+[node name="map" type="Node2D"]
 
 [node name="Sprite" type="Sprite" parent="."]
 show_behind_parent = true

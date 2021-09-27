@@ -1,8 +1,9 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://player_model/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://world/map.tscn" type="PackedScene" id=2]
 [ext_resource path="res://CLockBar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://gui/loading_world.tscn" type="PackedScene" id=4]
 [ext_resource path="res://car.tscn" type="PackedScene" id=7]
 [ext_resource path="res://world/inventory_tab.gd" type="Script" id=10]
 [ext_resource path="res://world/slot.gd" type="Script" id=11]
@@ -41,22 +42,22 @@ bg_color = Color( 1, 1, 1, 1 )
 border_width_bottom = 1
 border_color = Color( 0.662745, 0.662745, 0.662745, 1 )
 
-[sub_resource type="StyleBoxTexture" id=7]
+[sub_resource type="StyleBoxTexture" id=5]
 texture = ExtResource( 16 )
 region_rect = Rect2( 0, 0, 17, 18 )
 
-[sub_resource type="StyleBoxTexture" id=8]
+[sub_resource type="StyleBoxTexture" id=6]
 texture = ExtResource( 17 )
 region_rect = Rect2( 0, 0, 17, 18 )
 
-[sub_resource type="StyleBoxTexture" id=9]
+[sub_resource type="StyleBoxTexture" id=7]
 texture = ExtResource( 17 )
 region_rect = Rect2( 0, 0, 17, 18 )
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.27451, 0.784314, 0.164706, 1 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=9]
 font_data = ExtResource( 27 )
 
 [node name="world" type="Node2D"]
@@ -244,7 +245,7 @@ __meta__ = {
 margin_right = 20.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 20, 20 )
-custom_styles/panel = SubResource( 7 )
+custom_styles/panel = SubResource( 5 )
 script = ExtResource( 11 )
 
 [node name="slot2" type="Panel" parent="UI2/hand_slots"]
@@ -252,7 +253,7 @@ margin_left = 23.0
 margin_right = 43.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 20, 20 )
-custom_styles/panel = SubResource( 8 )
+custom_styles/panel = SubResource( 6 )
 script = ExtResource( 11 )
 
 [node name="slot3" type="Panel" parent="UI2/hand_slots"]
@@ -260,7 +261,7 @@ margin_left = 46.0
 margin_right = 66.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 20, 20 )
-custom_styles/panel = SubResource( 9 )
+custom_styles/panel = SubResource( 7 )
 script = ExtResource( 11 )
 
 [node name="energy" type="Control" parent="UI2"]
@@ -289,7 +290,7 @@ __meta__ = {
 [node name="ProgressBar" type="ProgressBar" parent="UI2/energy/heal"]
 margin_right = 40.0
 margin_bottom = 1.0
-custom_styles/fg = SubResource( 5 )
+custom_styles/fg = SubResource( 8 )
 value = 100.0
 percent_visible = false
 
@@ -383,7 +384,7 @@ margin_left = -24.0
 margin_right = 24.0
 margin_bottom = 16.0
 rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 9 )
 text = "fps"
 clip_text = true
 script = ExtResource( 25 )
@@ -392,6 +393,9 @@ __meta__ = {
 }
 
 [node name="game_menu" parent="UI2" instance=ExtResource( 33 )]
+visible = false
+
+[node name="loding_world" parent="UI2" instance=ExtResource( 4 )]
 visible = false
 
 [node name="TileMap" parent="." instance=ExtResource( 30 )]

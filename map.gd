@@ -9,8 +9,8 @@ var point = "1"
 func _ready():
 	pass # Replace with function body.
 var names = {
-	1:["pchelka"],
-	2:["desert"],
+	1:"forrest",
+	2:"desert",
 }
 var point2 = {
 	1:["off"],
@@ -31,7 +31,7 @@ var res_namber = {
 }
 var completed = {
 	1:["true"],
-	2:["false"],
+	2:["true"],
 }
 var unlocked = {
 	1:["true"],
@@ -46,7 +46,7 @@ func _on_point2_pressed():
 			point2[i][0] = "off"
 		point2[2][0] = "on"
 		point = "2"
-		$list/Label.text = names[int(point)][0]
+		$list/Label.text = names[int(point)]
 		$list.visible = true
 		for i in range(0,res[int(point)].size()):
 			var world = $items
@@ -104,7 +104,7 @@ func _on_point_pressed():
 				world.get_node(str("item",i)).remove()
 		point2[1][0] = "on"
 		point = "1"
-		$list/Label.text = names[int(point)][0]
+		$list/Label.text = names[int(point)]
 		$list.visible = true
 	elif point2[int(point)][0] == "on":
 		point2[int(point)][0] = "off"
@@ -128,14 +128,6 @@ func _on_but_pressed():
 	get_node(str("point",pointss)).texture_pressed = load("res://textures/gui/point/point-here_clicked.png")
 	get_node(str("point",pointss)).texture_hover = load("res://textures/gui/point/point-here_ON_mause.png")
 	$list.visible = false
-	if WorldData.map != str("map",2):
-		for i in range(0,res[2].size()):
-			var world = $items
-			world.get_node(str("item",i)).remove()
-	get_parent().get_parent().get_node(str(WorldData.map,"/sort/car")).remove(point)
-	get_parent().get_parent().get_node(str(WorldData.map,"/sort/player")).remove(point)
-	if point == "1":
-		WorldData.map = "map"
-	else:
-		WorldData.map = str("map",point)
+	WorldData.world_type = names[int(pointss)]
+	get_tree().reload_current_scene()
 	visible = false
