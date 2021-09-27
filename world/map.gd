@@ -66,6 +66,7 @@ var player_data = {
 	
 }
 func _ready():
+	set_name("map")
 	load_menu.visible = true
 	Console.add_command('time', self, 'settime')\
 			.set_description('setting time')\
@@ -78,8 +79,6 @@ func _ready():
 	$time_move.wait_time = $time.wait_time / 15
 	$time_move.start()
 	var file = File.new()
-	print(save_path)
-	print(WorldData.world_type)
 	get_node("b/Sprite").texture = load("res://textures/" + types[WorldData.world_type]["graund"]+".png")
 	if not file.file_exists(save_path):
 		var dir = Directory.new()
@@ -103,27 +102,35 @@ func _ready():
 				var enemy = enemyscene.instance()
 				get_node("sort").add_child(enemy)
 		pre_save()
+		load_menu.visible = false
+		$new_screen_shot.start()
+		print("work")
 	else:
 		load_menu.get_node("Label").text = "loading chunks.."
 		load_menu.get_node("ProgressBar").max_value = 4
+		yield(get_tree().create_timer(0.01), "timeout")
 		load_chunks()
 		load_menu.get_node("Label").text = "loading virables.."
 		load_menu.get_node("ProgressBar").value += 1
+		yield(get_tree().create_timer(0.01), "timeout")
 		load_virables()
 		load_menu.get_node("Label").text = "loading player.."
 		load_menu.get_node("ProgressBar").value += 1
+		yield(get_tree().create_timer(0.01), "timeout")
 		load_players()
 		load_menu.get_node("ProgressBar").value += 1
 		load_menu.get_node("Label").text = "loading car.."
+		yield(get_tree().create_timer(0.01), "timeout")
 		load_car()
 		load_menu.get_node("ProgressBar").value += 1
+		load_menu.visible = false
 	discord_rpc.details = str("In World: " ,WorldData.world_name)
 	discord_rpc.icon = WorldData.world_type
 	discord_rpc.icon_desc =  WorldData.world_type
 	discord_rpc.small_icon = "icon"
 	discord_rpc.small_icon_desc = "Game Icon"
 	discord_rpc.UpdatePresence()
-	load_menu.visible = false
+	
 func _on_kust_spawn_timeout():
 	if Ganaretor.kustes < 100 :
 		var enemyscene = load("res://world/kust.tscn")
@@ -306,7 +313,6 @@ func update_chunks():
 func load_chunks():
 	var file = File.new()
 	#var error = file.open(save_path, File.READ)
-	save_path = WorldData.world_path + "/"+WorldData.world_type+"/objects.json"
 	var error = file.open_encrypted_with_pass(save_path, File.READ, "P@paB3ar6969")
 	var text = file.get_as_text()
 	file.close()
@@ -459,16 +465,14 @@ func save_car(car):
 	save_path5 = SAVE_DIR + WorldData.world_name + "/car.json"
 	var dir = Directory.new()
 	dir.open(save_path2)
-	dir.make_dir(WorldData.world_type)
 	var car_data = {}
 	car_data["health"] = car.health
-	print('sdadsadasdasdad')
-	var save_data3 = virables_data.duplicate(true)
+	var save_data3 = car_data.duplicate(true)
 	var file = File.new()
 	#var error = file.open(save_path, File.WRITE)
 	var error = file.open_encrypted_with_pass(save_path5, File.WRITE, "P@paB3ar6969")
 	if error == OK:
-		file.store_line(to_json(save_data2))
+		file.store_line(to_json(save_data3))
 		file.close()
 		save_data3.clear()
 
@@ -506,7 +510,6 @@ func load_car():
 	var text = file.get_as_text()
 	file.close()
 	var save_data3 = parse_json(text)
-	print(save_data3)
 	get_node("sort/car").health = int(save_data3["health"])
 	get_parent().get_node("UI2/bars/car/bg/bar_health").value = int(save_data3["health"])
 func load_players():
@@ -531,11 +534,9 @@ func screen_shot_save():
 	img.save_png(SAVE_DIR + WorldData.world_name + "/icon.png")
 	WorldData.new2 = false
 func _on_new_screen_shot_timeout():
-	if WorldData.new2 == true:
-		var img = get_tree().get_root().get_texture().get_data()
-		img.flip_y()
-		img.save_png(SAVE_DIR + WorldData.world_name + "/icon.png")
-		WorldData.new2 = false
+	var img = get_tree().get_root().get_texture().get_data()
+	img.flip_y()
+	img.save_png(SAVE_DIR + WorldData.world_name + "/icon.png")
 func pre_save():
 	if WorldData.new == true:
 		save_chunks()
@@ -555,5 +556,3 @@ func load_virables():
 		$CanvasModulate.color = Color(0.294118, 0.294118, 0.294118)
 	$time.wait_time = save_data2["timer_max_time"]
 	WorldData.new2 = save_data2["new2"]
-	
-	

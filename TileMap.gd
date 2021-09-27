@@ -25,13 +25,17 @@ func _physics_process(_delta):
 			$Node2D/Sprite.texture = full
 		else:
 			$Node2D/Sprite.texture = full_rotare
-		get_parent().get_node(str(WorldData.map,"/sort/player")).full = true
+		var p = get_parent().get_node_or_null(str(WorldData.map,"/sort/player"))
+		if p != null:
+			p.full = true
 	else:
 		if rotared == false:
 			$Node2D/Sprite.texture = empty
 		else:
 			$Node2D/Sprite.texture = empty_rotare
-		get_parent().get_node(str(WorldData.map,"/sort/player")).full = false
+		var p = get_parent().get_node_or_null(str(WorldData.map,"/sort/player"))
+		if p != null:
+			p.full = false
 	if WorldData.map != "map" :
 		$Node2D.position.x -= 2048
 	if Input.is_action_just_pressed("rotare") and type == "block_beta" || Input.is_action_just_pressed("rotare") and type == "stone_block"|| Input.is_action_just_pressed("rotare") and type == "door" :
