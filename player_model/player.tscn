@@ -992,7 +992,6 @@ disabled = true
 "body",
 "player",
 ]]
-collision_layer = 3
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="body" groups=[
 "body",
