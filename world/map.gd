@@ -164,12 +164,12 @@ func settime(time_set = null):
 		$time.start()
 		time = "night"
 		$CanvasModulate.color = Color(0.294118, 0.294118, 0.294118)
-		get_parent().get_node("UI2/time/bg/ViewportContainer/Viewport/CLockBar").set_clock(1)
+		get_parent().get_node("UI2/bg/ViewportContainer/Viewport/CLockBar").set_clock(1)
 	elif time_set == "day":
 		$time_move.stop()
 		$time.stop()
 		time = "day"
-		get_parent().get_node("UI2/time/bg/ViewportContainer/Viewport/CLockBar").set_clock(0)
+		get_parent().get_node("UI2/bg/ViewportContainer/Viewport/CLockBar").set_clock(0)
 		$time.wait_time += 40
 		$CanvasModulate.color = Color(1, 1, 1)
 		$time_move.wait_time = $time.wait_time / 15
@@ -190,13 +190,13 @@ func _on_kust_fruit_spawn_timeout():
 func _on_time_timeout():
 	if time == "day" :
 		time = "night"
-		get_parent().get_node("UI2/time/bg/ViewportContainer/Viewport/CLockBar").set_clock(1)
+		get_parent().get_node("UI2/bg/ViewportContainer/Viewport/CLockBar").set_clock(1)
 		$CanvasModulate.color = Color(0.294118, 0.294118, 0.294118)
 	else:
 		$time_move.stop()
 		$time.stop()
 		time = "day"
-		get_parent().get_node("UI2/time/bg/ViewportContainer/Viewport/CLockBar").set_clock(0)
+		get_parent().get_node("UI2/bg/ViewportContainer/Viewport/CLockBar").set_clock(0)
 		$time.wait_time += 40
 		$CanvasModulate.color = Color(1, 1, 1)
 		$time_move.wait_time = $time.wait_time / 15
@@ -278,8 +278,8 @@ func change_biome():
 	discord_rpc.small_icon_desc = "Game Icon"
 	discord_rpc.UpdatePresence()
 func _on_time_move_timeout():
-	get_parent().get_node("UI2/time/bg/ViewportContainer/Viewport/CLockBar").next_step()
-#	get_parent().get_node("UI2/time/bg/ScrollContainer").scroll_horizontal += 1
+	get_parent().get_node("UI2/bg/ViewportContainer/Viewport/CLockBar").next_step()
+#	get_parent().get_node("UI2/bg/ScrollContainer").scroll_horizontal += 1
 func save_chunks():
 	var world = $sort.get_children()
 	save_path2 = SAVE_DIR + WorldData.world_name
@@ -685,7 +685,7 @@ func load_virables():
 	for i in save_data2["completed"].keys():
 		get_parent().get_node("UI2/map").completed[int(i)] =save_data2["completed"][i]
 	if time == "night":
-		get_parent().get_node("UI2/time/bg/ViewportContainer/Viewport/CLockBar").set_clock(1)
+		get_parent().get_node("UI2/bg/ViewportContainer/Viewport/CLockBar").set_clock(1)
 		$CanvasModulate.color = Color(0.294118, 0.294118, 0.294118)
 	$time.wait_time = save_data2["timer_max_time"]
 	WorldData.world_type = save_data2["type"]
