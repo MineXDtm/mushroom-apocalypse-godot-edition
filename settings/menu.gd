@@ -23,4 +23,5 @@ func _on_settings_but_button_up():
 func _on_exit_button_down():
 	get_parent().get_parent().get_parent().get_node("map").update_chunks()
 	get_parent().get_parent().get_parent().get_node("map").save_virables()
+	get_parent().get_parent().get_parent().get_node("map").save_chunksinlayer0()
 	get_tree().change_scene("res://menu.tscn")

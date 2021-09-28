@@ -11,6 +11,7 @@ var needed = 0
 var cooldown32 = 16
 var added = 16
 var added2 = 0
+var layer = 1
 var type = "stone_block" 
 func _ready():
 	WorldData.blocks += 1

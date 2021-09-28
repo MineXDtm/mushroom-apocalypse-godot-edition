@@ -9,6 +9,8 @@ var fire = []
 var added = []
 var fire_value = 0
 var progres = 0
+var type = "stove"
+var layer = 1
 var time = {
 	"piece_of_rust":[60,"iron"]
 }
@@ -109,82 +111,66 @@ func _on_stove_area_entered(area):
 		$ProgressBar.visible = true
 		$ProgressBar.value = health
 		if health <= 0 : 
-			var world = get_parent()
-			var drop_scene = load("res://world/drop/ItemDrop.tscn")
-			var _drop_intance = drop_scene.instance()
-			_drop_intance.position = position
-			_drop_intance.item_name = "stove"
-			world.add_child(_drop_intance)
-			queue_free()
+			broked = true
 	if area.is_in_group("wooden_exe"):
 		health -= 1.3
 		$ProgressBar.visible = true
 		$ProgressBar.value = health
 		if health <= 0 : 
-			var world = get_parent()
-			var drop_scene = load("res://world/drop/ItemDrop.tscn")
-			var _drop_intance = drop_scene.instance()
-			_drop_intance.position = position
-			_drop_intance.item_name = "stove"
-			world.add_child(_drop_intance)
-			queue_free()
+			broked = true
 	if area.is_in_group("wooden_pickaxe"):
 		health -= 0.5
 		$ProgressBar.visible = true
 		$ProgressBar.value = health
 		if health <= 0 : 
-			var world = get_parent()
-			var drop_scene = load("res://world/drop/ItemDrop.tscn")
-			var _drop_intance = drop_scene.instance()
-			_drop_intance.position = position
-			_drop_intance.item_name = "stove"
-			world.add_child(_drop_intance)
-			queue_free()
+			broked = true
 	if area.is_in_group("stone_pickaxe"):
 		health -= 1
 		$ProgressBar.visible = true
 		$ProgressBar.value = health
 		if health <= 0 : 
-			var world = get_parent()
-			var drop_scene = load("res://world/drop/ItemDrop_wood.tscn")
-			var _drop_intance = drop_scene.instance()
-			_drop_intance.position = position
-			_drop_intance.item_name = "stove"
-			world.add_child(_drop_intance)
-			queue_free()
+			broked = true
 	if area.is_in_group("stone_exe"):
 		health -= 1.7
 		$ProgressBar.visible = true
 		$ProgressBar.value = health
 		if health <= 0 : 
-			var world = get_parent()
-			var drop_scene = load("res://world/drop/ItemDrop_wood.tscn")
-			var _drop_intance = drop_scene.instance()
-			_drop_intance.position = position
-			_drop_intance.item_name = "stove"
-			world.add_child(_drop_intance)
-			queue_free()
+			broked = true
 	if area.is_in_group("zombie_arm"):
 		health -= 1
 		$ProgressBar.visible = true
 		$ProgressBar.value = health
 		if health <= 0 :
-			var world = get_parent()
-			var drop_scene = load("res://world/drop/ItemDrop_wood.tscn")
-			var _drop_intance = drop_scene.instance()
-			_drop_intance.position = position
-			_drop_intance.item_name = "stove"
-			world.add_child(_drop_intance)
-			queue_free()
-
+			broked = true
+	if broked == true and brokede == false:
+		brokede = true
+		var navigationscene = load("res://world/NavigationPolygonInstance.tscn")
+		var navigation = navigationscene.instance()
+		navigation.position.x = cords2[number]
+		navigation.position.y = cords2[number2]
+		navigation.added_by_gen = false
+		get_parent().get_parent().get_node("zombies").call_deferred("add_child", navigation)
+		var world = get_parent()
+		var exit_scene = load("res://exit.tscn")
+		var _exit_intance = exit_scene.instance()
+		_exit_intance.position = position
+		world.call_deferred("add_child", _exit_intance)
+		_exit_intance.position = position
+		var drop_scene = load("res://world/drop/ItemDrop.tscn")
+		var _drop_intance = drop_scene.instance()
+		_drop_intance.item_name = "stove"
+		_drop_intance.position = position
+		world.call_deferred("add_child", _drop_intance)
+		_drop_intance.position = position
+		queue_free()
 
 func _on_stove_area_exited(area):
 	if area.is_in_group("player_area"):
 		var ui = get_parent().get_parent().get_node("ui/stove_ui")
 		ui.visible = false
 		in_gui = false
-
-
+var brokede = false
+var broked = false
 func _on_prog_timeout():
 	if fire_value != 0:
 		var ui = get_parent().get_parent().get_node("ui/stove_ui")

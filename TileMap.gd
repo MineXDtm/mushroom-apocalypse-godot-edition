@@ -36,8 +36,6 @@ func _physics_process(_delta):
 		var p = get_parent().get_node_or_null(str(WorldData.map,"/sort/player"))
 		if p != null:
 			p.full = false
-	if WorldData.map != "map" :
-		$Node2D.position.x -= 2048
 	if Input.is_action_just_pressed("rotare") and type == "block_beta" || Input.is_action_just_pressed("rotare") and type == "stone_block"|| Input.is_action_just_pressed("rotare") and type == "door" :
 		if rotare == "up":
 			$Node2D/Sprite.position = Vector2(33,24)

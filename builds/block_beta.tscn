@@ -54,7 +54,7 @@ light_mode = 1
 [sub_resource type="StyleBoxFlat" id=9]
 bg_color = Color( 0.380392, 0.670588, 0.180392, 1 )
 
-[node name="block" type="Area2D" groups=[
+[node name="block_beta" type="Area2D" groups=[
 "block",
 "kust",
 ]]

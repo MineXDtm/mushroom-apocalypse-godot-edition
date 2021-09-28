@@ -10,6 +10,7 @@ var mind = null
 var map_size = 1536
 var needed = 0
 var cooldown32 = 16
+var layer = 0
 var added = 16
 var added2 = 0
 var type = "wooden_trap" 

@@ -12,6 +12,7 @@ var cooldown32 = 16
 var added = 16
 var added2 = 0
 var type = "block"
+var layer = 1
 func _ready():
 	WorldData.blocks += 1
 	name = str("block",WorldData.blocks)

@@ -5,7 +5,7 @@ var health = 100
 # var a = 2
 # var b = "text"
 var type = "car"
-
+var layer = 1
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

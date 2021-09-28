@@ -24,6 +24,7 @@ var cd = false
 var died = false
 var anim_name2
 var eating = false
+var layer = 1
 var type = "player"
 
 onready var heals = get_parent().get_parent().get_parent().get_node("UI2/bars/health")
@@ -219,8 +220,6 @@ func inventory():
 			var fruits = fruit.instance()
 			fruits.position = get_parent().get_parent().get_parent().get_node("TileMap/Node2D").position
 			fruits.position.x += 16
-			if WorldData.map != "map":
-				fruits.position.x -= 2048
 			fruits.position.y += 16
 			_map.add_child(fruits)
 			if invenory_slot == "1":
@@ -239,6 +238,7 @@ func inventory():
 		var block = get_parent().get_parent().get_node("b/TileMap")
 		block.visible = true
 		if block.empty != load("res://textures/build_player/" + arm +"_true.png"):
+			block.collides = JsonData.item_data[arm]["collides"]
 			block.empty = load("res://textures/build_player/" + arm +"_true.png")
 			if JsonData.item_data[arm]["rotation"]:
 				block.empty_rotare = load("res://textures/build_player/" + arm +"_rotare_true.png")
@@ -249,10 +249,8 @@ func inventory():
 			var _map = get_parent().get_parent().get_node("b/builds")
 			var fruit = load("res://builds/"+arm+".tscn")
 			var fruits = fruit.instance()
-			fruits.position = get_parent().get_parent().get_node("b/TileMap").position
+			fruits.position = get_parent().get_parent().get_node("b/TileMap/Node2D").position
 			fruits.position.x += 16
-			if WorldData.map != "map":
-				fruits.position.x -= 2048
 			fruits.position.y += 16
 			_map.add_child(fruits)
 			if invenory_slot == "1":

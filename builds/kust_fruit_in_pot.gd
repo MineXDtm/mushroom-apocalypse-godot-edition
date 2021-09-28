@@ -11,6 +11,7 @@ var map_size = 1536
 var needed = 0
 var cooldown32 = 16
 var added = 16
+var layer = 1
 var added2 = 0
 var type = "kust_fruit_in_pot"
 func _on_kust_area_entered(area):

@@ -12,7 +12,7 @@ var needed = 0
 var cooldown32 = 16
 var added = 16
 var added2 = 0
-
+var layer = 1
 func _ready():
 	while cooldown32 <= map_size:
 		cooldown32 += 32
@@ -108,7 +108,7 @@ func _on_door_area_entered(area):
 		elif area.is_in_group("arm") and broked == false:
 			health -= 1
 			$ProgressBar.visible = true
-			$ProgressbuBar.value = health
+			$ProgressBar.value = health
 			if health <= 0 :
 				$ProgressBar.visible = false
 				broked = true
@@ -161,6 +161,6 @@ func _on_door_area_entered(area):
 			var drop_scene = load("res://world/drop/ItemDrop.tscn")
 			var _drop_intance = drop_scene.instance()
 			_drop_intance.position = position
-			_drop_intance.item_name = "drop_wood"
+			_drop_intance.item_name = "door"
 			world.call_deferred("add_child", _drop_intance)
 			queue_free()

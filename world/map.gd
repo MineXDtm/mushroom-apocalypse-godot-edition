@@ -110,13 +110,13 @@ func _ready():
 	else:
 		WorldData.new = false
 		WorldData.new2 = false
+		load_menu.get_node("ProgressBar").max_value = 5
 		load_menu.get_node("Label").text = "loading virables.."
 		load_menu.get_node("ProgressBar").value += 1
 		load_virables()
 		yield(get_tree().create_timer(0.01), "timeout")
 		yield(get_tree(), 'idle_frame')
 		load_menu.get_node("Label").text = "loading chunks.."
-		load_menu.get_node("ProgressBar").max_value = 4
 		yield(get_tree().create_timer(0.01), "timeout")
 		load_chunks()
 		load_menu.get_node("Label").text = "loading player.."
@@ -128,7 +128,12 @@ func _ready():
 		yield(get_tree().create_timer(0.01), "timeout")
 		load_car()
 		load_menu.get_node("ProgressBar").value += 1
+		load_menu.get_node("Label").text = "loading layer0.."
+		yield(get_tree().create_timer(0.01), "timeout")
+		load_chunks_layer0()
+		load_menu.get_node("ProgressBar").value += 1
 		load_menu.visible = false
+		
 	get_node("b/Sprite").texture = load("res://textures/" + types[WorldData.world_type]["graund"]+".png")
 	get_node("zombies").reloaddec()
 	discord_rpc.details = str("In World: " ,WorldData.world_name)
@@ -185,6 +190,7 @@ func _on_kust_fruit_spawn_timeout():
 func _on_time_timeout():
 	if time == "day" :
 		time = "night"
+		get_parent().get_node("UI2/time/bg/ViewportContainer/Viewport/CLockBar").set_clock(1)
 		$CanvasModulate.color = Color(0.294118, 0.294118, 0.294118)
 	else:
 		$time_move.stop()
@@ -194,7 +200,7 @@ func _on_time_timeout():
 		$time.wait_time += 40
 		$CanvasModulate.color = Color(1, 1, 1)
 		$time_move.wait_time = $time.wait_time / 15
-		$time.stop()
+		$time.start()
 		$time_move.start()
 
 
@@ -223,6 +229,8 @@ func change_biome():
 	for n in get_node("sort").get_children():
 		if n.type == "player" || n.type == "car":
 			continue
+		n.queue_free()
+	for n in get_node("b/builds").get_children():
 		n.queue_free()
 	var file = File.new()
 	save_path = SAVE_DIR + WorldData.world_name + "/"+WorldData.world_type+"/objects.json"
@@ -257,7 +265,12 @@ func change_biome():
 		yield(get_tree().create_timer(0.01), "timeout")
 		load_car()
 		load_menu.get_node("ProgressBar").value += 1
+		load_menu.get_node("Label").text = "loading layer0.."
+		yield(get_tree().create_timer(0.01), "timeout")
+		load_chunks_layer0()
+		load_menu.get_node("ProgressBar").value += 1
 		load_menu.visible = false
+		
 	discord_rpc.details = str("In World: " ,WorldData.world_name)
 	discord_rpc.icon = WorldData.world_type
 	discord_rpc.icon_desc =  WorldData.world_type
@@ -366,6 +379,52 @@ func update_chunks():
 		file.store_line(to_json(save_data))
 		file.close()
 		save_data.clear()
+func save_chunksinlayer0():
+	var world = get_node("b/builds").get_children()
+	save_path2 = SAVE_DIR + WorldData.world_name
+	var save_path_layer0 = SAVE_DIR + WorldData.world_name + "/"+WorldData.world_type+"/objects_layer0.json"
+	var dir = Directory.new()
+	dir.open(save_path2)
+	var object_data_layer0 = {
+		
+	}
+	var save_data_layer0 = {
+		
+	}
+	dir.make_dir(WorldData.world_type)
+	for i in world.size():
+		object_data_layer0["position_x"] = world[i].position.x
+		object_data_layer0["position_y"] = world[i].position.y
+		object_data_layer0["type"] = world[i].type
+		save_data_layer0[str("object",i)] = object_data_layer0.duplicate(true)
+	var file = File.new()
+	#var error = file.open(save_path, File.WRITE)
+	var error = file.open_encrypted_with_pass(save_path_layer0, File.WRITE, "P@paB3ar6969")
+	if error == OK:
+		file.store_line(to_json(save_data_layer0))
+		file.close()
+		save_data.clear()
+func load_chunks_layer0():
+	var file = File.new()
+	var save_path_layer0 = SAVE_DIR + WorldData.world_name + "/"+WorldData.world_type+"/objects_layer0.json"
+	#var error = file.open(save_path, File.READ)
+	var error = file.open_encrypted_with_pass(save_path_layer0, File.READ, "P@paB3ar6969")
+	var text = file.get_as_text()
+	file.close()
+	var save_data_layer0 = parse_json(text)
+	for i in save_data_layer0:
+		if save_data_layer0[i]["type"] == "wooden_floor":
+			var enemyscene = load("res://builds/wooden_floor.tscn")
+			var enemy = enemyscene.instance()
+			enemy.position.x = int(save_data_layer0[i]["position_x"])
+			enemy.position.y = int(save_data_layer0[i]["position_y"])
+			get_node("b/builds").add_child(enemy)
+		elif save_data_layer0[i]["type"] == "wooden_trap":
+			var enemyscene = load("res://builds/wooden_trap.tscn")
+			var enemy = enemyscene.instance()
+			enemy.position.x = int(save_data_layer0[i]["position_x"])
+			enemy.position.y = int(save_data_layer0[i]["position_y"])
+			get_node("b/builds").add_child(enemy)
 func load_chunks():
 	var file = File.new()
 	save_path = SAVE_DIR + WorldData.world_name + "/"+WorldData.world_type+"/objects.json"
@@ -399,6 +458,17 @@ func load_chunks():
 			get_node("sort").add_child(enemy)
 		if save_data[i]["type"] == "torch":
 			var enemyscene = load("res://builds/torch.tscn")
+			var enemy = enemyscene.instance()
+			enemy.position.x = int(save_data[i]["position_x"])
+			enemy.position.y = int(save_data[i]["position_y"])
+			if enemy.health > int(save_data[i]["health"]):
+				enemy.get_node("ProgressBar").visible = true
+				enemy.get_node("ProgressBar").value = int(save_data[i]["health"])
+			enemy.health = int(save_data[i]["health"])
+			enemy.name = save_data[i]["name"]
+			get_node("sort").add_child(enemy)
+		if save_data[i]["type"] == "stove":
+			var enemyscene = load("res://builds/stove.tscn")
 			var enemy = enemyscene.instance()
 			enemy.position.x = int(save_data[i]["position_x"])
 			enemy.position.y = int(save_data[i]["position_y"])
@@ -538,6 +608,9 @@ func save_car(car):
 func _on_save_timeout():
 	update_chunks()
 	save_virables()
+	save_chunksinlayer0()
+	save_car(get_node("sort/car"))
+	save_player(get_node("sort/player"))
 
 func _on_screen_shot_icon_timeout():
 	var img = get_tree().get_root().get_texture().get_data()

@@ -21,6 +21,7 @@ extents = Vector2( 22, 9 )
 [node name="car" type="Area2D" groups=[
 "car",
 ]]
+collision_layer = 3
 script = ExtResource( 10 )
 
 [node name="car_area" type="Area2D" parent="." groups=[
@@ -56,7 +57,6 @@ __meta__ = {
 [node name="pos1" type="Area2D" parent="." groups=[
 "area_car",
 ]]
-collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pos1"]
 position = Vector2( -16, 0 )
@@ -74,7 +74,6 @@ __meta__ = {
 [node name="pos2" type="Area2D" parent="." groups=[
 "area_car",
 ]]
-collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pos2"]
 position = Vector2( -4, 0 )
@@ -83,7 +82,6 @@ shape = SubResource( 3 )
 [node name="pos3" type="Area2D" parent="." groups=[
 "area_car",
 ]]
-collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pos3"]
 position = Vector2( 8, 0 )

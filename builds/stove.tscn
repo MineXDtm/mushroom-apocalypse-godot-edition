@@ -14,18 +14,28 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 8, 12 )
+extents = Vector2( 7, 7 )
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.207843, 1, 0, 1 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 1, 1, 1, 1 )
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 8, 15 )
 
 [node name="stove" type="Area2D" groups=[
-"buildblock",
+"stove",
 ]]
 collision_layer = 7
 script = ExtResource( 2 )
@@ -51,7 +61,7 @@ margin_top = -25.4182
 margin_right = 16.4001
 margin_bottom = -21.4182
 custom_styles/fg = SubResource( 3 )
-custom_styles/bg = SubResource( 4 )
+custom_styles/bg = SubResource( 6 )
 max_value = 12.0
 value = 12.0
 percent_visible = false
@@ -62,6 +72,8 @@ __meta__ = {
 [node name="blocked" type="Area2D" parent="." groups=[
 "blocked",
 ]]
+collision_layer = 0
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="blocked"]
 position = Vector2( 0, 5 )

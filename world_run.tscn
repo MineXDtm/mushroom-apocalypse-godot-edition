@@ -341,7 +341,3 @@ visible = false
 
 [node name="TileMap" parent="." instance=ExtResource( 30 )]
 visible = false
-
-[node name="save" type="Timer" parent="."]
-wait_time = 10.0
-autostart = true

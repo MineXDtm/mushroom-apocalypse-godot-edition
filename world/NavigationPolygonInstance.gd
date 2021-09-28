@@ -39,6 +39,14 @@ func _on_navarea_area_entered(area):
 		get_parent().astar.set_point_disabled(int(position.x + position.y + int(get_parent().indexes[Vector2(position.x, position.y)])) ,true)
 		get_parent().walk_zone.erase(position)
 		queue_free()
+	if area.is_in_group("stove"):
+		get_parent().astar.set_point_disabled(int(position.x + position.y + int(get_parent().indexes[Vector2(position.x, position.y)])) ,true)
+		get_parent().walk_zone.erase(position)
+		queue_free()
+	if area.is_in_group("bucket"):
+		get_parent().astar.set_point_disabled(int(position.x + position.y + int(get_parent().indexes[Vector2(position.x, position.y)])) ,true)
+		get_parent().walk_zone.erase(position)
+		queue_free()
 	elif area.is_in_group("door"):
 		get_parent().astar.set_point_disabled(int(position.x + position.y + int(get_parent().indexes[Vector2(position.x, position.y)])) ,true)
 		get_parent().walk_zone.erase(position)
@@ -58,7 +66,6 @@ func _on_navarea_area_entered(area):
 	if area.is_in_group("block"):
 		get_parent().astar.set_point_disabled(int(position.x + position.y + int(get_parent().indexes[Vector2(position.x, position.y)])) ,true)
 		get_parent().walk_zone.erase(position)
-		print('deleted')
 		queue_free()
 	if area.is_in_group("area_car"):
 		get_parent().astar.set_point_disabled(int(position.x + position.y + int(get_parent().indexes[Vector2(position.x, position.y)])) ,true)

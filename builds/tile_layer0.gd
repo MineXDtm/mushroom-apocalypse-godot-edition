@@ -14,18 +14,31 @@ var empty_rotare = load("res://textures/build_player/" + type +"_rotare_true.png
 var full_rotare = load("res://textures/build_player/" + type +"_rotare_false.png")
 var full  = load("res://textures/build_player/" + type +"_false.png")
 var rotared = false
+var layer = 1
 var pos = null
+var collides = [0]
 func _ready():
 	$Node2D/Sprite.texture = empty
 func _physics_process(_delta):
 	tile = world_to_map(get_global_mouse_position())
 	$Node2D.position = map_to_world(tile)
 	if $Node2D/checker.is_colliding():
+		print($Node2D/checker.get_collider().name)
+	if $Node2D/checker.is_colliding() and not $Node2D/checker.get_collider().layer in collides :
+		if rotared == false:
+			$Node2D/Sprite.texture = empty
+		else:
+			$Node2D/Sprite.texture = empty_rotare
+		var p = get_parent().get_parent().get_node_or_null("sort/player")
+		if p != null:
+			p.full2 = false
+		return
+	if $Node2D/checker.is_colliding():
 		if rotared == false:
 			$Node2D/Sprite.texture = full
 		else:
 			$Node2D/Sprite.texture = full_rotare
-		var p = get_parent().get_parent().get_node_or_null("/sort/player")
+		var p = get_parent().get_parent().get_node_or_null("sort/player")
 		if p != null:
 			p.full2 = true
 	else:
@@ -33,7 +46,7 @@ func _physics_process(_delta):
 			$Node2D/Sprite.texture = empty
 		else:
 			$Node2D/Sprite.texture = empty_rotare
-		var p = get_parent().get_parent().get_node_or_null("/sort/player")
+		var p = get_parent().get_parent().get_node_or_null("sort/player")
 		if p != null:
 			p.full2 = false
 	if WorldData.map != "map" :

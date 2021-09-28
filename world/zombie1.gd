@@ -14,6 +14,7 @@ var number2 = 0
 var random_x = 16
 var random_y = 16
 var index = 0
+var layer = 1
 var can_broke = true
 var cooldown2 = false
 var path = PoolVector2Array()

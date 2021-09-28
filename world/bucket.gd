@@ -9,6 +9,7 @@ var number = 0
 var number2 = 0
 var cooldown32 = 16
 var map_size = 1536
+var layer = 1
 var needed = 0
 var added = 16
 var skip = 0
@@ -73,6 +74,12 @@ func _on_bucket_area_entered(area):
 		$ProgressBar.value = health
 		$AnimatedSprite.play("broke")
 		if health <= 0 :
+			var navigationscene = load("res://world/NavigationPolygonInstance.tscn")
+			var navigation = navigationscene.instance()
+			navigation.position.x = cords2[number]
+			navigation.position.y = cords2[number2]
+			navigation.added_by_gen = false
+			get_parent().get_parent().get_node("zombies").call_deferred("add_child", navigation)
 			queue_free()
 	if area.is_in_group("wooden_exe") and broked == false:
 		health -= 0.7
@@ -80,6 +87,12 @@ func _on_bucket_area_entered(area):
 		$ProgressBar.value = health
 		$AnimatedSprite.play("broke")
 		if health <= 0 :
+			var navigationscene = load("res://world/NavigationPolygonInstance.tscn")
+			var navigation = navigationscene.instance()
+			navigation.position.x = cords2[number]
+			navigation.position.y = cords2[number2]
+			navigation.added_by_gen = false
+			get_parent().get_parent().get_node("zombies").call_deferred("add_child", navigation)
 			queue_free()
 	if area.is_in_group("wooden_pickaxe") and broked == false:
 		health -= 1
@@ -103,24 +116,22 @@ func _on_bucket_area_entered(area):
 		$ProgressBar.value = health
 		$AnimatedSprite.play("broke")
 		if health <= 0 :
-			queue_free()
+			broked = true
 	if broked == true :
 		broked = false
-		Ganaretor.kustes -= 1
+		var navigationscene = load("res://world/NavigationPolygonInstance.tscn")
+		var navigation = navigationscene.instance()
+		navigation.position.x = cords2[number]
+		navigation.position.y = cords2[number2]
+		navigation.added_by_gen = false
+		get_parent().get_parent().get_node("zombies").call_deferred("add_child", navigation)
 		var world = get_parent()
 		var drop_scene = load("res://world/drop/ItemDrop.tscn")
 		var _drop_intance = drop_scene.instance()
 		_drop_intance.item_name = "piece_of_rust"
 		_drop_intance.position = position
-		world.add_child(_drop_intance)
-		var navigationscene = load("res://world/NavigationPolygonInstance.tscn")
-		var _world = get_parent()
-		var navigation = navigationscene.instance()
-		navigation.position.x = cords2[number]
-		navigation.position.y = cords2[number2]
-		get_parent().get_parent().get_node("zombie").add_child(navigation)
-		navigation.position.x = cords2[number]
-		navigation.position.y = cords2[number2]
+		world.call_deferred("add_child", _drop_intance)
+		_drop_intance.position = position
 		queue_free()
 func _on_AnimatedSprite_animation_finished():
 	if broked == false and health > 0 :

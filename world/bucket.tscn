@@ -34,8 +34,8 @@ bg_color = Color( 0.207843, 1, 0, 1 )
 
 [node name="bucket" type="Area2D" groups=[
 "bucket",
-"kust",
 ]]
+collision_layer = 3
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

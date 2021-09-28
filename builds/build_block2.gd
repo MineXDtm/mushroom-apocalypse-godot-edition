@@ -11,6 +11,7 @@ var needed = 0
 var cooldown32 = 16
 var added = 16
 var added2 = 0
+var layer = 1
 var entered = false
 var mind = null
 var type = "build_block"
