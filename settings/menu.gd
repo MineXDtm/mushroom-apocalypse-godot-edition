@@ -1,4 +1,4 @@
-extends TextureRect
+extends Control
 
 func _physics_process(_delta):
 	if get_parent().get_parent().list == "1":

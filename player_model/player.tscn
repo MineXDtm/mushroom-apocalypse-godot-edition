@@ -910,7 +910,7 @@ angle = 360.0
 angle_random = 0.59
 scale = 4.0
 scale_curve = SubResource( 18 )
-color = Color( 0.396078, 0.396078, 0.396078, 1 )
+color = Color( 0.396078, 0.396078, 0.396078, 0.764706 )
 
 [node name="player" type="KinematicBody2D"]
 light_mask = 3

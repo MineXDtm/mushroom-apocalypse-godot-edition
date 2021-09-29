@@ -76,8 +76,6 @@ func _ready():
 			.set_description('locking time')\
 			.add_argument('true/false', TYPE_BOOL)\
 			.register()
-	$time_move.wait_time = $time.wait_time / 15
-	$time_move.start()
 	var file = File.new()
 	if not file.file_exists(save_path):
 		WorldData.new = true
@@ -107,6 +105,9 @@ func _ready():
 		WorldData.new2 = false
 		load_menu.visible = false
 		$new_screen_shot.start()
+		$time.start()
+		$time_move.wait_time = $time.wait_time / 15
+		$time_move.start()
 	else:
 		WorldData.new = false
 		WorldData.new2 = false
@@ -404,6 +405,12 @@ func save_chunksinlayer0():
 		file.store_line(to_json(save_data_layer0))
 		file.close()
 		save_data.clear()
+func load_time(time_left):
+	$time_move.wait_time = $time.wait_time / 15
+	$time_move.start()
+	yield(get_tree().create_timer(time_left), "timeout")
+	_on_time_timeout()
+
 func load_chunks_layer0():
 	var file = File.new()
 	var save_path_layer0 = SAVE_DIR + WorldData.world_name + "/"+WorldData.world_type+"/objects_layer0.json"
@@ -577,7 +584,9 @@ func save_virables():
 	dir.open(save_path2)
 	dir.make_dir(WorldData.world_type)
 	virables_data["time"] = time
+	virables_data["time_left"] = $time.time_left
 	virables_data["timer_max_time"] = $time.wait_time
+	virables_data["clock"] = get_parent().get_node("UI2/bg/ViewportContainer/Viewport/CLockBar").get_node("CanvasLayer/clock").rect_position.x
 	virables_data["type"] =  WorldData.world_type
 	virables_data["getted"] = get_parent().get_node("UI2/map").getted
 	virables_data["completed"] = get_parent().get_node("UI2/map").completed
@@ -688,4 +697,6 @@ func load_virables():
 		get_parent().get_node("UI2/bg/ViewportContainer/Viewport/CLockBar").set_clock(1)
 		$CanvasModulate.color = Color(0.294118, 0.294118, 0.294118)
 	$time.wait_time = save_data2["timer_max_time"]
+	get_parent().get_node("UI2/bg/ViewportContainer/Viewport/CLockBar").get_node("CanvasLayer/clock").rect_position.x = save_data2["clock"]
+	load_time(save_data2["time_left"])
 	WorldData.world_type = save_data2["type"]

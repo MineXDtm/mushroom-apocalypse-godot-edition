@@ -26,3 +26,4 @@ C:\Users\andrey\OneDrive\Документы\GitHub\mushroom-apocalypse\.mono\tem
 C:\Users\andrey\OneDrive\Документы\GitHub\mushroom-apocalypse\.mono\temp\obj\ExportRelease\mushroom apocalypse.csproj.CopyComplete
 C:\Users\andrey\OneDrive\Документы\GitHub\mushroom-apocalypse\.mono\temp\obj\ExportRelease\mushroom apocalypse.dll
 C:\Users\andrey\OneDrive\Документы\GitHub\mushroom-apocalypse\.mono\temp\obj\ExportRelease\mushroom apocalypse.pdb
+C:\Users\andrey\OneDrive\Документы\GitHub\mushroom-apocalypse\.mono\temp\obj\ExportRelease\mushroom apocalypse.GeneratedMSBuildEditorConfig.editorconfig

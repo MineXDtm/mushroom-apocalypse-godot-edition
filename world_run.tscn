@@ -56,9 +56,10 @@ bg_color = Color( 0.27451, 0.784314, 0.164706, 1 )
 font_data = ExtResource( 27 )
 
 [node name="world" type="Node2D"]
-position = Vector2( -1, 0 )
+position = Vector2( -1, 1 )
 
 [node name="map" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, 0 )
 
 [node name="UI2" type="CanvasLayer" parent="."]
 script = ExtResource( 13 )
@@ -296,9 +297,6 @@ __meta__ = {
 [node name="game_menu" parent="UI2" instance=ExtResource( 33 )]
 visible = false
 
-[node name="loding_world" parent="UI2" instance=ExtResource( 4 )]
-visible = false
-
 [node name="bg" type="TextureRect" parent="UI2"]
 anchor_left = 0.5
 anchor_right = 0.5
@@ -331,6 +329,9 @@ usage = 0
 render_target_update_mode = 3
 
 [node name="CLockBar" parent="UI2/bg/ViewportContainer/Viewport" instance=ExtResource( 3 )]
+
+[node name="loding_world" parent="UI2" instance=ExtResource( 4 )]
+visible = false
 
 [node name="TileMap" parent="." instance=ExtResource( 30 )]
 visible = false

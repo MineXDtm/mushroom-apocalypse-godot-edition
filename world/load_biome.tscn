@@ -33,7 +33,6 @@ scale = Vector2( 2, 2 )
 
 [node name="time" type="Timer" parent="."]
 wait_time = 60.0
-autostart = true
 
 [node name="time_move" type="Timer" parent="."]
 

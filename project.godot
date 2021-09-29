@@ -192,8 +192,11 @@ console={
 
 [rendering]
 
+quality/driver/fallback_to_gles2=true
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
+quality/shadows/filter_mode=2
+quality/subsurface_scattering/quality=2
 
 [world]
 

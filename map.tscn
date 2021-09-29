@@ -36,68 +36,90 @@ __meta__ = {
 [node name="map_texture" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_default_cursor_shape = 13
 texture = ExtResource( 1 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="list" type="Sprite" parent="."]
-visible = false
-position = Vector2( 248, 88 )
-scale = Vector2( 2.57143, 2.4375 )
+[node name="list" type="TextureRect" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -120.0
+margin_right = -5.0
 texture = ExtResource( 7 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="but" type="TextureButton" parent="list"]
-margin_left = -14.7778
-margin_top = 18.8718
-margin_right = 17.2222
-margin_bottom = 28.8718
+margin_left = 20.0
+margin_top = 130.0
+margin_right = 100.0
+margin_bottom = 160.0
 disabled = true
 texture_normal = ExtResource( 10 )
 texture_pressed = ExtResource( 13 )
 texture_hover = ExtResource( 14 )
 texture_disabled = ExtResource( 12 )
+expand = true
+stretch_mode = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="list/but"]
-margin_left = 3.11115
-margin_top = 2.05128
-margin_right = 129.111
-margin_bottom = 28.0513
-rect_scale = Vector2( 0.2, 0.2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 5.0
+margin_right = 80.0
+margin_bottom = 5.0
+rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = SubResource( 1 )
-text = "    move"
+text = "move"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="list"]
-margin_left = -17.1111
-margin_top = -26.6667
-margin_right = 98.8889
-margin_bottom = -0.666664
-rect_scale = Vector2( 0.15, 0.15 )
+anchor_left = 0.087
+anchor_top = 0.083
+anchor_right = 0.913
+anchor_bottom = 0.156
+margin_left = -0.00500011
+margin_top = 0.0599995
+margin_right = 95.005
+margin_bottom = 12.92
+rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Place name"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="items" type="VBoxContainer" parent="."]
-margin_left = 216.0
-margin_top = 43.0
-margin_right = 248.0
-margin_bottom = 128.0
-custom_constants/separation = 10
+clip_text = true
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
+[node name="items" type="VBoxContainer" parent="list"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 40.0
+margin_right = -15.0
+margin_bottom = -55.0
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="buttons" type="Control" parent="."]
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="point2" type="TextureButton" parent="buttons"]
 margin_left = 62.0
@@ -126,5 +148,8 @@ script = ExtResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 160, 90 )
 
 [connection signal="pressed" from="list/but" to="." method="_on_but_pressed"]
