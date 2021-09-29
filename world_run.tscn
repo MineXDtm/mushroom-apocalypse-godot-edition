@@ -294,9 +294,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="game_menu" parent="UI2" instance=ExtResource( 33 )]
-visible = false
-
 [node name="bg" type="TextureRect" parent="UI2"]
 anchor_left = 0.5
 anchor_right = 0.5
@@ -329,6 +326,9 @@ usage = 0
 render_target_update_mode = 3
 
 [node name="CLockBar" parent="UI2/bg/ViewportContainer/Viewport" instance=ExtResource( 3 )]
+
+[node name="game_menu" parent="UI2" instance=ExtResource( 33 )]
+visible = false
 
 [node name="loding_world" parent="UI2" instance=ExtResource( 4 )]
 visible = false

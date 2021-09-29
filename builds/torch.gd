@@ -11,7 +11,7 @@ var type = "torch"
 # var a = 2
 # var b = "text"
 
-
+var layer = 1
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

@@ -31,7 +31,7 @@ animations = [ {
 } ]
 
 [sub_resource type="OccluderPolygon2D" id=2]
-polygon = PoolVector2Array( 239.343, -1.19724, -236.208, -1.19724, -237.531, -59.9257, -237.775, -82.0732, 237.775, -82.0732 )
+polygon = PoolVector2Array( 239.343, -1.19724, -236.208, -1.19724, -237.775, -82.0732, 237.775, -82.0732 )
 
 [sub_resource type="OccluderPolygon2D" id=3]
 polygon = PoolVector2Array( -0.104491, -24.2752, -15.9562, -24.2752, -15.9562, 23.7525, -0.104491, 23.7525 )
