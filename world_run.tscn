@@ -56,7 +56,6 @@ bg_color = Color( 0.27451, 0.784314, 0.164706, 1 )
 font_data = ExtResource( 27 )
 
 [node name="world" type="Node2D"]
-position = Vector2( -1, 1 )
 
 [node name="map" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, 0 )

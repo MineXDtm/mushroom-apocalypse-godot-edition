@@ -54,7 +54,6 @@ bg_color = Color( 0.380392, 0.670588, 0.180392, 1 )
 "kust",
 ]]
 visible = false
-show_behind_parent = true
 scale = Vector2( -0.0672904, 0.194948 )
 collision_layer = 3
 script = ExtResource( 2 )

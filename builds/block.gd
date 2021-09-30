@@ -13,6 +13,8 @@ var added = 16
 var added2 = 0
 var type = "block"
 var layer = 1
+export var up: Texture
+export var rotared: Texture
 func _ready():
 	WorldData.blocks += 1
 	name = str("block",WorldData.blocks)
@@ -30,28 +32,28 @@ func _ready():
 		if cords[i] == position.y:
 			number2 = i
 	if get_parent().get_parent().get_parent().get_node("TileMap").rotare == "up":
-		$AnimatedSprite.play("default")
+		$AnimatedSprite.texture = up
 		$AnimatedSprite.position.y = 0
 		$AnimatedSprite.position.x = 0
 		$AnimatedSprite/up.visible = true
 		$StaticBody2D/up.disabled = false
 		rotare = "up"
 	elif get_parent().get_parent().get_parent().get_node("TileMap").rotare == "right":
-		$AnimatedSprite.play("right")
+		$AnimatedSprite.texture = rotared
 		$AnimatedSprite/right.visible = true
 		$StaticBody2D/right.disabled = false
 		$AnimatedSprite.position.y = 41.037
 		$AnimatedSprite.position.x = 0
 		rotare = "right"
 	elif get_parent().get_parent().get_parent().get_node("TileMap").rotare == "left":
-		$AnimatedSprite.play("left")
+		$AnimatedSprite.texture = rotared
 		$AnimatedSprite/left.visible = true
 		$StaticBody2D/left.disabled = false
 		$AnimatedSprite.position.y = 41.037
 		$AnimatedSprite.position.x = 237.775
 		rotare = "left"
 	elif get_parent().get_parent().get_parent().get_node("TileMap").rotare == "down":
-		$AnimatedSprite.play("default")
+		$AnimatedSprite.texture = up
 		$AnimatedSprite/up.visible = true
 		$StaticBody2D/down.disabled = false
 		$AnimatedSprite.position.y = 82.073

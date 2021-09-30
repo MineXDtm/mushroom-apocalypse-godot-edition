@@ -20,26 +20,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
-func _on_AnimatedSprite_animation_finished():
-	if broked == true :
-		broked = false
-		for _i in Ganaretor.zombie:
-			if Ganaretor.zombies.has(_i) == true:
-				var navigationscene = load("res://world/NavigationPolygonInstance.tscn")
-				var _world = get_parent()
-				var navigation = navigationscene.instance()
-				navigation.position.x = cords2[number]
-				navigation.position.y = cords2[number2]
-				get_parent().get_node(str("zombie",_i)).add_child(navigation)
-				navigation.position.x = cords2[number]
-				navigation.position.y = cords2[number2]
-		var world = get_parent()
-		var drop_scene = load("res://world/drop/ItemDrop_wood.tscn")
-		var _drop_intance = drop_scene.instance()
-		_drop_intance.position = position
-		world.add_child(_drop_intance)
-		_drop_intance.position = position
-		queue_free()
+
 
 
 func _on_torch_area_entered(area):
@@ -79,3 +60,12 @@ func _on_torch_area_entered(area):
 		if health <= 0 :
 			$ProgressBar.visible = false
 			broked = true
+	if broked == true :
+		var world = get_parent()
+		var drop_scene = load("res://world/drop/ItemDrop.tscn")
+		var _drop_intance = drop_scene.instance()
+		_drop_intance.item_name = "coal"
+		_drop_intance.position = position
+		world.call_deferred("add_child", _drop_intance)
+		_drop_intance.position = position
+		queue_free()

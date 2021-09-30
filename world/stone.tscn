@@ -32,7 +32,6 @@ bg_color = Color( 0.380392, 0.670588, 0.180392, 1 )
 "stone",
 ]]
 visible = false
-show_behind_parent = true
 scale = Vector2( -0.0672904, 0.194948 )
 gravity_vec = Vector2( 0, 0 )
 gravity = 0.0

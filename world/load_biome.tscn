@@ -19,17 +19,19 @@ position = Vector2( 0, -3 )
 script = ExtResource( 1 )
 
 [node name="b" parent="." instance=ExtResource( 6 )]
+position = Vector2( -90, -6 )
 
 [node name="sort" type="YSort" parent="."]
-position = Vector2( 0, -1 )
-
-[node name="player" parent="sort" instance=ExtResource( 8 )]
-material = SubResource( 1 )
-position = Vector2( 753, 673 )
 
 [node name="car" parent="sort" instance=ExtResource( 7 )]
-position = Vector2( 752, 658 )
+position = Vector2( 756, 660 )
 scale = Vector2( 2, 2 )
+
+[node name="player" parent="sort" groups=[
+"kust",
+] instance=ExtResource( 8 )]
+material = SubResource( 1 )
+position = Vector2( 702, 705 )
 
 [node name="time" type="Timer" parent="."]
 wait_time = 60.0
