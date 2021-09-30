@@ -24,14 +24,14 @@ position = Vector2( -90, -6 )
 [node name="sort" type="YSort" parent="."]
 
 [node name="car" parent="sort" instance=ExtResource( 7 )]
-position = Vector2( 756, 660 )
+position = Vector2( 684, 651 )
 scale = Vector2( 2, 2 )
 
 [node name="player" parent="sort" groups=[
 "kust",
 ] instance=ExtResource( 8 )]
 material = SubResource( 1 )
-position = Vector2( 702, 705 )
+position = Vector2( 684, 669 )
 
 [node name="time" type="Timer" parent="."]
 wait_time = 60.0
