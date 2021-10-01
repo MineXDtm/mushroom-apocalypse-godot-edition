@@ -1,42 +1,77 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://settings/menu.gd" type="Script" id=1]
-[ext_resource path="res://textures/gui/bu31tton_on_clicked.png" type="Texture" id=3]
-[ext_resource path="res://textures/gui/bu31tton_on_mause.png" type="Texture" id=4]
-[ext_resource path="res://textures/gui/bu31tton.png" type="Texture" id=5]
+[ext_resource path="res://settings/game_menu.tres" type="StyleBox" id=2]
+[ext_resource path="res://textures/gui/arrow_right_menu.png" type="Texture" id=3]
+[ext_resource path="res://settings/game_menu_clicked.tres" type="StyleBox" id=4]
 [ext_resource path="res://textures/gui/fdfdfdf.png" type="Texture" id=6]
 [ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=8]
-[ext_resource path="res://settings/screen_size.gd" type="Script" id=9]
 [ext_resource path="res://textures/gui/menu21.png" type="Texture" id=11]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.54902, 0.227451, 0.615686, 1 )
-border_width_bottom = 3
-border_color = Color( 0.384314, 0.168627, 0.431373, 1 )
+[sub_resource type="StyleBoxEmpty" id=1]
 
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.54902, 0.227451, 0.615686, 1 )
-border_color = Color( 0.384314, 0.168627, 0.431373, 1 )
-
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 8 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.54902, 0.227451, 0.615686, 1 )
-border_width_bottom = 3
-border_color = Color( 0.364706, 0.14902, 0.407843, 1 )
+border_color = Color( 0.384314, 0.168627, 0.431373, 1 )
 
-[sub_resource type="DynamicFont" id=5]
-font_data = ExtResource( 8 )
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.356863, 0.152941, 0.4, 1 )
+border_width_bottom = 3
+border_color = Color( 0.219608, 0.0901961, 0.243137, 1 )
 
 [sub_resource type="DynamicFont" id=6]
-use_mipmaps = true
 font_data = ExtResource( 8 )
 
 [sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.54902, 0.227451, 0.615686, 1 )
+border_color = Color( 0.384314, 0.168627, 0.431373, 1 )
 
-[sub_resource type="Theme" id=8]
-OptionButton/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="DynamicFont" id=9]
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=10]
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=11]
+use_mipmaps = true
+font_data = ExtResource( 8 )
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0.262745, 0, 0.254902, 1 )
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 1, 1, 1, 1 )
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 0.141176, 0.0431373, 0.160784, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_blend = true
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="DynamicFont" id=15]
+font_data = ExtResource( 8 )
+
+[sub_resource type="Theme" id=16]
+default_font = SubResource( 15 )
+OptionButton/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
 OptionButton/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
 OptionButton/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
 OptionButton/colors/font_color_pressed = Color( 1, 1, 1, 1 )
@@ -44,16 +79,44 @@ OptionButton/constants/arrow_margin = 2
 OptionButton/constants/hseparation = 2
 OptionButton/fonts/font = null
 OptionButton/icons/arrow = null
-OptionButton/styles/disabled = null
-OptionButton/styles/focus = null
-OptionButton/styles/hover = null
-OptionButton/styles/normal = SubResource( 7 )
-OptionButton/styles/pressed = null
+OptionButton/styles/disabled = SubResource( 12 )
+OptionButton/styles/focus = SubResource( 12 )
+OptionButton/styles/hover = SubResource( 12 )
+OptionButton/styles/normal = SubResource( 12 )
+OptionButton/styles/pressed = SubResource( 12 )
+PopupMenu/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+PopupMenu/colors/font_color_accel = Color( 0.7, 0.7, 0.7, 0.8 )
+PopupMenu/colors/font_color_disabled = Color( 0.4, 0.4, 0.4, 0.8 )
+PopupMenu/colors/font_color_hover = Color( 0.88, 0.88, 0.88, 1 )
+PopupMenu/colors/font_color_separator = Color( 0.88, 0.88, 0.88, 1 )
+PopupMenu/constants/hseparation = 4
+PopupMenu/constants/vseparation = 4
+PopupMenu/fonts/font = null
+PopupMenu/icons/checked = null
+PopupMenu/icons/radio_checked = null
+PopupMenu/icons/radio_unchecked = null
+PopupMenu/icons/submenu = null
+PopupMenu/icons/unchecked = null
+PopupMenu/styles/hover = SubResource( 13 )
+PopupMenu/styles/labeled_separator_left = null
+PopupMenu/styles/labeled_separator_right = null
+PopupMenu/styles/panel = SubResource( 14 )
+PopupMenu/styles/panel_disabled = null
+PopupMenu/styles/separator = null
 
-[sub_resource type="StyleBoxFlat" id=9]
-bg_color = Color( 0.290196, 0.227451, 0.4, 1 )
+[sub_resource type="StyleBoxFlat" id=17]
+bg_color = Color( 0.4, 0.227451, 0.4, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=18]
+
+[sub_resource type="StyleBoxFlat" id=19]
+bg_color = Color( 0.266667, 0.145098, 0.266667, 1 )
+
+[sub_resource type="DynamicFont" id=20]
+font_data = ExtResource( 8 )
 
 [node name="game_menu" type="Control"]
+pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -79,9 +142,10 @@ __meta__ = {
 }
 
 [node name="menu" type="Control" parent="."]
-anchor_top = 0.222222
+pause_mode = 2
+anchor_top = 0.244444
 anchor_right = 1.0
-anchor_bottom = 0.777778
+anchor_bottom = 0.755556
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": true
@@ -90,27 +154,28 @@ __meta__ = {
 [node name="HBoxContainer" type="HBoxContainer" parent="menu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+custom_constants/separation = 20
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="but" type="VBoxContainer" parent="menu/HBoxContainer"]
-margin_right = 318.0
-margin_bottom = 200.0
+[node name="MarginContainer" type="MarginContainer" parent="menu/HBoxContainer"]
+margin_right = 640.0
+margin_bottom = 173.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+custom_constants/margin_bottom = 10
 
-[node name="title" type="TextureRect" parent="menu/HBoxContainer/but"]
-margin_right = 318.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 0, 20 )
+[node name="VBoxContainer" type="VBoxContainer" parent="menu/HBoxContainer/MarginContainer"]
+margin_right = 640.0
+margin_bottom = 163.0
+
+[node name="title" type="TextureRect" parent="menu/HBoxContainer/MarginContainer/VBoxContainer"]
+margin_right = 640.0
+margin_bottom = 79.0
 mouse_filter = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 7
 size_flags_vertical = 3
 texture = ExtResource( 11 )
 expand = true
@@ -119,93 +184,329 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="menu/HBoxContainer/but"]
-margin_top = 164.0
-margin_right = 318.0
-margin_bottom = 200.0
-size_flags_horizontal = 3
-size_flags_vertical = 10
-
-[node name="settings_but" type="Button" parent="menu/HBoxContainer/but/VBoxContainer"]
-margin_right = 318.0
-margin_bottom = 16.0
+[node name="ScrollContainer" type="ScrollContainer" parent="menu/HBoxContainer/MarginContainer/VBoxContainer"]
+margin_top = 83.0
+margin_right = 640.0
+margin_bottom = 163.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/normal = SubResource( 1 )
-custom_fonts/font = SubResource( 3 )
-text = "Settings"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="menu/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+margin_right = 628.0
+margin_bottom = 98.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="menu/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_right = 628.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 20, 30 )
+size_flags_horizontal = 7
+
+[node name="Control2" type="Control" parent="menu/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+margin_right = 206.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="exit" type="Button" parent="menu/HBoxContainer/but/VBoxContainer"]
-margin_top = 20.0
-margin_right = 318.0
-margin_bottom = 36.0
+[node name="settings_but" type="Button" parent="menu/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+margin_left = 210.0
+margin_right = 417.0
+margin_bottom = 30.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/normal = SubResource( 4 )
-custom_fonts/font = SubResource( 5 )
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/focus = SubResource( 1 )
+custom_styles/normal = ExtResource( 2 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Settings"
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="menu/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+margin_left = 421.0
+margin_right = 628.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="menu/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 34.0
+margin_right = 628.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 20, 30 )
+size_flags_horizontal = 3
+
+[node name="Control2" type="Control" parent="menu/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
+margin_right = 206.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="exit" type="Button" parent="menu/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
+margin_left = 210.0
+margin_right = 417.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = ExtResource( 2 )
+custom_fonts/font = SubResource( 6 )
+disabled = true
+text = "create server"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="menu/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
+margin_left = 421.0
+margin_right = 628.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="menu/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 68.0
+margin_right = 628.0
+margin_bottom = 98.0
+rect_min_size = Vector2( 20, 30 )
+size_flags_horizontal = 3
+
+[node name="Control2" type="Control" parent="menu/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
+margin_right = 206.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="exit" type="Button" parent="menu/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 210.0
+margin_right = 417.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = ExtResource( 2 )
+custom_fonts/font = SubResource( 6 )
 text = "exit"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Control" type="Control" parent="menu/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 421.0
+margin_right = 628.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="ScrollContainer" type="ScrollContainer" parent="menu/HBoxContainer"]
-margin_left = 322.0
+pause_mode = 1
+visible = false
+margin_left = 330.0
 margin_right = 640.0
-margin_bottom = 200.0
+margin_bottom = 173.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="menu/HBoxContainer/ScrollContainer"]
-margin_right = 318.0
-margin_bottom = 200.0
+margin_right = 310.0
+margin_bottom = 173.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/separation = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="fullscreen" type="TextureButton" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer"]
-margin_right = 318.0
-margin_bottom = 12.0
-texture_normal = ExtResource( 5 )
-texture_pressed = ExtResource( 3 )
-texture_hover = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="HBoxContainer" type="HBoxContainer" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer"]
+margin_right = 310.0
+margin_bottom = 19.0
+custom_constants/separation = 0
+
+[node name="fullscreen" type="CheckBox" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+margin_right = 84.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/normal = ExtResource( 2 )
+custom_fonts/font = SubResource( 9 )
+text = "fullscreen"
+align = 1
+
+[node name="Label" type="Label" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+margin_left = 84.0
+margin_top = 3.0
+margin_right = 105.0
+margin_bottom = 16.0
+size_flags_horizontal = 8
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 10 )
+text = " off"
+align = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+margin_left = 105.0
+margin_right = 310.0
+margin_bottom = 19.0
+custom_constants/margin_right = 205
 
 [node name="title" type="Label" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 16.0
-margin_right = 318.0
-margin_bottom = 29.0
-custom_fonts/font = SubResource( 6 )
+margin_top = 19.0
+margin_right = 310.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 11 )
 custom_colors/font_color = Color( 1, 0.984314, 0, 1 )
 text = "Screen Size"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="screen_size" type="OptionButton" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer/title"]
-margin_left = -1.0
-margin_top = 14.0
-margin_right = 121.0
-margin_bottom = 34.0
-rect_scale = Vector2( 0.5, 0.5 )
-theme = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+[node name="HBoxContainer2" type="HBoxContainer" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 32.0
+margin_right = 310.0
+margin_bottom = 45.0
+custom_constants/separation = 130
+
+[node name="screen_size" type="OptionButton" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
+margin_right = 90.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource( 16 )
+custom_icons/arrow = ExtResource( 3 )
+custom_styles/hover = SubResource( 17 )
+custom_styles/pressed = SubResource( 17 )
+custom_styles/focus = SubResource( 18 )
+custom_styles/disabled = SubResource( 19 )
+custom_styles/normal = SubResource( 17 )
+custom_fonts/font = SubResource( 20 )
 text = "1920x1080"
 items = [ "1920x1080", null, false, 0, null, "640x480", null, false, 1, null, "1280x720", null, false, 2, null, "800x600", null, false, 3, null ]
 selected = 0
-script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="menu/HBoxContainer/but/VBoxContainer/settings_but" to="menu" method="_on_settings_but_pressed"]
-[connection signal="button_down" from="menu/HBoxContainer/but/VBoxContainer/exit" to="menu" method="_on_exit_button_down"]
-[connection signal="item_selected" from="menu/HBoxContainer/ScrollContainer/VBoxContainer/title/screen_size" to="menu/HBoxContainer/ScrollContainer/VBoxContainer/title/screen_size" method="_on_screen_size_item_selected"]
+[node name="Control" type="Control" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 220.0
+margin_right = 310.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="title2" type="Label" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 45.0
+margin_right = 310.0
+margin_bottom = 58.0
+custom_fonts/font = SubResource( 11 )
+custom_colors/font_color = Color( 1, 0.984314, 0, 1 )
+text = "fps lock"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 58.0
+margin_right = 310.0
+margin_bottom = 71.0
+custom_constants/separation = 130
+
+[node name="fps_lock" type="OptionButton" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
+margin_right = 90.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource( 16 )
+custom_icons/arrow = ExtResource( 3 )
+custom_styles/hover = SubResource( 17 )
+custom_styles/pressed = SubResource( 17 )
+custom_styles/focus = SubResource( 18 )
+custom_styles/disabled = SubResource( 19 )
+custom_styles/normal = SubResource( 17 )
+custom_fonts/font = SubResource( 20 )
+text = "60"
+items = [ "60", null, false, 0, null, "120", null, false, 1, null, "180", null, false, 2, null, "30", null, false, 3, null, "300", null, false, 4, null, "off", null, false, 5, null ]
+selected = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
+margin_left = 220.0
+margin_right = 310.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="title3" type="Label" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 71.0
+margin_right = 310.0
+margin_bottom = 84.0
+custom_fonts/font = SubResource( 11 )
+custom_colors/font_color = Color( 1, 0.984314, 0, 1 )
+text = "shadow mode"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 84.0
+margin_right = 310.0
+margin_bottom = 97.0
+custom_constants/separation = 130
+
+[node name="shadow_mode" type="OptionButton" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
+margin_right = 90.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource( 16 )
+custom_icons/arrow = ExtResource( 3 )
+custom_styles/hover = SubResource( 17 )
+custom_styles/pressed = SubResource( 17 )
+custom_styles/focus = SubResource( 18 )
+custom_styles/disabled = SubResource( 19 )
+custom_styles/normal = SubResource( 17 )
+custom_fonts/font = SubResource( 20 )
+text = "low"
+items = [ "low", null, false, 0, null, "hight", null, false, 1, null ]
+selected = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
+margin_left = 220.0
+margin_right = 310.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="pressed" from="menu/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/settings_but" to="menu" method="_on_settings_but_pressed"]
+[connection signal="button_down" from="menu/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/exit" to="menu" method="_on_exit_button_down"]
+[connection signal="pressed" from="menu/HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/fullscreen" to="menu" method="_on_fullscreen_pressed"]
+[connection signal="item_selected" from="menu/HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/screen_size" to="menu" method="_on_screen_size_item_selected"]
+[connection signal="item_selected" from="menu/HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/fps_lock" to="menu" method="_on_fps_lock_item_selected"]
+[connection signal="item_selected" from="menu/HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/shadow_mode" to="menu" method="_on_shadow_mode_item_selected"]

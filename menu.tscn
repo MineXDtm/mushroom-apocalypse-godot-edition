@@ -84,12 +84,13 @@ __meta__ = {
 }
 
 [node name="Particles2D" type="Particles2D" parent="."]
-position = Vector2( 156, 145 )
+position = Vector2( 320, 280 )
 scale = Vector2( -1.15821, 0.756622 )
 lifetime = 7.64
 process_material = SubResource( 1 )
 
 [node name="menu_1" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -99,9 +100,9 @@ __meta__ = {
 [node name="title" type="TextureRect" parent="menu_1"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -112.0
-margin_right = 112.0
-margin_bottom = 24.0
+margin_left = -168.0
+margin_right = 144.0
+margin_bottom = 64.0
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
@@ -110,21 +111,20 @@ __meta__ = {
 }
 
 [node name="buttons" type="VBoxContainer" parent="menu_1"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -92.0
-margin_top = -98.0
-margin_right = -9.0
-margin_bottom = -10.0
+anchor_left = 0.775
+anchor_top = 0.611765
+anchor_right = 0.985937
+anchor_bottom = 0.970588
+margin_top = -1.52588e-05
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
 [node name="play" type="Button" parent="menu_1/buttons"]
-margin_right = 83.0
-margin_bottom = 19.0
+margin_right = 135.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_fonts/font = SubResource( 2 )
 text = "play"
 __meta__ = {
@@ -132,9 +132,11 @@ __meta__ = {
 }
 
 [node name="join" type="Button" parent="menu_1/buttons"]
-margin_top = 23.0
-margin_right = 83.0
-margin_bottom = 42.0
+margin_top = 31.0
+margin_right = 135.0
+margin_bottom = 59.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_fonts/font = SubResource( 3 )
 disabled = true
 text = "join"
@@ -143,9 +145,11 @@ __meta__ = {
 }
 
 [node name="settings" type="Button" parent="menu_1/buttons"]
-margin_top = 46.0
-margin_right = 83.0
-margin_bottom = 65.0
+margin_top = 63.0
+margin_right = 135.0
+margin_bottom = 90.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_fonts/font = SubResource( 4 )
 disabled = true
 text = "settings"
@@ -154,9 +158,11 @@ __meta__ = {
 }
 
 [node name="quit" type="Button" parent="menu_1/buttons"]
-margin_top = 69.0
-margin_right = 83.0
-margin_bottom = 88.0
+margin_top = 94.0
+margin_right = 135.0
+margin_bottom = 122.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_fonts/font = SubResource( 4 )
 text = "quit game"
 __meta__ = {
@@ -164,64 +170,11 @@ __meta__ = {
 }
 
 [node name="worlds_list" type="Control" parent="."]
-visible = false
-margin_right = 320.0
-margin_bottom = 180.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="container" type="ScrollContainer" parent="worlds_list"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -26.0
-margin_top = -45.0
-margin_right = 21.0
-margin_bottom = -2.0
-rect_scale = Vector2( 2, 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="worlds_list/container"]
-
-[node name="create" type="Button" parent="worlds_list"]
-margin_left = 181.0
-margin_top = 139.0
-margin_right = 325.0
-margin_bottom = 167.0
-rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = SubResource( 5 )
-text = "create world"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="remove" type="Button" parent="worlds_list"]
-margin_left = 130.0
-margin_top = 139.0
-margin_right = 221.0
-margin_bottom = 167.0
-rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = SubResource( 6 )
-text = "remove"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="join" type="Button" parent="worlds_list"]
-margin_left = 77.0
-margin_top = 139.0
-margin_right = 168.0
-margin_bottom = 167.0
-rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = SubResource( 7 )
-text = "join"
-__meta__ = {
 "_edit_use_anchors_": false
 }
 
@@ -231,39 +184,115 @@ margin_top = 3.0
 margin_right = 40.0
 margin_bottom = 23.0
 rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 5 )
 text = "back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="worlds_list"]
+anchor_left = 0.25
+anchor_top = 0.094
+anchor_right = 0.748
+anchor_bottom = 0.871
+margin_left = 1.0
+margin_top = 8.04
+margin_right = 0.279968
+margin_bottom = -0.140015
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="container" type="ScrollContainer" parent="worlds_list/VBoxContainer"]
+margin_right = 318.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 0, 200 )
+size_flags_horizontal = 3
+size_flags_vertical = 6
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="worlds_list/VBoxContainer/container"]
+margin_right = 318.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 0, 200 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="worlds_list/VBoxContainer"]
+margin_top = 227.0
+margin_right = 318.0
+margin_bottom = 255.0
+size_flags_horizontal = 3
+size_flags_vertical = 10
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="join" type="Button" parent="worlds_list/VBoxContainer/HBoxContainer"]
+margin_right = 50.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 6 )
+text = "join"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="remove" type="Button" parent="worlds_list/VBoxContainer/HBoxContainer"]
+margin_left = 70.0
+margin_right = 158.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 7 )
+text = "remove"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="create" type="Button" parent="worlds_list/VBoxContainer/HBoxContainer"]
+margin_left = 178.0
+margin_right = 318.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 8 )
+text = "create game"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ColorRect" type="ColorRect" parent="worlds_list"]
 visible = false
-margin_top = -1.0
-margin_right = 320.0
-margin_bottom = 179.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 color = Color( 0, 0, 0, 0.301961 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="gui" type="TextureRect" parent="worlds_list/ColorRect"]
-margin_left = 101.0
-margin_top = 53.0
-margin_right = 140.0
-margin_bottom = 73.0
-rect_scale = Vector2( 3, 3 )
+anchor_left = 0.2375
+anchor_top = 0.188235
+anchor_right = 0.725
+anchor_bottom = 0.729412
 texture = ExtResource( 7 )
+expand = true
+stretch_mode = 6
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
 [node name="name_edit" type="LineEdit" parent="worlds_list/ColorRect/gui"]
-margin_left = 4.0
-margin_top = 10.0
-margin_right = 317.0
-margin_bottom = 42.0
-rect_scale = Vector2( 0.1, 0.1 )
+margin_left = 32.0
+margin_top = 80.0
+margin_right = 280.0
+margin_bottom = 107.0
 custom_styles/focus = SubResource( 9 )
 custom_styles/normal = SubResource( 10 )
 custom_fonts/font = SubResource( 11 )
@@ -273,27 +302,31 @@ __meta__ = {
 }
 
 [node name="Button" type="Button" parent="worlds_list/ColorRect/gui"]
-margin_left = 15.0
-margin_top = 14.0
-margin_right = 112.0
-margin_bottom = 42.0
-rect_scale = Vector2( 0.1, 0.1 )
+margin_left = 112.0
+margin_top = 112.0
+margin_right = 209.0
+margin_bottom = 140.0
 custom_fonts/font = SubResource( 12 )
 text = "ok"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="worlds_list/ColorRect/gui"]
-margin_left = 11.0
-margin_top = 5.66666
-margin_right = 191.0
-margin_bottom = 27.6667
-rect_scale = Vector2( 0.1, 0.1 )
+margin_left = 64.0
+margin_top = 48.0
+margin_right = 244.0
+margin_bottom = 70.0
 custom_fonts/font = SubResource( 13 )
 text = "Write world name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="pressed" from="menu_1/buttons/play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="menu_1/buttons/quit" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="worlds_list/create" to="worlds_list" method="_on_create_pressed"]
-[connection signal="pressed" from="worlds_list/remove" to="worlds_list" method="_on_remove_pressed"]
-[connection signal="pressed" from="worlds_list/join" to="worlds_list" method="_on_join_pressed"]
 [connection signal="pressed" from="worlds_list/back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="worlds_list/VBoxContainer/HBoxContainer/join" to="worlds_list" method="_on_join_pressed"]
+[connection signal="pressed" from="worlds_list/VBoxContainer/HBoxContainer/remove" to="worlds_list" method="_on_remove_pressed"]
+[connection signal="pressed" from="worlds_list/VBoxContainer/HBoxContainer/create" to="worlds_list" method="_on_create_pressed"]
 [connection signal="pressed" from="worlds_list/ColorRect/gui/Button" to="worlds_list" method="_on_Button_pressed"]

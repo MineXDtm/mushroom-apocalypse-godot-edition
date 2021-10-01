@@ -27,12 +27,12 @@ func _ready():
 		image.load_png_from_buffer(buffer)
 		var image_texture = ImageTexture.new()
 		image_texture.create_from_image(image)
-		world_file_instance.get_node("image_box/icon").texture = image_texture
+		world_file_instance.get_node("icon").texture = image_texture
 		world_file_instance.get_node("name").text = i
 		world_file_instance.name = i
 		world_file_instance.name_world = i
 		world_file_instance.directory = save_path 
-		$container/VBoxContainer.add_child(world_file_instance)
+		$VBoxContainer/container/VBoxContainer.add_child(world_file_instance)
 
 
 func _on_create_pressed():
@@ -43,15 +43,15 @@ func _on_create_pressed():
 func _on_join_pressed():
 	if selected != null:
 		WorldData.new = false
-		WorldData.world_path = get_node(str("container/VBoxContainer/",selected)).directory
-		WorldData.world_name = get_node(str("container/VBoxContainer/",selected,"/name")).text
+		WorldData.world_path = get_node(str("VBoxContainer/container/VBoxContainer/",selected)).directory
+		WorldData.world_name = get_node(str("VBoxContainer/container/VBoxContainer/",selected,"/name")).text
 		get_tree().change_scene("res://world_run.tscn")
 
 
 func _on_remove_pressed():
 	if selected != null:
 		dir_contents(str(SAVE_DIR,selected))
-		get_node(str("container/VBoxContainer/",selected)).queue_free()
+		get_node(str("VBoxContainer/container/VBoxContainer/",selected)).queue_free()
 		selected = null
 
 func dir_contents(path):

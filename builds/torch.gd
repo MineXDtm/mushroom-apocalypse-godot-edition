@@ -14,9 +14,13 @@ var type = "torch"
 var layer = 1
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-
+	gamesettings.connect("change_settings",self,"changed_settings")
+func changed_settings():
+	if visible:
+		if gamesettings.shadow_mode == "low":
+			$Light2D.shadow_enabled = false
+		else:
+			$Light2D.shadow_enabled = true
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
@@ -24,6 +28,7 @@ func _ready():
 
 
 func _on_torch_area_entered(area):
+	
 	if area.is_in_group("arm") and broked == false:
 		health -= 1
 		print(position.y, name)
@@ -69,3 +74,15 @@ func _on_torch_area_entered(area):
 		world.call_deferred("add_child", _drop_intance)
 		_drop_intance.position = position
 		queue_free()
+
+
+func _on_VisibilityNotifier2D_screen_entered():
+	visible = true
+	if gamesettings.shadow_mode != "low":
+		$Light2D.shadow_enabled = true
+
+
+func _on_VisibilityNotifier2D_screen_exited():
+	visible = false
+	if gamesettings.shadow_mode != "low":
+		$Light2D.shadow_enabled = false

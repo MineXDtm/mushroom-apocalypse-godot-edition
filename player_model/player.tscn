@@ -927,7 +927,6 @@ occluder = SubResource( 2 )
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="shadow" type="Sprite" parent="Node2D"]
-visible = false
 light_mask = -2147483646
 position = Vector2( 0.515338, 14.6613 )
 scale = Vector2( 0.612136, 0.545864 )

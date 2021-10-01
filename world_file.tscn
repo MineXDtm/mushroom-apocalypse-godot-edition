@@ -1,32 +1,48 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://world_file.gd" type="Script" id=1]
 [ext_resource path="res://textures/gui/world_file.png" type="Texture" id=2]
-[ext_resource path="res://Fonts/FFFFORWA.TTF" type="DynamicFontData" id=3]
+[ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://textures/gui/world_file_selected.png" type="Texture" id=4]
 [ext_resource path="res://textures/gui/world_file_mause.png" type="Texture" id=5]
+[ext_resource path="res://textures/gui/defaultimg.png" type="Texture" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 3 )
 
 [node name="world_file" type="TextureButton"]
-margin_right = 32.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 1, 1 )
+margin_right = 318.0
+margin_bottom = 160.0
+rect_min_size = Vector2( 318, 160 )
 texture_normal = ExtResource( 2 )
 texture_hover = ExtResource( 5 )
 texture_focused = ExtResource( 4 )
+expand = true
+stretch_mode = 5
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="default" type="TextureRect" parent="."]
+show_behind_parent = true
+margin_left = 99.0
+margin_top = 30.0
+margin_right = 219.0
+margin_bottom = 90.0
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="name" type="Label" parent="."]
-margin_left = 5.0
-margin_top = 22.0
-margin_right = 225.0
-margin_bottom = 82.0
-rect_scale = Vector2( 0.1, 0.1 )
+anchor_left = 0.0625
+anchor_top = 0.625
+anchor_right = 0.9375
+anchor_bottom = 0.9375
+size_flags_vertical = 1
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "name"
@@ -35,24 +51,20 @@ valign = 1
 autowrap = true
 clip_text = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
-[node name="image_box" type="Control" parent="."]
-margin_left = 4.0
-margin_top = 6.0
-margin_right = 28.0
-margin_bottom = 18.0
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="icon" type="TextureRect" parent="image_box"]
+[node name="icon" type="TextureRect" parent="."]
+show_behind_parent = true
+anchor_left = 0.311321
+anchor_top = 0.1875
+anchor_right = 0.688679
+anchor_bottom = 0.5625
+margin_right = 1.52588e-05
 mouse_filter = 2
 expand = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
 [connection signal="pressed" from="." to="." method="_on_world_file_pressed"]

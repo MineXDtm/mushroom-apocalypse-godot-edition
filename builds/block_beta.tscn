@@ -5,25 +5,25 @@
 [ext_resource path="res://textures/build/block_beta_test.png" type="Texture" id=7]
 [ext_resource path="res://textures/build/block_up.png" type="Texture" id=8]
 
-[sub_resource type="OccluderPolygon2D" id=2]
+[sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( 239.343, -1.19724, -236.208, -1.19724, -237.775, -82.0732, 237.775, -82.0732 )
 
-[sub_resource type="OccluderPolygon2D" id=3]
+[sub_resource type="OccluderPolygon2D" id=2]
 polygon = PoolVector2Array( -0.104491, -24.2752, -15.9562, -24.2752, -15.9562, 23.7525, -0.104491, 23.7525 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 143.047, 46.1662 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 237.775, 82.0732 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 222.914, 15.3887 )
 
-[sub_resource type="CanvasItemMaterial" id=8]
+[sub_resource type="CanvasItemMaterial" id=6]
 light_mode = 1
 
-[sub_resource type="StyleBoxFlat" id=9]
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0.380392, 0.670588, 0.180392, 1 )
 
 [node name="block_beta" type="Area2D" groups=[
@@ -50,15 +50,15 @@ texture = ExtResource( 8 )
 visible = false
 position = Vector2( -0.104491, 0.228768 )
 scale = Vector2( 0.0666667, 0.19108 )
-occluder = SubResource( 2 )
+occluder = SubResource( 1 )
 
 [node name="right" type="LightOccluder2D" parent="AnimatedSprite"]
 visible = false
-occluder = SubResource( 3 )
+occluder = SubResource( 2 )
 
 [node name="left" type="LightOccluder2D" parent="AnimatedSprite"]
 visible = false
-occluder = SubResource( 3 )
+occluder = SubResource( 2 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 __meta__ = {
@@ -99,29 +99,29 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="block_area" type="Area2D" parent="." groups=[
 "block_area",
 ]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="block_area"]
-shape = SubResource( 6 )
+shape = SubResource( 4 )
 
 [node name="block2" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="block2"]
 position = Vector2( 0, 76.9436 )
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 visible = false
-material = SubResource( 8 )
+material = SubResource( 6 )
 margin_left = -186.93
 margin_top = -90.1617
 margin_right = 188.07
 margin_bottom = -69.1617
-custom_styles/fg = SubResource( 9 )
+custom_styles/fg = SubResource( 7 )
 custom_styles/bg = ExtResource( 3 )
 custom_colors/font_color = Color( 0.431373, 1, 0, 1 )
 custom_colors/font_color_shadow = Color( 0.313726, 1, 0, 1 )

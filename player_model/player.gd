@@ -28,6 +28,11 @@ var layer = 1
 var type = "player"
 
 onready var heals = get_parent().get_parent().get_parent().get_node("UI2/bars/health")
+func changed_settings():
+	if gamesettings.shadow_mode == "low":
+		shadow.visible = true
+	else:
+		shadow.visible = false
 func _process(_delta):
 	if health <= 0 and cd == false:
 		cd = true
@@ -79,6 +84,7 @@ func god(value = true):
 	else:
 		player_god = false
 func _ready():
+	gamesettings.connect("change_settings",self,"changed_settings")
 	Console.add_command('god_mode', self, 'god')\
 		.set_description('god mode')\
 		.add_argument('true/false', TYPE_BOOL)\
@@ -100,8 +106,9 @@ func _input(event):
 
 onready var player = get_node("player")
 onready var shadow = get_node("Node2D/shadow")
+var in_menu = false
 func _physics_process(_delta):
-	if in_console == false:
+	if in_console == false and in_menu == false:
 		get_input()
 		$Label.text = str(position)
 		velocity = move_and_slide(velocity)
