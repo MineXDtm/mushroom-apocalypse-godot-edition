@@ -164,7 +164,7 @@ func settime(time_set = null):
 		$time_move.start()
 		$time.start()
 		time = "night"
-		$CanvasModulate.color = Color(0.294118, 0.294118, 0.294118)
+		$CanvasModulate.color = Color(0.156863, 0.066667, 0.321569)
 		get_parent().get_node("UI2/bg/ViewportContainer/Viewport/CLockBar").set_clock(1)
 	elif time_set == "day":
 		$time_move.stop()
@@ -192,7 +192,7 @@ func _on_time_timeout():
 	if time == "day" :
 		time = "night"
 		get_parent().get_node("UI2/bg/ViewportContainer/Viewport/CLockBar").set_clock(1)
-		$CanvasModulate.color = Color(0.294118, 0.294118, 0.294118)
+		$CanvasModulate.color = Color(0.156863, 0.066667, 0.321569)
 	else:
 		$time_move.stop()
 		$time.stop()
@@ -695,7 +695,7 @@ func load_virables():
 		get_parent().get_node("UI2/map").completed[int(i)] =save_data2["completed"][i]
 	if time == "night":
 		get_parent().get_node("UI2/bg/ViewportContainer/Viewport/CLockBar").set_clock(1)
-		$CanvasModulate.color = Color(0.294118, 0.294118, 0.294118)
+		$CanvasModulate.color = Color(0.156863, 0.066667, 0.321569)
 	$time.wait_time = save_data2["timer_max_time"]
 	get_parent().get_node("UI2/bg/ViewportContainer/Viewport/CLockBar").get_node("CanvasLayer/clock").rect_position.x = save_data2["clock"]
 	load_time(save_data2["time_left"])

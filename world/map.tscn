@@ -21,11 +21,10 @@ b = Vector2( -1024, 512 )
 
 [node name="Sprite" type="Sprite" parent="."]
 show_behind_parent = true
-position = Vector2( 776, 760.991 )
-scale = Vector2( 1.70924, 1.794 )
+position = Vector2( 768, 768 )
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 912, 864 )
+region_rect = Rect2( 0, -722.304, 1629.28, 1586.3 )
 
 [node name="decorations" type="YSort" parent="."]
 

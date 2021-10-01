@@ -1,8 +1,15 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/BitmapFontMaker/main.gd" type="Script" id=1]
 
 [node name="BitmapFontTool" type="VBoxContainer"]
-margin_right = 150.0
-margin_bottom = 235.0
+margin_left = 24.0
+margin_top = 40.0
+margin_right = 176.0
+margin_bottom = 264.0
+rect_scale = Vector2( 0.5, 0.5 )
+size_flags_vertical = 3
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -12,6 +19,7 @@ margin_right = 152.0
 margin_bottom = 24.0
 hint_tooltip = "Path, where you want your font to be created.
 Must include file name and extension .tres."
+size_flags_vertical = 3
 text = "res://new_font.tres"
 align = 1
 placeholder_text = "Path to new font (.tres)"
@@ -23,6 +31,7 @@ margin_bottom = 52.0
 hint_tooltip = "Path to texture.
 Must be in res://.
 Can be PNG, JPEG, etc."
+size_flags_vertical = 3
 align = 1
 placeholder_text = "Path to font texture"
 
@@ -42,12 +51,14 @@ wrap_enabled = true
 margin_top = 160.0
 margin_right = 152.0
 margin_bottom = 184.0
+size_flags_vertical = 3
 
 [node name="Width" type="SpinBox" parent="Dimensions"]
 margin_right = 74.0
 margin_bottom = 24.0
 hint_tooltip = "Character width in pixels."
 size_flags_horizontal = 3
+size_flags_vertical = 3
 min_value = 1.0
 max_value = 1000.0
 value = 8.0
@@ -61,6 +72,7 @@ margin_right = 152.0
 margin_bottom = 24.0
 hint_tooltip = "Character height in pixels."
 size_flags_horizontal = 3
+size_flags_vertical = 3
 min_value = 1.0
 max_value = 1000.0
 value = 8.0
@@ -73,6 +85,7 @@ margin_top = 188.0
 margin_right = 152.0
 margin_bottom = 208.0
 hint_tooltip = "Make bitmap font"
+size_flags_vertical = 3
 text = "Make font"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -81,7 +94,7 @@ __meta__ = {
 [node name="Output" type="Label" parent="."]
 margin_top = 212.0
 margin_right = 152.0
-margin_bottom = 235.0
+margin_bottom = 224.0
 size_flags_vertical = 3
 text = "This plugin will create bitmap font from texture."
 align = 1

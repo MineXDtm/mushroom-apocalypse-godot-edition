@@ -1,25 +1,41 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://settings/menu.gd" type="Script" id=1]
 [ext_resource path="res://textures/gui/bu31tton_on_clicked.png" type="Texture" id=3]
 [ext_resource path="res://textures/gui/bu31tton_on_mause.png" type="Texture" id=4]
 [ext_resource path="res://textures/gui/bu31tton.png" type="Texture" id=5]
 [ext_resource path="res://textures/gui/fdfdfdf.png" type="Texture" id=6]
-[ext_resource path="res://settings/settings.gd" type="Script" id=7]
 [ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://settings/screen_size.gd" type="Script" id=9]
 [ext_resource path="res://textures/gui/menu21.png" type="Texture" id=11]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.54902, 0.227451, 0.615686, 1 )
+border_width_bottom = 3
+border_color = Color( 0.384314, 0.168627, 0.431373, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.54902, 0.227451, 0.615686, 1 )
+border_color = Color( 0.384314, 0.168627, 0.431373, 1 )
+
+[sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 8 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.54902, 0.227451, 0.615686, 1 )
+border_width_bottom = 3
+border_color = Color( 0.364706, 0.14902, 0.407843, 1 )
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=6]
 use_mipmaps = true
 font_data = ExtResource( 8 )
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=7]
 
-[sub_resource type="Theme" id=4]
+[sub_resource type="Theme" id=8]
 OptionButton/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
 OptionButton/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
 OptionButton/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
@@ -31,10 +47,10 @@ OptionButton/icons/arrow = null
 OptionButton/styles/disabled = null
 OptionButton/styles/focus = null
 OptionButton/styles/hover = null
-OptionButton/styles/normal = SubResource( 3 )
+OptionButton/styles/normal = SubResource( 7 )
 OptionButton/styles/pressed = null
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=9]
 bg_color = Color( 0.290196, 0.227451, 0.4, 1 )
 
 [node name="game_menu" type="Control"]
@@ -63,33 +79,36 @@ __meta__ = {
 }
 
 [node name="menu" type="Control" parent="."]
-anchor_top = 0.222
+anchor_top = 0.222222
 anchor_right = 1.0
-anchor_bottom = 0.756
-margin_top = 0.0399971
-margin_bottom = -0.0800018
+anchor_bottom = 0.777778
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="menu"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="but" type="VBoxContainer" parent="menu/HBoxContainer"]
-margin_right = 50.0
-margin_bottom = 96.0
-rect_min_size = Vector2( 50, 0 )
+margin_right = 318.0
+margin_bottom = 200.0
+size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 2
+custom_constants/separation = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="title" type="TextureRect" parent="menu/HBoxContainer/but"]
-margin_right = 50.0
-margin_bottom = 30.0
+margin_right = 318.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 20 )
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -97,101 +116,88 @@ texture = ExtResource( 11 )
 expand = true
 stretch_mode = 6
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
-[node name="settings_but" type="TextureButton" parent="menu/HBoxContainer/but"]
-margin_top = 32.0
-margin_right = 50.0
-margin_bottom = 63.0
+[node name="VBoxContainer" type="VBoxContainer" parent="menu/HBoxContainer/but"]
+margin_top = 164.0
+margin_right = 318.0
+margin_bottom = 200.0
+size_flags_horizontal = 3
+size_flags_vertical = 10
+
+[node name="settings_but" type="Button" parent="menu/HBoxContainer/but/VBoxContainer"]
+margin_right = 318.0
+margin_bottom = 16.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture_normal = ExtResource( 5 )
-texture_pressed = ExtResource( 3 )
-texture_hover = ExtResource( 4 )
-expand = true
-stretch_mode = 5
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
+text = "Settings"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="exit" type="TextureButton" parent="menu/HBoxContainer/but"]
-margin_top = 65.0
-margin_right = 50.0
-margin_bottom = 96.0
+[node name="exit" type="Button" parent="menu/HBoxContainer/but/VBoxContainer"]
+margin_top = 20.0
+margin_right = 318.0
+margin_bottom = 36.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_styles/normal = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
+text = "exit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="menu/HBoxContainer"]
+margin_left = 322.0
+margin_right = 640.0
+margin_bottom = 200.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="menu/HBoxContainer/ScrollContainer"]
+margin_right = 318.0
+margin_bottom = 200.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="fullscreen" type="TextureButton" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer"]
+margin_right = 318.0
+margin_bottom = 12.0
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 3 )
 texture_hover = ExtResource( 4 )
-expand = true
-stretch_mode = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="settings" type="TextureRect" parent="."]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-script = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="fullscreen" type="TextureButton" parent="settings"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = 31.5
-margin_top = -1.49999
-margin_right = 71.5
-margin_bottom = 10.5
-texture_normal = ExtResource( 5 )
-texture_pressed = ExtResource( 3 )
-texture_hover = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="settings/fullscreen"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -13.0
-margin_top = -5.0
-margin_right = 38.0
-margin_bottom = 8.0
-rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 1, 0.960784, 0, 1 )
-text = "fullscreen"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="title" type="Label" parent="settings"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = 32.0
-margin_top = -34.0
-margin_right = 92.0
-margin_bottom = -21.0
-custom_fonts/font = SubResource( 2 )
+[node name="title" type="Label" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 16.0
+margin_right = 318.0
+margin_bottom = 29.0
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 1, 0.984314, 0, 1 )
 text = "Screen Size"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="screen_size" type="OptionButton" parent="settings/title"]
+[node name="screen_size" type="OptionButton" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer/title"]
 margin_left = -1.0
 margin_top = 14.0
 margin_right = 121.0
 margin_bottom = 34.0
 rect_scale = Vector2( 0.5, 0.5 )
-theme = SubResource( 4 )
-custom_styles/normal = SubResource( 5 )
+theme = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
 text = "1920x1080"
 items = [ "1920x1080", null, false, 0, null, "640x480", null, false, 1, null, "1280x720", null, false, 2, null, "800x600", null, false, 3, null ]
 selected = 0
@@ -200,9 +206,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="button_down" from="menu/HBoxContainer/but/settings_but" to="menu" method="_on_settings_but_button_down"]
-[connection signal="button_up" from="menu/HBoxContainer/but/settings_but" to="menu" method="_on_settings_but_button_up"]
-[connection signal="pressed" from="menu/HBoxContainer/but/settings_but" to="menu" method="_on_settings_but_pressed"]
-[connection signal="button_down" from="menu/HBoxContainer/but/exit" to="menu" method="_on_exit_button_down"]
-[connection signal="pressed" from="settings/fullscreen" to="settings" method="_on_fullscreen_pressed"]
-[connection signal="item_selected" from="settings/title/screen_size" to="settings/title/screen_size" method="_on_screen_size_item_selected"]
+[connection signal="pressed" from="menu/HBoxContainer/but/VBoxContainer/settings_but" to="menu" method="_on_settings_but_pressed"]
+[connection signal="button_down" from="menu/HBoxContainer/but/VBoxContainer/exit" to="menu" method="_on_exit_button_down"]
+[connection signal="item_selected" from="menu/HBoxContainer/ScrollContainer/VBoxContainer/title/screen_size" to="menu/HBoxContainer/ScrollContainer/VBoxContainer/title/screen_size" method="_on_screen_size_item_selected"]

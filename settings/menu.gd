@@ -12,12 +12,6 @@ func _on_settings_but_pressed():
 	get_parent().get_parent().list = "2"
 
 
-func _on_settings_but_button_down():
-	$but/settings_but/text_image.rect_position.y = 4
-
-
-func _on_settings_but_button_up():
-	$but/settings_but/text_image.rect_position.y = 3.333
 
 
 func _on_exit_button_down():

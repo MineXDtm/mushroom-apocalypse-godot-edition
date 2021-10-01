@@ -50,7 +50,7 @@ texture_scale = 0.01
 color = Color( 0.490196, 0.184314, 0, 1 )
 range_item_cull_mask = 3
 shadow_enabled = true
-shadow_filter_smooth = 64.0
+shadow_gradient_length = 0.5
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 visible = false
