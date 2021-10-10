@@ -34,6 +34,7 @@ func changed_settings():
 	else:
 		shadow.visible = false
 func _process(_delta):
+	$Label.text = str(position)
 	if health <= 0 and cd == false:
 		cd = true
 		get_parent().get_parent().get_parent().get_node("UI2/inventory").drop_all()

@@ -19,6 +19,7 @@ func _on_quit_pressed():
 	get_tree().quit()
 
 func _ready():
+	OS.set_use_vsync(false)
 	PlayerInventory.inventory = {}
 	PlayerInventory.inventory1 = {}
 	discord_rpc.icon = "icon"

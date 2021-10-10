@@ -1,4 +1,4 @@
-extends Node2D
+extends TextureRect
 
 var item_name
 var item_quantity
@@ -6,22 +6,19 @@ var item_quantity
 func _ready():
 	item_name = "drop_wood"
 	
-	$TextureRect.texture = load("res://textures/items/" + item_name + ".png")
+	texture = load("res://textures/items/" + item_name + ".png")
 	var stack_size = int(JsonData.item_data[item_name]["StackSize"])
 	item_quantity = randi() % stack_size + 1
 	
 	if stack_size == 1:
 		$Label.visible = false
 	else:
-		if item_quantity < 10:
-			$Label.text = str("0",item_quantity)
-		else:
-			$Label.text = String(item_quantity)
+		$Label.text = String(item_quantity)
 
 func set_item(nm, qt):
 	item_name = nm
 	item_quantity = qt
-	$TextureRect.texture = load("res://textures/items/" + item_name + ".png")
+	texture = load("res://textures/items/" + item_name + ".png")
 	
 	var stack_size = int(JsonData.item_data[item_name]["StackSize"])
 	if stack_size == 1:

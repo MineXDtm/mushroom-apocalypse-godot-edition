@@ -23,10 +23,9 @@ _global_script_class_icons={
 config/name="mushroom apocalypse"
 run/main_scene="res://menu.tscn"
 config/use_custom_user_dir=true
-boot_splash/image="res://icon.png"
+boot_splash/image="res://minexd.png"
 boot_splash/fullsize=false
-boot_splash/use_filter=false
-boot_splash/bg_color=Color( 0, 0, 0, 1 )
+boot_splash/bg_color=Color( 0.803922, 0.196078, 0.196078, 1 )
 config/icon="res://icon.png"
 config/windows_native_icon="res://icon.ico"
 

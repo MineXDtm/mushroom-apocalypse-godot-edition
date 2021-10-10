@@ -61,7 +61,9 @@ func animate(): #istandbyscott
 		elif isattacking == true and standing == true:
 			anim = "attack_zombie"
 		if selected > position.x:
-			anim = str(anim," fliped")
+			scale = Vector2(-1,1)
+		else:
+			scale = Vector2(1,1)
 		if $player.current_animation != anim and anim != null and anim != "Null fliped":
 			$player.play(anim)
 
@@ -218,6 +220,11 @@ func _on_body_area_entered(area):
 	if area.is_in_group("kust_fruit_build") and can_broke == true:
 		block_pos = area.get_parent().position
 func _ready():
+	gamesettings.connect("change_settings",self,"changed_settings")
+	if gamesettings.shadow_mode == "low":
+		$shadow.visible = true
+	else:
+		$shadow.visible = false
 	randomize()
 	for i in range(randi() % get_parent().get_parent().get_node("zombies").cords.size()):
 		random_x = get_parent().get_parent().get_node("zombies").cords[i]
@@ -245,8 +252,13 @@ func _ready():
 			if  get_parent().get_parent().zombies[_i][2] == name:
 				index = _i
 				return
-
-
+	
+func changed_settings():
+	print('works')
+	if gamesettings.shadow_mode == "low":
+		$shadow.visible = true
+	else:
+		$shadow.visible = false
 func _on_VisibilityNotifier2D_screen_entered():
 	screen = true
 

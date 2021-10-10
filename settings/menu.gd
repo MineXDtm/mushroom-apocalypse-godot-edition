@@ -1,6 +1,6 @@
 extends Control
 
-onready var settings_but = "HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/settings_but"
+onready var settings_but = "HBoxContainer/VBoxContainer/HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer/HBoxContainer/settings_but"
 var opened_settings = false
 func _on_settings_but_pressed():
 	if opened_settings == false:
@@ -45,6 +45,7 @@ func _on_fullscreen_pressed():
 
 
 func _on_fps_lock_item_selected(index):
+	ProjectSettings.set("display/window/vsync/use_vsync", true)
 	if index == 0:
 		Engine.set_target_fps(60)
 	elif index == 1:
@@ -58,7 +59,6 @@ func _on_fps_lock_item_selected(index):
 	elif index == 5:
 		ProjectSettings.set("display/window/vsync/use_vsync", false)
 		Engine.set_target_fps(0)
-		OS.set_use_vsync(false)
 
 
 func _on_shadow_mode_item_selected(index):
@@ -67,3 +67,4 @@ func _on_shadow_mode_item_selected(index):
 	elif index == 1:
 		gamesettings.shadow_mode = "hight"
 	gamesettings.change()
+

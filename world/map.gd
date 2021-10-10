@@ -700,3 +700,5 @@ func load_virables():
 	get_parent().get_node("UI2/bg/ViewportContainer/Viewport/CLockBar").get_node("CanvasLayer/clock").rect_position.x = save_data2["clock"]
 	load_time(save_data2["time_left"])
 	WorldData.world_type = save_data2["type"]
+
+

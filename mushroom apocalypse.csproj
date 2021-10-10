@@ -29,4 +29,15 @@
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
     <!-- ... -->
 </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\Resources\Default.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Resources\DesignData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
 </Project>

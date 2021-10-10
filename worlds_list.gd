@@ -37,7 +37,7 @@ func _ready():
 
 func _on_create_pressed():
 	$ColorRect.visible = true
-	
+	$ColorRect/mode_select.visible = true
 
 
 func _on_join_pressed():
@@ -71,8 +71,13 @@ func dir_contents(path):
 		print("An error occurred when trying to access the path.")
 func _on_Button_pressed():
 	WorldData.new = true
-	if $ColorRect/gui/name_edit.text.empty():
+	if $ColorRect/write_name/bg/name_edit.text.empty():
 		WorldData.world_name = "world"
 	else:
-		WorldData.world_name = $ColorRect/gui/name_edit.text
+		WorldData.world_name = $ColorRect/write_name/bg/name_edit.text
 	get_tree().change_scene("res://world_run.tscn")
+
+
+func _on_Sorvival_mode_pressed():
+	$ColorRect/mode_select.visible = false
+	$ColorRect/write_name.visible = true

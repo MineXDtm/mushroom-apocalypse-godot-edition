@@ -9,21 +9,12 @@ var inventory = {
 	
 }
 var inventory1 = { 
-	0:["kust_fruit_in_pot",99]
+
 }
 func add_item(item_name, item_quantity):
-	for item in inventory1:
-		if inventory1[item][0] == item_name:
-			var stack_size = int(JsonData.item_data[item_name]["StackSize"])
-			var able_to_add = stack_size - inventory1[item][1]
-			if able_to_add >= item_quantity:
-				inventory1[item][1] += item_quantity
-				return
-			else:
-				inventory1[item][1] += able_to_add
-				item_quantity = item_quantity - able_to_add
 	for item in inventory:
 		if inventory[item][0] == item_name:
+			
 			var stack_size = int(JsonData.item_data[item_name]["StackSize"])
 			var able_to_add = stack_size - inventory[item][1]
 			if able_to_add >= item_quantity:
@@ -32,15 +23,11 @@ func add_item(item_name, item_quantity):
 			else:
 				inventory[item][1] += able_to_add
 				item_quantity = item_quantity - able_to_add
-	for i in range(NUM_INVENTORY_SLOTS2):
-		if inventory1.has(i) == true:
-			if inventory1[i][0] == item_name:
-				inventory1[i] = [item_name, item_quantity]
-				return
 	for i in range(NUM_INVENTORY_SLOTS):
 		if inventory.has(i) == false:
 			inventory[i] = [item_name, item_quantity]
 			return
+	
 func _ready():
 	Console.add_command('add_item', self, 'add_item')\
 			.set_description('god mode')\

@@ -15,18 +15,21 @@ var select2 = false
 func _ready():
 	var slots = inventory_slots.get_children()
 	for i in range(slots.size()):
-		slots[i].connect("gui_input", self, "slot_gui_input", [slots[i]])
 		slots[i].slot_index = i
 	var slots2 = inventory_slots2.get_children()
 	for i in range(slots2.size()):
-		slots2[i].connect("gui_input", self, "slot_gui_input", [slots2[i]])
 		slots2[i].slot_index = i
 	initialize_inventory()
+func can_drop_data(position, data):
+	return true
+func drop_data(position, data):
+	drop()
 func initialize_inventory():
 	var slots = inventory_slots.get_children()
 	for i in range(slots.size()):
 		if PlayerInventory.inventory.has(i):
 			slots[i].initialize_item(PlayerInventory.inventory[i][0], PlayerInventory.inventory[i][1])
+			
 	var slots1 = inventory_slots2.get_children()
 	for i in range(slots1.size()):
 		if PlayerInventory.inventory1.has(i):
@@ -59,6 +62,7 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 						select = false
 			else:
 				drop()
+
 func left_click_empty_slot(slot: SlotClass):
 	var _selected_slot = get_node(selected)
 	if PlayerInventory.inventory.has(slot.slot_index) and slot.name != "slot1"and slot.name != "slot2"and slot.name != "slot3":
@@ -78,19 +82,7 @@ func left_click_empty_slot(slot: SlotClass):
 		select = false
 	slot.moved = false
 	slot.moved_moved = false
-func left_click_same_item(slot: SlotClass):
-	selected_name = slot.name
-	var _selected_slot = get_node(selected)
-	holding_item = slot.item
-	if slot.name == "slot1":
-		selected = str("GridContainer2/",slot.name)
-	elif slot.name == "slot2":
-		selected = str("GridContainer2/",slot.name)
-	elif slot.name == "slot3":
-		selected = str("GridContainer2/",slot.name)
-	else:
-		selected = str("GridContainer/",slot.name)
-		
+
 func left_click_not_holding(slot: SlotClass):
 	holding_item = slot.item
 	
@@ -107,7 +99,6 @@ func left_click_not_holding(slot: SlotClass):
 	if slot.name != "slot1"and slot.name != "slot2"and slot.name != "slot3" and get_node("GridContainer/"+"slot"+str(int(slot.name) + 1)).item != null and get_node("GridContainer/"+"slot"+str(int(slot.name) + 2)).item == null:
 		slot.moved = true
 		select = true 
-		print("Work")
 	elif slot.name != "slot1"and slot.name != "slot2"and slot.name != "slot3" and get_node("GridContainer/"+"slot"+str(int(slot.name) + 1)).item != null and get_node("GridContainer/"+"slot"+str(int(slot.name)+ 2)).item != null:
 		slot.moved_moved = true
 		slot.moved = true
@@ -134,7 +125,7 @@ func left_click_not_holding(slot: SlotClass):
 	elif slot.name == "slot3":
 		var inv = get_parent().get_node('hand_slots/'+ str(slot.name))
 		inv.pickFromSlot()
-	slot.item.position = Vector2(0, 0)
+	slot.item.rect_position = Vector2(0, 0)
 	slot.item = null
 func drop_all():
 	for i in PlayerInventory.NUM_INVENTORY_SLOTS2:
@@ -183,7 +174,6 @@ func drop():
 			world.add_child(_drop_intance)
 			_drop_intance.position = player.position
 			if holding_item.item_quantity == 1:
-				get_parent().get_node("slot").queue_free()
 				holding_item = null
 			else:
 				holding_item.item_quantity -= 1
@@ -225,7 +215,7 @@ func finder1(slotnumber):
 				slotr.pickFromSlot()
 func _physics_process(_delta):
 	if holding_item:
-		holding_item.position = get_global_mouse_position()
+		holding_item.rect_position = get_global_mouse_position()
 
 
 
