@@ -60,33 +60,5 @@ func _physics_process(_delta):
 			rotare = "right"
 		elif rotare == "right":
 			$Node2D/Sprite.play("default")
-			$Node2D/Sprite.position = Vector2(16,32)
-			rotare = "down"
-		elif rotare == "down":
-			$Node2D/Sprite.play("rotare")
-			$Node2D/Sprite.position = Vector2(16,25)
-			rotare = "left"
-		elif rotare == "left":
-			$Node2D/Sprite.play("default")
-			$Node2D/Sprite.position = Vector2(16,16)
-			rotare = "up"
-	if Input.is_action_just_pressed("rotare") and name == "TileMap5":
-		if rotare == "up":
-			$Node2D/Sprite.play("rotare")
-			$Node2D/Sprite.flip_h = true
-			rotare = "right"
-		elif rotare == "right":
-			$Node2D/Sprite.flip_h = false
-			$Node2D/Sprite.play("default")
-			$Node2D/Sprite.position = Vector2(16,38)
-			rotare = "down"
-		elif rotare == "down":
-			$Node2D/Sprite.play("rotare")
-			$Node2D/Sprite.position = Vector2(16,16)
-			rotare = "left"
-		elif rotare == "left":
-			$Node2D/Sprite.play("default")
-			$Node2D/Sprite.position = Vector2(16,16)
-			rotare = "up"
 
 

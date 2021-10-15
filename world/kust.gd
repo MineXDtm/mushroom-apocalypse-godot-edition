@@ -12,6 +12,7 @@ var needed = 0
 var cooldown32 = 16
 var added = 16
 var layer = 1
+var random = RandomNumberGenerator.new()
 var type = "kust"
 func _on_kust_area_entered(area):
 	if area.is_in_group("kust"):
@@ -94,85 +95,82 @@ func _on_kust_area_entered(area):
 		health -= 1
 		$ProgressBar.visible = true
 		$ProgressBar.value = health
-		$Particles2D.emitting = true
+		
 		if health <= 0 :
 			$ProgressBar.visible = false
-			$AnimatedSprite.position.x = -110
-			$AnimatedSprite.play("broked")
 			broked = true
 	elif area.is_in_group("wooden_exe") and broked == false:
 		health -= 1.3
 		$ProgressBar.visible = true
 		$ProgressBar.value = health
-		$Particles2D.emitting = true
 		if health <= 0 :
 			$ProgressBar.visible = false
 			$AnimatedSprite.position.x = -110
-			$AnimatedSprite.play("broked")
 			broked = true
 	elif area.is_in_group("wooden_pickaxe") and broked == false:
 		health -= 0.5
 		$ProgressBar.visible = true
 		$ProgressBar.value = health
-		$Particles2D.emitting = true
 		if health <= 0 :
 			$ProgressBar.visible = false
 			$AnimatedSprite.position.x = -110
-			$AnimatedSprite.play("broked")
 			broked = true
 	elif area.is_in_group("stone_pickaxe") and broked == false:
 		health -= 1
 		$ProgressBar.visible = true
 		$ProgressBar.value = health
-		$Particles2D.emitting = true
 		if health <= 0 :
 			$ProgressBar.visible = false
 			$AnimatedSprite.position.x = -110
-			$AnimatedSprite.play("broked")
 			broked = true
 	elif area.is_in_group("stone_exe") and broked == false:
 		health -= 1.7
 		$ProgressBar.visible = true
 		$ProgressBar.value = health
-		$Particles2D.emitting = true
 		if health <= 0 :
 			$ProgressBar.visible = false
 			$AnimatedSprite.position.x = -110
 			$AnimatedSprite.play("broked")
 			broked = true
-
-func _on_AnimatedSprite_animation_finished():
-	if broked == false and health > 0 :
-		$AnimatedSprite.play("default")
 	if broked == true :
-		broked = false
-		$StaticBody2D.visible = false
-		$StaticBody2D/CollisionShape2D.disabled = true
-		$StaticBody2D/CollisionShape2D2.disabled = true
-		$CollisionShape2D.visible = false
-		$AnimatedSprite.visible = false
-		$CollisionShape2D.disabled = true
-		Ganaretor.kustes -= 1
-		var navigationscene = load("res://world/NavigationPolygonInstance.tscn")
-		var _world = get_parent()
-		var navigation = navigationscene.instance()
-		navigation.position.x = cords2[number]
-		navigation.position.y = cords2[number2]
-		navigation.position.x = cords2[number]
-		navigation.position.y = cords2[number2]
-		get_parent().get_parent().get_node("zombies").call_deferred("add_child", navigation)
-		var world = get_parent()
-		var exit_scene = load("res://exit.tscn")
-		var _exit_intance = exit_scene.instance()
-		_exit_intance.position = position
-		world.call_deferred("add_child", _exit_intance)
-		_exit_intance.position = position
-		var drop_scene = load("res://world/drop/ItemDrop.tscn")
-		var _drop_intance = drop_scene.instance()
-		_drop_intance.position = position
-		_drop_intance.item_name = "drop_wood"
-		world.call_deferred("add_child", _drop_intance)
-		queue_free()
+			
+			$StaticBody2D.visible = false
+			$StaticBody2D/CollisionShape2D.disabled = true
+			$CollisionShape2D.visible = false
+			$AnimatedSprite.visible = false
+			$CollisionShape2D.disabled = true
+			for i in range(10):
+				var particle = Polygon2D.new()
+				random.randomize()
+				var pos = Vector2(random.randi_range(0,$AnimatedSprite.texture.get_size().x),random.randi_range(0,$AnimatedSprite.texture.get_size().y))
+				particle.polygon = [pos , Vector2(pos.x +5 ,pos.y), Vector2(pos.x +5 ,pos.y+5) , Vector2(pos.x ,pos.y+5)]
+				particle.texture = $AnimatedSprite.texture
+				particle.position = $AnimatedSprite.position -pos 
+				particle.set_script(load("res://world/particle.gd"))
+				add_child(particle)
+			yield(get_tree().create_timer(0.2), "timeout")
+			Ganaretor.kustes -= 1
+			var navigationscene = load("res://world/NavigationPolygonInstance.tscn")
+			var _world = get_parent()
+			var navigation = navigationscene.instance()
+			navigation.position.x = cords2[number]
+			navigation.position.y = cords2[number2]
+			navigation.position.x = cords2[number]
+			navigation.position.y = cords2[number2]
+			get_parent().get_parent().get_node("zombies").call_deferred("add_child", navigation)
+			var world = get_parent()
+			var exit_scene = load("res://exit.tscn")
+			var _exit_intance = exit_scene.instance()
+			_exit_intance.position = position
+			world.call_deferred("add_child", _exit_intance)
+			_exit_intance.position = position
+			var drop_scene = load("res://world/drop/ItemDrop.tscn")
+			var _drop_intance = drop_scene.instance()
+			_drop_intance.position = position
+			_drop_intance.item_name = "drop_wood"
+			world.call_deferred("add_child", _drop_intance)
+			queue_free()
+
 var added2 = 0
 func _ready():
 	while cooldown32 <= map_size:
@@ -193,7 +191,6 @@ func _ready():
 			number2 = i
 		var random_pos = Vector2(random_x,random_y)
 		position = random_pos
-
 
 
 

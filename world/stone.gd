@@ -6,6 +6,7 @@ var cords2 = [0]
 var random_x = 16
 var random_y = 16
 var number = 0
+var random = RandomNumberGenerator.new()
 var number2 = 0
 var cooldown32 = 16
 var map_size = 1536
@@ -116,21 +117,18 @@ func _on_kust_area_entered(area):
 		print(position.y, name)
 		$ProgressBar.visible = true
 		$ProgressBar.value = health
-		$AnimatedSprite.play("broke")
 		if health <= 0 :
 			queue_free()
 	elif area.is_in_group("wooden_exe") and broked == false:
 		health -= 0.7
 		$ProgressBar.visible = true
 		$ProgressBar.value = health
-		$AnimatedSprite.play("broke")
 		if health <= 0 :
 			queue_free()
 	elif area.is_in_group("wooden_pickaxe") and broked == false:
 		health -= 1
 		$ProgressBar.visible = true
 		$ProgressBar.value = health
-		$AnimatedSprite.play("broke")
 		if health <= 0 :
 			$ProgressBar.visible = false
 			print("broked")
@@ -139,7 +137,6 @@ func _on_kust_area_entered(area):
 		health -= 1.5
 		$ProgressBar.visible = true
 		$ProgressBar.value = health
-		$AnimatedSprite.play("broke")
 		if health <= 0 :
 			$ProgressBar.visible = false
 			print("broked")
@@ -148,14 +145,20 @@ func _on_kust_area_entered(area):
 		health -= 1
 		$ProgressBar.visible = true
 		$ProgressBar.value = health
-		$AnimatedSprite.play("broke")
 		if health <= 0 :
 			queue_free()
-func _on_AnimatedSprite_animation_finished():
-	if broked == false and health > 0 :
-		$AnimatedSprite.play("default")
-		
 	if broked == true :
+		$AnimatedSprite.visible = false
+		for i in range(10):
+				var particle = Polygon2D.new()
+				random.randomize()
+				var pos = Vector2(random.randi_range(0,$AnimatedSprite.texture.get_size().x),random.randi_range(0,$AnimatedSprite.texture.get_size().y))
+				particle.polygon = [pos , Vector2(pos.x +5 ,pos.y), Vector2(pos.x +5 ,pos.y+5) , Vector2(pos.x ,pos.y+5)]
+				particle.texture = $AnimatedSprite.texture
+				particle.position = $AnimatedSprite.position -pos 
+				particle.set_script(load("res://world/particle.gd"))
+				add_child(particle)
+		yield(get_tree().create_timer(0.2), "timeout")
 		broked = false
 		#Ganaretor.fruit_kustes -= 1
 		var world = get_parent()

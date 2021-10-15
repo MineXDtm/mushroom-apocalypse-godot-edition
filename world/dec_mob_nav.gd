@@ -15,7 +15,7 @@ func spawn():
 	mob_dec_s.path = path
 	add_child(mob_dec_s)
 func _ready():
-	for i in range(30):
+	for i in range(15):
 		spawn()
 var random = RandomNumberGenerator.new()
 

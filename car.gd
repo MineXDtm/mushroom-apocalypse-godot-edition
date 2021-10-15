@@ -11,6 +11,11 @@ func _ready():
 	pass # Replace with function body.
 
 func _physics_process(_delta):
+	var canvas = get_canvas_transform()
+	var top_left = -canvas.origin / canvas.get_scale()
+	var size = get_viewport_rect().size / canvas.get_scale()
+	positionate_arrow(Rect2(top_left,size))
+	rotare()
 	get_parent().get_parent().get_parent().get_node("UI2/bars/car/bg/bar_health").value = health
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -35,15 +40,27 @@ func remove(point):
 	new_parent.add_child(self)
 	position = Vector2(752,624)
 
-
+func positionate_arrow(bounds : Rect2):
+	if bounds.has_point(global_position):
+		get_parent().get_parent().get_node("arrow_scene").visible = false
+	else:
+		get_parent().get_parent().get_node("arrow_scene").visible = true
+	get_parent().get_parent().get_node("arrow_scene").global_position.x = clamp(position.x,bounds.position.x, bounds.end.x)
+	get_parent().get_parent().get_node("arrow_scene").global_position.y = clamp(position.y,bounds.position.y, bounds.end.y)
+func rotare():
+	var angle = (global_position - get_parent().get_parent().get_node("arrow_scene").global_position).angle()
+	get_parent().get_parent().get_node("arrow_scene").global_rotation = angle
+	get_parent().get_parent().get_node("arrow_scene/arrow").global_rotation = 0
 func _on_car_area2_area_entered(area):
 	if area.is_in_group("body") and area.is_in_group("player"):
 		if inmenu == false:
 			area.get_parent().opened = true
-			get_parent().get_parent().get_parent().get_node("UI2/map").visible = true
+			get_parent().get_parent().get_parent().get_node("UI2/Control").visible = true
+			get_parent().get_parent().get_parent().get_node("UI2/Control/ViewportContainer/Viewport").gui_disable_input = false
 			inmenu = true
 		else:
-			get_parent().get_parent().get_parent().get_node("UI2/map").visible = false
+			get_parent().get_parent().get_parent().get_node("UI2/Control").visible = false
+			get_parent().get_parent().get_parent().get_node("UI2/Control/ViewportContainer/Viewport").gui_disable_input = true
 			inmenu = false
 			area.get_parent().opened = false
 
@@ -52,9 +69,11 @@ func _on_Area2D_area_entered(area):
 	if area.is_in_group("body") and area.is_in_group("player"):
 		if inmenu == false:
 			area.get_parent().opened = true
-			get_parent().get_parent().get_parent().get_node("UI2/map").visible = true
+			get_parent().get_parent().get_parent().get_node("UI2/Control").visible = true
+			get_parent().get_parent().get_parent().get_node("UI2/Control/ViewportContainer/Viewport").gui_disable_input = false
 			inmenu = true
 		else:
-			get_parent().get_parent().get_parent().get_node("UI2/map").visible = false
+			get_parent().get_parent().get_parent().get_node("UI2/Control").visible = false
+			get_parent().get_parent().get_parent().get_node("UI2/Control/ViewportContainer/Viewport").gui_disable_input = true
 			inmenu = false
 			area.get_parent().opened = false

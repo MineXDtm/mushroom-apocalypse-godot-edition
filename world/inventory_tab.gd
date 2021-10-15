@@ -18,7 +18,6 @@ func select(slot):
 	selected = str(slot)
 	holding_item = get_node(selected).item
 	selected_name = get_node(selected).name
-	print("work")
 func unselect(slot):
 	var slots = get_node(slot)
 	slots.unselcted()

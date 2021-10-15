@@ -1,4 +1,4 @@
-extends TextureRect
+extends HBoxContainer
 func remove():
 	queue_free()
 

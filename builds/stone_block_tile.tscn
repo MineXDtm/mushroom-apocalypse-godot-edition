@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://TileMap.gd" type="Script" id=1]
 [ext_resource path="res://textures/build_player/block_beta_true.png" type="Texture" id=2]
-[ext_resource path="res://textures/items/tile.png" type="Texture" id=6]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 light_mode = 1
@@ -10,7 +9,7 @@ light_mode = 1
 [node name="TileMap" type="TileMap"]
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 32
-cell_custom_transform = Transform2D( 30, 32, 32, 32, 32, 32 )
+cell_custom_transform = Transform2D( 32, 32, 32, 32, 32, 32 )
 cell_tile_origin = 1
 format = 1
 script = ExtResource( 1 )
@@ -26,15 +25,9 @@ material = SubResource( 1 )
 position = Vector2( 16, 16 )
 texture = ExtResource( 2 )
 
-[node name="Sprite2" type="Sprite" parent="Node2D"]
-show_behind_parent = true
-material = SubResource( 1 )
-position = Vector2( 16, 16 )
-texture = ExtResource( 6 )
-
 [node name="checker" type="RayCast2D" parent="Node2D"]
-position = Vector2( 16, 5 )
+position = Vector2( 16, 8 )
 enabled = true
-cast_to = Vector2( 0, 16 )
+cast_to = Vector2( 0, 5 )
 collision_mask = 2
 collide_with_areas = true

@@ -1,4 +1,4 @@
-extends Control
+extends Node2D
 var childs = 0
 # Declare member variables here. Examples:
 # var a = 2
@@ -47,20 +47,21 @@ func _ready():
 func _on_point_pressed():
 	yield(get_tree().create_timer(0.01), "timeout")
 	if WorldData.world_type == names[int(point)] :
-		get_parent().get_parent().get_node(str(WorldData.map,"/sort/player")).opened = false
-		visible = false
+		get_parent().get_parent().get_parent().get_parent().get_parent().get_node(str(WorldData.map,"/sort/player")).opened = false
+		get_parent().get_parent().get_parent().visible = false
+		get_parent().gui_disable_input = true
 		return
 	elif point2[int(point)][0] == "off":
 		for i in point2:
 			point2[i][0] = "off"
 		point2[int(point)][0] = "on"
-		$list/Label.text = names[int(point)]
-		$list.visible = true
-		var worlds = $items.get_children()
+		$CanvasLayer/list/Label.text = names[int(point)]
+		$CanvasLayer/list.visible = true
+		var worlds = $CanvasLayer/list/items.get_children()
 		for i in worlds:
 			i.remove()
 		for i in range(0,res[int(point)].size()):
-			var world = $items
+			var world = $CanvasLayer/list/items
 			var drop_scene = load("res://gui/itme_list.tscn")
 			var _drop_intance = drop_scene.instance()
 			_drop_intance.get_node("ProgressBar").max_value = res_namber[int(point)][i]
@@ -69,14 +70,14 @@ func _on_point_pressed():
 			_drop_intance.name = str("item",i)
 			_drop_intance.get_node("but").me = i
 			_drop_intance.get_node("but").point = point
-			_drop_intance.texture = load("res://textures/items/" + res[int(point)][i] + ".png")
+			_drop_intance.get_node("TextureRect").texture = load("res://textures/items/" + res[int(point)][i] + ".png")
 			world.add_child(_drop_intance)
 	elif point2[int(point)][0] == "on":
 		point2[int(point)][0] = "off"
 		for i in range(0,res[int(point)].size()):
-			var world = $items
+			var world = $CanvasLayer/list/items
 			world.get_node(str("item",i)).remove()
-		$list.visible = false
+		$CanvasLayer/list.visible = false
 		point = "0"
 
 func _process(_delta):
@@ -86,17 +87,17 @@ func _process(_delta):
 			if getted[int(point)][i] == res_namber[int(point)][i]:
 				check +=1
 		if res[int(point)].size() == check:
-			$list/but.disabled = false
+			$CanvasLayer/list/but.disabled = false
 			get_node(str("buttons/point",point)).texture_normal = load("res://textures/gui/point/point-move.png")
 			get_node(str("buttons/point",point)).texture_pressed = load("res://textures/gui/point/point-move_clicked.png")
 			get_node(str("buttons/point",point)).texture_hover = load("res://textures/gui/point/point-move_on_mause.png")
 		elif completed[int(point)][0] == "true":
-			$list/but.disabled = false
+			$CanvasLayer/list/but.disabled = false
 			get_node(str("buttons/point",point)).texture_normal = load("res://textures/gui/point/point-move.png")
 			get_node(str("buttons/point",point)).texture_pressed = load("res://textures/gui/point/point-move_clicked.png")
 			get_node(str("buttons/point",point)).texture_hover = load("res://textures/gui/point/point-move_on_mause.png")
 		else:
-			$list/but.disabled = true
+			$CanvasLayer/list/but.disabled = true
 		if WorldData.world_type == names[int(point)] :
 			get_node(str("buttons/point",point)).texture_normal = load("res://textures/gui/point/point-here.png")
 			get_node(str("buttons/point",point)).texture_pressed = load("res://textures/gui/point/point-here_clicked.png")
@@ -108,7 +109,7 @@ func _process(_delta):
 func _on_but_pressed():
 	var pointss
 	pointss = point
-	var worlds = $items.get_children()
+	var worlds = $CanvasLayer/list/items.get_children()
 	for i in worlds:
 		i.remove()
 	for i in unlocked:
@@ -121,7 +122,7 @@ func _on_but_pressed():
 	get_node(str("buttons/point",pointss)).texture_normal = load("res://textures/gui/point/point-here.png")
 	get_node(str("buttons/point",pointss)).texture_pressed = load("res://textures/gui/point/point-here_clicked.png")
 	get_node(str("buttons/point",pointss)).texture_hover = load("res://textures/gui/point/point-here_ON_mause.png")
-	$list.visible = false
+	$CanvasLayer/list.visible = false
 	WorldData.world_type = names[int(pointss)]
 	yield(get_tree(), 'idle_frame')
 	get_parent().get_parent().get_node(WorldData.map).change_biome()

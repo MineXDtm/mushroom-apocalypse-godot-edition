@@ -17,3 +17,4 @@ func _physics_process(_delta):
 			get_parent().get_node(str(WorldData.map,"/sort/player")).in_menu = false
 	$hand_slots.initialize_inventory()
 	$inventory.initialize_inventory()
+

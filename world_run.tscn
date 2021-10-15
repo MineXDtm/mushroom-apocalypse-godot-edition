@@ -45,7 +45,6 @@ font_data = ExtResource( 27 )
 [node name="world" type="Node"]
 
 [node name="map" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0, 0 )
 
 [node name="UI2" type="CanvasLayer" parent="."]
 script = ExtResource( 13 )
@@ -157,7 +156,8 @@ __meta__ = {
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -67.0
+margin_top = -65.0
+margin_bottom = -1.0
 rect_clip_content = true
 mouse_filter = 0
 alignment = 1
@@ -169,7 +169,7 @@ __meta__ = {
 [node name="slot1" type="TextureRect" parent="UI2/hand_slots"]
 margin_left = 256.0
 margin_right = 296.0
-margin_bottom = 67.0
+margin_bottom = 64.0
 rect_min_size = Vector2( 40, 40 )
 texture = ExtResource( 17 )
 expand = true
@@ -179,7 +179,7 @@ script = ExtResource( 11 )
 [node name="slot2" type="TextureRect" parent="UI2/hand_slots"]
 margin_left = 300.0
 margin_right = 340.0
-margin_bottom = 67.0
+margin_bottom = 64.0
 rect_min_size = Vector2( 40, 40 )
 texture = ExtResource( 17 )
 expand = true
@@ -189,7 +189,7 @@ script = ExtResource( 11 )
 [node name="slot3" type="TextureRect" parent="UI2/hand_slots"]
 margin_left = 344.0
 margin_right = 384.0
-margin_bottom = 67.0
+margin_bottom = 64.0
 rect_min_size = Vector2( 40, 40 )
 texture = ExtResource( 17 )
 expand = true
@@ -259,9 +259,32 @@ visible = false
 [node name="inventory" parent="UI2" instance=ExtResource( 14 )]
 visible = false
 
-[node name="map" parent="UI2" instance=ExtResource( 18 )]
+[node name="Control" type="Control" parent="UI2"]
 visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
 mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ViewportContainer" type="ViewportContainer" parent="UI2/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="UI2/Control/ViewportContainer"]
+size = Vector2( 640, 340 )
+size_override_stretch = true
+handle_input_locally = false
+render_target_update_mode = 0
+gui_disable_input = true
+
+[node name="map" parent="UI2/Control/ViewportContainer/Viewport" instance=ExtResource( 18 )]
 
 [node name="died_menu" parent="UI2" instance=ExtResource( 31 )]
 visible = false
@@ -272,7 +295,7 @@ visible = false
 [node name="Label" type="Label" parent="UI2"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -48.0
+margin_left = -64.0
 margin_bottom = 16.0
 custom_fonts/font = SubResource( 6 )
 text = "fps"
@@ -285,8 +308,8 @@ __meta__ = {
 [node name="bg" type="TextureRect" parent="UI2"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -20.0
-margin_right = -1.0
+margin_left = -28.0
+margin_right = -9.0
 margin_bottom = 10.0
 rect_scale = Vector2( 3, 3 )
 texture = ExtResource( 26 )
