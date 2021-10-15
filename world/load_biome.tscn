@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://world/map.gd" type="Script" id=1]
 [ext_resource path="res://world/dec_mob_nav.gd" type="Script" id=2]
@@ -15,6 +15,51 @@
 render_priority = 100
 blend_mode = 1
 
+[sub_resource type="Animation" id=5]
+resource_name = "darkens"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.854902, 0.784314, 0.545098, 1 ), Color( 0.643137, 0.545098, 0.854902, 1 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "evening"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.854902, 0.784314, 0.545098, 1 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "night"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.643137, 0.545098, 0.854902, 1 ), Color( 0.45098, 0.388235, 0.772549, 1 ) ]
+}
+
 [sub_resource type="CanvasItemMaterial" id=2]
 light_mode = 1
 
@@ -30,6 +75,7 @@ light_mode = 1
 script = ExtResource( 1 )
 
 [node name="b" parent="." instance=ExtResource( 6 )]
+position = Vector2( -1, 1 )
 
 [node name="sort" type="YSort" parent="."]
 
@@ -49,6 +95,11 @@ wait_time = 60.0
 [node name="time_move" type="Timer" parent="."]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasModulate"]
+anims/darkens = SubResource( 5 )
+anims/evening = SubResource( 6 )
+anims/night = SubResource( 7 )
 
 [node name="ui" type="Control" parent="."]
 margin_right = 40.0
@@ -108,6 +159,7 @@ wait_time = 10.0
 autostart = true
 
 [node name="arrow_scene" type="Node2D" parent="."]
+visible = false
 
 [node name="arrow" type="Sprite" parent="arrow_scene"]
 material = SubResource( 4 )

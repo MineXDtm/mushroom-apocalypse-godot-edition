@@ -10,6 +10,8 @@ var added = 0
 var cords = [0]
 var cords2 = [0]
 var number = 0
+var evning_start_in = 25
+var darknes_start_in = 10
 var number2 = 0
 var check
 var chunks = 0
@@ -65,6 +67,19 @@ var zombie = 0
 var player_data = {
 	
 }
+func _process(delta):
+	var time_left = int($time.time_left)
+	if evning_start_in == time_left :
+		if time == "day":
+			$CanvasModulate/AnimationPlayer.play("evening")
+		else:
+			$CanvasModulate/AnimationPlayer.play_backwards("night")
+			
+	if darknes_start_in  == time_left :
+		if time == "day":
+			$CanvasModulate/AnimationPlayer.play("darkens")
+		else:
+			$CanvasModulate/AnimationPlayer.play_backwards("darkens")
 func _ready():
 	set_name("map")
 	load_menu.visible = true
@@ -164,7 +179,7 @@ func settime(time_set = null):
 		$time_move.start()
 		$time.start()
 		time = "night"
-		$CanvasModulate.color = Color(0.513726, 0.301961, 0.623529)
+		$CanvasModulate/AnimationPlayer.play("night")
 		get_parent().get_node("UI2/bg/ViewportContainer/Viewport/CLockBar").set_clock(1)
 	elif time_set == "day":
 		$time_move.stop()
@@ -172,9 +187,11 @@ func settime(time_set = null):
 		time = "day"
 		get_parent().get_node("UI2/bg/ViewportContainer/Viewport/CLockBar").set_clock(0)
 		$time.wait_time += 40
-		$CanvasModulate.color = Color(1, 1, 1)
+		evning_start_in += 25
+		darknes_start_in += 10
+		$CanvasModulate/AnimationPlayer.play_backwards("evening")
 		$time_move.wait_time = $time.wait_time / 15
-		$time.stop()
+		$time.start()
 		$time_move.start()
 	else:
 		Console.write_line("[color=#ffff66][url=time day]day[/url][/color]/[color=#ffff66][url=time night]night[/url][/color]")
@@ -192,14 +209,15 @@ func _on_time_timeout():
 	if time == "day" :
 		time = "night"
 		get_parent().get_node("UI2/bg/ViewportContainer/Viewport/CLockBar").set_clock(1)
-		$CanvasModulate.color = Color(0.513726, 0.301961, 0.623529)
+		$CanvasModulate/AnimationPlayer.play("night")
+		
 	else:
 		$time_move.stop()
 		$time.stop()
 		time = "day"
 		get_parent().get_node("UI2/bg/ViewportContainer/Viewport/CLockBar").set_clock(0)
 		$time.wait_time += 40
-		$CanvasModulate.color = Color(1, 1, 1)
+		$CanvasModulate/AnimationPlayer.play_backwards("evening")
 		$time_move.wait_time = $time.wait_time / 15
 		$time.start()
 		$time_move.start()
@@ -410,6 +428,7 @@ func load_time(time_left):
 	$time_move.start()
 	yield(get_tree().create_timer(time_left), "timeout")
 	_on_time_timeout()
+	$time.start()
 
 func load_chunks_layer0():
 	var file = File.new()
