@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/1bluebutterfly.png-59ccffd749cd35bdb2fcd5f604db9249.stex"
+path="res://.import/Firefly2.png-11ab10a60afaf0ce38ce269665df616d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/decs/1bluebutterfly.png"
-dest_files=[ "res://.import/1bluebutterfly.png-59ccffd749cd35bdb2fcd5f604db9249.stex" ]
+source_file="res://textures/decs/Firefly2.png"
+dest_files=[ "res://.import/Firefly2.png-11ab10a60afaf0ce38ce269665df616d.stex" ]
 
 [params]
 

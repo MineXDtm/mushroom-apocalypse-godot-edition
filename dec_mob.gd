@@ -1,7 +1,11 @@
 extends AnimatedSprite
 var speed = 30
 var path = []
-
+var type = "blue_butterfly"
+var types = {
+	"blue_butterfly":2,
+	"red_butterfly":2,
+}
 func _process(delta):
 	var distance_to_walk = speed * delta
 	
@@ -18,7 +22,8 @@ func _process(delta):
 		# Update the distance to walk
 		distance_to_walk -= distance_to_next_point
 
-
+func _ready():
+	get_parent().get_parent().get_node("dec_mob_nav").has_decs.append(self)
 func _on_VisibilityNotifier2D_screen_entered():
 	visible = true
 

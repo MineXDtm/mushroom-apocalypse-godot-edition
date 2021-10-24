@@ -23,16 +23,50 @@ var types = {
 			"kust_fruit":50,
 			"stone":100
 			},
-		"decs_number":500,
-		"decs":["grass","flowers","flowers2","small_stone"],
+		"decs":{
+			"grass":{
+				"caunt":[500,null,false],
+				"day": {
+					"random_properties":{
+						"texture":[load("res://textures/grass.png"),load("res://textures/flowers.png"),load("res://textures/flowers2.png"),load("res://textures/small_stone.png")]
+					},
+				},
+				"night": {
+					"random_properties":{
+						"texture":[load("res://textures/grass.png"),load("res://textures/flowers.png"),load("res://textures/flowers2.png"),load("res://textures/small_stone.png")]
+					},
+				},
+				"layer": 0,
+				"properties":[],
+				"scene":load("res://world/decorashon.tscn")
+			},
+			"dec_mob":{
+				#random count = false | null = max
+				"caunt":[25,null,false],
+				"day": {
+					"random_properties":{
+						"type":["blue_butterfly","red_butterfly"]
+					},
+				},
+				"night": {
+					"random_properties":{
+						"type":["Firefly"]
+					},
+				},
+				"layer": 2,
+				"properties":[],
+				"scene":load("res://world/Dec_mob.tscn")
+			},
+		},
 		"graund": "dirt"
 	},
 	"desert":{
 		"structures":{
 			"bucket":100,
 			},
-		"decs_number":0,
-		"decs":[],
+		"decs":{
+			
+		},
 		"graund": "sand"
 	}
 	
@@ -149,9 +183,26 @@ func _ready():
 		load_chunks_layer0()
 		load_menu.get_node("ProgressBar").value += 1
 		load_menu.visible = false
+	
+	for _i in types[WorldData.world_type]["decs"]:
 		
+		#types[WorldData.world_type]["decs"][_i]
+		if types[WorldData.world_type]["decs"][_i]["caunt"][2] == false:
+			for i in types[WorldData.world_type]["decs"][_i]["caunt"][0]:
+				var dec = types[WorldData.world_type]["decs"][_i]["scene"].instance()
+				
+				for ii in types[WorldData.world_type]["decs"][_i][time]["random_properties"]:
+					randomize()
+					
+					dec.set(ii, types[WorldData.world_type]["decs"][_i][time]["random_properties"][ii][randi() % types[WorldData.world_type]["decs"][_i][time]["random_properties"][ii].size()])
+				var random_pos = Vector2(random.randi_range(0, 1536),random.randi_range(0, 1536))
+				dec.position = random_pos
+				
+				if types[WorldData.world_type]["decs"][_i]["layer"] == 2:
+					get_node("layer2").add_child(dec)
+				elif types[WorldData.world_type]["decs"][_i]["layer"] == 0:
+					get_node("b/decorations").add_child(dec)
 	get_node("b/Sprite").texture = load("res://textures/" + types[WorldData.world_type]["graund"]+".png")
-	get_node("zombies").reloaddec()
 	discord_rpc.details = str("In World: " ,WorldData.world_name)
 	discord_rpc.icon = WorldData.world_type
 	discord_rpc.icon_desc =  WorldData.world_type
@@ -159,6 +210,8 @@ func _ready():
 	discord_rpc.small_icon_desc = "Game Icon"
 	discord_rpc.UpdatePresence()
 	
+var random = RandomNumberGenerator.new()
+
 func _on_kust_spawn_timeout():
 	if Ganaretor.kustes < 100 :
 		var enemyscene = load("res://world/kust.tscn")

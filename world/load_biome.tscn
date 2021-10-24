@@ -15,7 +15,7 @@
 render_priority = 100
 blend_mode = 1
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=2]
 resource_name = "darkens"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:color")
@@ -30,7 +30,7 @@ tracks/0/keys = {
 "values": [ Color( 0.854902, 0.784314, 0.545098, 1 ), Color( 0.643137, 0.545098, 0.854902, 1 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=3]
 resource_name = "evening"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:color")
@@ -45,7 +45,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.854902, 0.784314, 0.545098, 1 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=4]
 resource_name = "night"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:color")
@@ -57,18 +57,18 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 0.643137, 0.545098, 0.854902, 1 ), Color( 0.45098, 0.388235, 0.772549, 1 ) ]
+"values": [ Color( 0.643137, 0.545098, 0.854902, 1 ), Color( 0.290196, 0.25098, 0.494118, 1 ) ]
 }
 
-[sub_resource type="CanvasItemMaterial" id=2]
+[sub_resource type="CanvasItemMaterial" id=5]
 light_mode = 1
 
-[sub_resource type="NavigationPolygon" id=3]
+[sub_resource type="NavigationPolygon" id=6]
 vertices = PoolVector2Array( 99, 1728, 99, 189, 1638, 189, 1638, 1731 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 outlines = [ PoolVector2Array( 99, 1728, 99, 189, 1638, 189, 1638, 1731 ) ]
 
-[sub_resource type="CanvasItemMaterial" id=4]
+[sub_resource type="CanvasItemMaterial" id=7]
 light_mode = 1
 
 [node name="map" type="Node2D"]
@@ -89,6 +89,8 @@ scale = Vector2( 2, 2 )
 material = SubResource( 1 )
 position = Vector2( 756, 669 )
 
+[node name="layer2" type="Node2D" parent="."]
+
 [node name="time" type="Timer" parent="."]
 wait_time = 60.0
 
@@ -97,9 +99,9 @@ wait_time = 60.0
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasModulate"]
-anims/darkens = SubResource( 5 )
-anims/evening = SubResource( 6 )
-anims/night = SubResource( 7 )
+anims/darkens = SubResource( 2 )
+anims/evening = SubResource( 3 )
+anims/night = SubResource( 4 )
 
 [node name="ui" type="Control" parent="."]
 margin_right = 40.0
@@ -110,7 +112,7 @@ __meta__ = {
 
 [node name="stove_ui" parent="ui" instance=ExtResource( 5 )]
 visible = false
-material = SubResource( 2 )
+material = SubResource( 5 )
 
 [node name="TileMap" type="TileMap" parent="."]
 cell_size = Vector2( 32, 32 )
@@ -152,7 +154,7 @@ mob_dec = ExtResource( 4 )
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="dec_mob_nav"]
 visible = false
 position = Vector2( -99, -195 )
-navpoly = SubResource( 3 )
+navpoly = SubResource( 6 )
 
 [node name="dec_nav_update" type="Timer" parent="."]
 wait_time = 10.0
@@ -162,14 +164,14 @@ autostart = true
 visible = false
 
 [node name="arrow" type="Sprite" parent="arrow_scene"]
-material = SubResource( 4 )
+material = SubResource( 7 )
 position = Vector2( -12, 0.499999 )
 scale = Vector2( 1.2, 1.13333 )
 z_index = 1
 texture = ExtResource( 10 )
 
 [node name="icon" type="Sprite" parent="arrow_scene/arrow"]
-material = SubResource( 4 )
+material = SubResource( 7 )
 position = Vector2( 0, -0.441176 )
 scale = Vector2( 0.5, 0.5 )
 z_index = 1

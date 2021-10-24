@@ -14,9 +14,7 @@ func spawn():
 	var path = get_simple_path(mob_dec_s.position, Vector2(random.randi_range(map_size_min, map_size_max),random.randi_range(map_size_min, map_size_max)) , true)
 	mob_dec_s.path = path
 	add_child(mob_dec_s)
-func _ready():
-	for i in range(15):
-		spawn()
+
 var random = RandomNumberGenerator.new()
 
 

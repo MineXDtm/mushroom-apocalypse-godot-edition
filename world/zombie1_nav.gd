@@ -47,17 +47,7 @@ func _ready():
 			id += 1
 			add_child(nav_instance)
 		o += 1
-	var decoration = load("res://world/decorashon.tscn")
-	for _i in range(0,get_parent().types[WorldData.world_type]["decs_number"]):
-		var dec = decoration.instance()
-		randomize()
-		var random_x = cords[randi() % cords.size()]
-		var random_y = cords[randi() % cords.size()]
-		var random_pos = Vector2(random_x,random_y)
-		dec.position = random_pos
-		var rand = randi() % 5
-		dec.texture = load("res://textures/"+get_parent().types[WorldData.world_type]["decs"][rand -1]+".png")
-		get_parent().get_node("b/decorations").add_child(dec)
+	
 	for points in walk_zone:
 		var point = walk_zone[points]
 		var indexes = [Vector2(point.position.x + 32 ,point.position.y ),
@@ -77,17 +67,3 @@ func _ready():
 			# As we loop through all points we can set it to false
 			astar.connect_points(int(point_relative.x + point_relative.y) + int(walk_zone[point_relative].name),int((point.position.x) + (point.position.y) + int(point.name)), false)
 			
-func reloaddec():
-	for i in get_parent().get_node("b/decorations").get_children():
-		i.queue_free()
-	var decoration = load("res://world/decorashon.tscn")
-	for _i in range(0,get_parent().types[WorldData.world_type]["decs_number"]):
-		var dec = decoration.instance()
-		randomize()
-		var random_x = cords[randi() % cords.size()]
-		var random_y = cords[randi() % cords.size()]
-		var random_pos = Vector2(random_x,random_y)
-		dec.position = random_pos
-		var rand = randi() % 5
-		dec.texture = load("res://textures/"+get_parent().types[WorldData.world_type]["decs"][rand -1]+".png")
-		get_parent().get_node("b/decorations").add_child(dec)
