@@ -19,7 +19,12 @@ var random = RandomNumberGenerator.new()
 
 
 func _on_dec_nav_update_timeout():
+	
 	for i in has_decs:
+		if not weakref(i).get_ref() :
+			has_decs.erase(i)
+			print("work")
+			return
 		random.randomize()
 		var path = get_simple_path(i.position, Vector2(random.randi_range(map_size_min, map_size_max),random.randi_range(map_size_min, map_size_max)) , true)
 		i.path = path

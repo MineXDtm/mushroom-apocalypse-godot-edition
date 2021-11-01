@@ -184,24 +184,7 @@ func _ready():
 		load_menu.get_node("ProgressBar").value += 1
 		load_menu.visible = false
 	
-	for _i in types[WorldData.world_type]["decs"]:
-		
-		#types[WorldData.world_type]["decs"][_i]
-		if types[WorldData.world_type]["decs"][_i]["caunt"][2] == false:
-			for i in types[WorldData.world_type]["decs"][_i]["caunt"][0]:
-				var dec = types[WorldData.world_type]["decs"][_i]["scene"].instance()
-				
-				for ii in types[WorldData.world_type]["decs"][_i][time]["random_properties"]:
-					randomize()
-					
-					dec.set(ii, types[WorldData.world_type]["decs"][_i][time]["random_properties"][ii][randi() % types[WorldData.world_type]["decs"][_i][time]["random_properties"][ii].size()])
-				var random_pos = Vector2(random.randi_range(0, 1536),random.randi_range(0, 1536))
-				dec.position = random_pos
-				
-				if types[WorldData.world_type]["decs"][_i]["layer"] == 2:
-					get_node("layer2").add_child(dec)
-				elif types[WorldData.world_type]["decs"][_i]["layer"] == 0:
-					get_node("b/decorations").add_child(dec)
+	
 	get_node("b/Sprite").texture = load("res://textures/" + types[WorldData.world_type]["graund"]+".png")
 	discord_rpc.details = str("In World: " ,WorldData.world_name)
 	discord_rpc.icon = WorldData.world_type
@@ -228,6 +211,7 @@ func lock_time(value = false):
 		$time_move.start()
 		$time.start()
 func settime(time_set = null):
+	clear_decs()
 	if time_set == "night" :
 		$time_move.start()
 		$time.start()
@@ -248,6 +232,7 @@ func settime(time_set = null):
 		$time_move.start()
 	else:
 		Console.write_line("[color=#ffff66][url=time day]day[/url][/color]/[color=#ffff66][url=time night]night[/url][/color]")
+	generate_decs()
 func _on_kust_fruit_spawn_timeout():
 	if Ganaretor.fruit_kustes < 5 :
 		var fruit = load("res://world/kust_fruit.tscn")
@@ -256,9 +241,32 @@ func _on_kust_fruit_spawn_timeout():
 			Ganaretor.fruit_kustes += 1
 			get_node("sort").add_child(fruits)
 
-
-
+func generate_decs():
+	for _i in types[WorldData.world_type]["decs"]:
+			
+			#types[WorldData.world_type]["decs"][_i]
+			if types[WorldData.world_type]["decs"][_i]["caunt"][2] == false:
+				for i in types[WorldData.world_type]["decs"][_i]["caunt"][0]:
+					var dec = types[WorldData.world_type]["decs"][_i]["scene"].instance()
+					
+					for ii in types[WorldData.world_type]["decs"][_i][time]["random_properties"]:
+						randomize()
+						
+						dec.set(ii, types[WorldData.world_type]["decs"][_i][time]["random_properties"][ii][randi() % types[WorldData.world_type]["decs"][_i][time]["random_properties"][ii].size()])
+					var random_pos = Vector2(random.randi_range(0, 1536),random.randi_range(0, 1536))
+					dec.position = random_pos
+					
+					if types[WorldData.world_type]["decs"][_i]["layer"] == 2:
+						get_node("layer2").add_child(dec)
+					elif types[WorldData.world_type]["decs"][_i]["layer"] == 0:
+						get_node("b/decorations").add_child(dec)
+func clear_decs():
+	var decs = get_tree().get_nodes_in_group("decoration")
+	
+	for i in decs:
+		i.queue_free()
 func _on_time_timeout():
+	
 	if time == "day" :
 		time = "night"
 		get_parent().get_node("UI2/bg/ViewportContainer/Viewport/CLockBar").set_clock(1)
@@ -274,6 +282,8 @@ func _on_time_timeout():
 		$time_move.wait_time = $time.wait_time / 15
 		$time.start()
 		$time_move.start()
+	clear_decs()
+	generate_decs()
 
 
 func _on_zombie_spawn_timeout():
@@ -477,6 +487,8 @@ func save_chunksinlayer0():
 		file.close()
 		save_data.clear()
 func load_time(time_left):
+	clear_decs()
+	generate_decs()
 	$time_move.wait_time = $time.wait_time / 15
 	$time_move.start()
 	yield(get_tree().create_timer(time_left), "timeout")
