@@ -77,6 +77,7 @@ var save_path = SAVE_DIR + WorldData.world_name + "/"+WorldData.world_type+"/obj
 var save_path3 = SAVE_DIR + WorldData.world_name + "/save_virables.json"
 var save_path2 = SAVE_DIR + WorldData.world_name
 var save_path4 = SAVE_DIR + WorldData.world_name + "/players/player_beta.json"
+var save_path6 = SAVE_DIR + WorldData.world_name + "/world_data.json"
 var zombies = {
 	
 }
@@ -86,6 +87,7 @@ var save_data = {
 var save_data2 = {
 
 }
+
 var object_data = {
 	"name":[],
 	"position_x":[],
@@ -149,7 +151,9 @@ func _ready():
 				load_menu.get_node("ProgressBar").value += 1
 				var enemy = enemyscene.instance()
 				get_node("sort").add_child(enemy)
+		generate_decs()
 		pre_save()
+		save_date()
 		WorldData.new = false
 		WorldData.new2 = false
 		load_menu.visible = false
@@ -157,13 +161,17 @@ func _ready():
 		$time.start()
 		$time_move.wait_time = $time.wait_time / 15
 		$time_move.start()
+		
 	else:
+		
 		WorldData.new = false
 		WorldData.new2 = false
+		
 		load_menu.get_node("ProgressBar").max_value = 5
 		load_menu.get_node("Label").text = "loading virables.."
 		load_menu.get_node("ProgressBar").value += 1
 		load_virables()
+		update_date()
 		yield(get_tree().create_timer(0.01), "timeout")
 		yield(get_tree(), 'idle_frame')
 		load_menu.get_node("Label").text = "loading chunks.."
@@ -697,7 +705,42 @@ func save_car(car):
 		file.store_line(to_json(save_data3))
 		file.close()
 		save_data3.clear()
-
+func save_date():
+	save_path6 = SAVE_DIR + WorldData.world_name + "/world_data.json"
+	var dir = Directory.new()
+	dir.open(save_path2)
+	var data = {}
+	data["creation_date"] = OS.get_datetime()
+	data["last_join"] = OS.get_datetime()
+	data["mode"] = "sorvival_mode"
+	var save_data3 = data.duplicate(true)
+	var file = File.new()
+	#var error = file.open(save_path, File.WRITE)
+	var error = file.open_encrypted_with_pass(save_path6, File.WRITE, "P@paB3ar6969")
+	if error == OK:
+		file.store_line(to_json(save_data3))
+		file.close()
+		save_data3.clear()
+func update_date():
+	save_path6 = SAVE_DIR + WorldData.world_name + "/world_data.json"
+	
+	var file = File.new()
+	#var error = file.open(save_path, File.READ)
+	var error = file.open_encrypted_with_pass(save_path6, File.READ, "P@paB3ar6969")
+	var text = file.get_as_text()
+	file.close()
+	var save_data3 = parse_json(text)
+	save_data3["last_join"] = OS.get_datetime()
+	var save_data4 = save_data3
+	
+	var file2 = File.new()
+	#var error = file.open(save_path, File.WRITE)
+	var error2 = file2.open_encrypted_with_pass(save_path6, File.WRITE, "P@paB3ar6969")
+	
+	if error == OK:
+		file2.store_line(to_json(save_data4) )
+		file2.close()
+		save_data3.clear()
 func _on_save_timeout():
 	update_chunks()
 	save_virables()

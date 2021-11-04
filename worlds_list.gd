@@ -28,11 +28,20 @@ func _ready():
 		var image_texture = ImageTexture.new()
 		image_texture.create_from_image(image)
 		world_file_instance.get_node("icon").texture = image_texture
-		world_file_instance.get_node("name").text = i
+		world_file_instance.get_node("icon/name").text = i
 		world_file_instance.name = i
 		world_file_instance.name_world = i
 		world_file_instance.directory = save_path 
-		$VBoxContainer/container/VBoxContainer.add_child(world_file_instance)
+		var file = File.new()
+		#var error = file.open(save_path, File.READ)
+		var save_path5 = SAVE_DIR + i + "/world_data.json"
+		var error = file.open_encrypted_with_pass(save_path5, File.READ, "P@paB3ar6969")
+		var text = file.get_as_text()
+		file.close()
+		var save_data3 = parse_json(text)
+		world_file_instance.get_node("icon/date").text = str("%02d" % save_data3["creation_date"]["day"] ,".","%02d" % save_data3["creation_date"]["month"],".",save_data3["creation_date"]["year"] ,"\n", save_data3["creation_date"]["hour"],":","%02d" % save_data3["creation_date"]["minute"] )
+		world_file_instance.get_node("icon/box1/box2/MarginContainer/VBoxContainer/last_join").text = str("Last Join: ","%02d" % save_data3["last_join"]["day"] ,".", "%02d" %save_data3["last_join"]["month"],".",save_data3["last_join"]["year"] ,"\n", save_data3["last_join"]["hour"],":","%02d" % save_data3["last_join"]["minute"] )
+		$VBoxContainer/HBoxContainer2/container/VBoxContainer.add_child(world_file_instance)
 
 
 func _on_create_pressed():
@@ -43,15 +52,15 @@ func _on_create_pressed():
 func _on_join_pressed():
 	if selected != null:
 		WorldData.new = false
-		WorldData.world_path = get_node(str("VBoxContainer/container/VBoxContainer/",selected)).directory
-		WorldData.world_name = get_node(str("VBoxContainer/container/VBoxContainer/",selected,"/name")).text
+		WorldData.world_path = get_node(str("VBoxContainer/HBoxContainer2/container/VBoxContainer/",selected)).directory
+		WorldData.world_name = get_node(str("VBoxContainer/HBoxContainer2/container/VBoxContainer/",selected,"/icon/name")).text
 		get_tree().change_scene("res://world_run.tscn")
 
 
 func _on_remove_pressed():
 	if selected != null:
 		dir_contents(str(SAVE_DIR,selected))
-		get_node(str("VBoxContainer/container/VBoxContainer/",selected)).queue_free()
+		get_node(str("VBoxContainer/HBoxContainer2/container/VBoxContainer/",selected)).queue_free()
 		selected = null
 
 func dir_contents(path):
