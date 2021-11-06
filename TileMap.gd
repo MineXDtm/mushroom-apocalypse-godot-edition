@@ -36,29 +36,26 @@ func _physics_process(_delta):
 		var p = get_parent().get_node_or_null(str(WorldData.map,"/sort/player"))
 		if p != null:
 			p.full = false
-	if Input.is_action_just_pressed("rotare") and type == "block_beta" || Input.is_action_just_pressed("rotare") and type == "stone_block"|| Input.is_action_just_pressed("rotare") and type == "door" :
-		if rotare == "up":
-			$Node2D/Sprite.position = Vector2(33,24)
-			rotared = true
-			rotare = "right"
-		elif rotare == "right":
-			$Node2D/Sprite.position = Vector2(16,32)
-			rotared = false
-			rotare = "down"
-		elif rotare == "down":
-			$Node2D/Sprite.position = Vector2(16,25)
-			rotared = true
-			rotare = "left"
-		elif rotare == "left":
+	if visible == true: 
+		if type == "block_beta" || type == "stone_block"|| type == "door":
+			if Input.is_action_just_pressed("rotare")  :
+					if rotare == "up":
+						$Node2D/Sprite.position = Vector2(33,24)
+						rotared = true
+						rotare = "right"
+					elif rotare == "right":
+						$Node2D/Sprite.position = Vector2(16,32)
+						rotared = false
+						rotare = "down"
+					elif rotare == "down":
+						$Node2D/Sprite.position = Vector2(16,25)
+						rotared = true
+						rotare = "left"
+					elif rotare == "left":
+						$Node2D/Sprite.position = Vector2(16,16)
+						rotared = false
+						rotare = "up"
+		else:
 			$Node2D/Sprite.position = Vector2(16,16)
 			rotared = false
 			rotare = "up"
-	if Input.is_action_just_pressed("rotare") and name == "TileMap8":
-		if rotare == "up":
-			$Node2D/Sprite.play("rotare")
-			$Node2D/Sprite.position = Vector2(33,24)
-			rotare = "right"
-		elif rotare == "right":
-			$Node2D/Sprite.play("default")
-
-

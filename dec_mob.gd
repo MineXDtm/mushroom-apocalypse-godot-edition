@@ -3,6 +3,7 @@ var speed = 30
 var path = []
 var type = "blue_butterfly"
 func _process(delta):
+	
 	var distance_to_walk = speed * delta
 	
 	# Move the player along the path until he has run out of movement or the path ends.
@@ -11,6 +12,10 @@ func _process(delta):
 		if distance_to_walk <= distance_to_next_point:
 			# The player does not have enough movement left to get to the next point.
 			position += position.direction_to(path[0]) * distance_to_walk
+			if path[0].x > position.x:
+				scale.x = -1
+			else:
+				scale.x = 1
 		else:
 			# The player get to the next point
 			position = path[0]
@@ -21,6 +26,7 @@ func _process(delta):
 func _ready():
 	play(type)
 	if type == "Firefly":
+		$light.visible = true
 		set("light_mode","unshaded")
 	get_parent().get_parent().get_node("dec_mob_nav").has_decs.append(self)
 func _on_VisibilityNotifier2D_screen_entered():

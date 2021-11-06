@@ -1,23 +1,20 @@
-extends TextureRect
+extends Panel
 var ItemClass = preload("res://gui/item.tscn")
 var item = null
-var default_tex = preload("res://textures/gui/slot_inv.png")
-var selected_tex = preload("res://textures/gui/slot_inv_Selected.png")
-var default_style: StyleBoxTexture = null
-var selected_style: StyleBoxTexture = null
+var default_style = load("res://gui/slot_defaultstyle.tres")
+var selected_style = load("res://gui/slot_selectedstyle.tres")
 var slot_index
-
 
 func _ready():
 	if name == "slot1":
-		texture = selected_tex
-		rect_min_size = Vector2(50,50)
+		rect_min_size = Vector2(80,34)
+		set('custom_styles/panel', selected_style)
 func selcted():
-	rect_min_size = Vector2(50,50)
-	texture = selected_tex
+	rect_min_size = Vector2(80,34)
+	set('custom_styles/panel', selected_style)
 func unselcted():
-	rect_min_size = Vector2(40,40)
-	texture = default_tex
+	rect_min_size = Vector2(60,34)
+	set('custom_styles/panel', default_style)
 func pickFromSlot():
 	remove_child(item)
 	item = null

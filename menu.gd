@@ -15,10 +15,10 @@ func _on_back_pressed():
 	$worlds_list.visible = false
 
 
-func _on_quit_pressed():
-	get_tree().quit()
+
 
 func _ready():
+	WorldData.world_date_is_required = false
 	OS.set_use_vsync(false)
 	PlayerInventory.inventory = {}
 	PlayerInventory.inventory1 = {}
@@ -26,3 +26,11 @@ func _ready():
 	discord_rpc.icon_desc = "Game Icon"
 	discord_rpc.small_icon = ""
 	discord_rpc.small_icon_desc = ""
+
+
+func _on_settings_pressed():
+	$game_menu.visible = true
+
+
+func _on_exit_pressed():
+	get_tree().quit()

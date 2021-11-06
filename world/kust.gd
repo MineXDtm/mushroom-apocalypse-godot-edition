@@ -105,7 +105,6 @@ func _on_kust_area_entered(area):
 		$ProgressBar.value = health
 		if health <= 0 :
 			$ProgressBar.visible = false
-			$AnimatedSprite.position.x = -110
 			broked = true
 	elif area.is_in_group("wooden_pickaxe") and broked == false:
 		health -= 0.5
@@ -113,7 +112,6 @@ func _on_kust_area_entered(area):
 		$ProgressBar.value = health
 		if health <= 0 :
 			$ProgressBar.visible = false
-			$AnimatedSprite.position.x = -110
 			broked = true
 	elif area.is_in_group("stone_pickaxe") and broked == false:
 		health -= 1
@@ -121,7 +119,6 @@ func _on_kust_area_entered(area):
 		$ProgressBar.value = health
 		if health <= 0 :
 			$ProgressBar.visible = false
-			$AnimatedSprite.position.x = -110
 			broked = true
 	elif area.is_in_group("stone_exe") and broked == false:
 		health -= 1.7
@@ -129,8 +126,6 @@ func _on_kust_area_entered(area):
 		$ProgressBar.value = health
 		if health <= 0 :
 			$ProgressBar.visible = false
-			$AnimatedSprite.position.x = -110
-			$AnimatedSprite.play("broked")
 			broked = true
 	if broked == true :
 			

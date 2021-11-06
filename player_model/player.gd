@@ -27,7 +27,7 @@ var eating = false
 var layer = 1
 var type = "player"
 
-onready var heals = get_parent().get_parent().get_parent().get_node("UI2/bars/health")
+onready var heals = get_node("/root/world/UI2/bars/health")
 func changed_settings():
 	if gamesettings.shadow_mode == "low":
 		shadow.visible = true
@@ -37,8 +37,8 @@ func _process(_delta):
 	$Label.text = str(position)
 	if health <= 0 and cd == false:
 		cd = true
-		get_parent().get_parent().get_parent().get_node("UI2/inventory").drop_all()
-		get_parent().get_parent().get_parent().get_node("UI2/died_menu").visible = true
+		get_node("/root/world/UI2/inventory").drop_all()
+		get_node("/root/world/UI2/died_menu").visible = true
 		get_tree().paused = true
 		visible = false
 		died = true
@@ -53,7 +53,7 @@ func _process(_delta):
 			arm = "arm"
 			$Node2D/arm1/item.visible = false
 	elif isattacking == false:
-		var inv = get_parent().get_parent().get_parent().get_node("UI2/hand_slots")
+		var inv =get_node("/root/world/UI2/hand_slots")
 		inv.unselect("slot1")
 	if invenory_slot == "2" and isattacking == false:
 		if PlayerInventory.inventory1.has(1): 
@@ -64,7 +64,7 @@ func _process(_delta):
 			arm = "arm"
 			$Node2D/arm1/item.visible = false
 	elif isattacking == false:
-		var inv = get_parent().get_parent().get_parent().get_node("UI2/hand_slots")
+		var inv = get_node("/root/world/UI2/hand_slots")
 		inv.unselect("slot2")
 	if invenory_slot == "3" and isattacking == false:
 		if PlayerInventory.inventory1.has(2): 
@@ -75,7 +75,7 @@ func _process(_delta):
 			arm = "arm"
 			$Node2D/arm1/item.visible = false
 	elif isattacking == false:
-		var inv = get_parent().get_parent().get_parent().get_node("UI2/hand_slots")
+		var inv = get_node("/root/world/UI2/hand_slots")
 		inv.unselect("slot3")
 var in_console = false
 var player_god = false
@@ -85,6 +85,8 @@ func god(value = true):
 	else:
 		player_god = false
 func _ready():
+	if gamesettings.shadow_mode != "low":
+		$Node2D/shadow.visible = false
 	gamesettings.connect("change_settings",self,"changed_settings")
 	Console.add_command('god_mode', self, 'god')\
 		.set_description('god mode')\
@@ -113,7 +115,7 @@ func _physics_process(_delta):
 		get_input()
 		$Label.text = str(position)
 		velocity = move_and_slide(velocity)
-		get_parent().get_parent().get_parent().get_node("UI2/bars/health/bg/bar_health").value = health
+		get_node("/root/world/UI2/bars/health/bg/bar_health").value = health
 		if fliped == false:
 			$armsattack/CollisionShape2D.position.x = 17.478
 			$wooden_exe/CollisionShape2D.position.x = 17.478
@@ -139,13 +141,13 @@ func get_input():
 	velocity = Vector2()
 	if Input.is_action_just_released("scrolling_up") and isattacking == false and opened == false  and died == false and eating == false:
 		if invenory_slot != "3":
-			var inv = get_parent().get_parent().get_parent().get_node("UI2/hand_slots")
+			var inv = get_node("/root/world/UI2/hand_slots")
 			var i = int(invenory_slot)
 			i += 1
 			inv.select(str("slot",i))
 			invenory_slot = str(i)
 		else:
-			var inv = get_parent().get_parent().get_parent().get_node("UI2/hand_slots")
+			var inv = get_node("/root/world/UI2/hand_slots")
 			var i = int(invenory_slot)
 			i = 1
 			inv.select(str("slot",i))
@@ -153,13 +155,13 @@ func get_input():
 	elif Input.is_action_just_released("scrolling_down") and isattacking == false and opened == false  and died == false and eating == false:
 		
 		if invenory_slot != "1":
-			var inv = get_parent().get_parent().get_parent().get_node("UI2/hand_slots")
+			var inv = get_node("/root/world/UI2/hand_slots")
 			var i = int(invenory_slot)
 			i -= 1
 			inv.select(str("slot",i))
 			invenory_slot = str(i)
 		else:
-			var inv = get_parent().get_parent().get_parent().get_node("UI2/hand_slots")
+			var inv = get_node("/root/world/UI2/hand_slots")
 			var i = int(invenory_slot)
 			i = 3
 			inv.select(str("slot",i))
@@ -167,15 +169,15 @@ func get_input():
 	if Input.is_action_just_pressed("open")  and died == false:
 		$body/CollisionShape2D2.disabled = false
 	if Input.is_action_just_pressed("inv1") and isattacking == false and opened == false  and died == false and eating == false:
-		var inv = get_parent().get_parent().get_parent().get_node("UI2/hand_slots")
+		var inv = get_parent().get_node("/root/world/UI2/hand_slots")
 		inv.select("slot1")
 		invenory_slot = "1"
 	elif Input.is_action_just_pressed("inv2") and isattacking == false and opened == false and died == false  and eating == false:
-		var inv = get_parent().get_parent().get_parent().get_node("UI2/hand_slots")
+		var inv = get_node("/root/world/UI2/hand_slots")
 		inv.select("slot2")
 		invenory_slot = "2"
 	elif Input.is_action_just_pressed("inv3") and isattacking == false and opened == false and died == false  and eating == false:
-		var inv = get_parent().get_parent().get_parent().get_node("UI2/hand_slots")
+		var inv = get_node("/root/world/UI2/hand_slots")
 		inv.select("slot3")
 		invenory_slot = "3"
 	if Input.is_action_pressed("player_right") and isattacking == false and opened == false and died == false  and eating == false:
@@ -240,7 +242,7 @@ func inventory():
 				var inventory1 = get_parent().get_parent().get_parent().get_node("UI2/inventory")
 				inventory1.place("slot3")
 	else:
-		var block = get_parent().get_parent().get_parent().get_node("TileMap")
+		var block = get_node("/root/world/TileMap")
 		block.visible = false
 	if arm != "arm" and JsonData.item_data[arm]["ItemCategory"] == "build" and JsonData.item_data[arm]["layer"] == 0:
 		var block = get_parent().get_parent().get_node("b/TileMap")

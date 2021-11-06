@@ -31,28 +31,28 @@ func _ready():
 			number =  i
 		if cords[i] == position.y:
 			number2 = i
-	if get_parent().get_parent().get_parent().get_node("TileMap").rotare == "up":
+	if get_node("/root/world/TileMap").rotare == "up":
 		$AnimatedSprite.texture = up
 		$AnimatedSprite.position.y = 0
 		$AnimatedSprite.position.x = 0
 		$AnimatedSprite/up.visible = true
 		$StaticBody2D/up.disabled = false
 		rotare = "up"
-	elif get_parent().get_parent().get_parent().get_node("TileMap").rotare == "right":
+	elif get_node("/root/world/TileMap").rotare == "right":
 		$AnimatedSprite.texture = rotared
 		$AnimatedSprite/right.visible = true
 		$StaticBody2D/right.disabled = false
 		$AnimatedSprite.position.y = 41.037
 		$AnimatedSprite.position.x = 0
 		rotare = "right"
-	elif get_parent().get_parent().get_parent().get_node("TileMap").rotare == "left":
+	elif get_node("/root/world/TileMap").rotare == "left":
 		$AnimatedSprite.texture = rotared
 		$AnimatedSprite/left.visible = true
 		$StaticBody2D/left.disabled = false
 		$AnimatedSprite.position.y = 41.037
 		$AnimatedSprite.position.x = 237.775
 		rotare = "left"
-	elif get_parent().get_parent().get_parent().get_node("TileMap").rotare == "down":
+	elif get_node("/root/world/TileMap").rotare == "down":
 		$AnimatedSprite.texture = up
 		$AnimatedSprite/up.visible = true
 		$StaticBody2D/down.disabled = false

@@ -37,8 +37,12 @@ func _ready():
 		var save_path5 = SAVE_DIR + i + "/world_data.json"
 		var error = file.open_encrypted_with_pass(save_path5, File.READ, "P@paB3ar6969")
 		var text = file.get_as_text()
+		
 		file.close()
 		var save_data3 = parse_json(text)
+		if save_data3 == null|| save_data3.has("creation_date") == false|| save_data3["creation_date"].size() == 0|| save_data3.has("last_join") == false || save_data3["last_join"].size() == 0:
+			$VBoxContainer/HBoxContainer2/container/VBoxContainer.add_child(world_file_instance)
+			continue
 		world_file_instance.get_node("icon/date").text = str("%02d" % save_data3["creation_date"]["day"] ,".","%02d" % save_data3["creation_date"]["month"],".",save_data3["creation_date"]["year"] ,"\n", save_data3["creation_date"]["hour"],":","%02d" % save_data3["creation_date"]["minute"] )
 		world_file_instance.get_node("icon/box1/box2/MarginContainer/VBoxContainer/last_join").text = str("Last Join: ","%02d" % save_data3["last_join"]["day"] ,".", "%02d" %save_data3["last_join"]["month"],".",save_data3["last_join"]["year"] ,"\n", save_data3["last_join"]["hour"],":","%02d" % save_data3["last_join"]["minute"] )
 		$VBoxContainer/HBoxContainer2/container/VBoxContainer.add_child(world_file_instance)
@@ -51,6 +55,17 @@ func _on_create_pressed():
 
 func _on_join_pressed():
 	if selected != null:
+		var file = File.new()
+		#var error = file.open(save_path, File.READ)
+		var save_path5 = SAVE_DIR + selected + "/world_data.json"
+		var error = file.open_encrypted_with_pass(save_path5, File.READ, "P@paB3ar6969")
+		var text = file.get_as_text()
+		
+		file.close()
+		var save_data3 = parse_json(text)
+		if save_data3 == null|| save_data3.has("creation_date") == false|| save_data3["creation_date"].size() == 0|| save_data3.has("last_join") == false || save_data3["last_join"].size() == 0:
+			WorldData.world_date_is_required = true
+		
 		WorldData.new = false
 		WorldData.world_path = get_node(str("VBoxContainer/HBoxContainer2/container/VBoxContainer/",selected)).directory
 		WorldData.world_name = get_node(str("VBoxContainer/HBoxContainer2/container/VBoxContainer/",selected,"/icon/name")).text

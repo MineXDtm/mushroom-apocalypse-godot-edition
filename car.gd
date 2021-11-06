@@ -16,7 +16,7 @@ func _physics_process(_delta):
 	var size = get_viewport_rect().size / canvas.get_scale()
 	positionate_arrow(Rect2(top_left,size))
 	rotare()
-	get_parent().get_parent().get_parent().get_node("UI2/bars/car/bg/bar_health").value = health
+	get_node("/root/world/UI2/bars/car/bg/bar_health").value = health
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

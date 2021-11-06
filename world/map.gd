@@ -117,6 +117,7 @@ func _process(delta):
 		else:
 			$CanvasModulate/AnimationPlayer.play_backwards("darkens")
 func _ready():
+	
 	set_name("map")
 	load_menu.visible = true
 	Console.add_command('time', self, 'settime')\
@@ -171,7 +172,10 @@ func _ready():
 		load_menu.get_node("Label").text = "loading virables.."
 		load_menu.get_node("ProgressBar").value += 1
 		load_virables()
-		update_date()
+		if WorldData.world_date_is_required == true:
+			save_date()
+		else:
+			update_date()
 		yield(get_tree().create_timer(0.01), "timeout")
 		yield(get_tree(), 'idle_frame')
 		load_menu.get_node("Label").text = "loading chunks.."
@@ -277,7 +281,7 @@ func _on_time_timeout():
 	
 	if time == "day" :
 		time = "night"
-		get_parent().get_node("UI2/bg/ViewportContainer/Viewport/CLockBar").set_clock(1)
+		get_node("/root/world/UI2/bg/ViewportContainer/Viewport/CLockBar").set_clock(1)
 		$CanvasModulate/AnimationPlayer.play("night")
 		
 	else:
@@ -368,7 +372,7 @@ func change_biome():
 	discord_rpc.small_icon_desc = "Game Icon"
 	discord_rpc.UpdatePresence()
 func _on_time_move_timeout():
-	get_parent().get_node("UI2/bg/ViewportContainer/Viewport/CLockBar").next_step()
+	get_node("/root/world/UI2/bg/ViewportContainer/Viewport/CLockBar").next_step()
 #	get_parent().get_node("UI2/bg/ScrollContainer").scroll_horizontal += 1
 func save_chunks():
 	var world = $sort.get_children()
@@ -594,7 +598,7 @@ func load_chunks():
 				enemy.get_node("ProgressBar").visible = true
 				enemy.get_node("ProgressBar").value = int(save_data[i]["health"])
 			enemy.health = int(save_data[i]["health"])
-			get_parent().get_node("TileMap").rotare = save_data[i]["rotare"]
+			get_node("/root/world/TileMap").rotare = save_data[i]["rotare"]
 			enemy.name = save_data[i]["name"]
 			get_node("sort").add_child(enemy)
 		if save_data[i]["type"] == "door":
@@ -666,7 +670,7 @@ func load_chunks():
 			enemy.health = int(save_data[i]["health"])
 			enemy.name = save_data[i]["name"]
 			get_node("sort").add_child(enemy)
-	get_parent().get_node("TileMap").rotare = "up"
+	get_node("/root/world/TileMap").rotare = "up"
 
 func save_virables():
 	save_path2 = SAVE_DIR + WorldData.world_name
@@ -749,7 +753,7 @@ func _on_save_timeout():
 	save_player(get_node("sort/player"))
 
 func _on_screen_shot_icon_timeout():
-	var img = get_tree().get_root().get_texture().get_data()
+	var img = get_viewport().get_texture().get_data()
 	img.flip_y()
 	img.save_png(SAVE_DIR + WorldData.world_name + "/icon.png")
 func save_player(player):
@@ -779,7 +783,7 @@ func load_car():
 	file.close()
 	var save_data3 = parse_json(text)
 	get_node("sort/car").health = int(save_data3["health"])
-	get_parent().get_node("UI2/bars/car/bg/bar_health").value = int(save_data3["health"])
+	get_node("/root/world/UI2/bars/car/bg/bar_health").value = int(save_data3["health"])
 func load_players():
 	var file = File.new()
 	#var error = file.open(save_path, File.READ)
@@ -791,17 +795,17 @@ func load_players():
 	get_node("sort/player").position.x = int(save_data3["position_x"])
 	get_node("sort/player").position.y = int(save_data3["position_y"])
 	get_node("sort/player").health = int(save_data3["health"])
-	get_parent().get_node("UI2/bars/health/bg/bar_health").value = int(save_data3["health"])
+	get_node("/root/world/UI2/bars/health/bg/bar_health").value = int(save_data3["health"])
 	for ii in save_data3["inv"]:
 		PlayerInventory.inventory[int(ii)] = [save_data3["inv"][ii][0],int(save_data3["inv"][ii][1])]
 	for ii in save_data3["inv1"]:
 		PlayerInventory.inventory1[int(ii)] = [save_data3["inv1"][ii][0],int(save_data3["inv1"][ii][1])]
 func screen_shot_save():
-	var img = get_tree().get_root().get_texture().get_data()
+	var img = get_parent().get_node("Viewport").get_texture().get_data()
 	img.flip_y()
 	img.save_png(SAVE_DIR + WorldData.world_name + "/icon.png")
 func _on_new_screen_shot_timeout():
-	var img = get_tree().get_root().get_texture().get_data()
+	var img = get_viewport().get_texture().get_data()
 	img.flip_y()
 	img.save_png(SAVE_DIR + WorldData.world_name + "/icon.png")
 func pre_save():
@@ -817,14 +821,14 @@ func load_virables():
 	time = save_data2["time"]
 	for i in save_data2["getted"].keys():
 		for ii in save_data2["getted"][i].size():
-			get_parent().get_node("UI2/Control/ViewportContainer/Viewport/map").getted[int(i)][ii -1] = int(save_data2["getted"][i][ii -1])
+			get_node("/root/world/UI2/Control/ViewportContainer/Viewport/map").getted[int(i)][ii -1] = int(save_data2["getted"][i][ii -1])
 	for i in save_data2["completed"].keys():
-		get_parent().get_node("UI2/Control/ViewportContainer/Viewport/map").completed[int(i)] =save_data2["completed"][i]
+		get_node("/root/world/UI2/Control/ViewportContainer/Viewport/map").completed[int(i)] =save_data2["completed"][i]
 	if time == "night":
-		get_parent().get_node("UI2/bg/ViewportContainer/Viewport/CLockBar").set_clock(1)
+		get_node("/root/world/UI2/bg/ViewportContainer/Viewport/CLockBar").set_clock(1)
 		$CanvasModulate.color = Color(0.513726, 0.301961, 0.623529)
 	$time.wait_time = save_data2["timer_max_time"]
-	get_parent().get_node("UI2/bg/ViewportContainer/Viewport/CLockBar").get_node("CanvasLayer/clock").rect_position.x = save_data2["clock"]
+	get_node("/root/world/UI2/bg/ViewportContainer/Viewport/CLockBar").get_node("CanvasLayer/clock").rect_position.x = save_data2["clock"]
 	load_time(save_data2["time_left"])
 	WorldData.world_type = save_data2["type"]
 

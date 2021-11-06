@@ -121,6 +121,7 @@ func find_commands(name):
 # @param    String|null  target_name
 # @returns  Command/CommandBuilder
 func add_command(name, target, target_name = null):
+	if Console.get_command(name) != null: Console.remove_command(name)
 	emit_signal("command_added", name, target, target_name)
 	return self._command_service.create(name, target, target_name)
 

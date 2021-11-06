@@ -25,7 +25,12 @@ func _on_screen_size_item_selected(index):
 		 OS.set_window_size(Vector2(1280, 720))
 	elif index == 3:
 		 OS.set_window_size(Vector2(800, 600))
-
+func _ready():
+	$HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/fullscreen.pressed = OS.window_fullscreen
+	if gamesettings.shadow_mode == "low":
+		$HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/shadow_mode.selected = 0
+	else:
+		$HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/shadow_mode.selected = 1
 
 func _on_exit_button_down():
 	get_parent().get_parent().get_parent().get_node("map").update_chunks()
@@ -33,14 +38,13 @@ func _on_exit_button_down():
 	get_parent().get_parent().get_parent().get_node("map").save_chunksinlayer0()
 	get_tree().change_scene("res://menu.tscn")
 	
+	
 func _on_fullscreen_pressed():
 	if OS.window_fullscreen == false:
 		OS.window_fullscreen = true
-		$HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/Label.text = "on"
 		$HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/screen_size.disabled = true
 	else:
 		OS.window_fullscreen = false
-		$HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/Label.text = "off"
 		$HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/screen_size.disabled = false
 
 

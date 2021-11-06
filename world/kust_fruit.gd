@@ -118,7 +118,6 @@ func _on_kust_area_entered(area):
 		$ProgressBar.value = health
 		if health <= 0 :
 			$ProgressBar.visible = false
-			$AnimatedSprite.play("broked")
 			print("broked")
 			broked = true
 	if broked == true :

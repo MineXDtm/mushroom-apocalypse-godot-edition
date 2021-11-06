@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://textures/menu_craft/button_menu1_off.png" type="Texture" id=1]
 [ext_resource path="res://textures/menu_craft/button_menu2_off.png" type="Texture" id=2]
@@ -12,28 +12,23 @@
 [ext_resource path="res://textures/menu_craft/button_menu3_off.png" type="Texture" id=23]
 [ext_resource path="res://textures/menu_craft/button_menu3_on_mause.png" type="Texture" id=24]
 [ext_resource path="res://textures/menu_craft/button_menu3_clicked.png" type="Texture" id=25]
-[ext_resource path="res://menu_button.gd" type="Script" id=26]
-[ext_resource path="res://menu_button2.gd" type="Script" id=27]
-[ext_resource path="res://menu_button3.gd" type="Script" id=28]
 [ext_resource path="res://menubuild.gd" type="Script" id=32]
 [ext_resource path="res://textures/menu_craft/button_menu2.png" type="Texture" id=33]
 [ext_resource path="res://textures/menu_craft/button_menu5_clicked.png" type="Texture" id=53]
 [ext_resource path="res://textures/menu_craft/button_menu5.png" type="Texture" id=54]
 [ext_resource path="res://textures/menu_craft/button_menu5_mouse.png" type="Texture" id=55]
 [ext_resource path="res://textures/menu_craft/button_menu5_off.png" type="Texture" id=58]
-[ext_resource path="res://menu_button5.gd" type="Script" id=59]
 [ext_resource path="res://textures/menu_craft/button_menu6_clicked.png" type="Texture" id=71]
 [ext_resource path="res://textures/menu_craft/button_menu6_off.png" type="Texture" id=72]
 [ext_resource path="res://textures/menu_craft/button_menu6_mouse.png" type="Texture" id=73]
 [ext_resource path="res://textures/menu_craft/button_menu6.png" type="Texture" id=74]
-[ext_resource path="res://menu_button6.gd" type="Script" id=75]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.533333, 0.337255, 0.105882, 1 )
 
 [sub_resource type="StyleBoxFlat" id=2]
 draw_center = false
-border_width_right = 3
+border_width_right = 15
 border_color = Color( 0.807843, 0.619608, 0.392157, 1 )
 
 [sub_resource type="Theme" id=3]
@@ -47,191 +42,132 @@ VScrollBar/styles/grabber_pressed = SubResource( 1 )
 VScrollBar/styles/scroll = SubResource( 2 )
 VScrollBar/styles/scroll_focus = null
 
-[node name="menu" type="Sprite"]
-position = Vector2( 160.812, 91.1558 )
-scale = Vector2( 2, 2 )
+[node name="menu" type="TextureRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -119.0
+margin_top = -125.0
+margin_right = 120.0
+margin_bottom = 125.0
 texture = ExtResource( 12 )
+expand = true
 script = ExtResource( 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="menu_button" type="TextureButton" parent="."]
-anchor_left = 2.72478e-07
-anchor_top = 0.0174005
-anchor_right = 3.02754e-07
-anchor_bottom = 0.0174005
-margin_left = -25.974
-margin_top = -21.2907
-margin_right = 58.026
-margin_bottom = 0.709345
-rect_scale = Vector2( 0.2, 0.2 )
+[node name="GridContainer" type="GridContainer" parent="."]
+anchor_left = 0.00209205
+anchor_top = 0.124
+anchor_right = 0.902092
+anchor_bottom = 0.124
+margin_left = 22.5
+margin_top = -1.90735e-06
+margin_right = -1.59999
+margin_bottom = 32.0
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
+columns = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="drops" type="TextureButton" parent="GridContainer"]
+margin_right = 63.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 54 )
+texture_pressed = ExtResource( 53 )
+texture_hover = ExtResource( 55 )
+texture_disabled = ExtResource( 58 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="mechanisms" type="TextureButton" parent="GridContainer"]
+margin_left = 63.0
+margin_right = 126.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 74 )
+texture_pressed = ExtResource( 71 )
+texture_hover = ExtResource( 73 )
+texture_disabled = ExtResource( 72 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="farm" type="TextureButton" parent="GridContainer"]
+margin_left = 126.0
+margin_right = 189.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 33 )
+texture_pressed = ExtResource( 16 )
+texture_hover = ExtResource( 19 )
+texture_disabled = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="builds" type="TextureButton" parent="GridContainer"]
+margin_top = 16.0
+margin_right = 63.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 22 )
+texture_pressed = ExtResource( 25 )
+texture_hover = ExtResource( 24 )
+texture_disabled = ExtResource( 23 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="instrements" type="TextureButton" parent="GridContainer"]
+margin_left = 63.0
+margin_top = 16.0
+margin_right = 126.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 keep_pressed_outside = true
 texture_normal = ExtResource( 21 )
 texture_pressed = ExtResource( 3 )
 texture_hover = ExtResource( 10 )
 texture_disabled = ExtResource( 1 )
-script = ExtResource( 26 )
+expand = true
+stretch_mode = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="menu_button2" type="TextureButton" parent="."]
-anchor_left = 2.72478e-07
-anchor_top = 0.0174005
-anchor_right = 3.02754e-07
-anchor_bottom = 0.0174005
-margin_left = -8.79433
-margin_top = -21.4103
-margin_right = 75.2057
-margin_bottom = 0.589747
-rect_scale = Vector2( 0.2, 0.2 )
-texture_normal = ExtResource( 33 )
-texture_pressed = ExtResource( 16 )
-texture_hover = ExtResource( 19 )
-texture_disabled = ExtResource( 2 )
-script = ExtResource( 27 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="menu_button3" type="TextureButton" parent="."]
-anchor_left = 2.72478e-07
-anchor_top = 0.0174005
-anchor_right = 3.02754e-07
-anchor_bottom = 0.0174005
-margin_left = 8.01817
-margin_top = -21.2853
-margin_right = 92.0182
-margin_bottom = 0.714747
-rect_scale = Vector2( 0.2, 0.2 )
-texture_normal = ExtResource( 22 )
-texture_pressed = ExtResource( 25 )
-texture_hover = ExtResource( 24 )
-texture_disabled = ExtResource( 23 )
-script = ExtResource( 28 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="menu_button5" type="TextureButton" parent="."]
-anchor_left = 2.72478e-07
-anchor_top = 0.0174005
-anchor_right = 3.02754e-07
-anchor_bottom = 0.0174005
-margin_left = -9.40599
-margin_top = -24.6915
-margin_right = 74.594
-margin_bottom = -2.69148
-rect_scale = Vector2( 0.2, 0.2 )
-texture_normal = ExtResource( 54 )
-texture_pressed = ExtResource( 53 )
-texture_hover = ExtResource( 55 )
-texture_disabled = ExtResource( 58 )
-script = ExtResource( 59 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="menu_button6" type="TextureButton" parent="."]
-anchor_left = 2.72478e-07
-anchor_top = 0.0174005
-anchor_right = 3.02754e-07
-anchor_bottom = 0.0174005
-margin_left = 8.09401
-margin_top = -25.1915
-margin_right = 92.094
-margin_bottom = -1.19153
-rect_scale = Vector2( 0.2, 0.2 )
-texture_normal = ExtResource( 74 )
-texture_pressed = ExtResource( 71 )
-texture_hover = ExtResource( 73 )
-texture_disabled = ExtResource( 72 )
-script = ExtResource( 75 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="instruments" type="ScrollContainer" parent="."]
-margin_left = -26.0
-margin_top = -13.0
-margin_right = 32.0
-margin_bottom = 25.0
+[node name="crafts" type="ScrollContainer" parent="."]
+anchor_left = 0.0920502
+anchor_top = 0.296
+anchor_right = 1.03347
+anchor_bottom = 0.884
 theme = SubResource( 3 )
 follow_focus = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="instruments"]
-custom_constants/separation = 13
+[node name="VBoxContainer" type="VBoxContainer" parent="crafts"]
+custom_constants/separation = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="farm" type="ScrollContainer" parent="."]
-margin_left = -25.906
-margin_top = -12.5779
-margin_right = 45.094
-margin_bottom = 25.4221
-follow_focus = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="farm"]
-custom_constants/separation = 13
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="builds" type="ScrollContainer" parent="."]
-margin_left = -25.906
-margin_top = -12.5779
-margin_right = 45.094
-margin_bottom = 25.4221
-follow_focus = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="builds"]
-custom_constants/separation = 13
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="drops" type="ScrollContainer" parent="."]
-margin_left = -25.906
-margin_top = -12.5779
-margin_right = 45.094
-margin_bottom = 25.4221
-follow_focus = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="drops"]
-custom_constants/separation = 13
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="mechanisms" type="ScrollContainer" parent="."]
-margin_left = -26.0
-margin_top = -13.0
-margin_right = 45.0
-margin_bottom = 25.0
-follow_focus = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="mechanisms"]
-custom_constants/separation = 13
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[connection signal="pressed" from="menu_button" to="menu_button" method="_on_menu_button_pressed"]
-[connection signal="pressed" from="menu_button2" to="menu_button2" method="_on_menu_button2_pressed"]
-[connection signal="pressed" from="menu_button3" to="menu_button3" method="_on_menu_button3_pressed"]
-[connection signal="pressed" from="menu_button5" to="menu_button5" method="_on_menu_button3_pressed"]
-[connection signal="pressed" from="menu_button6" to="menu_button6" method="_on_menu_button3_pressed"]
