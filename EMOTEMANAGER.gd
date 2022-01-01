@@ -2,13 +2,13 @@ extends Node
 
 
 
-func _got_animation(result, response_code, headers, body:PoolByteArray,player,animname):
+func _got_animation(result, response_code, headers, body:PoolByteArray,player,animname,file):
 	if player != null:
 		var f = File.new()
-		f.open("res://Emotes/shopload.tres",File.WRITE)
+		f.open("res://Emotes/"+file+".tres",File.WRITE)
 		f.store_buffer(body)
 		f.close()
-		player.add_animation(animname,load("res://Emotes/shopload.tres"))
+		player.add_animation(animname,load("res://Emotes/"+file+".tres"))
 		
 		player.play(animname)
 func loademote(anim,player):

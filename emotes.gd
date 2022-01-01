@@ -11,7 +11,7 @@ func _ready():
 		
 		b.connect("mouse_entered",self,"hover_emote",[i])
 		if emoteslist.size() < int(i.name) +1:
-			
+			i.get_node("CenterContainer").visible = false
 			continue
 		
 		var a = i.get_node("CenterContainer/TextureRect/Viewport/playerview/player") as AnimationPlayer
