@@ -126,11 +126,11 @@ public class Discord : Node
 	}
 	String details = "In Main Menu";
 	long startTimestamp = Convert.ToInt64(Timestamps.FromTimeSpan(10).StartUnixMilliseconds);
-	String icon = "icon";
-	String icon_desc = "Game icon";
-	String small_icon = "";
-	
-	String small_icon_desc = "";
+	public String icon = "icon";
+	public String icon_desc = "Game icon";
+	public String small_icon = "";
+	public String nickname = "";
+	public String small_icon_desc = "";
 	// TODO: This must be run manually. IDK if you can put this in Process without lagging
 	public void UpdatePresence()
 	{
@@ -139,7 +139,7 @@ public class Discord : Node
 		presence.details = details;
 		
 		presence.startTimestamp = startTimestamp;
-		presence.state = "Alpha Test";
+		presence.state = "Nickname: "+ nickname;
 		presence.largeImageKey = icon;
 		presence.largeImageText = icon_desc;
 		presence.smallImageKey = small_icon;

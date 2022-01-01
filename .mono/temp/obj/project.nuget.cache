@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "6h1o61rBB4q6zYivu4SrJV9YWvcpy0opkmG7ryc93/iQhWGfaulxrSIrADz9LjohXRNBU6cwvUvv69KiKb/O+w==",
+  "dgSpecHash": "00+PJT3dgmFH7TdhXZTZSzqQq2CSVKdHgaQzRvvS81IeGeFEzvng7e3B7HBl0kjJr6zs5/LsR0XTaSDS1pS0Pw==",
   "success": true,
   "projectFilePath": "C:\\Users\\andrey\\OneDrive\\Документы\\GitHub\\mushroom-apocalypse\\mushroom apocalypse.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\andrey\\.nuget\\packages\\discordrichpresence\\1.0.175\\discordrichpresence.1.0.175.nupkg.sha512",
+    "C:\\Users\\andrey\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
     "C:\\Users\\andrey\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\andrey\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\andrey\\.nuget\\packages\\system.security.accesscontrol\\5.0.0\\system.security.accesscontrol.5.0.0.nupkg.sha512",

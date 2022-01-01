@@ -12,13 +12,13 @@ polygon = PoolVector2Array( 239.343, -1.19724, -236.208, -1.19724, -237.775, -82
 polygon = PoolVector2Array( -0.104491, -24.2752, -15.9562, -24.2752, -15.9562, 23.7525, -0.104491, 23.7525 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 143.047, 46.1662 )
+extents = Vector2( 16, 9.5 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 237.775, 82.0732 )
+extents = Vector2( 16, 16 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 222.914, 15.3887 )
+extents = Vector2( 16, 2 )
 
 [sub_resource type="CanvasItemMaterial" id=6]
 light_mode = 1
@@ -26,12 +26,8 @@ light_mode = 1
 [sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0.380392, 0.670588, 0.180392, 1 )
 
-[node name="block_beta" type="Area2D" groups=[
-"block",
-"kust",
-]]
+[node name="block_beta" type="Area2D" groups=["block", "kust"]]
 position = Vector2( 0, -1 )
-scale = Vector2( -0.0672904, 0.194948 )
 collision_layer = 7
 script = ExtResource( 2 )
 __meta__ = {
@@ -43,7 +39,7 @@ rotared = ExtResource( 7 )
 
 [node name="AnimatedSprite" type="Sprite" parent="."]
 light_mask = 2
-scale = Vector2( 15, 5.23342 )
+position = Vector2( 0, -1.19209e-07 )
 texture = ExtResource( 8 )
 
 [node name="up" type="LightOccluder2D" parent="AnimatedSprite"]
@@ -54,6 +50,7 @@ occluder = SubResource( 1 )
 
 [node name="right" type="LightOccluder2D" parent="AnimatedSprite"]
 visible = false
+position = Vector2( 16, 1.19209e-07 )
 occluder = SubResource( 2 )
 
 [node name="left" type="LightOccluder2D" parent="AnimatedSprite"]
@@ -66,9 +63,8 @@ __meta__ = {
 }
 
 [node name="right" type="CollisionPolygon2D" parent="StaticBody2D"]
-visible = false
 position = Vector2( 0, 41.0366 )
-polygon = PoolVector2Array( 0, 117.98, -237.775, 117.98, -237.775, -46.1662, 0, -46.1662, 0, -5.12957 )
+polygon = PoolVector2Array( 0, -24.0366, -16, -24.0366, -16, -57.0366, 0, -57.0366 )
 disabled = true
 __meta__ = {
 "_edit_lock_": true
@@ -76,34 +72,31 @@ __meta__ = {
 
 [node name="left" type="CollisionPolygon2D" parent="StaticBody2D"]
 position = Vector2( 237.775, 41.0366 )
-polygon = PoolVector2Array( 0.000366211, 117.98, -237.775, 117.98, -237.775, 83.5647, -237.775, -46.1662, 0.000366211, -46.1662, 0, -5.12957 )
+polygon = PoolVector2Array( -221.775, -24.0366, -237.775, -24.0366, -237.775, -56.0366, -221.775, -56.0366 )
 disabled = true
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="up" type="CollisionPolygon2D" parent="StaticBody2D"]
-visible = false
-polygon = PoolVector2Array( 237.775, 61.5549, 237.775, -25.6479, -237.775, -25.6479, -237.775, 61.5549 )
+polygon = PoolVector2Array( 16, 9, 16, -7, -16, -7, -16, 9 )
 disabled = true
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="down" type="CollisionPolygon2D" parent="StaticBody2D"]
-visible = false
-polygon = PoolVector2Array( 237.775, 143.628, -237.775, 143.628, -237.775, 51.2957, 237.775, 51.2957 )
+polygon = PoolVector2Array( 16, 17, -16, 17, -16, 33, 16, 33 )
 disabled = true
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 2.5 )
 shape = SubResource( 3 )
 
-[node name="block_area" type="Area2D" parent="." groups=[
-"block_area",
-]]
+[node name="block_area" type="Area2D" parent="." groups=["block_area"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="block_area"]
 shape = SubResource( 4 )
@@ -111,20 +104,20 @@ shape = SubResource( 4 )
 [node name="block2" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="block2"]
-position = Vector2( 0, 76.9436 )
+position = Vector2( 0, 13 )
 shape = SubResource( 5 )
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 visible = false
 material = SubResource( 6 )
-margin_left = -186.93
-margin_top = -90.1617
-margin_right = 188.07
-margin_bottom = -69.1617
-custom_styles/fg = SubResource( 7 )
-custom_styles/bg = ExtResource( 3 )
+margin_left = -15.0
+margin_top = -17.0
+margin_right = 15.0
+margin_bottom = -13.0
 custom_colors/font_color = Color( 0.431373, 1, 0, 1 )
 custom_colors/font_color_shadow = Color( 0.313726, 1, 0, 1 )
+custom_styles/fg = SubResource( 7 )
+custom_styles/bg = ExtResource( 3 )
 max_value = 10.0
 value = 10.0
 percent_visible = false

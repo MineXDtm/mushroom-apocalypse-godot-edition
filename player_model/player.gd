@@ -46,34 +46,34 @@ func _process(_delta):
 		cd = false
 	if invenory_slot == "1" and isattacking == false:
 		if PlayerInventory.inventory1.has(0):
-			$Node2D/arm1/item.visible = true
-			$Node2D/arm1/item.texture = load("res://textures/items/" + PlayerInventory.inventory1[0][0] + ".png")
+			$model/arm1/item.visible = true
+			$model/arm1/item.texture = load("res://textures/items/" + PlayerInventory.inventory1[0][0] + ".png")
 			arm = PlayerInventory.inventory1[0][0]
 		elif isattacking == false:
 			arm = "arm"
-			$Node2D/arm1/item.visible = false
+			$model/arm1/item.visible = false
 	elif isattacking == false:
 		var inv =get_node("/root/world/UI2/hand_slots")
 		inv.unselect("slot1")
 	if invenory_slot == "2" and isattacking == false:
 		if PlayerInventory.inventory1.has(1): 
-			$Node2D/arm1/item.visible = true
-			$Node2D/arm1/item.texture = load("res://textures/items/" + PlayerInventory.inventory1[1][0] + ".png")
+			$model/arm1/item.visible = true
+			$model/arm1/item.texture = load("res://textures/items/" + PlayerInventory.inventory1[1][0] + ".png")
 			arm = PlayerInventory.inventory1[1][0]
 		elif isattacking == false:
 			arm = "arm"
-			$Node2D/arm1/item.visible = false
+			$model/arm1/item.visible = false
 	elif isattacking == false:
 		var inv = get_node("/root/world/UI2/hand_slots")
 		inv.unselect("slot2")
 	if invenory_slot == "3" and isattacking == false:
 		if PlayerInventory.inventory1.has(2): 
-			$Node2D/arm1/item.visible = true
-			$Node2D/arm1/item.texture = load("res://textures/items/" + PlayerInventory.inventory1[2][0] + ".png")
+			$model/arm1/item.visible = true
+			$model/arm1/item.texture = load("res://textures/items/" + PlayerInventory.inventory1[2][0] + ".png")
 			arm = PlayerInventory.inventory1[2][0]
 		elif isattacking == false:
 			arm = "arm"
-			$Node2D/arm1/item.visible = false
+			$model/arm1/item.visible = false
 	elif isattacking == false:
 		var inv = get_node("/root/world/UI2/hand_slots")
 		inv.unselect("slot3")
@@ -85,8 +85,9 @@ func god(value = true):
 	else:
 		player_god = false
 func _ready():
+	loadskin()
 	if gamesettings.shadow_mode != "low":
-		$Node2D/shadow.visible = false
+		$model/shadow.visible = false
 	gamesettings.connect("change_settings",self,"changed_settings")
 	Console.add_command('god_mode', self, 'god')\
 		.set_description('god mode')\
@@ -108,8 +109,13 @@ func _input(event):
 			inventory_opened = false
 
 onready var player = get_node("player")
-onready var shadow = get_node("Node2D/shadow")
+onready var shadow = get_node("model/shadow")
 var in_menu = false
+func loadskin():
+	for i in get_node("model").get_children():
+		if i.name == "shadow":continue
+		i.texture.set_atlas(SkinManager.skin)
+		
 func _physics_process(_delta):
 	if in_console == false and in_menu == false:
 		get_input()
@@ -125,13 +131,13 @@ func _physics_process(_delta):
 		else:
 			if arm != "arm":
 				if JsonData.item_data[arm]["ItemCategory"] == "instrument":
-					$Node2D/arm1/item.rect_position.x = -8
-					$Node2D/arm1/item.rect_position.y = -3.5
-					$Node2D/arm1/item.rect_rotation = -45
+					$model/arm1/item.rect_position.x = -8
+					$model/arm1/item.rect_position.y = -3.5
+					$model/arm1/item.rect_rotation = -45
 				else:
-					$Node2D/arm1/item.rect_rotation = 0
-					$Node2D/arm1/item.rect_position.x = -7
-					$Node2D/arm1/item.rect_position.y = -8
+					$model/arm1/item.rect_rotation = 0
+					$model/arm1/item.rect_position.x = -7
+					$model/arm1/item.rect_position.y = -8
 			$armsattack/CollisionShape2D.position.x = -17.478
 			$wooden_exe/CollisionShape2D.position.x = -17.478
 			$wooden_pickaxe/CollisionShape2D.position.x = -17.478
@@ -295,9 +301,9 @@ func animate():
 	if eating == true:
 		anim = "eating"
 	if fliped == false:
-		$Node2D.scale.x = -1
+		$model.scale.x = -1
 	else:
-		$Node2D.scale.x = 1
+		$model.scale.x = 1
 	if $player.current_animation != anim:
 		$player.play(anim)
 
@@ -343,7 +349,7 @@ func _on_Timer3_timeout():
 func _on_player_animation_finished(_anim_name):
 	var animations = ["attack","attack_2"]
 	if fliped == false:
-		$Node2D.scale.x = -1
+		$model.scale.x = -1
 	if arm == "arm":
 		isattacking = false
 		$armsattack/CollisionShape2D.disabled = true

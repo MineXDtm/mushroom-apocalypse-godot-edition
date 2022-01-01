@@ -10,13 +10,11 @@ light_mode = 1
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.380392, 0.670588, 0.180392, 1 )
 
-[node name="stone" type="Area2D" groups=[
-"stone",
-]]
+[node name="stone" type="Area2D" groups=["stone"]]
 visible = false
+collision_layer = 3
 gravity_vec = Vector2( 0, 0 )
 gravity = 0.0
-collision_layer = 3
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="Sprite" parent="."]
@@ -26,7 +24,7 @@ texture = ExtResource( 1 )
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PoolVector2Array( -16, 16, 14, 16, 14, 10, 11, 5, 11, 0, 1, -6, -3, -6, -7, -5, -16, 10 )
+polygon = PoolVector2Array( -15, 15, 14, 15, 14, 10, 11, 5, 1, -6, -3, -6, -7, -5, -15, 10 )
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 visible = false
@@ -35,10 +33,10 @@ margin_left = -15.0
 margin_top = -13.0
 margin_right = 15.0
 margin_bottom = -9.0
-custom_styles/fg = SubResource( 3 )
-custom_styles/bg = ExtResource( 3 )
 custom_colors/font_color = Color( 0.431373, 1, 0, 1 )
 custom_colors/font_color_shadow = Color( 0.313726, 1, 0, 1 )
+custom_styles/fg = SubResource( 3 )
+custom_styles/bg = ExtResource( 3 )
 max_value = 12.0
 value = 5.0
 percent_visible = false
@@ -51,7 +49,7 @@ position = Vector2( -2.38419e-07, -2.38419e-07 )
 scale = Vector2( 1.6, 1.6 )
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -16, 16, 14, 16, 14, 10, 11, 5, 11, 0, 1, -6, -3, -6, -7, -5, -16, 10 )
+polygon = PoolVector2Array( -15, 15, 14, 15, 14, 10, 11, 5, 1, -6, -3, -6, -7, -5, -15, 10 )
 
 [connection signal="area_entered" from="." to="." method="_on_kust_area_entered"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]

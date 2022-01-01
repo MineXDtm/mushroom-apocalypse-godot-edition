@@ -1,17 +1,4 @@
-C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\bin\Debug\mushroom apocalypse.dll
-C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\bin\Debug\mushroom apocalypse.pdb
-C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\obj\Debug\mushroom apocalypse.csproj.AssemblyReference.cache
-C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\obj\Debug\mushroom apocalypse.AssemblyInfoInputs.cache
-C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\obj\Debug\mushroom apocalypse.AssemblyInfo.cs
-C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\obj\Debug\mushroom apocalypse.csproj.CoreCompileInputs.cache
-C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\obj\Debug\mushroom apocalypse.dll
-C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\obj\Debug\mushroom apocalypse.pdb
-C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\bin\Debug\DiscordRPC.dll
-C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\bin\Debug\Newtonsoft.Json.dll
-C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\obj\Debug\mushroom apocalypse.csproj.CopyComplete
-C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\bin\Debug\Microsoft.Win32.Registry.dll
-C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\bin\Debug\System.Security.AccessControl.dll
-C:\Users\andrey\OneDrive\Рабочий стол\The CUBEZ — копия\.mono\temp\bin\Debug\System.Security.Principal.Windows.dll
+C:\Users\andrey\OneDrive\Документы\GitHub\mushroom-apocalypse\.mono\temp\bin\Debug\mushroom apocalypse.deps.json
 C:\Users\andrey\OneDrive\Документы\GitHub\mushroom-apocalypse\.mono\temp\bin\Debug\mushroom apocalypse.dll
 C:\Users\andrey\OneDrive\Документы\GitHub\mushroom-apocalypse\.mono\temp\bin\Debug\mushroom apocalypse.pdb
 C:\Users\andrey\OneDrive\Документы\GitHub\mushroom-apocalypse\.mono\temp\bin\Debug\DiscordRPC.dll
@@ -19,11 +6,15 @@ C:\Users\andrey\OneDrive\Документы\GitHub\mushroom-apocalypse\.mono\tem
 C:\Users\andrey\OneDrive\Документы\GitHub\mushroom-apocalypse\.mono\temp\bin\Debug\Newtonsoft.Json.dll
 C:\Users\andrey\OneDrive\Документы\GitHub\mushroom-apocalypse\.mono\temp\bin\Debug\System.Security.AccessControl.dll
 C:\Users\andrey\OneDrive\Документы\GitHub\mushroom-apocalypse\.mono\temp\bin\Debug\System.Security.Principal.Windows.dll
+C:\Users\andrey\OneDrive\Документы\GitHub\mushroom-apocalypse\.mono\temp\bin\Debug\runtimes\win\lib\netstandard2.0\Microsoft.Win32.Registry.dll
+C:\Users\andrey\OneDrive\Документы\GitHub\mushroom-apocalypse\.mono\temp\bin\Debug\runtimes\win\lib\netcoreapp2.0\System.Security.AccessControl.dll
+C:\Users\andrey\OneDrive\Документы\GitHub\mushroom-apocalypse\.mono\temp\bin\Debug\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
+C:\Users\andrey\OneDrive\Документы\GitHub\mushroom-apocalypse\.mono\temp\bin\Debug\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 C:\Users\andrey\OneDrive\Документы\GitHub\mushroom-apocalypse\.mono\temp\obj\Debug\mushroom apocalypse.csproj.AssemblyReference.cache
+C:\Users\andrey\OneDrive\Документы\GitHub\mushroom-apocalypse\.mono\temp\obj\Debug\mushroom apocalypse.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\andrey\OneDrive\Документы\GitHub\mushroom-apocalypse\.mono\temp\obj\Debug\mushroom apocalypse.AssemblyInfoInputs.cache
 C:\Users\andrey\OneDrive\Документы\GitHub\mushroom-apocalypse\.mono\temp\obj\Debug\mushroom apocalypse.AssemblyInfo.cs
 C:\Users\andrey\OneDrive\Документы\GitHub\mushroom-apocalypse\.mono\temp\obj\Debug\mushroom apocalypse.csproj.CoreCompileInputs.cache
 C:\Users\andrey\OneDrive\Документы\GitHub\mushroom-apocalypse\.mono\temp\obj\Debug\mushroom apocalypse.csproj.CopyComplete
 C:\Users\andrey\OneDrive\Документы\GitHub\mushroom-apocalypse\.mono\temp\obj\Debug\mushroom apocalypse.dll
 C:\Users\andrey\OneDrive\Документы\GitHub\mushroom-apocalypse\.mono\temp\obj\Debug\mushroom apocalypse.pdb
-C:\Users\andrey\OneDrive\Документы\GitHub\mushroom-apocalypse\.mono\temp\obj\Debug\mushroom apocalypse.GeneratedMSBuildEditorConfig.editorconfig

@@ -1,7 +1,8 @@
-<Project Sdk="Godot.NET.Sdk/3.3.0">
+﻿<Project Sdk="Godot.NET.Sdk/3.3.0">
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
-    <RootNamespace>mushroomapocalypse</RootNamespace>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -12,6 +13,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
+  
   <PropertyGroup Condition=" '$(OS)' == 'Windows_NT' ">
     <DefineConstants>$(DefineConstants);NATIVE_WINDOWS</DefineConstants>
   </PropertyGroup>
@@ -21,7 +23,12 @@
   <PropertyGroup Condition=" '$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))' ">
     <DefineConstants>$(DefineConstants);NATIVE_LINUX</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup> <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies> </PropertyGroup>
+  <PropertyGroup> <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies> <ApplicationIcon /> <OutputType>Library</OutputType> <StartupObject /> </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Views\**" />
+    <EmbeddedResource Remove="Views\**" />
+    <Page Remove="Views\**" />
+  </ItemGroup>
   <ItemGroup>
     <!-- ... -->
     <PackageReference Include="DiscordRichPresence" Version="1.0.175" />
@@ -29,15 +36,4 @@
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
     <!-- ... -->
 </ItemGroup>
-  <ItemGroup>
-    <Page Include="Views\Resources\Default.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Resources\DesignData.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Windows\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
 </Project>

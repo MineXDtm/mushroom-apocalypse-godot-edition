@@ -1,9 +1,10 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://world/load_biome.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gui/slot_defaultstyle.tres" type="StyleBox" id=2]
 [ext_resource path="res://CLockBar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://gui/loading_world.tscn" type="PackedScene" id=4]
+[ext_resource path="res://menu/playerview.tscn" type="PackedScene" id=5]
 [ext_resource path="res://world/inventory_tab.gd" type="Script" id=10]
 [ext_resource path="res://world/slot.gd" type="Script" id=11]
 [ext_resource path="res://world/UI2.gd" type="Script" id=13]
@@ -13,6 +14,7 @@
 [ext_resource path="res://textures/gui/heal_full.png" type="Texture" id=20]
 [ext_resource path="res://textures/car2.png" type="Texture" id=21]
 [ext_resource path="res://textures/gui/progbg.png" type="Texture" id=23]
+[ext_resource path="res://emotes.gd" type="Script" id=24]
 [ext_resource path="res://fps_check.gd" type="Script" id=25]
 [ext_resource path="res://textures/gui/y.png" type="Texture" id=26]
 [ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=27]
@@ -22,14 +24,32 @@
 [ext_resource path="res://settings/game_menu.tscn" type="PackedScene" id=33]
 [ext_resource path="res://textures/gui/energy.png" type="Texture" id=34]
 
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0, 0, 0, 0.568627 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=10]
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0, 0, 0, 0.568627 )
+
+[sub_resource type="ViewportTexture" id=11]
+viewport_path = NodePath("UI2/emotes/GridContainer/bar0/CenterContainer/TextureRect/Viewport")
+
+[sub_resource type="BitmapFont" id=3]
+
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 1 )
 border_width_bottom = 1
 border_color = Color( 0.517647, 0.517647, 0.517647, 1 )
 
 [sub_resource type="StyleBoxEmpty" id=2]
-
-[sub_resource type="BitmapFont" id=3]
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 1, 1, 1, 1 )
@@ -48,6 +68,339 @@ font_data = ExtResource( 27 )
 
 [node name="UI2" type="CanvasLayer" parent="."]
 script = ExtResource( 13 )
+
+[node name="emotes" type="CenterContainer" parent="UI2"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="UI2/emotes"]
+margin_left = 220.0
+margin_top = 70.0
+margin_right = 420.0
+margin_bottom = 270.0
+columns = 3
+
+[node name="bar0" type="Button" parent="UI2/emotes/GridContainer"]
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+custom_constants/hseparation = 0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 8 )
+
+[node name="CenterContainer" type="CenterContainer" parent="UI2/emotes/GridContainer/bar0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI2/emotes/GridContainer/bar0/CenterContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 56.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 48, 48 )
+mouse_filter = 2
+texture = SubResource( 11 )
+expand = true
+stretch_mode = 6
+flip_v = true
+
+[node name="Viewport" type="Viewport" parent="UI2/emotes/GridContainer/bar0/CenterContainer/TextureRect"]
+size = Vector2( 4000, 4000 )
+transparent_bg = true
+
+[node name="playerview" parent="UI2/emotes/GridContainer/bar0/CenterContainer/TextureRect/Viewport" instance=ExtResource( 5 )]
+scale = Vector2( 100, 100 )
+
+[node name="bar1" type="Button" parent="UI2/emotes/GridContainer"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+custom_constants/hseparation = 0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 8 )
+
+[node name="CenterContainer" type="CenterContainer" parent="UI2/emotes/GridContainer/bar1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI2/emotes/GridContainer/bar1/CenterContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 56.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 48, 48 )
+mouse_filter = 2
+texture = SubResource( 11 )
+expand = true
+stretch_mode = 6
+flip_v = true
+
+[node name="Viewport" type="Viewport" parent="UI2/emotes/GridContainer/bar1/CenterContainer/TextureRect"]
+size = Vector2( 40, 40 )
+transparent_bg = true
+
+[node name="playerview" parent="UI2/emotes/GridContainer/bar1/CenterContainer/TextureRect/Viewport" instance=ExtResource( 5 )]
+
+[node name="bar2" type="Button" parent="UI2/emotes/GridContainer"]
+margin_left = 136.0
+margin_right = 200.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+custom_constants/hseparation = 0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 8 )
+
+[node name="CenterContainer" type="CenterContainer" parent="UI2/emotes/GridContainer/bar2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI2/emotes/GridContainer/bar2/CenterContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 56.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 48, 48 )
+mouse_filter = 2
+texture = SubResource( 11 )
+expand = true
+stretch_mode = 6
+flip_v = true
+
+[node name="Viewport" type="Viewport" parent="UI2/emotes/GridContainer/bar2/CenterContainer/TextureRect"]
+size = Vector2( 40, 40 )
+transparent_bg = true
+
+[node name="playerview" parent="UI2/emotes/GridContainer/bar2/CenterContainer/TextureRect/Viewport" instance=ExtResource( 5 )]
+
+[node name="bar7" type="Button" parent="UI2/emotes/GridContainer"]
+margin_top = 68.0
+margin_right = 64.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 64, 64 )
+custom_constants/hseparation = 0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 8 )
+
+[node name="CenterContainer" type="CenterContainer" parent="UI2/emotes/GridContainer/bar7"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI2/emotes/GridContainer/bar7/CenterContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 56.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 48, 48 )
+mouse_filter = 2
+texture = SubResource( 11 )
+expand = true
+stretch_mode = 6
+flip_v = true
+
+[node name="Viewport" type="Viewport" parent="UI2/emotes/GridContainer/bar7/CenterContainer/TextureRect"]
+size = Vector2( 40, 40 )
+transparent_bg = true
+
+[node name="playerview" parent="UI2/emotes/GridContainer/bar7/CenterContainer/TextureRect/Viewport" instance=ExtResource( 5 )]
+
+[node name="center" type="Control" parent="UI2/emotes/GridContainer"]
+margin_left = 68.0
+margin_top = 68.0
+margin_right = 132.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 64, 64 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bar3" type="Button" parent="UI2/emotes/GridContainer"]
+margin_left = 136.0
+margin_top = 68.0
+margin_right = 200.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 64, 64 )
+custom_constants/hseparation = 0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 8 )
+
+[node name="CenterContainer" type="CenterContainer" parent="UI2/emotes/GridContainer/bar3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI2/emotes/GridContainer/bar3/CenterContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 56.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 48, 48 )
+mouse_filter = 2
+texture = SubResource( 11 )
+expand = true
+stretch_mode = 6
+flip_v = true
+
+[node name="Viewport" type="Viewport" parent="UI2/emotes/GridContainer/bar3/CenterContainer/TextureRect"]
+size = Vector2( 40, 40 )
+transparent_bg = true
+
+[node name="playerview" parent="UI2/emotes/GridContainer/bar3/CenterContainer/TextureRect/Viewport" instance=ExtResource( 5 )]
+
+[node name="bar6" type="Button" parent="UI2/emotes/GridContainer"]
+margin_top = 136.0
+margin_right = 64.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 64, 64 )
+custom_constants/hseparation = 0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 8 )
+
+[node name="CenterContainer" type="CenterContainer" parent="UI2/emotes/GridContainer/bar6"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI2/emotes/GridContainer/bar6/CenterContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 56.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 48, 48 )
+mouse_filter = 2
+texture = SubResource( 11 )
+expand = true
+stretch_mode = 6
+flip_v = true
+
+[node name="Viewport" type="Viewport" parent="UI2/emotes/GridContainer/bar6/CenterContainer/TextureRect"]
+size = Vector2( 40, 40 )
+transparent_bg = true
+
+[node name="playerview" parent="UI2/emotes/GridContainer/bar6/CenterContainer/TextureRect/Viewport" instance=ExtResource( 5 )]
+
+[node name="bar5" type="Button" parent="UI2/emotes/GridContainer"]
+margin_left = 68.0
+margin_top = 136.0
+margin_right = 132.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 64, 64 )
+custom_constants/hseparation = 0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 8 )
+
+[node name="CenterContainer" type="CenterContainer" parent="UI2/emotes/GridContainer/bar5"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI2/emotes/GridContainer/bar5/CenterContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 56.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 48, 48 )
+mouse_filter = 2
+texture = SubResource( 11 )
+expand = true
+stretch_mode = 6
+flip_v = true
+
+[node name="Viewport" type="Viewport" parent="UI2/emotes/GridContainer/bar5/CenterContainer/TextureRect"]
+size = Vector2( 40, 40 )
+transparent_bg = true
+
+[node name="playerview" parent="UI2/emotes/GridContainer/bar5/CenterContainer/TextureRect/Viewport" instance=ExtResource( 5 )]
+
+[node name="bar4" type="Button" parent="UI2/emotes/GridContainer"]
+margin_left = 136.0
+margin_top = 136.0
+margin_right = 200.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 64, 64 )
+custom_constants/hseparation = 0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 8 )
+
+[node name="CenterContainer" type="CenterContainer" parent="UI2/emotes/GridContainer/bar4"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI2/emotes/GridContainer/bar4/CenterContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 56.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 48, 48 )
+mouse_filter = 2
+texture = SubResource( 11 )
+expand = true
+stretch_mode = 6
+flip_v = true
+
+[node name="Viewport" type="Viewport" parent="UI2/emotes/GridContainer/bar4/CenterContainer/TextureRect"]
+size = Vector2( 40, 40 )
+transparent_bg = true
+
+[node name="playerview" parent="UI2/emotes/GridContainer/bar4/CenterContainer/TextureRect/Viewport" instance=ExtResource( 5 )]
 
 [node name="bars" type="VBoxContainer" parent="UI2"]
 margin_right = 51.0
@@ -95,9 +448,9 @@ margin_left = 1.0
 margin_top = 1.0
 margin_right = 35.0
 margin_bottom = 8.0
+custom_fonts/font = SubResource( 3 )
 custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
-custom_fonts/font = SubResource( 3 )
 max_value = 20.0
 value = 20.0
 percent_visible = false
@@ -143,9 +496,9 @@ margin_left = 1.0
 margin_top = 1.0
 margin_right = 35.0
 margin_bottom = 8.0
+custom_fonts/font = SubResource( 3 )
 custom_styles/fg = SubResource( 4 )
 custom_styles/bg = SubResource( 2 )
-custom_fonts/font = SubResource( 3 )
 value = 100.0
 percent_visible = false
 __meta__ = {

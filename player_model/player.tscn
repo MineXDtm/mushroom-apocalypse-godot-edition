@@ -1,13 +1,8 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
-[ext_resource path="res://textures/player/body.png" type="Texture" id=1]
-[ext_resource path="res://textures/player/arm2.png" type="Texture" id=2]
-[ext_resource path="res://textures/player/head.png" type="Texture" id=3]
-[ext_resource path="res://textures/player/arm.png" type="Texture" id=4]
-[ext_resource path="res://textures/player/leg.png" type="Texture" id=5]
+[ext_resource path="res://skin.png" type="Texture" id=1]
 [ext_resource path="res://player_model/player.gd" type="Script" id=6]
 [ext_resource path="res://player_model/player_IDLE_anim.tres" type="Animation" id=7]
-[ext_resource path="res://textures/player/leg2.png" type="Texture" id=8]
 [ext_resource path="res://textures/items/drop_wood.png" type="Texture" id=9]
 [ext_resource path="res://textures/shadow.png" type="Texture" id=19]
 
@@ -17,15 +12,6 @@ blend_mode = 1
 
 [sub_resource type="OccluderPolygon2D" id=2]
 polygon = PoolVector2Array( -4, 13, 5, 13, 5, 14, 6, 14, 6, 15, 5, 15, 5, 16, -4, 16, -4, 15, -5, 15, -5, 14, -4, 14 )
-
-[sub_resource type="CanvasItemMaterial" id=3]
-light_mode = 1
-
-[sub_resource type="CanvasItemMaterial" id=4]
-light_mode = 1
-
-[sub_resource type="CanvasItemMaterial" id=5]
-light_mode = 1
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 5.09041, 13 )
@@ -51,7 +37,7 @@ bg_color = Color( 0, 0, 0, 1 )
 [sub_resource type="Animation" id=13]
 length = 0.41
 tracks/0/type = "value"
-tracks/0/path = NodePath("Node2D/arm1:position")
+tracks/0/path = NodePath("model/arm1:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -63,7 +49,7 @@ tracks/0/keys = {
 "values": [ Vector2( 6, 5.5 ), Vector2( -15, 5.5 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Node2D/arm1:rotation_degrees")
+tracks/1/path = NodePath("model/arm1:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -75,7 +61,7 @@ tracks/1/keys = {
 "values": [ 0.0, 0.0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Node2D/leg1:position")
+tracks/2/path = NodePath("model/leg1:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -87,7 +73,7 @@ tracks/2/keys = {
 "values": [ Vector2( 2.5, 12 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Node2D/leg1:rotation_degrees")
+tracks/3/path = NodePath("model/leg1:rotation_degrees")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -99,7 +85,7 @@ tracks/3/keys = {
 "values": [ 0.0 ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Node2D/head:rotation_degrees")
+tracks/4/path = NodePath("model/head:rotation_degrees")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -111,7 +97,7 @@ tracks/4/keys = {
 "values": [ 0.0, 0.0 ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Node2D/head:position")
+tracks/5/path = NodePath("model/head:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -123,7 +109,7 @@ tracks/5/keys = {
 "values": [ Vector2( 1.19209e-07, -2.5 ), Vector2( 0, -2.5 ) ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("Node2D/leg2:position")
+tracks/6/path = NodePath("model/leg2:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -135,7 +121,7 @@ tracks/6/keys = {
 "values": [ Vector2( -1.5, 12 ) ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Node2D/leg2:rotation_degrees")
+tracks/7/path = NodePath("model/leg2:rotation_degrees")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -147,7 +133,7 @@ tracks/7/keys = {
 "values": [ 0.0 ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("Node2D/head:flip_h")
+tracks/8/path = NodePath("model/head:flip_h")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -159,7 +145,7 @@ tracks/8/keys = {
 "values": [ false ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("Node2D/arm2:position")
+tracks/9/path = NodePath("model/arm2:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -171,7 +157,7 @@ tracks/9/keys = {
 "values": [ Vector2( -5, 5.5 ) ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("Node2D/arm2:rotation_degrees")
+tracks/10/path = NodePath("model/arm2:rotation_degrees")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
@@ -183,7 +169,7 @@ tracks/10/keys = {
 "values": [ 0.0 ]
 }
 tracks/11/type = "value"
-tracks/11/path = NodePath("Node2D/arm1:flip_h")
+tracks/11/path = NodePath("model/arm1:flip_h")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/imported = false
@@ -195,7 +181,7 @@ tracks/11/keys = {
 "values": [ false ]
 }
 tracks/12/type = "value"
-tracks/12/path = NodePath("Node2D/arm2:flip_h")
+tracks/12/path = NodePath("model/arm2:flip_h")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/imported = false
@@ -207,7 +193,7 @@ tracks/12/keys = {
 "values": [ false ]
 }
 tracks/13/type = "value"
-tracks/13/path = NodePath("Node2D/leg2:flip_h")
+tracks/13/path = NodePath("model/leg2:flip_h")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/imported = false
@@ -219,7 +205,7 @@ tracks/13/keys = {
 "values": [ false ]
 }
 tracks/14/type = "value"
-tracks/14/path = NodePath("Node2D/leg1:flip_h")
+tracks/14/path = NodePath("model/leg1:flip_h")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/imported = false
@@ -231,7 +217,7 @@ tracks/14/keys = {
 "values": [ false ]
 }
 tracks/15/type = "value"
-tracks/15/path = NodePath("Node2D/body2:flip_h")
+tracks/15/path = NodePath("model/body2:flip_h")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/imported = false
@@ -246,7 +232,7 @@ tracks/15/keys = {
 [sub_resource type="Animation" id=14]
 length = 0.4
 tracks/0/type = "value"
-tracks/0/path = NodePath("Node2D/body2:position")
+tracks/0/path = NodePath("model/body2:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -258,7 +244,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0.5, 8 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Node2D/body2:rotation_degrees")
+tracks/1/path = NodePath("model/body2:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -270,7 +256,7 @@ tracks/1/keys = {
 "values": [ 0.0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Node2D/arm1:position")
+tracks/2/path = NodePath("model/arm1:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -282,7 +268,7 @@ tracks/2/keys = {
 "values": [ Vector2( 7, 5.5 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Node2D/arm1:rotation_degrees")
+tracks/3/path = NodePath("model/arm1:rotation_degrees")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -294,7 +280,7 @@ tracks/3/keys = {
 "values": [ 0.0 ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Node2D/leg1:position")
+tracks/4/path = NodePath("model/leg1:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -306,7 +292,7 @@ tracks/4/keys = {
 "values": [ Vector2( 2.5, 12 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Node2D/leg1:rotation_degrees")
+tracks/5/path = NodePath("model/leg1:rotation_degrees")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -318,7 +304,7 @@ tracks/5/keys = {
 "values": [ 0.0 ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("Node2D/head:rotation_degrees")
+tracks/6/path = NodePath("model/head:rotation_degrees")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -330,7 +316,7 @@ tracks/6/keys = {
 "values": [ 0.0 ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Node2D/head:position")
+tracks/7/path = NodePath("model/head:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -342,7 +328,7 @@ tracks/7/keys = {
 "values": [ Vector2( 0, -2.5 ) ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("Node2D/leg2:position")
+tracks/8/path = NodePath("model/leg2:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -354,7 +340,7 @@ tracks/8/keys = {
 "values": [ Vector2( -1.5, 12 ) ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("Node2D/leg2:rotation_degrees")
+tracks/9/path = NodePath("model/leg2:rotation_degrees")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -366,7 +352,7 @@ tracks/9/keys = {
 "values": [ 0.0 ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("Node2D/head:flip_h")
+tracks/10/path = NodePath("model/head:flip_h")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
@@ -378,7 +364,7 @@ tracks/10/keys = {
 "values": [ false ]
 }
 tracks/11/type = "value"
-tracks/11/path = NodePath("Node2D/arm2:position")
+tracks/11/path = NodePath("model/arm2:position")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/imported = false
@@ -390,7 +376,7 @@ tracks/11/keys = {
 "values": [ Vector2( -5, 5.375 ), Vector2( -15, 5.5 ) ]
 }
 tracks/12/type = "value"
-tracks/12/path = NodePath("Node2D/arm2:rotation_degrees")
+tracks/12/path = NodePath("model/arm2:rotation_degrees")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/imported = false
@@ -402,7 +388,7 @@ tracks/12/keys = {
 "values": [ 0.0, 0.0 ]
 }
 tracks/13/type = "value"
-tracks/13/path = NodePath("Node2D/arm1:flip_h")
+tracks/13/path = NodePath("model/arm1:flip_h")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/imported = false
@@ -414,7 +400,7 @@ tracks/13/keys = {
 "values": [ false ]
 }
 tracks/14/type = "value"
-tracks/14/path = NodePath("Node2D/leg1:flip_h")
+tracks/14/path = NodePath("model/leg1:flip_h")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/imported = false
@@ -426,7 +412,7 @@ tracks/14/keys = {
 "values": [ false ]
 }
 tracks/15/type = "value"
-tracks/15/path = NodePath("Node2D/leg2:flip_h")
+tracks/15/path = NodePath("model/leg2:flip_h")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/imported = false
@@ -438,7 +424,7 @@ tracks/15/keys = {
 "values": [ false ]
 }
 tracks/16/type = "value"
-tracks/16/path = NodePath("Node2D/body2:flip_h")
+tracks/16/path = NodePath("model/body2:flip_h")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/imported = false
@@ -450,7 +436,7 @@ tracks/16/keys = {
 "values": [ false ]
 }
 tracks/17/type = "value"
-tracks/17/path = NodePath("Node2D/arm2:flip_h")
+tracks/17/path = NodePath("model/arm2:flip_h")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/imported = false
@@ -465,7 +451,7 @@ tracks/17/keys = {
 [sub_resource type="Animation" id=15]
 length = 1.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("Node2D/body2:position")
+tracks/0/path = NodePath("model/body2:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -477,7 +463,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0.5, 8 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Node2D/body2:rotation_degrees")
+tracks/1/path = NodePath("model/body2:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -489,7 +475,7 @@ tracks/1/keys = {
 "values": [ 0.0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Node2D/arm2:position")
+tracks/2/path = NodePath("model/arm2:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -501,7 +487,7 @@ tracks/2/keys = {
 "values": [ Vector2( -5, 5.5 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Node2D/arm2:rotation_degrees")
+tracks/3/path = NodePath("model/arm2:rotation_degrees")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -513,7 +499,7 @@ tracks/3/keys = {
 "values": [ 0.0 ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Node2D/head:rotation_degrees")
+tracks/4/path = NodePath("model/head:rotation_degrees")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -525,7 +511,7 @@ tracks/4/keys = {
 "values": [ 0.0, 0.0, 0.0 ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Node2D/head:position")
+tracks/5/path = NodePath("model/head:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -537,7 +523,7 @@ tracks/5/keys = {
 "values": [ Vector2( 0, -2.5 ), Vector2( 0, -2 ), Vector2( 0, -3 ), Vector2( 0, -2 ), Vector2( 0, -3 ) ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("Node2D/leg1:position")
+tracks/6/path = NodePath("model/leg1:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -549,7 +535,7 @@ tracks/6/keys = {
 "values": [ Vector2( 2.5, 12 ) ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Node2D/leg1:rotation_degrees")
+tracks/7/path = NodePath("model/leg1:rotation_degrees")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -561,7 +547,7 @@ tracks/7/keys = {
 "values": [ 0.0 ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("Node2D/arm1:position")
+tracks/8/path = NodePath("model/arm1:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -573,7 +559,7 @@ tracks/8/keys = {
 "values": [ Vector2( 7, 5.5 ), Vector2( 1, 4 ), Vector2( 1, 5 ), Vector2( 1, 4 ), Vector2( 1, 5 ), Vector2( 1, 4 ) ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("Node2D/arm1:rotation_degrees")
+tracks/9/path = NodePath("model/arm1:rotation_degrees")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -585,7 +571,7 @@ tracks/9/keys = {
 "values": [ 0.0, 0.0, 0.0, 0.0 ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("Node2D/head:scale")
+tracks/10/path = NodePath("model/head:scale")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
@@ -597,7 +583,7 @@ tracks/10/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 tracks/11/type = "value"
-tracks/11/path = NodePath("Node2D/head:flip_h")
+tracks/11/path = NodePath("model/head:flip_h")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/imported = false
@@ -609,7 +595,7 @@ tracks/11/keys = {
 "values": [ false ]
 }
 tracks/12/type = "value"
-tracks/12/path = NodePath("Node2D/leg2:position")
+tracks/12/path = NodePath("model/leg2:position")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/imported = false
@@ -621,7 +607,7 @@ tracks/12/keys = {
 "values": [ Vector2( -1.43606, 12 ) ]
 }
 tracks/13/type = "value"
-tracks/13/path = NodePath("Node2D/leg2:rotation_degrees")
+tracks/13/path = NodePath("model/leg2:rotation_degrees")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/imported = false
@@ -633,7 +619,7 @@ tracks/13/keys = {
 "values": [ 0.0 ]
 }
 tracks/14/type = "value"
-tracks/14/path = NodePath("Node2D/arm2:flip_h")
+tracks/14/path = NodePath("model/arm2:flip_h")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/imported = false
@@ -645,7 +631,7 @@ tracks/14/keys = {
 "values": [ false ]
 }
 tracks/15/type = "value"
-tracks/15/path = NodePath("Node2D/leg2:flip_h")
+tracks/15/path = NodePath("model/leg2:flip_h")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/imported = false
@@ -657,7 +643,7 @@ tracks/15/keys = {
 "values": [ false ]
 }
 tracks/16/type = "value"
-tracks/16/path = NodePath("Node2D/leg1:flip_h")
+tracks/16/path = NodePath("model/leg1:flip_h")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/imported = false
@@ -669,7 +655,7 @@ tracks/16/keys = {
 "values": [ false ]
 }
 tracks/17/type = "value"
-tracks/17/path = NodePath("Node2D/body2:flip_h")
+tracks/17/path = NodePath("model/body2:flip_h")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/imported = false
@@ -681,7 +667,7 @@ tracks/17/keys = {
 "values": [ false ]
 }
 tracks/18/type = "value"
-tracks/18/path = NodePath("Node2D/arm1:flip_h")
+tracks/18/path = NodePath("model/arm1:flip_h")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/imported = false
@@ -697,7 +683,7 @@ tracks/18/keys = {
 length = 0.5
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Node2D/head:rotation_degrees")
+tracks/0/path = NodePath("model/head:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -709,7 +695,7 @@ tracks/0/keys = {
 "values": [ 0.0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Node2D/head:position")
+tracks/1/path = NodePath("model/head:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -721,7 +707,7 @@ tracks/1/keys = {
 "values": [ Vector2( 0, -2.5 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Node2D/arm1:position")
+tracks/2/path = NodePath("model/arm1:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -733,7 +719,7 @@ tracks/2/keys = {
 "values": [ Vector2( 6, 5.5 ), Vector2( 7, 5.5 ), Vector2( 8, 5.5 ), Vector2( 7, 5.5 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Node2D/arm1:rotation_degrees")
+tracks/3/path = NodePath("model/arm1:rotation_degrees")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -745,7 +731,7 @@ tracks/3/keys = {
 "values": [ 0.0, 0.0, 0.0, 0.0 ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Node2D/arm2:position")
+tracks/4/path = NodePath("model/arm2:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -757,7 +743,7 @@ tracks/4/keys = {
 "values": [ Vector2( -4, 5.5 ), Vector2( -5, 5.5 ), Vector2( -6, 5.5 ), Vector2( -5, 5.5 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Node2D/arm2:rotation_degrees")
+tracks/5/path = NodePath("model/arm2:rotation_degrees")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -769,7 +755,7 @@ tracks/5/keys = {
 "values": [ 0.0, 0.0, 0.0, 0.0 ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("Node2D/leg1:position")
+tracks/6/path = NodePath("model/leg1:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -781,7 +767,7 @@ tracks/6/keys = {
 "values": [ Vector2( 6, 11 ), Vector2( 2.52107, 11.9952 ), Vector2( -3, 11 ), Vector2( 2.52107, 11.9952 ) ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Node2D/leg1:rotation_degrees")
+tracks/7/path = NodePath("model/leg1:rotation_degrees")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -793,7 +779,7 @@ tracks/7/keys = {
 "values": [ -59.2944, -0.433074, 48.3833, -0.433074 ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("Node2D/head:flip_h")
+tracks/8/path = NodePath("model/head:flip_h")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -805,7 +791,7 @@ tracks/8/keys = {
 "values": [ false ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("Node2D/leg2:position")
+tracks/9/path = NodePath("model/leg2:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -817,7 +803,7 @@ tracks/9/keys = {
 "values": [ Vector2( -5, 11 ), Vector2( -1.50083, 11.9973 ), Vector2( 5, 11 ), Vector2( -1.50083, 11.9973 ) ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("Node2D/leg2:rotation_degrees")
+tracks/10/path = NodePath("model/leg2:rotation_degrees")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
@@ -829,7 +815,7 @@ tracks/10/keys = {
 "values": [ 49.8164, 0.312263, -47.5322, 0.312263 ]
 }
 tracks/11/type = "value"
-tracks/11/path = NodePath("Node2D/arm2:flip_h")
+tracks/11/path = NodePath("model/arm2:flip_h")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/imported = false
@@ -841,7 +827,7 @@ tracks/11/keys = {
 "values": [ false ]
 }
 tracks/12/type = "value"
-tracks/12/path = NodePath("Node2D/leg1:flip_h")
+tracks/12/path = NodePath("model/leg1:flip_h")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/imported = false
@@ -853,7 +839,7 @@ tracks/12/keys = {
 "values": [ false ]
 }
 tracks/13/type = "value"
-tracks/13/path = NodePath("Node2D/leg2:flip_h")
+tracks/13/path = NodePath("model/leg2:flip_h")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/imported = false
@@ -865,7 +851,7 @@ tracks/13/keys = {
 "values": [ false ]
 }
 tracks/14/type = "value"
-tracks/14/path = NodePath("Node2D/arm1:flip_h")
+tracks/14/path = NodePath("model/arm1:flip_h")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/imported = false
@@ -877,7 +863,7 @@ tracks/14/keys = {
 "values": [ false ]
 }
 tracks/15/type = "value"
-tracks/15/path = NodePath("Node2D/body2:flip_h")
+tracks/15/path = NodePath("model/body2:flip_h")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/imported = false
@@ -915,6 +901,39 @@ scale = 4.0
 scale_curve = SubResource( 19 )
 color = Color( 0.396078, 0.396078, 0.396078, 0.764706 )
 
+[sub_resource type="CanvasItemMaterial" id=3]
+light_mode = 1
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 1 )
+region = Rect2( 6, 25, 6, 5 )
+
+[sub_resource type="CanvasItemMaterial" id=4]
+light_mode = 1
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 22, 17 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 1 )
+region = Rect2( 5, 21, 5, 4 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 21, 5, 4 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 17, 9, 4 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 25, 6, 5 )
+
+[sub_resource type="CanvasItemMaterial" id=5]
+light_mode = 1
+
 [node name="player" type="KinematicBody2D"]
 light_mask = 3
 material = SubResource( 1 )
@@ -934,138 +953,53 @@ smoothing_enabled = true
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource( 2 )
 
-[node name="Node2D" type="Node2D" parent="."]
-
-[node name="shadow" type="Sprite" parent="Node2D"]
-light_mask = -2147483646
-position = Vector2( 0.515338, 14.6613 )
-scale = Vector2( 0.612136, 0.545864 )
-texture = ExtResource( 19 )
-
-[node name="arm2" type="Sprite" parent="Node2D"]
-show_behind_parent = true
-material = SubResource( 3 )
-position = Vector2( -5, 5.5 )
-texture = ExtResource( 2 )
-
-[node name="head" type="Sprite" parent="Node2D"]
-show_behind_parent = true
-light_mask = 0
-material = SubResource( 4 )
-position = Vector2( -1, -2.5 )
-texture = ExtResource( 3 )
-region_rect = Rect2( -1, -1, 24, 19 )
-
-[node name="leg2" type="Sprite" parent="Node2D"]
-material = SubResource( 3 )
-position = Vector2( -1.43606, 12 )
-texture = ExtResource( 8 )
-
-[node name="leg1" type="Sprite" parent="Node2D"]
-material = SubResource( 3 )
-position = Vector2( 2.5, 12 )
-texture = ExtResource( 5 )
-
-[node name="body2" type="Sprite" parent="Node2D"]
-material = SubResource( 3 )
-position = Vector2( 0.5, 8 )
-texture = ExtResource( 1 )
-region_rect = Rect2( -1, -2, 11, 7 )
-
-[node name="arm1" type="Sprite" parent="Node2D"]
-material = SubResource( 3 )
-position = Vector2( 7, 5.5 )
-texture = ExtResource( 4 )
-
-[node name="item" type="TextureRect" parent="Node2D/arm1"]
-show_behind_parent = true
-material = SubResource( 5 )
-margin_left = -7.0
-margin_top = -8.0
-margin_right = 9.0
-margin_bottom = 8.0
-rect_scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 9 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="armsattack" type="Area2D" parent="." groups=[
-"arm",
-"damage",
-]]
+[node name="armsattack" type="Area2D" parent="." groups=["arm", "damage"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="armsattack"]
 position = Vector2( -18, 6 )
 shape = SubResource( 6 )
 disabled = true
 
-[node name="body" type="Area2D" parent="." groups=[
-"body",
-"player",
-]]
+[node name="body" type="Area2D" parent="." groups=["body", "player"]]
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="body" groups=[
-"body",
-]]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="body" groups=["body"]]
 position = Vector2( 0.0620769, 10.4354 )
 shape = SubResource( 7 )
 disabled = true
 
-[node name="Timer" type="Timer" parent="." groups=[
-"wooden_pickaxe",
-]]
+[node name="Timer" type="Timer" parent="." groups=["wooden_pickaxe"]]
 wait_time = 0.1
 autostart = true
 
-[node name="wooden_exe" type="Area2D" parent="." groups=[
-"damage",
-"wooden_exe",
-]]
+[node name="wooden_exe" type="Area2D" parent="." groups=["damage", "wooden_exe"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wooden_exe"]
 position = Vector2( -19.2916, 7.04173 )
 shape = SubResource( 8 )
 disabled = true
 
-[node name="stone_exe" type="Area2D" parent="." groups=[
-"damage",
-"stone_exe",
-]]
+[node name="stone_exe" type="Area2D" parent="." groups=["damage", "stone_exe"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="stone_exe"]
 position = Vector2( -19.2916, 7.04173 )
 shape = SubResource( 8 )
 disabled = true
 
-[node name="wooden_pickaxe" type="Area2D" parent="." groups=[
-"damage",
-"wooden_pickaxe",
-]]
+[node name="wooden_pickaxe" type="Area2D" parent="." groups=["damage", "wooden_pickaxe"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="wooden_pickaxe" groups=[
-"wooden_pickaxe",
-]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wooden_pickaxe" groups=["wooden_pickaxe"]]
 position = Vector2( -22.3122, 5.02821 )
 shape = SubResource( 9 )
 disabled = true
 
-[node name="stone_pickaxe" type="Area2D" parent="." groups=[
-"damage",
-"stone_pickaxe",
-]]
+[node name="stone_pickaxe" type="Area2D" parent="." groups=["damage", "stone_pickaxe"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="stone_pickaxe" groups=[
-"wooden_pickaxe",
-]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="stone_pickaxe" groups=["wooden_pickaxe"]]
 position = Vector2( -22.3122, 5.02821 )
 shape = SubResource( 9 )
 disabled = true
 
-[node name="area" type="Area2D" parent="." groups=[
-"area",
-"player",
-]]
+[node name="area" type="Area2D" parent="." groups=["area", "player"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="area"]
 shape = SubResource( 10 )
@@ -1104,9 +1038,7 @@ anims/eating = SubResource( 15 )
 anims/idle = ExtResource( 7 )
 anims/move = SubResource( 16 )
 
-[node name="player_area" type="Area2D" parent="." groups=[
-"player_area",
-]]
+[node name="player_area" type="Area2D" parent="." groups=["player_area"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_area"]
 position = Vector2( 0, 3 )
@@ -1123,6 +1055,62 @@ speed_scale = 1.5
 explosiveness = 0.17
 randomness = 0.47
 process_material = SubResource( 20 )
+
+[node name="model" type="Node2D" parent="."]
+
+[node name="shadow" type="Sprite" parent="model"]
+light_mask = -2147483646
+position = Vector2( 0.515338, 14.6613 )
+scale = Vector2( 0.612136, 0.545864 )
+texture = ExtResource( 19 )
+
+[node name="arm2" type="Sprite" parent="model"]
+show_behind_parent = true
+material = SubResource( 3 )
+position = Vector2( -5, 5.5 )
+texture = SubResource( 22 )
+
+[node name="head" type="Sprite" parent="model"]
+show_behind_parent = true
+light_mask = 0
+material = SubResource( 4 )
+position = Vector2( 0, -2.5 )
+texture = SubResource( 21 )
+region_rect = Rect2( -1, -1, 24, 19 )
+
+[node name="leg2" type="Sprite" parent="model"]
+material = SubResource( 3 )
+position = Vector2( -1.43606, 12 )
+texture = SubResource( 24 )
+
+[node name="leg1" type="Sprite" parent="model"]
+material = SubResource( 3 )
+position = Vector2( 2.5, 12 )
+texture = SubResource( 25 )
+
+[node name="body2" type="Sprite" parent="model"]
+material = SubResource( 3 )
+position = Vector2( 0.5, 8 )
+texture = SubResource( 26 )
+region_rect = Rect2( -1, -2, 11, 7 )
+
+[node name="arm1" type="Sprite" parent="model"]
+material = SubResource( 3 )
+position = Vector2( 7, 5.5 )
+texture = SubResource( 23 )
+
+[node name="item" type="TextureRect" parent="model/arm1"]
+show_behind_parent = true
+material = SubResource( 5 )
+margin_left = -7.0
+margin_top = -8.0
+margin_right = 9.0
+margin_bottom = 8.0
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="."]
 visible = false

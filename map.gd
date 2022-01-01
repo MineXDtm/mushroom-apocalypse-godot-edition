@@ -44,6 +44,7 @@ func _ready():
 		i.connect("pressed",self,"_on_point_pressed")
 		i.index = str(int(i.name))
 		i.connect("pressed",i,"clicked")
+
 func _on_point_pressed():
 	yield(get_tree().create_timer(0.01), "timeout")
 	if WorldData.world_type == names[int(point)] :

@@ -83,9 +83,7 @@ position = Vector2( -1, 1 )
 position = Vector2( 756, 660 )
 scale = Vector2( 2, 2 )
 
-[node name="player" parent="sort" groups=[
-"kust",
-] instance=ExtResource( 8 )]
+[node name="player" parent="sort" groups=["kust"] instance=ExtResource( 8 )]
 material = SubResource( 1 )
 position = Vector2( 756, 669 )
 
