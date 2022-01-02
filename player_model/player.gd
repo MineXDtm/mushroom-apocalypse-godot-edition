@@ -281,17 +281,21 @@ func inventory():
 	else:
 		var block = get_parent().get_parent().get_node("b/TileMap")
 		block.visible = false
+var emote = false
 func animate():
 	var anim
-	if isattacking == false:
+	if isattacking == false and emote == false :
 		anim = "idle"
 	if velocity.x != 0 and isattacking == false and eating == false:
 		anim = "move"
+		emote = false
 		$Particles2D.emitting = true
 	elif velocity.y != 0 and isattacking == false and eating == false:
 		anim = "move"
+		emote = false
 		$Particles2D.emitting = true
 	if isattacking == true and eating == false:
+		emote = false
 		if arm == "arm" and rands == 0:
 			anim = "attack"
 		elif arm == "arm" and rands == 1:
@@ -299,12 +303,13 @@ func animate():
 		else:
 			anim = "attack"
 	if eating == true:
+		emote = false
 		anim = "eating"
 	if fliped == false:
 		$model.scale.x = -1
 	else:
 		$model.scale.x = 1
-	if $player.current_animation != anim:
+	if $player.current_animation != anim and anim != null:
 		$player.play(anim)
 
 
@@ -348,6 +353,7 @@ func _on_Timer3_timeout():
 
 func _on_player_animation_finished(_anim_name):
 	var animations = ["attack","attack_2"]
+	emote = false
 	if fliped == false:
 		$model.scale.x = -1
 	if arm == "arm":

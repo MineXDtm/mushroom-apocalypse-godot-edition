@@ -4,7 +4,6 @@ extends Control
 
 
 func _ready():
-	Emotemanager.loademote("think",get_node("Viewport/playerview/player"))
 	SkinManager.connect("skinloaded",self,"skinloaded")
 	for i in get_node("/root/menu/Viewport/playerview/model").get_children():
 		if i.name == "shadow":continue

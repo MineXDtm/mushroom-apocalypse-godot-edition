@@ -17,8 +17,14 @@ func _ready():
 		var a = i.get_node("CenterContainer/TextureRect/Viewport/playerview/player") as AnimationPlayer
 		
 		a.connect("animation_finished",self,"animended",[a])
-		Emotemanager.loademote(emoteslist[int(i.name) ], i.get_node("CenterContainer/TextureRect/Viewport/playerview/player"))
-		
+		if !Emotemanager.loadedanimation.has(emoteslist[int(i.name) ]):
+			Emotemanager.connect("emoteloaded",self,"emoteloadedd",[a,get_parent().get_parent().get_node(str(WorldData.map,"/sort/player/player"))],CONNECT_ONESHOT)
+			Emotemanager.loademote(emoteslist[int(i.name) ])
+			
+func emoteloadedd(emote : Animation,animname : String, anim : AnimationPlayer ,p : AnimationPlayer):
+	p.add_animation(animname,emote)
+	anim.add_animation(animname,emote)
+	anim.play(animname)
 func animended(track,a):
 	a.play(track)
 func hover_emote(id : Button):

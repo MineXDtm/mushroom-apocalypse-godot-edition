@@ -1067,7 +1067,7 @@ texture = ExtResource( 19 )
 [node name="arm2" type="Sprite" parent="model"]
 show_behind_parent = true
 material = SubResource( 3 )
-position = Vector2( -5, 5.5 )
+position = Vector2( -4, 5.5 )
 texture = SubResource( 22 )
 
 [node name="head" type="Sprite" parent="model"]
@@ -1080,12 +1080,14 @@ region_rect = Rect2( -1, -1, 24, 19 )
 
 [node name="leg2" type="Sprite" parent="model"]
 material = SubResource( 3 )
-position = Vector2( -1.43606, 12 )
+position = Vector2( -5, 11 )
+rotation = 0.86946
 texture = SubResource( 24 )
 
 [node name="leg1" type="Sprite" parent="model"]
 material = SubResource( 3 )
-position = Vector2( 2.5, 12 )
+position = Vector2( 6, 11 )
+rotation = -1.03488
 texture = SubResource( 25 )
 
 [node name="body2" type="Sprite" parent="model"]
@@ -1096,7 +1098,7 @@ region_rect = Rect2( -1, -2, 11, 7 )
 
 [node name="arm1" type="Sprite" parent="model"]
 material = SubResource( 3 )
-position = Vector2( 7, 5.5 )
+position = Vector2( 6, 5.5 )
 texture = SubResource( 23 )
 
 [node name="item" type="TextureRect" parent="model/arm1"]

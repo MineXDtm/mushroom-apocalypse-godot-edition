@@ -30,5 +30,7 @@ func _input(event):
 		
 	if event.is_action_released("emotebar"):
 		$emotes.visible = false
-		if $emotes.selected != null and $emotes.selected <= $emotes.emoteslist:
-			
+		if $emotes.selected != null and $emotes.selected <= $emotes.emoteslist.size():
+			var p = get_parent().get_node(str(WorldData.map,"/sort/player/player")) as AnimationPlayer
+			get_parent().get_node(str(WorldData.map,"/sort/player")).emote = true
+			p.play($emotes.emoteslist[$emotes.selected])
