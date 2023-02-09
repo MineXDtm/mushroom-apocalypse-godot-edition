@@ -82,6 +82,7 @@ func _on_point_pressed():
 		point = "0"
 
 func _process(_delta):
+	return
 	var points = point
 	if res.has(int(point)) and WorldData.map != str("map",points):
 		for i in range(0,res[int(point)].size()):
