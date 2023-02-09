@@ -14,27 +14,56 @@ var added = 16
 var layer = 1
 var random = RandomNumberGenerator.new()
 var type = "kust"
+
+
+func damage():
+	var navigationscene = load("res://world/NavigationPolygonInstance.tscn")
+	health -= 1
+	$ProgressBar.visible = true
+	$ProgressBar.value = health
+		
+	if health <= 0 :
+		$ProgressBar.visible = false
+		broked = true
+	if broked == true :
+			
+			$StaticBody2D.visible = false
+			$StaticBody2D/CollisionShape2D.disabled = true
+			$CollisionShape2D.visible = false
+			$tex.visible = false
+			$CollisionShape2D.disabled = true
+			for i in range(10):
+				var particle = Polygon2D.new()
+				random.randomize()
+				var pos = Vector2(random.randi_range(0,$tex.texture.get_size().x),random.randi_range(0,$tex.texture.get_size().y))
+				particle.polygon = [pos , Vector2(pos.x +5 ,pos.y), Vector2(pos.x +5 ,pos.y+5) , Vector2(pos.x ,pos.y+5)]
+				particle.texture = $tex.texture
+				particle.position = $tex.position -pos 
+				particle.set_script(load("res://world/particle.gd"))
+				add_child(particle)
+			yield(get_tree().create_timer(0.2), "timeout")
+			Ganaretor.kustes -= 1
+			var _world = get_parent()
+			var navigation = navigationscene.instance()
+			navigation.position.x = cords2[number]
+			navigation.position.y = cords2[number2]
+			navigation.position.x = cords2[number]
+			navigation.position.y = cords2[number2]
+			get_parent().get_parent().get_node("zombies").call_deferred("add_child", navigation)
+			var world = get_parent()
+			var exit_scene = load("res://exit.tscn")
+			var _exit_intance = exit_scene.instance()
+			_exit_intance.position = position
+			world.call_deferred("add_child", _exit_intance)
+			_exit_intance.position = position
+			var drop_scene = load("res://world/drop/ItemDrop.tscn")
+			var _drop_intance = drop_scene.instance()
+			_drop_intance.position = position
+			_drop_intance.item_name = "drop_wood"
+			world.call_deferred("add_child", _drop_intance)
+			queue_free()
 func _on_kust_area_entered(area):
-	if area.is_in_group("kust"):
-		$CollisionShape2D.set_deferred("disabled" , true)
-		var navigationscene = load("res://world/NavigationPolygonInstance.tscn")
-		var navigation = navigationscene.instance()
-		navigation.position.x = cords2[number]
-		navigation.position.y = cords2[number2]
-		navigation.position.x = cords2[number]
-		navigation.position.y = cords2[number2]
-		get_parent().get_parent().get_node("zombies").call_deferred("add_child", navigation)
-		randomize()
-		for i in range(randi() % cords.size()):
-			random_x = cords[i]
-			number = i
-		for i in range(randi() % cords.size()):
-			random_y = cords[i]
-			number2 = i
-		var random_pos = Vector2(random_x,random_y)
-		position = random_pos
-		$CollisionShape2D.set_deferred("disabled" , false)
-	elif area.is_in_group("blocked"):
+	if area.is_in_group("blocked"):
 		$CollisionShape2D.set_deferred("disabled" , true)
 		var navigationscene = load("res://world/NavigationPolygonInstance.tscn")
 		var navigation = navigationscene.instance()
@@ -132,15 +161,15 @@ func _on_kust_area_entered(area):
 			$StaticBody2D.visible = false
 			$StaticBody2D/CollisionShape2D.disabled = true
 			$CollisionShape2D.visible = false
-			$AnimatedSprite.visible = false
+			$tex.visible = false
 			$CollisionShape2D.disabled = true
 			for i in range(10):
 				var particle = Polygon2D.new()
 				random.randomize()
-				var pos = Vector2(random.randi_range(0,$AnimatedSprite.texture.get_size().x),random.randi_range(0,$AnimatedSprite.texture.get_size().y))
+				var pos = Vector2(random.randi_range(0,$tex.texture.get_size().x),random.randi_range(0,$tex.texture.get_size().y))
 				particle.polygon = [pos , Vector2(pos.x +5 ,pos.y), Vector2(pos.x +5 ,pos.y+5) , Vector2(pos.x ,pos.y+5)]
-				particle.texture = $AnimatedSprite.texture
-				particle.position = $AnimatedSprite.position -pos 
+				particle.texture = $tex.texture
+				particle.position = $tex.position -pos 
 				particle.set_script(load("res://world/particle.gd"))
 				add_child(particle)
 			yield(get_tree().create_timer(0.2), "timeout")

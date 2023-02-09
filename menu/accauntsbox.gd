@@ -49,7 +49,7 @@ func updatelist():
 		acc_file_instance.token= save_data3["token"]
 		var t =  acc_file_instance.get_node("Button/CenterContainer/box/CenterContainer/iconb/TextureRect").texture.duplicate(true)
 		acc_file_instance.get_node("Button/CenterContainer/box/CenterContainer/iconb/TextureRect").texture = t
-		epic.gethead(save_data3["accountid"], save_data3["token"],acc_file_instance.get_node("Button/CenterContainer/box/CenterContainer/iconb/TextureRect").texture,0)
+		#epic.gethead(save_data3["accountid"], save_data3["token"],acc_file_instance.get_node("Button/CenterContainer/box/CenterContainer/iconb/TextureRect").texture,0)
 		add_child(acc_file_instance)
 		
 	var add_acc_file = load("res://menu/addaccount.tscn")

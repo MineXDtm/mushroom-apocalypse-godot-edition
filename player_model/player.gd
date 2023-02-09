@@ -34,6 +34,7 @@ func changed_settings():
 	else:
 		shadow.visible = false
 func _process(_delta):
+	
 	$Label.text = str(position)
 	if health <= 0 and cd == false:
 		cd = true
@@ -112,37 +113,44 @@ onready var player = get_node("player")
 onready var shadow = get_node("model/shadow")
 var in_menu = false
 func loadskin():
+	return
 	for i in get_node("model").get_children():
 		if i.name == "shadow":continue
 		i.texture.set_atlas(SkinManager.skin)
 		
 func _physics_process(_delta):
 	if in_console == false and in_menu == false:
+		
+		$RayCast2D.look_at(get_global_mouse_position())
+		$RayCast2D.global_rotation_degrees -= 90
+		$Line2D.global_rotation_degrees = $RayCast2D.global_rotation_degrees
+		
+		if $RayCast2D.is_colliding():
+			if $Line2D.visible == true:
+				get_parent().get_node("select").visible = true
+			get_parent().get_node("select").position = $RayCast2D.get_collider().position
+			get_parent().get_node("select").texture = $RayCast2D.get_collider().get_node("tex").texture
+			
+			var origin = $RayCast2D.global_transform.origin
+			var collision_point = $RayCast2D.get_collision_point()
+			var distance = origin.distance_to(collision_point)
+			$Line2D.points[1].y = distance
+		else:
+			get_parent().get_node("select").visible = false
+			$Line2D.points[1].y = 25
 		get_input()
 		$Label.text = str(position)
 		velocity = move_and_slide(velocity)
 		get_node("/root/world/UI2/bars/health/bg/bar_health").value = health
-		if fliped == false:
-			$armsattack/CollisionShape2D.position.x = 17.478
-			$wooden_exe/CollisionShape2D.position.x = 17.478
-			$wooden_pickaxe/CollisionShape2D.position.x = 17.478
-			$stone_pickaxe/CollisionShape2D.position.x = 17.478
-			$stone_exe/CollisionShape2D.position.x = 17.478
-		else:
-			if arm != "arm":
-				if JsonData.item_data[arm]["ItemCategory"] == "instrument":
-					$model/arm1/item.rect_position.x = -8
-					$model/arm1/item.rect_position.y = -3.5
-					$model/arm1/item.rect_rotation = -45
-				else:
-					$model/arm1/item.rect_rotation = 0
-					$model/arm1/item.rect_position.x = -7
-					$model/arm1/item.rect_position.y = -8
-			$armsattack/CollisionShape2D.position.x = -17.478
-			$wooden_exe/CollisionShape2D.position.x = -17.478
-			$wooden_pickaxe/CollisionShape2D.position.x = -17.478
-			$stone_pickaxe/CollisionShape2D.position.x = -17.478
-			$stone_exe/CollisionShape2D.position.x = -17.478
+		if arm != "arm":
+			if JsonData.item_data[arm]["ItemCategory"] == "instrument":
+				$model/arm1/item.rect_position.x = -8
+				$model/arm1/item.rect_position.y = -3.5
+				$model/arm1/item.rect_rotation = -45
+			else:
+				$model/arm1/item.rect_rotation = 0
+				$model/arm1/item.rect_position.x = -7
+				$model/arm1/item.rect_position.y = -8
 func get_input():
 	velocity = Vector2()
 	if Input.is_action_just_released("scrolling_up") and isattacking == false and opened == false  and died == false and eating == false:
@@ -174,6 +182,31 @@ func get_input():
 			invenory_slot = str(i)
 	if Input.is_action_just_pressed("open")  and died == false:
 		$body/CollisionShape2D2.disabled = false
+	if Input.is_action_just_pressed("click_left") and opened == false and isattacking == false and inventory_opened == false and died == false:
+		$Line2D.visible = true
+		
+	if Input.is_action_just_released("click_left") and opened == false and isattacking == false and inventory_opened == false and died == false :
+		get_parent().get_node("select").visible = false
+		$Line2D.visible = false
+		
+		var rand = randi() % 2
+		rands = rand
+		
+		if arm == "arm":
+			isattacking = true
+			if !$RayCast2D.is_colliding():return
+			$RayCast2D.get_collider().damage()
+			
+		elif JsonData.item_data[arm]["ItemCategory"] == "food" and health < 20 and eating == false:
+			eating = true
+		elif JsonData.item_data[arm]["ItemCategory"] == "resurse":
+			isattacking = true
+			if !$RayCast2D.is_colliding():return
+			print($RayCast2D.get_collider().name)
+		elif JsonData.item_data[arm]["ItemCategory"] == "instrument":
+			isattacking = true
+			if !$RayCast2D.is_colliding():return
+			print($RayCast2D.get_collider().name)
 	if Input.is_action_just_pressed("inv1") and isattacking == false and opened == false  and died == false and eating == false:
 		var inv = get_parent().get_node("/root/world/UI2/hand_slots")
 		inv.select("slot1")
@@ -200,21 +233,6 @@ func get_input():
 		velocity.y += 1
 	if Input.is_action_pressed("player_up") and isattacking == false and opened == false and died == false and eating == false:
 		velocity.y -= 1
-	if velocity.x == 0 and velocity.y == 0 :
-		if Input.is_action_just_pressed("click_left") and opened == false and isattacking == false and inventory_opened == false and died == false:
-			var rand = randi() % 2
-			rands = rand
-			if arm == "arm":
-				isattacking = true
-				$armsattack/CollisionShape2D.disabled = false
-			elif JsonData.item_data[arm]["ItemCategory"] == "food" and health < 20 and eating == false:
-				eating = true
-			elif JsonData.item_data[arm]["ItemCategory"] == "resurse":
-				isattacking = true
-				$armsattack/CollisionShape2D.disabled = false
-			elif JsonData.item_data[arm]["ItemCategory"] == "instrument":
-				isattacking = true
-				get_node(str(arm,"/CollisionShape2D")).disabled = false
 	velocity = velocity.normalized() * speed
 	animate()
 	inventory()
@@ -345,10 +363,10 @@ func _on_Timer2_timeout():
 
 func _on_Timer3_timeout():
 	if $player.current_animation == "attack" :
-		$armsattack/CollisionShape2D.disabled = true
+		
 		isattacking = false
 	elif $player.current_animation == "attack_2" :
-		$armsattack/CollisionShape2D.disabled = true
+		
 		isattacking = false
 
 func _on_player_animation_finished(_anim_name):
@@ -358,7 +376,6 @@ func _on_player_animation_finished(_anim_name):
 		$model.scale.x = -1
 	if arm == "arm":
 		isattacking = false
-		$armsattack/CollisionShape2D.disabled = true
 	elif JsonData.item_data[arm]["ItemCategory"] == "food":
 		health += 0.5
 		var inventory1 = get_parent().get_parent().get_parent().get_node("UI2/inventory")
@@ -366,7 +383,6 @@ func _on_player_animation_finished(_anim_name):
 		eating = false
 	elif JsonData.item_data[arm]["ItemCategory"] == "resurse":
 		isattacking = false
-		$armsattack/CollisionShape2D.disabled = true
 	elif JsonData.item_data[arm]["ItemCategory"] == "instrument":
 		isattacking = false
 		get_node(str(arm,"/CollisionShape2D")).disabled = true

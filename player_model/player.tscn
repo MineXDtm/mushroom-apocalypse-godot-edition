@@ -1,6 +1,7 @@
 [gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://skin.png" type="Texture" id=1]
+[ext_resource path="res://textures/gui/casttex.png" type="Texture" id=2]
 [ext_resource path="res://player_model/player.gd" type="Script" id=6]
 [ext_resource path="res://player_model/player_IDLE_anim.tres" type="Animation" id=7]
 [ext_resource path="res://textures/items/drop_wood.png" type="Texture" id=9]
@@ -13,17 +14,8 @@ blend_mode = 1
 [sub_resource type="OccluderPolygon2D" id=2]
 polygon = PoolVector2Array( -4, 13, 5, 13, 5, 14, 6, 14, 6, 15, 5, 15, 5, 16, -4, 16, -4, 15, -5, 15, -5, 14, -4, 14 )
 
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 5.09041, 13 )
-
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 12.0669, 6.14661 )
-
-[sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 6.69397, 9.067 )
-
-[sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 10, 5.79864 )
 
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 12, 16 )
@@ -33,6 +25,21 @@ bg_color = Color( 0.294118, 0.682353, 0.168627, 1 )
 
 [sub_resource type="StyleBoxFlat" id=12]
 bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="Animation" id=27]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("model/body2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 8 ) ]
+}
 
 [sub_resource type="Animation" id=13]
 length = 0.41
@@ -227,6 +234,18 @@ tracks/15/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("model/body2:position")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 8 ) ]
 }
 
 [sub_resource type="Animation" id=14]
@@ -874,6 +893,18 @@ tracks/15/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/16/type = "value"
+tracks/16/path = NodePath("model/body2:position")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 8 ) ]
+}
 
 [sub_resource type="RectangleShape2D" id=17]
 extents = Vector2( 4, 4 )
@@ -934,6 +965,9 @@ region = Rect2( 0, 25, 6, 5 )
 [sub_resource type="CanvasItemMaterial" id=5]
 light_mode = 1
 
+[sub_resource type="CanvasItemMaterial" id=28]
+light_mode = 1
+
 [node name="player" type="KinematicBody2D"]
 light_mask = 3
 material = SubResource( 1 )
@@ -953,13 +987,6 @@ smoothing_enabled = true
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource( 2 )
 
-[node name="armsattack" type="Area2D" parent="." groups=["arm", "damage"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="armsattack"]
-position = Vector2( -18, 6 )
-shape = SubResource( 6 )
-disabled = true
-
 [node name="body" type="Area2D" parent="." groups=["body", "player"]]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="body" groups=["body"]]
@@ -970,34 +997,6 @@ disabled = true
 [node name="Timer" type="Timer" parent="." groups=["wooden_pickaxe"]]
 wait_time = 0.1
 autostart = true
-
-[node name="wooden_exe" type="Area2D" parent="." groups=["damage", "wooden_exe"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="wooden_exe"]
-position = Vector2( -19.2916, 7.04173 )
-shape = SubResource( 8 )
-disabled = true
-
-[node name="stone_exe" type="Area2D" parent="." groups=["damage", "stone_exe"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="stone_exe"]
-position = Vector2( -19.2916, 7.04173 )
-shape = SubResource( 8 )
-disabled = true
-
-[node name="wooden_pickaxe" type="Area2D" parent="." groups=["damage", "wooden_pickaxe"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="wooden_pickaxe" groups=["wooden_pickaxe"]]
-position = Vector2( -22.3122, 5.02821 )
-shape = SubResource( 9 )
-disabled = true
-
-[node name="stone_pickaxe" type="Area2D" parent="." groups=["damage", "stone_pickaxe"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="stone_pickaxe" groups=["wooden_pickaxe"]]
-position = Vector2( -22.3122, 5.02821 )
-shape = SubResource( 9 )
-disabled = true
 
 [node name="area" type="Area2D" parent="." groups=["area", "player"]]
 
@@ -1032,6 +1031,7 @@ wait_time = 0.3
 one_shot = true
 
 [node name="player" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 27 )
 anims/attack = SubResource( 13 )
 anims/attack_2 = SubResource( 14 )
 anims/eating = SubResource( 15 )
@@ -1056,38 +1056,41 @@ explosiveness = 0.17
 randomness = 0.47
 process_material = SubResource( 20 )
 
+[node name="objects" type="Node2D" parent="."]
+
+[node name="audio" type="Node2D" parent="."]
+
 [node name="model" type="Node2D" parent="."]
 
 [node name="shadow" type="Sprite" parent="model"]
 light_mask = -2147483646
 position = Vector2( 0.515338, 14.6613 )
 scale = Vector2( 0.612136, 0.545864 )
+z_index = -1
 texture = ExtResource( 19 )
 
 [node name="arm2" type="Sprite" parent="model"]
 show_behind_parent = true
 material = SubResource( 3 )
-position = Vector2( -4, 5.5 )
+position = Vector2( -5, 5.5 )
 texture = SubResource( 22 )
 
 [node name="head" type="Sprite" parent="model"]
 show_behind_parent = true
 light_mask = 0
 material = SubResource( 4 )
-position = Vector2( 0, -2.5 )
+position = Vector2( 1.19209e-07, -2.5 )
 texture = SubResource( 21 )
 region_rect = Rect2( -1, -1, 24, 19 )
 
 [node name="leg2" type="Sprite" parent="model"]
 material = SubResource( 3 )
-position = Vector2( -5, 11 )
-rotation = 0.86946
+position = Vector2( -1.5, 12 )
 texture = SubResource( 24 )
 
 [node name="leg1" type="Sprite" parent="model"]
 material = SubResource( 3 )
-position = Vector2( 6, 11 )
-rotation = -1.03488
+position = Vector2( 2.5, 12 )
 texture = SubResource( 25 )
 
 [node name="body2" type="Sprite" parent="model"]
@@ -1128,6 +1131,24 @@ __meta__ = {
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -4, 10, -4, 14, 5, 14, 5, 10 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 25 )
+collision_mask = 8
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Line2D" type="Line2D" parent="."]
+visible = false
+material = SubResource( 28 )
+z_index = 1
+points = PoolVector2Array( 0, 0, 0, 25 )
+width = 5.0
+default_color = Color( 1, 1, 1, 1 )
+texture = ExtResource( 2 )
+texture_mode = 2
+round_precision = 12
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="area_entered" from="area" to="." method="_on_area_area_entered"]

@@ -25,7 +25,8 @@ run/main_scene="res://menu.tscn"
 config/use_custom_user_dir=true
 boot_splash/image="res://minexd.png"
 boot_splash/fullsize=false
-boot_splash/bg_color=Color( 0.803922, 0.196078, 0.196078, 1 )
+boot_splash/use_filter=false
+boot_splash/bg_color=Color( 1, 1, 1, 1 )
 config/icon="res://icon.png"
 config/windows_native_icon="res://icon.ico"
 
@@ -208,6 +209,10 @@ emotebar={
 2d_physics/layer_1="cant_move"
 2d_physics/layer_2="cant_build"
 2d_physics/layer_3="zombie_can_break"
+
+[mono]
+
+project/assembly_name="mushroom apocalypse"
 
 [rendering]
 

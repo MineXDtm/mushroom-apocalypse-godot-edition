@@ -121,14 +121,14 @@ func _on_kust_area_entered(area):
 			print("broked")
 			broked = true
 	if broked == true :
-			$AnimatedSprite.visible = false
+			$tex.visible = false
 			for i in range(10):
 				var particle = Polygon2D.new()
 				random.randomize()
-				var pos = Vector2(random.randi_range(0,$AnimatedSprite.texture.get_size().x),random.randi_range(0,$AnimatedSprite.texture.get_size().y))
+				var pos = Vector2(random.randi_range(0,$tex.texture.get_size().x),random.randi_range(0,$tex.texture.get_size().y))
 				particle.polygon = [pos , Vector2(pos.x +5 ,pos.y), Vector2(pos.x +5 ,pos.y+5) , Vector2(pos.x ,pos.y+5)]
-				particle.texture = $AnimatedSprite.texture
-				particle.position = $AnimatedSprite.position -pos 
+				particle.texture = $tex.texture
+				particle.position = $tex.position -pos 
 				particle.set_script(load("res://world/particle.gd"))
 				add_child(particle)
 			yield(get_tree().create_timer(0.2), "timeout")

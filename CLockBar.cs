@@ -18,7 +18,8 @@ using Newtonsoft.Json;
 using System.Linq;
 using System.Collections.Generic;
 using System.Net;
-
+using System.IO.MemoryMappedFiles;
+using System.Text;
 public class CLockBar : Node
 {
 	// Declare member variables here. Examples:
@@ -30,9 +31,9 @@ public class CLockBar : Node
 	private static EpicAccountId localuserid;
 	private static EpicAccountId localuseridf;
 	private static ProductUserId productuserid;
-	public string token;
 	public string nickname;
-
+	public String CustomSkin = "null";
+	public string token ;
 	string nickp = "/root/menu/menu_1/VBoxContainer/MarginContainer/VBoxContainer/p/MarginContainer/HBoxContainer/Nickname";
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -44,6 +45,8 @@ public class CLockBar : Node
 		string deploymentId = "1fa029e4788a448eb8e85f379a8f8fc8";
 		string clientId = "xyza7891LhaG2lVbex3pkzi0UbCLUKFV";
 		string clientSecret = "SWByQFB0hkXwxlFgW7ildGxjXvqEE7DDYo+0ytEdLt0";
+
+
 
 		var initializeOptions = new Epic.OnlineServices.Platform.InitializeOptions()
 		{
@@ -93,81 +96,7 @@ public class CLockBar : Node
 		}
 
 	}
-	byte[] data = new byte[0];
-	// Called when the node enters the scene tree for the first time.
-	public void emotelistc(ProductUserId productuserid)
-	{
-		static T[] CombineTwoArrays<T>(T[] a1, T[] a2)
-		{
-			T[] arrayCombined = new T[a1.Length + a2.Length];
-			System.Array.Copy(a1, 0, arrayCombined, 0, a1.Length);
-			System.Array.Copy(a2, 0, arrayCombined, a1.Length, a2.Length);
-			return arrayCombined;
-		}
-		var readFileOptions = new Epic.OnlineServices.TitleStorage.ReadFileOptions()
-		{
-			LocalUserId = productuserid,
-			Filename = "emoteslist",
-			ReadChunkLengthBytes = 1048576,
-			ReadFileDataCallback = (Epic.OnlineServices.TitleStorage.ReadFileDataCallbackInfo readFileDataCallbackInfo) =>
-			{
-				data = CombineTwoArrays(data, readFileDataCallbackInfo.DataChunk);
-				return Epic.OnlineServices.TitleStorage.ReadResult.RrContinuereading;
-			},
-			FileTransferProgressCallback = (Epic.OnlineServices.TitleStorage.FileTransferProgressCallbackInfo fileTransferProgressCallbackInfo) =>
-			{
-				var percentComplete = (double)fileTransferProgressCallbackInfo.BytesTransferred / (double)fileTransferProgressCallbackInfo.TotalFileSizeBytes * 100;
-				GD.Print($"Downloading file <{fileTransferProgressCallbackInfo.Filename}> ({System.Math.Ceiling(percentComplete)}%)...");
-			}
-		};
-
-		GD.Print($"Downloading file <{readFileOptions.Filename}> (creating buffer)...");
-
-		var fileTransferRequest = platformInterface.GetTitleStorageInterface().ReadFile(readFileOptions, null, (Epic.OnlineServices.TitleStorage.ReadFileCallbackInfo readFileCallbackInfo) =>
-		{
-
-		GD.Print($"ReadFile {readFileCallbackInfo.ResultCode} - " + readFileCallbackInfo.Filename);
-
-		if (readFileCallbackInfo.ResultCode == Result.Success)
-		{
-			GD.Print($"Successfully Downloaded emotelist {readFileCallbackInfo.Filename}");
-
-
-
-			var jsonFile = JSON.Parse(data.GetStringFromUTF8()).Result;
-
-			Dictionary ParsedData = jsonFile as Dictionary;
-			var d = new Godot.Directory();
-			d.Open("res://EmotesA");
-			var files = new Godot.Collections.Array();
-			d.ListDirBegin();
-			IEnumerable<int> squares = Enumerable.Range(1, 99).Select(x => x * x);
-			foreach (int num in squares)
-			{
-					var file1 = d.GetNext();
-
-					if (file1 == "")
-					{
-						break;
-					}
-					else if (!file1.BeginsWith("."))
-					{
-						files.Add(file1);
-					}
-			}
-			var pd = ParsedData["emotes"] as Godot.Collections.Array;
-			
-				
-			}
-		}
-		);
-
-		if (fileTransferRequest == null)
-		{
-			GD.Print("Error downloading file: bad handle");
-
-		}
-	}
+	
 	
 
 public void login()
@@ -214,6 +143,7 @@ public void login()
 					{
 						if (data.ResultCode == Epic.OnlineServices.Result.Success)
 						{
+							GetNode("/root/playerinfo").Call("create");
 							log(loginCallbackInfo, authInterface);
 						}
 						else if (Epic.OnlineServices.Common.IsOperationComplete(data.ResultCode))
@@ -231,131 +161,10 @@ public void login()
 
 		);
 	}
-	public void WriteFile()
-	{
-		var bytesWritten = 0;
-		var openFileDialog = new OpenFileDialog();
-		openFileDialog.InitialDirectory = "c:\\";
-		openFileDialog.Filter = "PNG Portable Network Graphics (*.png)|*.png";
+	
+	
 
-		openFileDialog.FilterIndex = 2;
-		openFileDialog.RestoreDirectory = true;
-		if (openFileDialog.ShowDialog() == DialogResult.OK)
-		{
-			GD.Print(ProductUserId.FromString(localuserid.ToString()));
-
-			var writeFileOptions = new WriteFileOptions()
-			{
-
-				LocalUserId = productuserid,
-				Filename = localuserid.ToString() + ".png",
-				ChunkLengthBytes = 10485760,
-				WriteFileDataCallback = (WriteFileDataCallbackInfo writeFileDataCallbackInfo, out byte[] buffer) =>
-				{
-					var fs = new FileStream($"{openFileDialog.FileName}", FileMode.Open, FileAccess.Read);
-
-					if (fs.Length > bytesWritten)
-					{
-
-						var readBytes = new byte[System.Math.Min(writeFileDataCallbackInfo.DataBufferLengthBytes, fs.Length)];
-						fs.Seek(bytesWritten, SeekOrigin.Begin);
-						bytesWritten += fs.Read(readBytes, 0, (int)System.Math.Min(writeFileDataCallbackInfo.DataBufferLengthBytes, fs.Length));
-						buffer = readBytes;
-					}
-					else
-					{
-						buffer = new byte[0];
-						return WriteResult.CompleteRequest;
-					}
-					return WriteResult.ContinueWriting;
-				},
-				FileTransferProgressCallback = (FileTransferProgressCallbackInfo fileTransferProgressCallbackInfo) =>
-				{
-					var percentComplete = (double)fileTransferProgressCallbackInfo.BytesTransferred / (double)fileTransferProgressCallbackInfo.TotalFileSizeBytes * 100;
-					GD.Print($"Downloading file <{fileTransferProgressCallbackInfo.Filename}> ({System.Math.Ceiling(percentComplete)}%)...");
-				}
-			};
-
-			GD.Print($"Uploading file <{writeFileOptions.Filename}> (creating buffer)...");
-
-			var fileTransferRequest = platformInterface
-		.GetPlayerDataStorageInterface().WriteFile(writeFileOptions, null, (WriteFileCallbackInfo writeFileCallbackInfo) =>
-		{
-			GD.Print($"WriteFile {writeFileCallbackInfo.ResultCode}");
-
-			if (writeFileCallbackInfo.ResultCode == Result.Success)
-			{
-				GD.Print($"Successfully uploaded {writeFileCallbackInfo.Filename}.");
-				var im = new Image();
-				im.Load(openFileDialog.FileName);
-				GetNode("/root/SkinManager").Call("loadskin", im);
-			}
-			else
-			{
-				GD.Print($"Error uploading {writeFileCallbackInfo.Filename}: {writeFileCallbackInfo.ResultCode}.");
-			}
-		});
-
-			if (fileTransferRequest == null)
-			{
-				GD.Print("Error uploading file: bad handle");
-			}
-		}
-	}
-
-	public void gethead(string id, string token, AtlasTexture t, int type)
-
-	{
-		var c = platformInterface.GetConnectInterface();
-		if (type == 0)
-		{
-
-
-
-			var ap = new Epic.OnlineServices.Connect.LoginOptions()
-			{
-				Credentials = new Epic.OnlineServices.Connect.Credentials()
-				{
-					Type = ExternalCredentialType.Epic,
-					Token = token,
-
-				},
-			};
-
-
-			c.Login(ap, null, (Epic.OnlineServices.Connect.LoginCallbackInfo cl) =>
-			{
-				if (cl.ResultCode == Epic.OnlineServices.Result.Success)
-				{
-
-
-					GD.Print("chead succeeded");
-
-					productuserid = cl.LocalUserId;
-
-					var sk = new skinloader();
-					sk.platformInterface = platformInterface;
-					GD.Print(t);
-					sk.ReadSkin(cl.LocalUserId, 0, EpicAccountId.FromString(id), t, GetNode("/root/SkinManager"));
-
-				}
-				else if (Epic.OnlineServices.Common.IsOperationComplete(cl.ResultCode))
-				{
-					GD.Print("chead failed: " + cl.GetResultCode());
-				};
-			}
-				);
-		}
-
-
-
-
-
-
-
-
-
-	}
+	
 
 	public void logaccaunt(string id, string token)
 	{
@@ -425,6 +234,7 @@ public void login()
 
 
 				GD.Print("acc succeeded");
+				
 				var c = platformInterface.GetConnectInterface();
 				var ap = new CopyUserAuthTokenOptions();
 
@@ -432,6 +242,8 @@ public void login()
 
 
 				token = i.AccessToken;
+
+				
 				var loginOptions = new Epic.OnlineServices.Connect.LoginOptions()
 				{
 					Credentials = new Epic.OnlineServices.Connect.Credentials()
@@ -450,12 +262,7 @@ public void login()
 
 						GD.Print("c succeeded");
 						productuserid = cl.LocalUserId;
-						var sk = new skinloader();
-						sk.platformInterface = platformInterface;
 
-						sk.ReadSkin(productuserid, 1, localuserid, null, GetNode("/root/SkinManager"));
-						
-						
 						Friendsinterface = platformInterface.GetFriendsInterface();
 
 
@@ -610,80 +417,9 @@ public void login()
 	{
 		GetNode("/root/SkinManager").Call("loadskin", im);
 	}
-	public class skinloader
-	{
-		// Declare member variables here. Examples:
-		// private int a = 2;
-		// private string b = "text";
-		public PlatformInterface platformInterface { get; set; }
-
-		byte[] data = new byte[0];
-		// Called when the node enters the scene tree for the first time.
-		public void ReadSkin(ProductUserId productuserid, int type, EpicAccountId localuserid, AtlasTexture t, Node d)
-		{
-			static T[] CombineTwoArrays<T>(T[] a1, T[] a2)
-			{
-				T[] arrayCombined = new T[a1.Length + a2.Length];
-				Array.Copy(a1, 0, arrayCombined, 0, a1.Length);
-				Array.Copy(a2, 0, arrayCombined, a1.Length, a2.Length);
-				return arrayCombined;
-			}
-			GD.Print(productuserid);
-			GD.Print(localuserid);
-			var readFileOptions = new ReadFileOptions()
-			{
-				LocalUserId = productuserid,
-				Filename = localuserid.ToString() + ".png",
-				ReadChunkLengthBytes = 1048576,
-				ReadFileDataCallback = (ReadFileDataCallbackInfo readFileDataCallbackInfo) =>
-				{
-					data = CombineTwoArrays(data, readFileDataCallbackInfo.DataChunk);
-					return ReadResult.ContinueReading;
-				},
-				FileTransferProgressCallback = (FileTransferProgressCallbackInfo fileTransferProgressCallbackInfo) =>
-				{
-					var percentComplete = (double)fileTransferProgressCallbackInfo.BytesTransferred / (double)fileTransferProgressCallbackInfo.TotalFileSizeBytes * 100;
-					GD.Print($"Downloading file <{fileTransferProgressCallbackInfo.Filename}> ({System.Math.Ceiling(percentComplete)}%)...");
-				}
-			};
-
-			GD.Print($"Downloading file <{readFileOptions.Filename}> (creating buffer)...");
-
-			var fileTransferRequest = platformInterface.GetPlayerDataStorageInterface().ReadFile(readFileOptions, null, (ReadFileCallbackInfo readFileCallbackInfo) =>
-			{
-
-				GD.Print($"ReadFile {readFileCallbackInfo.ResultCode}");
-
-				if (readFileCallbackInfo.ResultCode == Result.Success)
-				{
-					GD.Print($"Successfully setted {readFileCallbackInfo.Filename}");
-					var im = new Image();
-					//im.CreateFromData(32, 32, true, Image.Format.Rgb8, data);
-					im.LoadPngFromBuffer(data);
-					if (type == 1)
-					{
-
-						d.Call("loadskin", im);
-
-					}
-					if (type == 0)
-					{
-						var tt = new ImageTexture();
-
-						tt.CreateFromImage(im, 0);
-						t.Atlas = tt;
-					}
-				}
-			}
-			);
-
-			if (fileTransferRequest == null)
-			{
-				GD.Print("Error downloading file: bad handle");
-
-			}
-		}
-	}
+	
+	
+	
 	
 }
 

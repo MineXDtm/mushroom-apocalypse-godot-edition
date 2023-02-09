@@ -9,19 +9,17 @@
 
 [sub_resource type="StyleBoxEmpty" id=57]
 
-[sub_resource type="Gradient" id=59]
-offsets = PoolRealArray( 0.0921409, 1 )
-colors = PoolColorArray( 0.315063, 0.695313, 0.677488, 1, 0.98267, 0.98103, 0.98103, 1 )
-
-[sub_resource type="GradientTexture" id=60]
-gradient = SubResource( 59 )
-
-[sub_resource type="StyleBoxTexture" id=61]
-texture = SubResource( 60 )
-region_rect = Rect2( 0, 0, 2048, 1 )
+[sub_resource type="ViewportTexture" id=59]
+viewport_path = NodePath("Button/CenterContainer/box/CenterContainer/iconb/Viewport")
 
 [sub_resource type="AtlasTexture" id=58]
 region = Rect2( 0, 0, 22, 17 )
+
+[sub_resource type="Gradient" id=60]
+colors = PoolColorArray( 0.454902, 0, 1, 1, 0.713726, 0.121569, 0.678431, 1 )
+
+[sub_resource type="GradientTexture" id=61]
+gradient = SubResource( 60 )
 
 [sub_resource type="DynamicFont" id=51]
 font_data = ExtResource( 4 )
@@ -74,14 +72,15 @@ mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="iconb" type="Panel" parent="Button/CenterContainer/box/CenterContainer"]
+[node name="iconb" type="TextureRect" parent="Button/CenterContainer/box/CenterContainer"]
 margin_left = 13.0
 margin_right = 48.0
 margin_bottom = 35.0
 rect_min_size = Vector2( 35, 35 )
 mouse_filter = 2
 size_flags_vertical = 0
-custom_styles/panel = SubResource( 61 )
+texture = SubResource( 59 )
+expand = true
 
 [node name="TextureRect" type="TextureRect" parent="Button/CenterContainer/box/CenterContainer/iconb"]
 anchor_right = 1.0
@@ -97,6 +96,19 @@ stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Viewport" type="Viewport" parent="Button/CenterContainer/box/CenterContainer/iconb"]
+size = Vector2( 50, 50 )
+transparent_bg = true
+
+[node name="TextureRect" type="TextureRect" parent="Button/CenterContainer/box/CenterContainer/iconb/Viewport"]
+margin_left = 25.0
+margin_top = -25.0
+margin_right = 125.0
+margin_bottom = 75.0
+rect_rotation = 45.0
+texture = SubResource( 61 )
+expand = true
 
 [node name="Label" type="Label" parent="Button/CenterContainer/box"]
 margin_left = 82.0

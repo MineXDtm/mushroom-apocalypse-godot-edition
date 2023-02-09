@@ -1,24 +1,66 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://textures/gui/customizationbg.png" type="Texture" id=1]
 [ext_resource path="res://menu/playerview.tscn" type="PackedScene" id=2]
 [ext_resource path="res://costumization_menu.gd" type="Script" id=3]
-[ext_resource path="res://apply.cs" type="Script" id=4]
-[ext_resource path="res://textures/gui/backgraundbutton_applyskin.png" type="Texture" id=5]
-[ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://builds/cmbar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://player_model/bar.tscn" type="PackedScene" id=5]
+[ext_resource path="res://textures/gui/shopbatpart.png" type="Texture" id=6]
+[ext_resource path="res://textures/gui/backpackbatpart.png" type="Texture" id=7]
+[ext_resource path="res://textures/gui/shopbat.png" type="Texture" id=8]
+[ext_resource path="res://textures/gui/shopicont.png" type="Texture" id=9]
+[ext_resource path="res://textures/gui/backpackicon.png" type="Texture" id=10]
+[ext_resource path="res://gui/shopbat.gd" type="Script" id=11]
+[ext_resource path="res://gui/backpack.gd" type="Script" id=12]
+[ext_resource path="res://textures/gui/backpackbatbg.png" type="Texture" id=13]
+[ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=14]
+[ext_resource path="res://shop_and_cost/costumication.gd" type="Script" id=15]
+[ext_resource path="res://textures/gui/backpackbatselected.png" type="Texture" id=16]
+[ext_resource path="res://textures/gui/plus_bar.png" type="Texture" id=17]
 
-[sub_resource type="ViewportTexture" id=4]
-viewport_path = NodePath("Viewport")
+[sub_resource type="DynamicFont" id=30]
+font_data = ExtResource( 14 )
 
-[sub_resource type="Theme" id=5]
+[sub_resource type="StyleBoxFlat" id=33]
+bg_color = Color( 0.772549, 0, 0.988235, 1 )
+border_width_bottom = 5
+border_color = Color( 0.670588, 0, 0.85098, 1 )
 
-[sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 6 )
+[sub_resource type="StyleBoxFlat" id=31]
+bg_color = Color( 0.623529, 0, 0.796078, 1 )
+border_width_top = 5
+border_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="StyleBoxEmpty" id=34]
+
+[sub_resource type="StyleBoxFlat" id=32]
+bg_color = Color( 0.623529, 0, 0.796078, 1 )
+border_width_bottom = 5
+border_color = Color( 0.4, 0, 0.509804, 1 )
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+
+[sub_resource type="Animation" id=11]
+resource_name = "shophover"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer/HBoxContainer/cosumizationoptions/shop/CenterContainer/MarginContainer/TextureRect:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 0.225313, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ) ]
+}
+
+[sub_resource type="Animation" id=23]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("VBoxContainer/CenterContainer2/apply:rect_scale")
+tracks/0/path = NodePath("VBoxContainer/HBoxContainer/cosumizationoptions/shop/TextureRect:material:shader_param/scroll_speed")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -27,26 +69,50 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("VBoxContainer/CenterContainer2/apply:rect_min_size")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 128, 128 ) ]
+"values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "hover"
+[sub_resource type="Animation" id=24]
+resource_name = "shophover"
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("VBoxContainer/CenterContainer2/apply:rect_min_size")
+tracks/0/path = NodePath("VBoxContainer/HBoxContainer/cosumizationoptions/shop/TextureRect:material:shader_param/scroll_speed")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 2.63902, 2.63902 ),
+"update": 0,
+"values": [ 0.0, 0.2 ]
+}
+
+[sub_resource type="Shader" id=25]
+code = "shader_type canvas_item;
+
+uniform float scroll_speed;
+
+
+
+
+void fragment () {
+	COLOR = texture(TEXTURE, vec2(UV.x + TIME * scroll_speed, UV.y));
+	
+}"
+
+[sub_resource type="ShaderMaterial" id=22]
+shader = SubResource( 25 )
+shader_param/scroll_speed = 0.0
+
+[sub_resource type="Animation" id=12]
+length = 0.001
+
+[sub_resource type="Animation" id=13]
+resource_name = "backpackhover"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer/HBoxContainer/cosumizationoptions/backpack/CenterContainer/MarginContainer/TextureRect:rect_scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -55,8 +121,174 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 128, 128 ), Vector2( 150, 150 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ) ]
 }
+
+[sub_resource type="Animation" id=26]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer/HBoxContainer/cosumizationoptions/shop/TextureRect:material:shader_param/scroll_speed")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HBoxContainer/cosumizationoptions/backpack/TextureRect:material:shader_param/scroll_speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=27]
+resource_name = "backpackhover"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("HBoxContainer/cosumizationoptions/backpack/TextureRect:material:shader_param/scroll_speed")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 2.63902, 2.63902 ),
+"update": 0,
+"values": [ 0.0, 0.2 ]
+}
+
+[sub_resource type="ShaderMaterial" id=28]
+shader = SubResource( 25 )
+shader_param/scroll_speed = 0.0
+
+[sub_resource type="Shader" id=16]
+code = "shader_type canvas_item;
+
+uniform float scroll_speed;
+
+
+
+
+void fragment () {
+	COLOR = texture(TEXTURE, vec2(UV.x + TIME * scroll_speed, UV.y+ TIME * scroll_speed));
+	
+}"
+
+[sub_resource type="ShaderMaterial" id=17]
+shader = SubResource( 16 )
+shader_param/scroll_speed = 0.01
+
+[sub_resource type="ViewportTexture" id=4]
+flags = 5
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="StyleBoxFlat" id=50]
+bg_color = Color( 0.972549, 0.752206, 0, 0.568627 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=49]
+bg_color = Color( 0.972549, 0.752206, 0, 0.568627 )
+
+[sub_resource type="StyleBoxFlat" id=18]
+bg_color = Color( 0, 0.290196, 0.701961, 0.568627 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=19]
+bg_color = Color( 0, 0.290196, 0.701961, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=20]
+bg_color = Color( 0, 0.290196, 0.701961, 0.568627 )
+border_color = Color( 1, 1, 1, 1 )
+shadow_offset = Vector2( 0, 1 )
+
+[sub_resource type="DynamicFont" id=43]
+font_data = ExtResource( 14 )
+
+[sub_resource type="StyleBoxFlat" id=44]
+bg_color = Color( 0.972549, 0.364706, 1, 1 )
+border_width_bottom = 3
+border_color = Color( 0.666667, 0.258824, 0.686275, 1 )
+expand_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxFlat" id=45]
+bg_color = Color( 0.843137, 0.235294, 0.870588, 1 )
+border_width_top = 4
+border_color = Color( 0.513726, 0.129412, 0.533333, 0 )
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxEmpty" id=47]
+
+[sub_resource type="StyleBoxEmpty" id=48]
+
+[sub_resource type="StyleBoxFlat" id=46]
+bg_color = Color( 0.843137, 0.235294, 0.870588, 1 )
+border_width_bottom = 3
+border_color = Color( 0.513726, 0.129412, 0.533333, 1 )
+expand_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxFlat" id=29]
+bg_color = Color( 0, 0, 0, 0.756863 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="DynamicFont" id=35]
+font_data = ExtResource( 14 )
+
+[sub_resource type="StyleBoxFlat" id=40]
+bg_color = Color( 0.952941, 0.184314, 0.705882, 1 )
+border_width_bottom = 2
+border_color = Color( 0.737255, 0.141176, 0.545098, 1 )
+
+[sub_resource type="StyleBoxFlat" id=41]
+bg_color = Color( 0.764706, 0.145098, 0.564706, 1 )
+border_color = Color( 0.537255, 0.101961, 0.396078, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=38]
+
+[sub_resource type="StyleBoxFlat" id=42]
+bg_color = Color( 0.764706, 0.145098, 0.564706, 1 )
+border_width_bottom = 2
+border_color = Color( 0.537255, 0.101961, 0.396078, 1 )
+
+[sub_resource type="StyleBoxFlat" id=36]
+bg_color = Color( 1, 0.568627, 0.972549, 1 )
+border_width_bottom = 2
+border_color = Color( 0.596078, 0.415686, 0.584314, 1 )
+
+[sub_resource type="StyleBoxFlat" id=37]
+bg_color = Color( 1, 0, 0.933333, 1 )
+border_color = Color( 0.682353, 0, 0.639216, 1 )
+
+[sub_resource type="StyleBoxFlat" id=39]
+bg_color = Color( 1, 0, 0.933333, 1 )
+border_width_bottom = 2
+border_color = Color( 0.682353, 0, 0.639216, 1 )
 
 [node name="menu" type="Control"]
 anchor_right = 1.0
@@ -67,7 +299,7 @@ __meta__ = {
 }
 
 [node name="Viewport" type="Viewport" parent="."]
-size = Vector2( 4000, 4000 )
+size = Vector2( 4000, 4200 )
 size_override_stretch = true
 transparent_bg = true
 handle_input_locally = false
@@ -75,32 +307,91 @@ msaa = 4
 fxaa = true
 disable_3d = true
 usage = 0
-render_target_update_mode = 3
+audio_listener_enable_2d = true
 gui_disable_input = true
 
 [node name="playerview" parent="Viewport" instance=ExtResource( 2 )]
 scale = Vector2( 100, 100 )
 
-[node name="bg" type="TextureRect" parent="."]
+[node name="audio" type="Node2D" parent="Viewport/playerview"]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 1 )
-expand = true
-stretch_mode = 7
+custom_constants/separation = 0
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="."]
-margin_right = 80.0
-margin_bottom = 35.0
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 640.0
+margin_bottom = 340.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="cosumizationoptions" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+margin_right = 100.0
+margin_bottom = 340.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_vertical = 3
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer/cosumizationoptions"]
+margin_right = 100.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 100, 40 )
+custom_fonts/font = SubResource( 30 )
+custom_styles/hover = SubResource( 33 )
+custom_styles/pressed = SubResource( 31 )
+custom_styles/focus = SubResource( 34 )
+custom_styles/normal = SubResource( 32 )
 text = "back"
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="VBoxContainer" type="HBoxContainer" parent="."]
+[node name="shop" type="TextureButton" parent="VBoxContainer/HBoxContainer/cosumizationoptions"]
+margin_top = 40.0
+margin_right = 100.0
+margin_bottom = 190.0
+rect_min_size = Vector2( 0, 150 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 8 )
+expand = true
+stretch_mode = 6
+script = ExtResource( 11 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/HBoxContainer/cosumizationoptions/shop"]
+root_node = NodePath("../../../../..")
+anims/RESET = SubResource( 8 )
+anims/shophover = SubResource( 11 )
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="VBoxContainer/HBoxContainer/cosumizationoptions/shop"]
+root_node = NodePath("../../../../..")
+anims/RESET = SubResource( 23 )
+anims/shophover = SubResource( 24 )
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/cosumizationoptions/shop"]
+material = SubResource( 22 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/HBoxContainer/cosumizationoptions/shop"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -108,18 +399,136 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
-margin_right = 318.0
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/cosumizationoptions/shop/CenterContainer"]
+margin_left = 18.0
+margin_top = 43.0
+margin_right = 82.0
+margin_bottom = 107.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/cosumizationoptions/shop/CenterContainer/MarginContainer"]
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+mouse_filter = 2
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="backpack" type="TextureButton" parent="VBoxContainer/HBoxContainer/cosumizationoptions"]
+margin_top = 190.0
+margin_right = 100.0
+margin_bottom = 340.0
+rect_min_size = Vector2( 0, 150 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource( 13 )
+texture_disabled = ExtResource( 16 )
+expand = true
+stretch_mode = 6
+script = ExtResource( 12 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/HBoxContainer/cosumizationoptions/backpack"]
+root_node = NodePath("../../../../..")
+anims/RESET = SubResource( 12 )
+anims/backpackhover = SubResource( 13 )
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="VBoxContainer/HBoxContainer/cosumizationoptions/backpack"]
+root_node = NodePath("../../../..")
+anims/RESET = SubResource( 26 )
+anims/backpackhover = SubResource( 27 )
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/cosumizationoptions/backpack"]
+material = SubResource( 28 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/HBoxContainer/cosumizationoptions/backpack"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -92.6246, 5 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/cosumizationoptions/backpack/CenterContainer"]
+margin_left = 18.0
+margin_top = 43.0
+margin_right = 82.0
+margin_bottom = 107.0
+mouse_filter = 2
+custom_constants/margin_right = 0
+custom_constants/margin_top = 0
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 0
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/cosumizationoptions/backpack/CenterContainer/MarginContainer"]
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+mouse_filter = 2
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 6
+
+[node name="costumication" type="Control" parent="VBoxContainer/HBoxContainer"]
+margin_left = 100.0
+margin_right = 640.0
 margin_bottom = 340.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CenterContainer"]
-margin_left = 69.0
+[node name="bg" type="TextureRect" parent="VBoxContainer/HBoxContainer/costumication"]
+material = SubResource( 17 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 1 )
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/costumication"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="player" type="CenterContainer" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer"]
+margin_right = 268.0
+margin_bottom = 340.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/player"]
+margin_left = 44.0
 margin_top = 80.0
-margin_right = 249.0
+margin_right = 224.0
 margin_bottom = 260.0
+
+[node name="playerviewtex" type="TextureRect" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/player/VBoxContainer"]
+margin_right = 180.0
+margin_bottom = 180.0
 rect_min_size = Vector2( 180, 180 )
 mouse_filter = 2
 texture = SubResource( 4 )
@@ -131,53 +540,228 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer2" type="CenterContainer" parent="VBoxContainer"]
-margin_left = 322.0
-margin_right = 640.0
+[node name="custumications" type="MarginContainer" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer"]
+margin_left = 272.0
+margin_right = 540.0
 margin_bottom = 340.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 10
+custom_constants/margin_top = 5
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 5
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/custumications"]
+margin_left = 10.0
+margin_top = 5.0
+margin_right = 258.0
+margin_bottom = 335.0
+
+[node name="list" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/custumications/CenterContainer"]
+margin_left = 24.0
+margin_top = 11.0
+margin_right = 224.0
+margin_bottom = 319.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 10
+alignment = 1
+
+[node name="player" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/custumications/CenterContainer/list"]
+margin_right = 200.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 200, 0 )
+alignment = 2
+
+[node name="item" type="Button" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/custumications/CenterContainer/list/player"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+custom_styles/hover = SubResource( 50 )
+custom_styles/normal = SubResource( 49 )
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/custumications/CenterContainer/list/player/item"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/custumications/CenterContainer/list/player/item/CenterContainer"]
+self_modulate = Color( 1, 1, 1, 0.745098 )
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 48.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 32, 32 )
+mouse_filter = 2
+texture = ExtResource( 17 )
+expand = true
+stretch_mode = 7
+
+[node name="skin" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/custumications/CenterContainer/list/player" instance=ExtResource( 4 )]
+margin_left = 136.0
+margin_right = 200.0
+custom_styles/hover = SubResource( 18 )
+custom_styles/pressed = SubResource( 19 )
+custom_styles/normal = SubResource( 20 )
+
+[node name="emotes" type="GridContainer" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/custumications/CenterContainer/list"]
+margin_top = 74.0
+margin_right = 200.0
+margin_bottom = 274.0
+columns = 3
+
+[node name="bar0" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/custumications/CenterContainer/list/emotes" instance=ExtResource( 5 )]
+
+[node name="bar1" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/custumications/CenterContainer/list/emotes" instance=ExtResource( 5 )]
+margin_left = 68.0
+margin_right = 132.0
+
+[node name="bar2" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/custumications/CenterContainer/list/emotes" instance=ExtResource( 5 )]
+margin_left = 136.0
+margin_right = 200.0
+
+[node name="bar7" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/custumications/CenterContainer/list/emotes" instance=ExtResource( 5 )]
+margin_top = 68.0
+margin_bottom = 132.0
+
+[node name="center" type="Control" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/custumications/CenterContainer/list/emotes"]
+margin_left = 68.0
+margin_top = 68.0
+margin_right = 132.0
+margin_bottom = 132.0
+
+[node name="bar3" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/custumications/CenterContainer/list/emotes" instance=ExtResource( 5 )]
+margin_left = 136.0
+margin_top = 68.0
+margin_right = 200.0
+margin_bottom = 132.0
+
+[node name="bar6" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/custumications/CenterContainer/list/emotes" instance=ExtResource( 5 )]
+margin_top = 136.0
+margin_bottom = 200.0
+
+[node name="bar5" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/custumications/CenterContainer/list/emotes" instance=ExtResource( 5 )]
+margin_left = 68.0
+margin_top = 136.0
+margin_right = 132.0
+margin_bottom = 200.0
+
+[node name="bar4" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/custumications/CenterContainer/list/emotes" instance=ExtResource( 5 )]
+margin_left = 136.0
+margin_top = 136.0
+margin_right = 200.0
+margin_bottom = 200.0
+
+[node name="tools" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/custumications/CenterContainer/list"]
+margin_top = 284.0
+margin_right = 200.0
+margin_bottom = 308.0
+alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/custumications/CenterContainer/list/tools"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 64, 24 )
+custom_fonts/font = SubResource( 43 )
+custom_styles/hover = SubResource( 44 )
+custom_styles/pressed = SubResource( 45 )
+custom_styles/focus = SubResource( 47 )
+custom_styles/disabled = SubResource( 48 )
+custom_styles/normal = SubResource( 46 )
+text = "save"
+
+[node name="selectionmenu" type="CenterContainer" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer"]
+visible = false
+margin_left = 272.0
+margin_right = 540.0
+margin_bottom = 340.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="apply" type="TextureButton" parent="VBoxContainer/CenterContainer2"]
-margin_left = 95.0
-margin_top = 106.0
-margin_right = 223.0
-margin_bottom = 234.0
-rect_min_size = Vector2( 128, 128 )
-mouse_default_cursor_shape = 2
-size_flags_vertical = 3
-theme = SubResource( 5 )
-texture_normal = ExtResource( 5 )
-texture_pressed = ExtResource( 5 )
-expand = true
-stretch_mode = 6
-script = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/selectionmenu"]
+margin_left = 24.0
+margin_top = 20.0
+margin_right = 244.0
+margin_bottom = 320.0
+rect_min_size = Vector2( 220, 300 )
+custom_styles/panel = SubResource( 29 )
 
-[node name="Label" type="Label" parent="VBoxContainer/CenterContainer2/apply"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/selectionmenu/Panel"]
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -51.0
-margin_top = -24.0
-margin_right = 54.0
-margin_bottom = -11.0
-custom_fonts/font = SubResource( 1 )
-text = "apply skin"
-align = 1
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 2 )
-anims/hover = SubResource( 3 )
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/selectionmenu/Panel/MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 210.0
+margin_bottom = 290.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
-[connection signal="mouse_entered" from="VBoxContainer/CenterContainer2/apply" to="VBoxContainer/CenterContainer2/apply" method="_on_apply_mouse_entered"]
-[connection signal="mouse_exited" from="VBoxContainer/CenterContainer2/apply" to="VBoxContainer/CenterContainer2/apply" method="_on_apply_mouse_exited"]
-[connection signal="pressed" from="VBoxContainer/CenterContainer2/apply" to="VBoxContainer/CenterContainer2/apply" method="_on_apply_pressed"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/selectionmenu/Panel/MarginContainer/VBoxContainer"]
+margin_right = 210.0
+margin_bottom = 232.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/selectionmenu/Panel/MarginContainer/VBoxContainer/ScrollContainer"]
+margin_right = 210.0
+margin_bottom = 232.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+
+[node name="cancel" type="Button" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/selectionmenu/Panel/MarginContainer/VBoxContainer"]
+margin_top = 236.0
+margin_right = 210.0
+margin_bottom = 256.0
+rect_min_size = Vector2( 0, 20 )
+custom_fonts/font = SubResource( 35 )
+custom_styles/hover = SubResource( 40 )
+custom_styles/pressed = SubResource( 41 )
+custom_styles/focus = SubResource( 38 )
+custom_styles/normal = SubResource( 42 )
+text = "cancel"
+
+[node name="apply" type="Button" parent="VBoxContainer/HBoxContainer/costumication/HBoxContainer/selectionmenu/Panel/MarginContainer/VBoxContainer"]
+margin_top = 260.0
+margin_right = 210.0
+margin_bottom = 280.0
+rect_min_size = Vector2( 0, 20 )
+custom_fonts/font = SubResource( 35 )
+custom_styles/hover = SubResource( 36 )
+custom_styles/pressed = SubResource( 37 )
+custom_styles/focus = SubResource( 38 )
+custom_styles/normal = SubResource( 39 )
+text = "apply"
+
+[node name="shop" type="Control" parent="VBoxContainer/HBoxContainer"]
+visible = false
+margin_left = 100.0
+margin_right = 640.0
+margin_bottom = 340.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/cosumizationoptions/Button" to="." method="_on_Button_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/HBoxContainer/cosumizationoptions/shop" to="VBoxContainer/HBoxContainer/cosumizationoptions/shop" method="_on_shop_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/HBoxContainer/cosumizationoptions/shop" to="VBoxContainer/HBoxContainer/cosumizationoptions/shop" method="_on_shop_mouse_exited"]
+[connection signal="mouse_entered" from="VBoxContainer/HBoxContainer/cosumizationoptions/backpack" to="VBoxContainer/HBoxContainer/cosumizationoptions/backpack" method="_on_backpack_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/HBoxContainer/cosumizationoptions/backpack" to="VBoxContainer/HBoxContainer/cosumizationoptions/backpack" method="_on_backpack_mouse_exited"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/costumication/HBoxContainer/custumications/CenterContainer/list/tools/Button" to="VBoxContainer/HBoxContainer/costumication" method="_on_Button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/costumication/HBoxContainer/selectionmenu/Panel/MarginContainer/VBoxContainer/apply" to="VBoxContainer/HBoxContainer/costumication" method="_on_apply_pressed"]
+
+[editable path="Viewport/playerview"]

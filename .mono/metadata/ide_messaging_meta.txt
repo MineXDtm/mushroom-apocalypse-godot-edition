@@ -1,2 +1,2 @@
-﻿60453
-C:/Users/andrey/OneDrive/Рабочий стол/Godot_v3.4.1-stable_mono_win64/Godot_v3.4.1-stable_mono_win64.exe
+﻿58993
+C:/Users/andrey/OneDrive/Рабочий стол/Godot_v3.5.1-stable_mono_win64/Godot_v3.5.1-stable_mono_win64.exe

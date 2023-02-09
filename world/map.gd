@@ -69,7 +69,6 @@ var types = {
 		},
 		"graund": "sand"
 	}
-	
 }
 const SAVE_DIR = "user://worlds/"
 const SAVE_DIR2 = "user://screen_shot/"
@@ -198,7 +197,7 @@ func _ready():
 	
 	
 	get_node("b/Sprite").texture = load("res://textures/" + types[WorldData.world_type]["graund"]+".png")
-	discord_rpc.details = str("In World: " ,WorldData.world_name)
+	discord_rpc.details = str("In World: "  + WorldData.world_name)
 	discord_rpc.icon = WorldData.world_type
 	discord_rpc.icon_desc =  WorldData.world_type
 	discord_rpc.small_icon = "icon"

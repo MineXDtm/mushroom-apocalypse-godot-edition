@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/superemotion.mp3-2d99a802c40ade895b3b59bcd161a148.mp3str"
+
+[deps]
+
+source_file="res://player_model/superemotion.mp3"
+dest_files=[ "res://.import/superemotion.mp3-2d99a802c40ade895b3b59bcd161a148.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

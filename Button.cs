@@ -14,8 +14,7 @@ public class Button : Godot.Button
 	}
 	private void _on_Button_pressed()
 	{
-		var e = GetNode<CLockBar>("/root/epic");
-		e.WriteFile();
+		
 	}
 	//  // Called every frame. 'delta' is the elapsed time since the previous frame.
 	//  public override void _Process(float delta)

@@ -5,16 +5,15 @@ public class apply : TextureButton
 {
 	private void _on_apply_pressed()
 		{
-			var e = GetNode<CLockBar>("/root/epic");
-			e.WriteFile();
+			
 		}
 	private void _on_apply_mouse_entered()
 	{
-		GetNode<AnimationPlayer>("/root/menu/AnimationPlayer").Play("hover");
+		GetNode<AnimationPlayer>("AnimationPlayer").Play("hover");
 	}
 	private void _on_apply_mouse_exited()
 	{
-		GetNode<AnimationPlayer>("/root/menu/AnimationPlayer").PlayBackwards("hover");
+		GetNode<AnimationPlayer>("AnimationPlayer").PlayBackwards("hover");
 	}
 
 	private void _gui_input(InputEventMouseButton e)
