@@ -8,10 +8,10 @@ func _on_Button_pressed():
 	for i in Ganaretor.zombie:
 		if Ganaretor.zombies.has(i):
 			Ganaretor.zombies.erase(i)
-	for i in get_tree().get_nodes_in_group("player")[0].NUM_INVENTORY_SLOTS2:
+	for i in range(3):
 		if get_tree().get_nodes_in_group("player")[0].arm.has(i):
 			get_tree().get_nodes_in_group("player")[0].arm.erase(i)
-	for i in get_tree().get_nodes_in_group("player")[0].NUM_INVENTORY_SLOTS:
+	for i in  range(12):
 		if get_tree().get_nodes_in_group("player")[0].inventory.has(i):
 			get_tree().get_nodes_in_group("player")[0].inventory.erase(i)
 	Ganaretor.zombie = 0

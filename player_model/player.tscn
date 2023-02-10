@@ -52,9 +52,21 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( 0, -2 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("model/head:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
 
 [sub_resource type="Animation" id=13]
-length = 0.41
+length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("model/arm1:position")
 tracks/0/interp = 1
@@ -110,7 +122,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.41 ),
+"times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.0, 0.0 ]
@@ -122,10 +134,10 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 0.41 ),
+"times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, -2 ), Vector2( 0, -2.5 ) ]
+"values": [ Vector2( 0, -2 ), Vector2( 0, -2 ) ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("model/leg2:position")

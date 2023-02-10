@@ -42,3 +42,10 @@ func _input(event):
 
 func _on_inv_but_pressed():
 	openinv()
+
+
+func _on_joystick_movement_gui_input(event):
+	if event is InputEventScreenTouch or event is InputEventScreenDrag:
+		print(event.position)
+		var move_vector =event.position.normalized()
+		get_tree().get_nodes_in_group("player")[0].velocity = move_vector;

@@ -287,6 +287,15 @@ rect_min_size = Vector2( 60, 34 )
 custom_styles/panel = ExtResource( 2 )
 script = ExtResource( 11 )
 
+[node name="joystick_movement" type="ColorRect" parent="UI2"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = -140.0
+margin_right = 144.0
+margin_bottom = -20.0
+color = Color( 0, 0, 0, 0.392157 )
+
 [node name="builds" type="Control" parent="UI2"]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -309,9 +318,11 @@ visible = false
 visible = false
 
 [node name="inv_but" type="Button" parent="UI2"]
-margin_left = 576.0
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -64.0
 margin_top = 24.0
-margin_right = 627.0
+margin_right = -13.0
 margin_bottom = 64.0
 text = "inv"
 
@@ -393,8 +404,12 @@ visible = false
 
 [node name="loding_world" parent="UI2" instance=ExtResource( 4 )]
 visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TileMap" parent="." instance=ExtResource( 30 )]
 visible = false
 
+[connection signal="gui_input" from="UI2/joystick_movement" to="UI2" method="_on_joystick_movement_gui_input"]
 [connection signal="pressed" from="UI2/inv_but" to="UI2" method="_on_inv_but_pressed"]

@@ -139,8 +139,9 @@ func _physics_process(_delta):
 				$model/arm1/item.rect_rotation = 0
 				$model/arm1/item.rect_position.x = -7
 				$model/arm1/item.rect_position.y = -8
-func get_input(_delta):
 	velocity = Vector2()
+func get_input(_delta):
+	
 	if Input.is_action_just_released("scrolling_up") and isattacking == false and opened == false  and died == false and eating == false:
 		if invenory_slot != 3:
 			var inv = get_node("/root/world/UI2/hand_slots")
@@ -217,6 +218,7 @@ func get_input(_delta):
 		velocity.y -= 1
 	velocity *= speed
 	move_and_slide(velocity)
+
 func inventory():
 	if selected_item != "arm" and JsonData.item_data[selected_item]["ItemCategory"] == "build"  and JsonData.item_data[selected_item]["layer"] == 1:
 		var block = get_parent().get_parent().get_parent().get_node("TileMap")
