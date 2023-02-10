@@ -38,3 +38,7 @@ func _input(event):
 			get_parent().get_node(str(WorldData.map,"/sort/player")).emote = true
 			
 			p.play($emotes.emoteslist[str(int($emotes.selected))])
+
+
+func _on_inv_but_pressed():
+	openinv()

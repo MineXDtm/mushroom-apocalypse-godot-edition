@@ -308,6 +308,13 @@ visible = false
 [node name="inventory" parent="UI2" instance=ExtResource( 14 )]
 visible = false
 
+[node name="inv_but" type="Button" parent="UI2"]
+margin_left = 576.0
+margin_top = 24.0
+margin_right = 627.0
+margin_bottom = 64.0
+text = "inv"
+
 [node name="Control" type="Control" parent="UI2"]
 visible = false
 anchor_right = 1.0
@@ -389,3 +396,5 @@ visible = false
 
 [node name="TileMap" parent="." instance=ExtResource( 30 )]
 visible = false
+
+[connection signal="pressed" from="UI2/inv_but" to="UI2" method="_on_inv_but_pressed"]
