@@ -197,12 +197,12 @@ func _ready():
 	
 	
 	get_node("b/Sprite").texture = load("res://textures/" + types[WorldData.world_type]["graund"]+".png")
-	discord_rpc.details = str("In World: "  + WorldData.world_name)
-	discord_rpc.icon = WorldData.world_type
-	discord_rpc.icon_desc =  WorldData.world_type
-	discord_rpc.small_icon = "icon"
-	discord_rpc.small_icon_desc = "Game Icon"
-	discord_rpc.UpdatePresence()
+	#discord_rpc.details = str("In World: "  + WorldData.world_name)
+	#discord_rpc.icon = WorldData.world_type
+	#discord_rpc.icon_desc =  WorldData.world_type
+	#discord_rpc.small_icon = "icon"
+	#discord_rpc.small_icon_desc = "Game Icon"
+	#discord_rpc.UpdatePresence()
 	
 var random = RandomNumberGenerator.new()
 
@@ -364,12 +364,12 @@ func change_biome():
 		load_menu.get_node("ProgressBar").value += 1
 		load_menu.visible = false
 		
-	discord_rpc.details = str("In World: " ,WorldData.world_name)
-	discord_rpc.icon = WorldData.world_type
-	discord_rpc.icon_desc =  WorldData.world_type
-	discord_rpc.small_icon = "icon"
-	discord_rpc.small_icon_desc = "Game Icon"
-	discord_rpc.UpdatePresence()
+	#discord_rpc.details = str("In World: " ,WorldData.world_name)
+	#discord_rpc.icon = WorldData.world_type
+	#discord_rpc.icon_desc =  WorldData.world_type
+	#discord_rpc.small_icon = "icon"
+	#discord_rpc.small_icon_desc = "Game Icon"
+	#discord_rpc.UpdatePresence()
 func _on_time_move_timeout():
 	get_node("/root/world/UI2/bg/ViewportContainer/Viewport/CLockBar").next_step()
 #	get_parent().get_node("UI2/bg/ScrollContainer").scroll_horizontal += 1
@@ -452,8 +452,8 @@ func update_chunks():
 		object_data["position_x"] = world[i].position.x
 		object_data["position_y"] = world[i].position.y
 		if world[i].type == "player":
-			object_data["inventory"] = PlayerInventory.inventory
-			object_data["inventory1"] = PlayerInventory.inventory1
+			object_data["inventory"] =world[i].inventory
+			object_data["inventory1"] = world[i].arm
 		save_data[str("object",i)] = object_data.duplicate(true)
 		if object_data.has("drop_name"):
 			object_data.erase("drop_name")
@@ -762,8 +762,8 @@ func save_player(player):
 	dir.make_dir("players")
 	player_data["position_x"] = player.position.x
 	player_data["position_y"] = player.position.y
-	player_data["inv"] = PlayerInventory.inventory
-	player_data["inv1"] = PlayerInventory.inventory1
+	player_data["inv"] = get_tree().get_nodes_in_group("player")[0].inventory 
+	player_data["inv1"] =  get_tree().get_nodes_in_group("player")[0].arm
 	player_data["health"] = player.health
 	var save_data3 = player_data.duplicate(true)
 	var file = File.new()
@@ -795,10 +795,10 @@ func load_players():
 	get_node("sort/player").position.y = int(save_data3["position_y"])
 	get_node("sort/player").health = int(save_data3["health"])
 	get_node("/root/world/UI2/bars/health/bg/bar_health").value = int(save_data3["health"])
-	for ii in save_data3["inv"]:
-		PlayerInventory.inventory[int(ii)] = [save_data3["inv"][ii][0],int(save_data3["inv"][ii][1])]
+	for ii in range( save_data3["inv"].size()):
+		 get_tree().get_nodes_in_group("player")[0].inventory.append([save_data3["inv"][ii][0],int(save_data3["inv"][ii][1])])
 	for ii in save_data3["inv1"]:
-		PlayerInventory.inventory1[int(ii)] = [save_data3["inv1"][ii][0],int(save_data3["inv1"][ii][1])]
+		 get_tree().get_nodes_in_group("player")[0].arm[int(ii)] = [save_data3["inv1"][ii][0],int(save_data3["inv1"][ii][1])]
 func screen_shot_save():
 	var img = get_parent().get_node("Viewport").get_texture().get_data()
 	img.flip_y()

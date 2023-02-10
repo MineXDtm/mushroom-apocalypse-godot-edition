@@ -16,24 +16,11 @@ func _ready():
 	var slots = inventory_slots.get_children()
 	for i in range(slots.size()):
 		slots[i].slot_index = i
-	var slots2 = inventory_slots2.get_children()
-	for i in range(slots2.size()):
-		slots2[i].slot_index = i
-	initialize_inventory()
 func can_drop_data(position, data):
 	return true
 func drop_data(position, data):
 	drop()
-func initialize_inventory():
-	var slots = inventory_slots.get_children()
-	for i in range(slots.size()):
-		if PlayerInventory.inventory.has(i):
-			slots[i].initialize_item(PlayerInventory.inventory[i][0], PlayerInventory.inventory[i][1])
-			
-	var slots1 = inventory_slots2.get_children()
-	for i in range(slots1.size()):
-		if PlayerInventory.inventory1.has(i):
-			slots1[i].initialize_item(PlayerInventory.inventory1[i][0], PlayerInventory.inventory1[i][1])
+
 func slot_gui_input(event: InputEvent, slot: SlotClass):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed == true:
@@ -48,7 +35,7 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 					if !inventory_slots.get_node(selected2).item:
 						left_click_empty_slot(inventory_slots.get_node(selected2))
 					else:
-						PlayerInventory.add_item(holding_item.item_name,holding_item.item_quantity)
+						get_tree().get_nodes_in_group("player")[0].add_item(holding_item.item_name,holding_item.item_quantity)
 						holding_item = null
 						select = false
 				elif holding_item  != null :
@@ -57,7 +44,7 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 					if !inventory_slots2.get_node(selected2).item:
 						left_click_empty_slot(inventory_slots2.get_node(selected2))
 					else:
-						PlayerInventory.add_item(holding_item.item_name,holding_item.item_quantity)
+						get_tree().get_nodes_in_group("player")[0].add_item(holding_item.item_name,holding_item.item_quantity)
 						holding_item = null
 						select = false
 			else:
@@ -65,19 +52,19 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 
 func left_click_empty_slot(slot: SlotClass):
 	var _selected_slot = get_node(selected)
-	if PlayerInventory.inventory.has(slot.slot_index) and slot.name != "slot1"and slot.name != "slot2"and slot.name != "slot3":
+	if get_tree().get_nodes_in_group("player")[0].inventory.has(slot.slot_index) and slot.name != "slot1"and slot.name != "slot2"and slot.name != "slot3":
 		slot.putIntoSlot(holding_item)
 		
-		PlayerInventory.add_item_to_empty_slot(holding_item, slot)
+		get_tree().get_nodes_in_group("player")[0].add_item_to_empty_slot(holding_item, slot)
 		holding_item = null
 		select = false
 	elif slot.name != "slot1"and slot.name != "slot2"and slot.name != "slot3":
-		PlayerInventory.add_item(holding_item.item_name,holding_item.item_quantity)
+		get_tree().get_nodes_in_group("player")[0].add_item(holding_item.item_name,holding_item.item_quantity)
 		holding_item = null
 		select = false
 	else:
 		slot.putIntoSlot(holding_item)
-		PlayerInventory.add_item_to_empty_slot(holding_item, slot)
+		get_tree().get_nodes_in_group("player")[0].add_item_to_empty_slot(holding_item, slot)
 		holding_item = null
 		select = false
 	slot.moved = false
@@ -94,7 +81,7 @@ func left_click_not_holding(slot: SlotClass):
 		selected = str("GridContainer2/",slot.name)
 	else:
 		selected = str("GridContainer/",slot.name)
-	PlayerInventory.remove_item(slot)
+	get_tree().get_nodes_in_group("player")[0].remove_item(slot)
 	slot.tex = false
 	if slot.name != "slot1"and slot.name != "slot2"and slot.name != "slot3" and get_node("GridContainer/"+"slot"+str(int(slot.name) + 1)).item != null and get_node("GridContainer/"+"slot"+str(int(slot.name) + 2)).item == null:
 		slot.moved = true
@@ -128,40 +115,40 @@ func left_click_not_holding(slot: SlotClass):
 	slot.item.rect_position = Vector2(0, 0)
 	slot.item = null
 func drop_all():
-	for i in PlayerInventory.NUM_INVENTORY_SLOTS2:
-		if PlayerInventory.inventory1.has(i):
-			for ii in int(PlayerInventory.inventory1[i][1]):
+	for i in range(3):
+		if get_tree().get_nodes_in_group("player")[0].arm.has(i):
+			for ii in int(get_tree().get_nodes_in_group("player")[0].arm[i][1]):
 				var _selected_slot = get_tree().get_nodes_in_group('hand_slot')
 				var world = get_parent().get_parent().get_node(WorldData.map)
 				var player = get_parent().get_parent().get_node("map/sort/player")
 				var drop_scene = load("res://world/drop/ItemDrop.tscn")
 				var _drop_intance = drop_scene.instance()
-				_drop_intance.item_name = PlayerInventory.inventory1[i][0]
+				_drop_intance.item_name = get_tree().get_nodes_in_group("player")[0].arm[i][0]
 				world.add_child(_drop_intance)
 				_drop_intance.position = player.position
-				PlayerInventory.inventory1[i][1] -= 1
-				if PlayerInventory.inventory1[i][1] <= 0:
+				get_tree().get_nodes_in_group("player")[0].arm[i][1] -= 1
+				if get_tree().get_nodes_in_group("player")[0].arm[i][1] <= 0:
 					for iii in _selected_slot.size():
 						if _selected_slot[iii].name != "slot4" and _selected_slot[iii].name != "slot5"  and _selected_slot[iii].name != "slot6" and _selected_slot[iii].item != null:
 							_selected_slot[iii].pickFromSlot()
 							print('work')
-							PlayerInventory.inventory1.erase(i)
-	for i in PlayerInventory.NUM_INVENTORY_SLOTS:
-		if PlayerInventory.inventory.has(i):
+							get_tree().get_nodes_in_group("player")[0].arm.erase(i)
+	for i in  range(12):
+		if get_tree().get_nodes_in_group("player")[0].inventory.has(i):
 			
-			for ii in int(PlayerInventory.inventory[i][1]):
+			for ii in int(get_tree().get_nodes_in_group("player")[0].inventory[i][1]):
 				var _selected_slot = get_tree().get_nodes_in_group(str(i))
 				var world = get_parent().get_parent().get_node(WorldData.map)
 				var player = get_parent().get_parent().get_node(WorldData.map+"/sort/player")
 				var drop_scene = load("res://world/drop/ItemDrop.tscn")
 				var _drop_intance = drop_scene.instance()
-				_drop_intance.item_name = PlayerInventory.inventory[i][0]
+				_drop_intance.item_name = get_tree().get_nodes_in_group("player")[0].inventory[i][0]
 				_drop_intance.position = player.position
 				world.add_child(_drop_intance)
-				PlayerInventory.inventory[i][1] -= 1
-				if PlayerInventory.inventory[i][1] <= 0:
+				get_tree().get_nodes_in_group("player")[0].inventory[i][1] -= 1
+				if get_tree().get_nodes_in_group("player")[0].inventory[i][1] <= 0:
 					get_node(str("GridContainer/slot",i+4)).pickFromSlot()
-					PlayerInventory.inventory.erase(i)
+					get_tree().get_nodes_in_group("player")[0].inventory.erase(i)
 func drop():
 	if holding_item and visible == true:
 		for i in holding_item.item_quantity:
@@ -181,28 +168,28 @@ func place(slot):
 	if slot == "slot1" :
 		if $GridContainer2/slot1/item.item_quantity > 1:
 			$GridContainer2/slot1/item.decrease_item_quantity(1)
-			PlayerInventory.inventory1[0][1] -= 1
+			get_tree().get_nodes_in_group("player")[0].arm[0][1] -= 1
 		else:
 			$GridContainer2/slot1/item.item_quantity -= 1
 			$GridContainer2/slot1.pickFromSlot()
-			PlayerInventory.inventory1.erase(0)
+			get_tree().get_nodes_in_group("player")[0].arm.erase(0)
 		
 	if slot == "slot2" :
 		if $GridContainer2/slot2/item.item_quantity > 1:
 			$GridContainer2/slot2/item.decrease_item_quantity(1)
-			PlayerInventory.inventory1[1][1] -= 1
+			get_tree().get_nodes_in_group("player")[0].arm[1][1] -= 1
 		else:
 			$GridContainer2/slot2/item.item_quantity -= 1
 			$GridContainer2/slot2.pickFromSlot()
-			PlayerInventory.inventory1.erase(1)
+			get_tree().get_nodes_in_group("player")[0].arm.erase(1)
 	if slot == "slot3" :
 		if $GridContainer2/slot3/item.item_quantity > 1:
 			$GridContainer2/slot3/item.decrease_item_quantity(1)
-			PlayerInventory.inventory1[2][1] -= 1
+			get_tree().get_nodes_in_group("player")[0].arm[2][1] -= 1
 		else:
 			$GridContainer2/slot3/item.item_quantity -= 1
 			$GridContainer2/slot3.pickFromSlot()
-			PlayerInventory.inventory1.erase(2)
+			get_tree().get_nodes_in_group("player")[0].arm.erase(2)
 func finder(slotnumber):
 		for slot in range(1,4):
 			if inventory_slots2.get_node("slot" + str(slot)).slot_index == slotnumber:

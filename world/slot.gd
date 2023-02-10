@@ -4,15 +4,23 @@ var item = null
 var default_style = load("res://gui/slot_defaultstyle.tres")
 var selected_style = load("res://gui/slot_selectedstyle.tres")
 var slot_index
-
-func _ready():
-	if name == "slot1":
-		rect_min_size = Vector2(80,34)
-		set('custom_styles/panel', selected_style)
-func selcted():
+func _gui_input(event):
+	if event is InputEventScreenTouch:
+		get_tree().get_nodes_in_group("player")[0].invenory_slot = int(name)
+func _process(delta):
+	if  get_tree().get_nodes_in_group("player")[0].invenory_slot == int(name):
+		select()
+	else:
+		unselect()
+		
+	if get_tree().get_nodes_in_group("player")[0].arm.has(int(name)-1):
+		initialize_item(get_tree().get_nodes_in_group("player")[0].arm[ int(name)-1][0],get_tree().get_nodes_in_group("player")[0].arm[ int(name)-1][1])
+	elif item != null:
+		pickFromSlot()
+func select():
 	rect_min_size = Vector2(80,34)
 	set('custom_styles/panel', selected_style)
-func unselcted():
+func unselect():
 	rect_min_size = Vector2(60,34)
 	set('custom_styles/panel', default_style)
 func pickFromSlot():

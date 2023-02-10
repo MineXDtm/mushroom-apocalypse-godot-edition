@@ -25,25 +25,21 @@ run/main_scene="res://menu.tscn"
 config/use_custom_user_dir=true
 boot_splash/image="res://minexd.png"
 boot_splash/fullsize=false
-boot_splash/use_filter=false
-boot_splash/bg_color=Color( 1, 1, 1, 1 )
+boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://icon.png"
 config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
-PlayerInventory="*res://player_model/PlayerInventory.gd"
 JsonData="*res://JSONData.gd"
-WorldData="*res://world/world_data.gd"
 Ganaretor="*res://ganaretor.gd"
-discord_rpc="*res://Discord.cs"
 Console="*res://addons/quentincaffeino/console/src/Console.tscn"
 LayerSystem="*res://LayerSystem.gd"
 gamesettings="*res://settings.gd"
-epic="*res://CLockBar.cs"
 SkinManager="*res://skinmanager.gd"
 FriendsSystem="*res://FriendsSystem.gd"
 Emotemanager="*res://EMOTEMANAGER.gd"
+WorldData="*res://world/world_data.gd"
 
 [debug]
 
@@ -95,7 +91,7 @@ texture={
 
 inv={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":80,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777218,"unicode":0,"echo":false,"script":null)
  ]
 }
 scrolling_up={
@@ -217,9 +213,13 @@ project/assembly_name="mushroom apocalypse"
 [rendering]
 
 quality/driver/fallback_to_gles2=true
+2d/options/use_nvidia_rect_flicker_workaround=true
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
+2d/snapping/use_gpu_pixel_snap=true
 quality/shadows/filter_mode=2
+quality/filters/use_nearest_mipmap_filter=true
+2d/opengl/batching_stream=2
 quality/subsurface_scattering/quality=2
 quality/filters/msaa=4
 quality/filters/use_fxaa=true

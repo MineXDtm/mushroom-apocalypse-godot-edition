@@ -12,6 +12,7 @@ var null_style: StyleBoxTexture = null
 var slot_index
 var tex = false
 var mouse_entered = false
+
 func _ready():
 	connect("mouse_entered",self,"mause_entered")
 	connect("mouse_exited",self,"mause_exited")
@@ -46,22 +47,7 @@ func unselcted():
 func pickFromSlot():
 	tex = false
 	set('custom_styles/panel', null_style)
-	if name == "slot1":
-		set('custom_styles/panel', null_hand_style)
-	if name == "slot2":
-		set('custom_styles/panel', null_hand_style)
-	if name == "slot3":
-		set('custom_styles/panel', null_hand_style)
-	remove_child(item)
-	if name == "slot1":
-		var inv = get_parent().get_parent().get_parent().get_node('hand_slots/'+ str(name))
-		inv.pickFromSlot()
-	elif name == "slot2":
-		var inv = get_parent().get_parent().get_parent().get_node('hand_slots/'+ str(name))
-		inv.pickFromSlot()
-	elif name == "slot3":
-		var inv = get_parent().get_parent().get_parent().get_node('hand_slots/'+ str(name))
-		inv.pickFromSlot()
+	get_node("CenterContainer").remove_child(item)
 	item = null
 func can_drop_data(position, data):
 	return true
@@ -72,32 +58,22 @@ func drop_data(position, data):
 		moved_moved = false
 		return
 	var _selected_slot = get_parent().get_parent().get_node(get_parent().get_parent().selected)
-	if PlayerInventory.inventory.has(slot_index) and name != "slot1"and name != "slot2"and name != "slot3":
+	if get_tree().get_nodes_in_group("player")[0].inventory.size() > slot_index:
 		putIntoSlot(data)
-		PlayerInventory.add_item_to_empty_slot(data, self)
-		get_parent().get_parent().holding_item = null
-		get_parent().get_parent().select = false
-	elif name != "slot1" and name != "slot2" and name != "slot3":
-		PlayerInventory.add_item(data.item_name,data.item_quantity)
+		get_tree().get_nodes_in_group("player")[0].add_item_to_empty_slot(data, self)
 		get_parent().get_parent().holding_item = null
 		get_parent().get_parent().select = false
 	else:
 		putIntoSlot(data)
-		PlayerInventory.add_item_to_empty_slot(data, self)
+		get_tree().get_nodes_in_group("player")[0].add_item_to_empty_slot(data, self)
 		get_parent().get_parent().holding_item = null
 		get_parent().get_parent().select = false
 	moved = false
 	moved_moved = false
 func putIntoSlot(new_item):
 	if new_item == null: return
-	if name == "slot1" || name == "slot2" || name == "slot3":
-		var new = ItemClass.instance()
-		new.set_item(new_item.item_name, 99)
-		item = new
-		add_child(new)
-	else:
-		item = new_item
-		add_child(item)
+	item = new_item
+	get_node("CenterContainer").add_child(item)
 	get_parent().get_parent().selected_name = name
 	set('custom_styles/panel', selected_style)
 	moved = false
@@ -106,7 +82,7 @@ func initialize_item(item_name, item_quantity):
 	if item == null:
 		
 		item = ItemClass.instance()
-		add_child(item)
+		get_node("CenterContainer").add_child(item)
 		item.set_item(item_name, item_quantity)
 	else:
 		item.set_item(item_name, item_quantity)
@@ -120,53 +96,38 @@ func initialize_item(item_name, item_quantity):
 
 
 
-func _physics_process(_delta):
+func _process(_delta):
 	if mouse_entered == false and item != null:
 		set('custom_styles/panel', default_style)
 	elif item != null:
 		set('custom_styles/panel', selected_style)
+	if get_tree().get_nodes_in_group("player")[0].inventory.size() >= int(name):
+		var item = get_tree().get_nodes_in_group("player")[0].inventory[ int(name)-1]
+		if item != null:
+			initialize_item(item[0],item[1])
+	elif item != null:
+		pickFromSlot()
 var moved = false
 var moved_moved = false
 var block = false
 var entered = false
 func get_drag_data(position):
 	if item == null: return
+	
 	get_parent().get_parent().selected_name = name
 	get_parent().get_parent().holding_item = item
-	if name == "slot1":
-		get_parent().get_parent().selected = str("GridContainer2/",name)
-	elif name == "slot2":
-		get_parent().get_parent().selected = str("GridContainer2/",name)
-	elif name == "slot3":
-		get_parent().get_parent().selected = str("GridContainer2/",name)
-	else:
-		get_parent().get_parent().selected = str("GridContainer/",name)
-	PlayerInventory.remove_item(self)
+	get_parent().get_parent().selected = str("GridContainer/",name)
+	get_tree().get_nodes_in_group("player")[0].remove_item(self)
 	tex = false
-	if name != "slot1"and name != "slot2"and name != "slot3" and get_parent().get_parent().get_node("GridContainer/"+"slot"+str(int(name) + 1)).item != null and get_parent().get_parent().get_node("GridContainer/"+"slot"+str(int(name) + 2)).item == null:
+	if get_parent().get_parent().get_node("GridContainer/"+"slot"+str(int(name) + 1)).item != null and get_parent().get_parent().get_node("GridContainer/"+"slot"+str(int(name) + 2)).item == null:
 		moved = true
 		get_parent().get_parent().select = true 
-	elif name != "slot1"and name != "slot2"and name != "slot3" and get_parent().get_parent().get_node("GridContainer/"+"slot"+str(int(name) + 1)).item != null and get_parent().get_parent().get_node("GridContainer/"+"slot"+str(int(name)+ 2)).item != null:
+	elif   get_parent().get_parent().get_node("GridContainer/"+"slot"+str(int(name) + 1)).item != null and get_parent().get_parent().get_node("GridContainer/"+"slot"+str(int(name)+ 2)).item != null:
 		moved_moved = true
 		moved = true
 		get_parent().get_parent().select = true
 	set('custom_styles/panel', null_style)
-	if name == "slot1":
-		set('custom_styles/panel',null_hand_style)
-	if name == "slot2":
-		set('custom_styles/panel', null_hand_style)
-	if name == "slot3":
-		set('custom_styles/panel', null_hand_style)
-	remove_child(get_parent().get_parent().holding_item)
-	if name == "slot1":
-		var inv = get_parent().get_parent().get_parent().get_node('hand_slots/'+ str(name))
-		inv.pickFromSlot()
-	elif name == "slot2":
-		var inv = get_parent().get_parent().get_parent().get_node('hand_slots/'+ str(name))
-		inv.pickFromSlot()
-	elif name == "slot3":
-		var inv = get_parent().get_parent().get_parent().get_node('hand_slots/'+ str(name))
-		inv.pickFromSlot()
+	get_node("CenterContainer").remove_child(get_parent().get_parent().holding_item)
 	var data = item
 	item = null
 	var slot_hand = load("res://gui/slot_hand.tscn")
@@ -177,95 +138,88 @@ func get_drag_data(position):
 	c.add_child(slot_hand_s)
 	slot_hand_s.rect_position = -0.5 * slot_hand_s.rect_size
 	set_drag_preview(c)
+	get_tree().get_nodes_in_group("player")[0].inventory.remove(int(name)-1)
+	
 	return data
 func mause_entered():
 		
 		
 		get_parent().get_parent().selected2 = name
 		mouse_entered = true
-		if name == "slot15":
-			return
-		if name == "slot1":
-			return
-		if name == "slot2":
-			return
-		if name == "slot3":
+		return
+		if name == "slot12":
 			return
 		if get_parent().get_parent().holding_item != null and moved == false and item != null and get_parent().get_parent().select == false and get_parent().get_node("slot"+str(int(name) +1)).item == null:
 			moved = true
 			get_parent().get_parent().select = true 
 			var item2 = item
-			PlayerInventory.inventory.erase(slot_index)
+			get_tree().get_nodes_in_group("player")[0].inventory.erase(slot_index)
 			pickFromSlot()
 			get_parent().get_node("slot"+str(int(name) +1)).putIntoSlot(item2)
-			PlayerInventory.add_item_to_empty_slot(item2, get_parent().get_node("slot"+str(int(name) +1)))
+			get_tree().get_nodes_in_group("player")[0].add_item_to_empty_slot(item2, get_parent().get_node("slot"+str(int(name) +1)))
 		elif get_parent().get_parent().holding_item != null and moved == false and moved_moved == false and item != null and get_parent().get_parent().select == false:
 			get_parent().get_node("slot"+str(int(name) +1)).move_()
 			moved = true
 			moved_moved = true
 			get_parent().get_parent().select = true 
 			var item2 = item
-			PlayerInventory.inventory.erase(slot_index)
+			get_tree().get_nodes_in_group("player")[0].inventory.erase(slot_index)
 			pickFromSlot()
 			get_parent().get_node("slot"+str(int(name) +1)).putIntoSlot(item2)
-			PlayerInventory.add_item_to_empty_slot(item2, get_parent().get_node("slot"+str(int(name) +1)))
+			get_tree().get_nodes_in_group("player")[0].add_item_to_empty_slot(item2, get_parent().get_node("slot"+str(int(name) +1)))
 func mause_exited():
+		
 		mouse_entered = false
-		if name == "slot1":
-			return
-		if name == "slot2":
-			return
-		if name == "slot3":
-			return
+		return
 		if get_parent().get_parent().holding_item != null and moved == true and get_parent().get_parent().select == true  and get_parent().get_node("slot"+str(int(name) +2)).item == null :
 			moved = false
 			get_parent().get_parent().select = false 
 			var item2 = get_parent().get_node("slot"+str(int(name) +1)).item
-			PlayerInventory.inventory.erase(slot_index + 1)
+			get_tree().get_nodes_in_group("player")[0].inventory.erase(slot_index + 1)
 			get_parent().get_node("slot"+str(int(name) +1)).pickFromSlot()
 			putIntoSlot(item2)
-			PlayerInventory.add_item_to_empty_slot(item2, self)
+			get_tree().get_nodes_in_group("player")[0].add_item_to_empty_slot(item2, self)
 		elif get_parent().get_parent().holding_item != null and moved == true and moved_moved == true and get_parent().get_parent().select == true :
 			moved = false
 			moved_moved = false
 			get_parent().get_parent().select = false 
 			var item2 = get_parent().get_node("slot"+str(int(name) +1)).item
-			PlayerInventory.inventory.erase(slot_index + 1)
+			get_tree().get_nodes_in_group("player")[0].inventory.erase(slot_index + 1)
 			get_parent().get_node("slot"+str(int(name) +1)).pickFromSlot()
 			putIntoSlot(item2)
-			PlayerInventory.add_item_to_empty_slot(item2, self)
+			get_tree().get_nodes_in_group("player")[0].add_item_to_empty_slot(item2, self)
 			get_parent().get_node("slot"+str(int(name) +1)).move_back()
 func move_():
 	if get_parent().get_node("slot"+str(int(name) +1)).item == null:
 		moved = true
 		moved_moved = true
 		var item2 = item
-		PlayerInventory.inventory.erase(slot_index)
+		get_tree().get_nodes_in_group("player")[0].inventory.erase(slot_index)
 		pickFromSlot()
 		get_parent().get_node("slot"+str(int(name) +1)).putIntoSlot(item2)
-		PlayerInventory.add_item_to_empty_slot(item2, get_parent().get_node("slot"+str(int(name) +1)))
+		get_tree().get_nodes_in_group("player")[0].add_item_to_empty_slot(item2, get_parent().get_node("slot"+str(int(name) +1)))
 	else:
 		get_parent().get_node("slot"+str(int(name) +1)).move_()
 		moved = true
 		moved_moved = true
 		var item2 = item
-		PlayerInventory.inventory.erase(slot_index)
+		get_tree().get_nodes_in_group("player")[0].inventory.erase(slot_index)
 		pickFromSlot()
 		get_parent().get_node("slot"+str(int(name) +1)).putIntoSlot(item2)
-		PlayerInventory.add_item_to_empty_slot(item2, get_parent().get_node("slot"+str(int(name) +1)))
+		get_tree().get_nodes_in_group("player")[0].add_item_to_empty_slot(item2, get_parent().get_node("slot"+str(int(name) +1)))
 func move_back():
 	if get_parent().get_node("slot"+str(int(name) +2)).item == null:
 		var item2 = get_parent().get_node("slot"+str(int(name) +1)).item
-		PlayerInventory.inventory.erase(slot_index + 1)
+		get_tree().get_nodes_in_group("player")[0].inventory.erase(slot_index + 1)
 		get_parent().get_node("slot"+str(int(name) +1)).pickFromSlot()
-		PlayerInventory.add_item_to_empty_slot(item2, self)
+		get_tree().get_nodes_in_group("player")[0].add_item_to_empty_slot(item2, self)
 		putIntoSlot(item2)
 	else:
 		var item2 = get_parent().get_node("slot"+str(int(name) +1)).item
-		PlayerInventory.inventory.erase(slot_index + 1)
+		get_tree().get_nodes_in_group("player")[0].inventory.erase(slot_index + 1)
 		get_parent().get_node("slot"+str(int(name) +1)).pickFromSlot()
 		putIntoSlot(item2)
-		PlayerInventory.add_item_to_empty_slot(item2, self)
+		get_tree().get_nodes_in_group("player")[0].add_item_to_empty_slot(item2, self)
 		get_parent().get_node("slot"+str(int(name) +1)).move_back()
 
 

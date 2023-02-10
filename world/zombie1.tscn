@@ -1602,9 +1602,7 @@ position = Vector2( 0, 2 )
 shape = SubResource( 3 )
 disabled = true
 
-[node name="zombie_armsattack" type="Area2D" parent="." groups=[
-"zombie_arm",
-]]
+[node name="zombie_armsattack" type="Area2D" parent="." groups=["zombie_arm"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="zombie_armsattack"]
 shape = SubResource( 4 )
@@ -1615,9 +1613,7 @@ script = ExtResource( 19 )
 wait_time = 0.25
 autostart = true
 
-[node name="area" type="Area2D" parent="." groups=[
-"zombie_area",
-]]
+[node name="area" type="Area2D" parent="." groups=["zombie_area"]]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="area"]
 polygon = PoolVector2Array( -18, -18, -18, 18, 18, 18, 18, -18 )
@@ -1629,10 +1625,10 @@ margin_left = -8.0
 margin_top = -15.0
 margin_right = 8.0
 margin_bottom = -13.0
-custom_styles/fg = SubResource( 6 )
-custom_styles/bg = SubResource( 7 )
 custom_colors/font_color = Color( 0.431373, 1, 0, 1 )
 custom_colors/font_color_shadow = Color( 0.313726, 1, 0, 1 )
+custom_styles/fg = SubResource( 6 )
+custom_styles/bg = SubResource( 7 )
 max_value = 5.0
 value = 5.0
 percent_visible = false
@@ -1648,9 +1644,7 @@ autostart = true
 wait_time = 0.3
 one_shot = true
 
-[node name="zombie_dis" type="Area2D" parent="." groups=[
-"zombie_dis",
-]]
+[node name="zombie_dis" type="Area2D" parent="." groups=["zombie_dis"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="zombie_dis"]
 shape = SubResource( 8 )
@@ -1743,7 +1737,7 @@ texture = ExtResource( 6 )
 
 [node name="head" type="Sprite" parent="."]
 material = SubResource( 18 )
-position = Vector2( 0, -2.5 )
+position = Vector2( 0, -2 )
 texture = ExtResource( 5 )
 
 [node name="leg2" type="Sprite" parent="."]

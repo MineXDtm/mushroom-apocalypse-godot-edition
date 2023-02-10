@@ -21,7 +21,7 @@ func pick_up_item(body):
 
 func _on_ItemDrop_area_entered(area):
 	if area.is_in_group("body") and area.is_in_group("player"):
-		PlayerInventory.add_item(item_name, 1)
+		get_tree().get_nodes_in_group("player")[0].add_item(item_name, 1)
 		queue_free()
 
 

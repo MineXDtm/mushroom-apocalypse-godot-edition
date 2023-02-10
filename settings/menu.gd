@@ -33,6 +33,7 @@ func _ready():
 		$HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/shadow_mode.selected = 1
 
 func _on_exit_button_down():
+	get_tree().paused = false
 	get_parent().get_parent().get_parent().get_node("map").update_chunks()
 	get_parent().get_parent().get_parent().get_node("map").save_virables()
 	get_parent().get_parent().get_parent().get_node("map").save_chunksinlayer0()

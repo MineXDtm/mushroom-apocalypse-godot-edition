@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://gui/inventory.tres" type="StyleBox" id=1]
+[ext_resource path="res://gui/slot_arm.gd" type="Script" id=2]
+
+[node name="slot1" type="Panel" groups=["hand_slot"]]
+margin_right = 38.5
+margin_bottom = 40.0
+rect_min_size = Vector2( 38.5, 40 )
+rect_pivot_offset = Vector2( 1, 1 )
+custom_styles/panel = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2

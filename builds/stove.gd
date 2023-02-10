@@ -48,13 +48,13 @@ func _physics_process(_delta):
 		$fire.start()
 	if Input.is_action_just_pressed("add") and in_gui == true:
 		if added.size() == 0 and completed.size() == 0: 
-			if PlayerInventory.inventory1.has(int(get_parent().get_node("player").invenory_slot) - 1):
+			if get_tree().get_nodes_in_group("player")[0].arm.has(int(get_parent().get_node("player").invenory_slot) - 1):
 				for i in items:
-					if PlayerInventory.inventory1[int(get_parent().get_node("player").invenory_slot) - 1][0] == i:
+					if get_tree().get_nodes_in_group("player")[0].arm[int(get_parent().get_node("player").invenory_slot) - 1][0] == i:
 						var ui = get_parent().get_parent().get_node("ui/stove_ui")
-						added.append(PlayerInventory.inventory1[int(get_parent().get_node("player").invenory_slot) - 1][0])
+						added.append(get_tree().get_nodes_in_group("player")[0].arm[int(get_parent().get_node("player").invenory_slot) - 1][0])
 						ui.get_node("added").visible = true
-						ui.get_node("added").texture = load("res://textures/items/" + PlayerInventory.inventory1[int(get_parent().get_node("player").invenory_slot) - 1][0] + ".png")
+						ui.get_node("added").texture = load("res://textures/items/" + get_tree().get_nodes_in_group("player")[0].arm[int(get_parent().get_node("player").invenory_slot) - 1][0] + ".png")
 						var inventory1 = get_parent().get_parent().get_parent().get_node("UI2/inventory")
 						inventory1.place(str("slot",get_parent().get_node("player").invenory_slot))
 						for ii in time:
@@ -62,18 +62,18 @@ func _physics_process(_delta):
 								$prog.wait_time = 100 / time[ii][0]
 						$prog.start()
 		for i in fire_time:
-			if PlayerInventory.inventory1.has(int(get_parent().get_node("player").invenory_slot) - 1):
-				if PlayerInventory.inventory1[int(get_parent().get_node("player").invenory_slot) - 1][0] == i and fire.size() == 0:
+			if get_tree().get_nodes_in_group("player")[0].arm.has(int(get_parent().get_node("player").invenory_slot) - 1):
+				if get_tree().get_nodes_in_group("player")[0].arm[int(get_parent().get_node("player").invenory_slot) - 1][0] == i and fire.size() == 0:
 					var ui = get_parent().get_parent().get_node("ui/stove_ui")
 					var inventory1 = get_parent().get_parent().get_parent().get_node("UI2/inventory")
-					fire.append(PlayerInventory.inventory1[int(get_parent().get_node("player").invenory_slot) - 1][0])
+					fire.append(get_tree().get_nodes_in_group("player")[0].arm[int(get_parent().get_node("player").invenory_slot) - 1][0])
 					fire.append(1)
 					ui.get_node("added2/Label").text = str(fire[1])
 					ui.get_node("added2").visible = true
-					ui.get_node("added2").texture = load("res://textures/items/" + PlayerInventory.inventory1[int(get_parent().get_node("player").invenory_slot) - 1][0] + ".png")
+					ui.get_node("added2").texture = load("res://textures/items/" + get_tree().get_nodes_in_group("player")[0].arm[int(get_parent().get_node("player").invenory_slot) - 1][0] + ".png")
 					inventory1.place(str("slot",get_parent().get_node("player").invenory_slot))
-				elif fire.size() != 0 and fire[1] != 99 and PlayerInventory.inventory1[int(get_parent().get_node("player").invenory_slot) - 1][0] == i:
-					if PlayerInventory.inventory1[int(get_parent().get_node("player").invenory_slot) - 1][0] == fire[0]:
+				elif fire.size() != 0 and fire[1] != 99 and get_tree().get_nodes_in_group("player")[0].arm[int(get_parent().get_node("player").invenory_slot) - 1][0] == i:
+					if get_tree().get_nodes_in_group("player")[0].arm[int(get_parent().get_node("player").invenory_slot) - 1][0] == fire[0]:
 						var inventory1 = get_parent().get_parent().get_parent().get_node("UI2/inventory")
 						inventory1.place(str("slot",get_parent().get_node("player").invenory_slot))
 						var ui = get_parent().get_parent().get_node("ui/stove_ui")
@@ -81,7 +81,7 @@ func _physics_process(_delta):
 						ui.get_node("added2/Label").text = str(fire[1])
 		if completed.size() != 0:
 			var ui = get_parent().get_parent().get_node("ui/stove_ui")
-			PlayerInventory.add_item(completed[0], 1)
+			get_tree().get_nodes_in_group("player")[0].add_item(completed[0], 1)
 			completed.clear()
 			ui.get_node("done").visible = false
 func _on_stove_area_entered(area):

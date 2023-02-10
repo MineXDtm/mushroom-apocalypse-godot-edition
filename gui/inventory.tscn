@@ -1,7 +1,7 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://textures/gui/inventory3.png" type="Texture" id=1]
-[ext_resource path="res://gui/slot_area.gd" type="Script" id=2]
+[ext_resource path="res://gui/slot_arm_inv.tscn" type="PackedScene" id=2]
 [ext_resource path="res://gui/inventory_grid.gd" type="Script" id=3]
 [ext_resource path="res://gui/inventory.gd" type="Script" id=4]
 [ext_resource path="res://textures/gui/inv_ver.png" type="Texture" id=5]
@@ -14,18 +14,13 @@
 [ext_resource path="res://textures/gui/button2/bat_on_mause.png" type="Texture" id=12]
 [ext_resource path="res://textures/gui/button2/bat_on.png" type="Texture" id=13]
 [ext_resource path="res://textures/gui/button2/bat_on_clicked.png" type="Texture" id=14]
-[ext_resource path="res://gui/inventory.tres" type="StyleBox" id=15]
-
-[sub_resource type="StyleBoxTexture" id=1]
+[ext_resource path="res://slot_inv.tscn" type="PackedScene" id=15]
 
 [node name="inventory" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1
 script = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchor_left = 1.0
@@ -38,9 +33,6 @@ margin_bottom = 110.0
 mouse_filter = 2
 texture = ExtResource( 1 )
 stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="GridContainer" type="GridContainer" parent="."]
 anchor_left = 1.0
@@ -53,122 +45,64 @@ margin_right = -29.0
 margin_bottom = 93.0
 columns = 3
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="slot4" type="Panel" parent="GridContainer"]
-margin_right = 38.2
-margin_bottom = 40.0
-rect_min_size = Vector2( 38.2, 40 )
-mouse_filter = 1
-custom_styles/panel = SubResource( 1 )
-script = ExtResource( 2 )
+[node name="slot1" parent="GridContainer" instance=ExtResource( 15 )]
 
-[node name="slot5" type="Panel" parent="GridContainer"]
+[node name="slot2" parent="GridContainer" instance=ExtResource( 15 )]
 margin_left = 42.0
 margin_right = 80.2
-margin_bottom = 40.0
-rect_min_size = Vector2( 38.2, 40 )
-mouse_filter = 1
-custom_styles/panel = SubResource( 1 )
-script = ExtResource( 2 )
 
-[node name="slot6" type="Panel" parent="GridContainer"]
+[node name="slot3" parent="GridContainer" instance=ExtResource( 15 )]
 margin_left = 84.0
 margin_right = 122.2
-margin_bottom = 40.0
-rect_min_size = Vector2( 38.2, 40 )
-mouse_filter = 1
-custom_styles/panel = SubResource( 1 )
-script = ExtResource( 2 )
 
-[node name="slot7" type="Panel" parent="GridContainer"]
+[node name="slot4" parent="GridContainer" instance=ExtResource( 15 )]
 margin_top = 44.0
-margin_right = 38.2
 margin_bottom = 84.0
-rect_min_size = Vector2( 38.2, 40 )
-mouse_filter = 1
-custom_styles/panel = SubResource( 1 )
-script = ExtResource( 2 )
 
-[node name="slot8" type="Panel" parent="GridContainer"]
+[node name="slot5" parent="GridContainer" instance=ExtResource( 15 )]
 margin_left = 42.0
 margin_top = 44.0
 margin_right = 80.2
 margin_bottom = 84.0
-rect_min_size = Vector2( 38.2, 40 )
-mouse_filter = 1
-custom_styles/panel = SubResource( 1 )
-script = ExtResource( 2 )
 
-[node name="slot9" type="Panel" parent="GridContainer"]
+[node name="slot6" parent="GridContainer" instance=ExtResource( 15 )]
 margin_left = 84.0
 margin_top = 44.0
 margin_right = 122.2
 margin_bottom = 84.0
-rect_min_size = Vector2( 38.2, 40 )
-mouse_filter = 1
-custom_styles/panel = SubResource( 1 )
-script = ExtResource( 2 )
 
-[node name="slot10" type="Panel" parent="GridContainer"]
+[node name="slot7" parent="GridContainer" instance=ExtResource( 15 )]
 margin_top = 88.0
-margin_right = 38.2
 margin_bottom = 128.0
-rect_min_size = Vector2( 38.2, 40 )
-mouse_filter = 1
-custom_styles/panel = SubResource( 1 )
-script = ExtResource( 2 )
 
-[node name="slot11" type="Panel" parent="GridContainer"]
+[node name="slot8" parent="GridContainer" instance=ExtResource( 15 )]
 margin_left = 42.0
 margin_top = 88.0
 margin_right = 80.2
 margin_bottom = 128.0
-rect_min_size = Vector2( 38.2, 40 )
-mouse_filter = 1
-custom_styles/panel = SubResource( 1 )
-script = ExtResource( 2 )
 
-[node name="slot12" type="Panel" parent="GridContainer"]
+[node name="slot9" parent="GridContainer" instance=ExtResource( 15 )]
 margin_left = 84.0
 margin_top = 88.0
 margin_right = 122.2
 margin_bottom = 128.0
-rect_min_size = Vector2( 38.2, 40 )
-mouse_filter = 1
-custom_styles/panel = SubResource( 1 )
-script = ExtResource( 2 )
 
-[node name="slot13" type="Panel" parent="GridContainer"]
+[node name="slot10" parent="GridContainer" instance=ExtResource( 15 )]
 margin_top = 132.0
-margin_right = 38.2
 margin_bottom = 172.0
-rect_min_size = Vector2( 38.2, 40 )
-mouse_filter = 1
-custom_styles/panel = SubResource( 1 )
-script = ExtResource( 2 )
 
-[node name="slot14" type="Panel" parent="GridContainer"]
+[node name="slot11" parent="GridContainer" instance=ExtResource( 15 )]
 margin_left = 42.0
 margin_top = 132.0
 margin_right = 80.2
 margin_bottom = 172.0
-rect_min_size = Vector2( 38.2, 40 )
-mouse_filter = 1
-custom_styles/panel = SubResource( 1 )
-script = ExtResource( 2 )
 
-[node name="slot15" type="Panel" parent="GridContainer"]
+[node name="slot12" parent="GridContainer" instance=ExtResource( 15 )]
 margin_left = 84.0
 margin_top = 132.0
 margin_right = 122.2
 margin_bottom = 172.0
-rect_min_size = Vector2( 38.2, 40 )
-mouse_filter = 1
-custom_styles/panel = SubResource( 1 )
-script = ExtResource( 2 )
 
 [node name="GridContainer2" type="GridContainer" parent="."]
 anchor_left = 1.0
@@ -182,35 +116,16 @@ margin_bottom = 61.0
 rect_pivot_offset = Vector2( 1, 1 )
 custom_constants/vseparation = 1
 custom_constants/hseparation = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="slot1" type="Panel" parent="GridContainer2" groups=["hand_slot"]]
-margin_right = 38.5
-margin_bottom = 40.0
-rect_min_size = Vector2( 38.5, 40 )
-rect_pivot_offset = Vector2( 1, 1 )
-custom_styles/panel = ExtResource( 15 )
-script = ExtResource( 2 )
+[node name="slot1" parent="GridContainer2" instance=ExtResource( 2 )]
 
-[node name="slot2" type="Panel" parent="GridContainer2" groups=["hand_slot"]]
+[node name="slot2" parent="GridContainer2" instance=ExtResource( 2 )]
 margin_top = 41.0
-margin_right = 38.2
 margin_bottom = 81.0
-rect_min_size = Vector2( 38.2, 40 )
-rect_pivot_offset = Vector2( 1, 1 )
-custom_styles/panel = ExtResource( 15 )
-script = ExtResource( 2 )
 
-[node name="slot3" type="Panel" parent="GridContainer2" groups=["hand_slot"]]
+[node name="slot3" parent="GridContainer2" instance=ExtResource( 2 )]
 margin_top = 82.0
-margin_right = 38.2
 margin_bottom = 122.0
-rect_min_size = Vector2( 38.2, 40 )
-rect_pivot_offset = Vector2( 1, 1 )
-custom_styles/panel = ExtResource( 15 )
-script = ExtResource( 2 )
 
 [node name="invr" type="TextureRect" parent="."]
 anchor_top = 0.5

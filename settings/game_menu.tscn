@@ -70,6 +70,9 @@ border_color = Color( 0.384314, 0.168627, 0.431373, 1 )
 use_mipmaps = true
 font_data = ExtResource( 8 )
 
+[sub_resource type="DynamicFont" id=21]
+font_data = ExtResource( 8 )
+
 [sub_resource type="StyleBoxFlat" id=18]
 bg_color = Color( 0.262745, 0, 0.254902, 1 )
 
@@ -93,9 +96,6 @@ expand_margin_right = 2.0
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="DynamicFont" id=21]
-font_data = ExtResource( 8 )
-
 [sub_resource type="Theme" id=22]
 default_font = SubResource( 21 )
 OptionButton/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
@@ -104,7 +104,7 @@ OptionButton/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
 OptionButton/colors/font_color_pressed = Color( 1, 1, 1, 1 )
 OptionButton/constants/arrow_margin = 2
 OptionButton/constants/hseparation = 2
-OptionButton/fonts/font = null
+OptionButton/fonts/font = SubResource( 21 )
 OptionButton/icons/arrow = null
 OptionButton/styles/disabled = SubResource( 18 )
 OptionButton/styles/focus = SubResource( 18 )
@@ -118,7 +118,7 @@ PopupMenu/colors/font_color_hover = Color( 0.88, 0.88, 0.88, 1 )
 PopupMenu/colors/font_color_separator = Color( 0.88, 0.88, 0.88, 1 )
 PopupMenu/constants/hseparation = 4
 PopupMenu/constants/vseparation = 4
-PopupMenu/fonts/font = null
+PopupMenu/fonts/font = SubResource( 21 )
 PopupMenu/icons/checked = null
 PopupMenu/icons/radio_checked = null
 PopupMenu/icons/radio_unchecked = null
@@ -146,11 +146,9 @@ bg_color = Color( 0.266667, 0.145098, 0.266667, 1 )
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="."]
+pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 0.364706 )
@@ -159,6 +157,7 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="."]
+pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 6 )
@@ -179,6 +178,7 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="menu"]
+pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = -0.778076
@@ -189,12 +189,14 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="menu/HBoxContainer"]
+pause_mode = 2
 margin_left = 188.0
 margin_right = 452.0
 margin_bottom = 173.0
 rect_min_size = Vector2( 250, 0 )
 
 [node name="title" type="TextureRect" parent="menu/HBoxContainer/VBoxContainer"]
+pause_mode = 2
 margin_right = 264.0
 margin_bottom = 84.0
 rect_min_size = Vector2( 200, 80 )
@@ -209,6 +211,7 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="menu/HBoxContainer/VBoxContainer"]
+pause_mode = 2
 margin_top = 88.0
 margin_right = 264.0
 margin_bottom = 173.0
@@ -216,11 +219,13 @@ size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="Control" type="Control" parent="menu/HBoxContainer/VBoxContainer/HBoxContainer"]
+pause_mode = 2
 margin_right = 14.0
 margin_bottom = 85.0
 rect_min_size = Vector2( 14, 0 )
 
 [node name="MarginContainer2" type="MarginContainer" parent="menu/HBoxContainer/VBoxContainer/HBoxContainer"]
+pause_mode = 2
 margin_left = 14.0
 margin_right = 264.0
 margin_bottom = 85.0
@@ -230,6 +235,7 @@ custom_constants/margin_right = 50
 custom_constants/margin_left = 50
 
 [node name="ScrollContainer" type="ScrollContainer" parent="menu/HBoxContainer/VBoxContainer/HBoxContainer/MarginContainer2"]
+pause_mode = 2
 margin_left = 50.0
 margin_right = 200.0
 margin_bottom = 85.0
@@ -237,6 +243,7 @@ size_flags_vertical = 3
 theme = SubResource( 5 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="menu/HBoxContainer/VBoxContainer/HBoxContainer/MarginContainer2/ScrollContainer"]
+pause_mode = 2
 margin_right = 142.0
 margin_bottom = 98.0
 size_flags_horizontal = 3
@@ -244,12 +251,14 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="menu/HBoxContainer/VBoxContainer/HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer"]
+pause_mode = 2
 margin_right = 142.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 20, 30 )
 size_flags_horizontal = 7
 
 [node name="settings_but" type="Button" parent="menu/HBoxContainer/VBoxContainer/HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer/HBoxContainer"]
+pause_mode = 2
 margin_right = 142.0
 margin_bottom = 30.0
 size_flags_horizontal = 3
@@ -267,6 +276,7 @@ __meta__ = {
 }
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="menu/HBoxContainer/VBoxContainer/HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer"]
+pause_mode = 2
 margin_top = 34.0
 margin_right = 142.0
 margin_bottom = 64.0
@@ -274,6 +284,7 @@ rect_min_size = Vector2( 20, 30 )
 size_flags_horizontal = 3
 
 [node name="exit" type="Button" parent="menu/HBoxContainer/VBoxContainer/HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer/HBoxContainer3"]
+pause_mode = 2
 margin_right = 142.0
 margin_bottom = 30.0
 size_flags_horizontal = 3
@@ -291,6 +302,7 @@ __meta__ = {
 }
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="menu/HBoxContainer/VBoxContainer/HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer"]
+pause_mode = 2
 margin_top = 68.0
 margin_right = 142.0
 margin_bottom = 98.0
@@ -298,6 +310,7 @@ rect_min_size = Vector2( 20, 30 )
 size_flags_horizontal = 3
 
 [node name="exit" type="Button" parent="menu/HBoxContainer/VBoxContainer/HBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer/HBoxContainer2"]
+pause_mode = 2
 margin_right = 142.0
 margin_bottom = 30.0
 size_flags_horizontal = 3
@@ -313,7 +326,7 @@ __meta__ = {
 }
 
 [node name="ScrollContainer" type="ScrollContainer" parent="menu/HBoxContainer"]
-pause_mode = 1
+pause_mode = 2
 visible = false
 margin_left = 284.0
 margin_right = 640.0
@@ -322,6 +335,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="menu/HBoxContainer/ScrollContainer"]
+pause_mode = 2
 margin_right = 356.0
 margin_bottom = 173.0
 size_flags_horizontal = 3
@@ -332,6 +346,7 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer"]
+pause_mode = 2
 margin_right = 356.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 130, 0 )
@@ -341,6 +356,7 @@ __meta__ = {
 }
 
 [node name="fullscreen" type="CheckBox" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+pause_mode = 2
 margin_right = 115.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 115, 0 )
@@ -354,6 +370,7 @@ text = "fullscreen"
 align = 1
 
 [node name="title" type="Label" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer"]
+pause_mode = 2
 margin_top = 19.0
 margin_right = 356.0
 margin_bottom = 32.0
@@ -365,12 +382,14 @@ __meta__ = {
 }
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer"]
+pause_mode = 2
 margin_top = 32.0
 margin_right = 356.0
 margin_bottom = 45.0
 custom_constants/separation = 130
 
 [node name="screen_size" type="OptionButton" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
+pause_mode = 2
 margin_right = 113.0
 margin_bottom = 13.0
 size_flags_horizontal = 3
@@ -391,6 +410,7 @@ __meta__ = {
 }
 
 [node name="Control" type="Control" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
+pause_mode = 2
 margin_left = 243.0
 margin_right = 356.0
 margin_bottom = 13.0
@@ -398,6 +418,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="title2" type="Label" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer"]
+pause_mode = 2
 margin_top = 45.0
 margin_right = 356.0
 margin_bottom = 58.0
@@ -409,12 +430,14 @@ __meta__ = {
 }
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer"]
+pause_mode = 2
 margin_top = 58.0
 margin_right = 356.0
 margin_bottom = 71.0
 custom_constants/separation = 130
 
 [node name="fps_lock" type="OptionButton" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
+pause_mode = 2
 margin_right = 113.0
 margin_bottom = 13.0
 size_flags_horizontal = 3
@@ -435,6 +458,7 @@ __meta__ = {
 }
 
 [node name="Control" type="Control" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
+pause_mode = 2
 margin_left = 243.0
 margin_right = 356.0
 margin_bottom = 13.0
@@ -442,6 +466,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="title3" type="Label" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer"]
+pause_mode = 2
 margin_top = 71.0
 margin_right = 356.0
 margin_bottom = 84.0
@@ -453,12 +478,14 @@ __meta__ = {
 }
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer"]
+pause_mode = 2
 margin_top = 84.0
 margin_right = 356.0
 margin_bottom = 97.0
 custom_constants/separation = 130
 
 [node name="shadow_mode" type="OptionButton" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
+pause_mode = 2
 margin_right = 113.0
 margin_bottom = 13.0
 size_flags_horizontal = 3
@@ -479,6 +506,7 @@ __meta__ = {
 }
 
 [node name="Control" type="Control" parent="menu/HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
+pause_mode = 2
 margin_left = 243.0
 margin_right = 356.0
 margin_bottom = 13.0

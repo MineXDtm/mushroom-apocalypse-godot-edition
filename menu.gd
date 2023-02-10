@@ -23,21 +23,19 @@ func _ready():
 	SkinManager.connect("skinloaded",self,"skinloaded")
 	WorldData.world_date_is_required = false
 	OS.set_use_vsync(false)
-	PlayerInventory.inventory = {}
-	PlayerInventory.inventory1 = {}
-	discord_rpc.icon = "icon"
-	discord_rpc.icon_desc = "Game Icon"
-	discord_rpc.small_icon = ""
-	discord_rpc.small_icon_desc = ""
+	#discord_rpc.icon = "icon"
+	#discord_rpc.icon_desc = "Game Icon"
+	#discord_rpc.small_icon = ""
+	#discord_rpc.small_icon_desc = ""
 	
 	
-	if epic.logged():
-		get_node("accountmenu").visible = false
-		epic.setfriendlist()
-		get_node("menu_1/VBoxContainer/MarginContainer/VBoxContainer/p/MarginContainer/HBoxContainer/CenterContainer/icon").texture.set_atlas(SkinManager.skin);
-		get_node("menu_1/VBoxContainer/MarginContainer/VBoxContainer/p/MarginContainer/HBoxContainer/Nickname").text = epic.nickname
-	else:
-		get_node("accountmenu").visible = true
+	#if epic.logged():
+	#	get_node("accountmenu").visible = false
+	#	epic.setfriendlist()
+	#	get_node("menu_1/VBoxContainer/MarginContainer/VBoxContainer/p/MarginContainer/HBoxContainer/CenterContainer/icon").texture.set_atlas(SkinManager.skin);
+	#	get_node("menu_1/VBoxContainer/MarginContainer/VBoxContainer/p/MarginContainer/HBoxContainer/Nickname").text = epic.nickname
+	#else:
+	#	get_node("accountmenu").visible = true
 
 func skinloaded(skin):
 	get_node("menu_1/VBoxContainer/MarginContainer/VBoxContainer/p/MarginContainer/HBoxContainer/CenterContainer/icon").texture.set_atlas(skin);

@@ -28,7 +28,7 @@ func emote_edit(s):
 	selectedbar = s
 	$HBoxContainer/custumications.visible = false
 	$HBoxContainer/selectionmenu.visible = true
-	var allemotes = epic.allEmotes
+	var allemotes = []
 	var bar = load("res://player_model/barselect.tscn")
 	for i in allemotes:
 		var bar_i = bar.instance() 
@@ -97,11 +97,11 @@ func _on_Button_pressed():
 	for i in emotes.keys():
 		cemotes["\""+i+"\""] = "\""+emotes[i]+"\""
 	var callemotes = []
-	for i in epic.allEmotes:
+	for i in []:
 		callemotes.append("\""+i+"\"")
 	var callskins = []
-	for i in epic.allskins:
+	for i in []:
 		callskins.append("\""+i+"\"")
 	var cskin = "null"
-	epic.call("setplayerinfo",cemotes,callemotes,callskins,cskin)
+	#epic.call("setplayerinfo",cemotes,callemotes,callskins,cskin)
 	
