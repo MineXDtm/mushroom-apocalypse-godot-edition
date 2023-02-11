@@ -683,8 +683,8 @@ func save_virables():
 	virables_data["timer_max_time"] = $time.wait_time
 	virables_data["clock"] = get_parent().get_node("UI2/bg/ViewportContainer/Viewport/CLockBar").get_node("CanvasLayer/clock").rect_position.x
 	virables_data["type"] =  WorldData.world_type
-	virables_data["getted"] = get_parent().get_node("UI2/Control/ViewportContainer/Viewport/map").getted
-	virables_data["completed"] = get_parent().get_node("UI2/Control/ViewportContainer/Viewport/map").completed
+	virables_data["getted"] = get_parent().get_node("UI2/map/ViewportContainer/Viewport/map").getted
+	virables_data["completed"] = get_parent().get_node("UI2/map/ViewportContainer/Viewport/map").completed
 	save_data2 = virables_data.duplicate(true)
 	var file = File.new()
 	#var error = file.open(save_path, File.WRITE)
@@ -820,9 +820,9 @@ func load_virables():
 	time = save_data2["time"]
 	for i in save_data2["getted"].keys():
 		for ii in save_data2["getted"][i].size():
-			get_node("/root/world/UI2/Control/ViewportContainer/Viewport/map").getted[int(i)][ii -1] = int(save_data2["getted"][i][ii -1])
+			get_node("/root/world/UI2/map/ViewportContainer/Viewport/map").getted[int(i)][ii -1] = int(save_data2["getted"][i][ii -1])
 	for i in save_data2["completed"].keys():
-		get_node("/root/world/UI2/Control/ViewportContainer/Viewport/map").completed[int(i)] =save_data2["completed"][i]
+		get_node("/root/world/UI2/map/ViewportContainer/Viewport/map").completed[int(i)] =save_data2["completed"][i]
 	if time == "night":
 		get_node("/root/world/UI2/bg/ViewportContainer/Viewport/CLockBar").set_clock(1)
 		$CanvasModulate.color = Color(0.513726, 0.301961, 0.623529)

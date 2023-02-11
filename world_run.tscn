@@ -47,6 +47,7 @@ font_data = ExtResource( 27 )
 [node name="world" type="Node"]
 
 [node name="map" parent="." instance=ExtResource( 1 )]
+position = Vector2( -24, 0 )
 
 [node name="UI2" type="CanvasLayer" parent="."]
 pause_mode = 2
@@ -350,32 +351,50 @@ visible = false
 [node name="inventory" parent="UI2" instance=ExtResource( 14 )]
 visible = false
 
-[node name="Control" type="Control" parent="UI2"]
+[node name="inv_but" type="Button" parent="UI2"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -72.0
+margin_top = 32.0
+margin_right = -13.0
+margin_bottom = 72.0
+text = "inv"
+
+[node name="pick_up" type="Button" parent="UI2"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -72.0
+margin_top = 80.0
+margin_right = -11.0
+margin_bottom = 120.0
+text = "interact"
+
+[node name="map" type="Control" parent="UI2"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ViewportContainer" type="ViewportContainer" parent="UI2/Control"]
+[node name="ViewportContainer" type="ViewportContainer" parent="UI2/map"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1
 stretch = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Viewport" type="Viewport" parent="UI2/Control/ViewportContainer"]
+[node name="Viewport" type="Viewport" parent="UI2/map/ViewportContainer"]
 size = Vector2( 640, 340 )
 size_override_stretch = true
 handle_input_locally = false
+msaa = 4
+fxaa = true
+hdr = false
+usage = 0
 render_target_update_mode = 0
 gui_disable_input = true
 
-[node name="map" parent="UI2/Control/ViewportContainer/Viewport" instance=ExtResource( 18 )]
+[node name="map" parent="UI2/map/ViewportContainer/Viewport" instance=ExtResource( 18 )]
 
 [node name="died_menu" parent="UI2" instance=ExtResource( 31 )]
 visible = false
@@ -423,26 +442,17 @@ render_target_update_mode = 3
 
 [node name="CLockBar" parent="UI2/bg/ViewportContainer/Viewport" instance=ExtResource( 3 )]
 
-[node name="inv_but" type="Button" parent="UI2"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -72.0
-margin_top = 32.0
-margin_right = -13.0
-margin_bottom = 72.0
-text = "inv"
-
-[node name="pick_up" type="Button" parent="UI2"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -72.0
-margin_top = 80.0
-margin_right = -11.0
-margin_bottom = 120.0
-text = "interact"
-
 [node name="game_menu" parent="UI2" instance=ExtResource( 33 )]
 visible = false
+
+[node name="pause_but" type="Button" parent="UI2"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 40.0
+margin_right = 103.0
+margin_bottom = 48.0
+text = "pause"
+clip_text = true
 
 [node name="loding_world" parent="UI2" instance=ExtResource( 4 )]
 visible = false
@@ -457,3 +467,4 @@ visible = false
 [connection signal="gui_input" from="UI2/joystick_attack" to="UI2" method="_on_joystick_attack_gui_input"]
 [connection signal="pressed" from="UI2/inv_but" to="UI2" method="_on_inv_but_pressed"]
 [connection signal="pressed" from="UI2/pick_up" to="UI2" method="_on_pick_up_pressed"]
+[connection signal="pressed" from="UI2/pause_but" to="UI2" method="_on_pause_but_pressed"]

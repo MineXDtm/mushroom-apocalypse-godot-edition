@@ -534,9 +534,6 @@ margin_top = -17.0
 margin_right = 154.0
 custom_fonts/font = SubResource( 8 )
 text = "Version: 0.0.6"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="worlds_list" type="Control" parent="."]
 visible = false

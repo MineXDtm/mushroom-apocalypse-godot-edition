@@ -106,9 +106,11 @@ func _physics_process(_delta):
 	if in_console == false and in_menu == false:
 		if gamesettings.device_mode == "pc":
 			$RayCast2D.look_at(get_global_mouse_position())
+			$RayCast2D.global_rotation_degrees -= 90
 		elif direction_attack_js != Vector2.ZERO:
-			$RayCast2D.look_at(position + direction_attack_js)
-		$RayCast2D.global_rotation_degrees -= 90
+			$RayCast2D.look_at(position+(direction_attack_js))
+			$RayCast2D.global_rotation_degrees -= 90
+	
 		$Line2D.global_rotation_degrees = $RayCast2D.global_rotation_degrees
 		
 		if $RayCast2D.is_colliding():
@@ -199,16 +201,16 @@ func get_input(_delta):
 				velocity.y += 1
 			if Input.is_action_pressed("player_up") and isattacking == false and opened == false and died == false and eating == false:
 				velocity.y -= 1
-	velocity *= speed
-	if velocity.x > 0:
-		fliped = false
-		$Particles2D.position.x = -7
-		$Particles2D.process_material.gravity.x = -50
-	else:
-		fliped = true
-		$Particles2D.position.x = 7
-		$Particles2D.process_material.gravity.x = 50
-	move_and_slide(velocity)
+		velocity *= speed
+		if velocity.x > 0:
+			fliped = false
+			$Particles2D.position.x = -7
+			$Particles2D.process_material.gravity.x = -50
+		elif velocity.x < 0:
+			fliped = true
+			$Particles2D.position.x = 7
+			$Particles2D.process_material.gravity.x = 50
+		move_and_slide(velocity)
 
 func inventory():
 	if selected_item != "arm" and JsonData.item_data[selected_item]["ItemCategory"] == "build"  and JsonData.item_data[selected_item]["layer"] == 1:
@@ -396,7 +398,6 @@ func add_item(item_name, item_quantity):
 func remove_item(slot):
 	inventory.erase(slot.slot_index)
 func  add_item_to_empty_slot(item, slot):
-	print("e")
 	print(inventory)
 	inventory.append([item.item_name, item.item_quantity])
 func attack():

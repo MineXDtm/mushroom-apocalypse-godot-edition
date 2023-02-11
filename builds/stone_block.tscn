@@ -8,14 +8,9 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 1 ) ],
 "loop": false,
-"name": "right",
-"speed": 0.0
-}, {
-"frames": [ ExtResource( 2 ) ],
-"loop": false,
-"name": "left",
+"name": "break",
 "speed": 0.0
 }, {
 "frames": [ ExtResource( 1 ) ],
@@ -23,9 +18,14 @@ animations = [ {
 "name": "default",
 "speed": 0.0
 }, {
-"frames": [ ExtResource( 1 ) ],
+"frames": [ ExtResource( 2 ) ],
 "loop": false,
-"name": "break",
+"name": "left",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": false,
+"name": "right",
 "speed": 0.0
 } ]
 
@@ -53,10 +53,7 @@ extents = Vector2( 237.775, 82.0732 )
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 222.914, 15.3887 )
 
-[node name="block" type="Area2D" groups=[
-"block",
-"kust",
-]]
+[node name="block" type="Area2D" groups=["block", "kust"]]
 show_behind_parent = true
 scale = Vector2( -0.0672904, 0.194948 )
 collision_layer = 7
@@ -127,10 +124,10 @@ margin_left = -186.93
 margin_top = -90.1617
 margin_right = 188.07
 margin_bottom = -69.1617
-custom_styles/fg = SubResource( 5 )
-custom_styles/bg = ExtResource( 4 )
 custom_colors/font_color = Color( 0.431373, 1, 0, 1 )
 custom_colors/font_color_shadow = Color( 0.313726, 1, 0, 1 )
+custom_styles/fg = SubResource( 5 )
+custom_styles/bg = ExtResource( 4 )
 max_value = 30.0
 value = 30.0
 percent_visible = false
@@ -142,27 +139,21 @@ __meta__ = {
 scale = Vector2( 1.03889, 0.832874 )
 shape = SubResource( 6 )
 
-[node name="exit" type="Area2D" parent="." groups=[
-"exit",
-]]
+[node name="exit" type="Area2D" parent="." groups=["exit"]]
 script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="exit"]
 position = Vector2( 0, 164.146 )
 shape = SubResource( 7 )
 
-[node name="exit2" type="Area2D" parent="." groups=[
-"exit",
-]]
+[node name="exit2" type="Area2D" parent="." groups=["exit"]]
 script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="exit2"]
 position = Vector2( -478.799, 4.07595 )
 shape = SubResource( 7 )
 
-[node name="exit3" type="Area2D" parent="." groups=[
-"exit",
-]]
+[node name="exit3" type="Area2D" parent="." groups=["exit"]]
 position = Vector2( 4.95925, 1.71179 )
 script = ExtResource( 6 )
 
@@ -170,18 +161,14 @@ script = ExtResource( 6 )
 position = Vector2( 478.958, 0.48035 )
 shape = SubResource( 7 )
 
-[node name="exit4" type="Area2D" parent="." groups=[
-"exit",
-]]
+[node name="exit4" type="Area2D" parent="." groups=["exit"]]
 script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="exit4"]
 position = Vector2( 7.62939e-06, -164.146 )
 shape = SubResource( 7 )
 
-[node name="block_area" type="Area2D" parent="." groups=[
-"block_area",
-]]
+[node name="block_area" type="Area2D" parent="." groups=["block_area"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="block_area"]
 shape = SubResource( 8 )

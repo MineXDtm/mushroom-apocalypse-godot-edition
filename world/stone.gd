@@ -112,76 +112,55 @@ func _on_kust_area_entered(area):
 		var random_pos = Vector2(random_x,random_y)
 		position = random_pos
 		$CollisionPolygon2D2.set_deferred("disabled" , false)
-	if area.is_in_group("arm") and broked == false:
-		health -= 0.5
-		print(position.y, name)
-		$ProgressBar.visible = true
-		$ProgressBar.value = health
-		if health <= 0 :
-			queue_free()
-	elif area.is_in_group("wooden_exe") and broked == false:
-		health -= 0.7
-		$ProgressBar.visible = true
-		$ProgressBar.value = health
-		if health <= 0 :
-			queue_free()
-	elif area.is_in_group("wooden_pickaxe") and broked == false:
-		health -= 1
-		$ProgressBar.visible = true
-		$ProgressBar.value = health
-		if health <= 0 :
-			$ProgressBar.visible = false
-			print("broked")
-			broked = true
-	elif area.is_in_group("stone_pickaxe") and broked == false:
-		health -= 1.5
-		$ProgressBar.visible = true
-		$ProgressBar.value = health
-		if health <= 0 :
-			$ProgressBar.visible = false
-			print("broked")
-			broked = true
-	elif area.is_in_group("stone_exe") and broked == false:
-		health -= 1
-		$ProgressBar.visible = true
-		$ProgressBar.value = health
-		if health <= 0 :
-			queue_free()
+func damage():
+	var navigationscene = load("res://world/NavigationPolygonInstance.tscn")
+	health -= 1
+	$ProgressBar.visible = true
+	$ProgressBar.value = health
+		
+	if health <= 0 :
+		$ProgressBar.visible = false
+		broked = true
 	if broked == true :
-		$AnimatedSprite.visible = false
-		for i in range(10):
+			
+			$StaticBody2D.visible = false
+			$StaticBody2D/CollisionPolygon2D.disabled = true
+			$CollisionPolygon2D2.visible = false
+			$tex.visible = false
+			$CollisionPolygon2D2.disabled = true
+			for i in range(10):
 				var particle = Polygon2D.new()
 				random.randomize()
-				var pos = Vector2(random.randi_range(0,$AnimatedSprite.texture.get_size().x),random.randi_range(0,$AnimatedSprite.texture.get_size().y))
+				var pos = Vector2(random.randi_range(0,$tex.texture.get_size().x),random.randi_range(0,$tex.texture.get_size().y))
 				particle.polygon = [pos , Vector2(pos.x +5 ,pos.y), Vector2(pos.x +5 ,pos.y+5) , Vector2(pos.x ,pos.y+5)]
-				particle.texture = $AnimatedSprite.texture
-				particle.position = $AnimatedSprite.position -pos 
+				particle.texture = $tex.texture
+				particle.position = $tex.position -pos 
 				particle.set_script(load("res://world/particle.gd"))
 				add_child(particle)
-		yield(get_tree().create_timer(0.2), "timeout")
-		broked = false
-		#Ganaretor.fruit_kustes -= 1
-		var world = get_parent()
-		var drop_scene = load("res://world/drop/ItemDrop.tscn") 
-		var _drop_intance = drop_scene.instance()
-		_drop_intance.item_name = "cobblestone"
-		_drop_intance.position = position
-		var navigationscene = load("res://world/NavigationPolygonInstance.tscn")
-		var navigation = navigationscene.instance()
-		navigation.position.x = cords2[number]
-		navigation.position.y = cords2[number2]
-		get_parent().get_parent().get_node("zombies").call_deferred("add_child", navigation)
-		var exit_scene = load("res://exit.tscn")
-		var _exit_intance = exit_scene.instance()
-		_exit_intance.position = position
-		world.call_deferred("add_child", _exit_intance)
-		_exit_intance.position = position
-		_drop_intance.position = position
-		world.call_deferred("add_child", _drop_intance)
-		_drop_intance.position = position
-		queue_free()
-
+			yield(get_tree().create_timer(0.2), "timeout")
+			Ganaretor.kustes -= 1
+			var _world = get_parent()
+			var navigation = navigationscene.instance()
+			navigation.position.x = cords2[number]
+			navigation.position.y = cords2[number2]
+			navigation.position.x = cords2[number]
+			navigation.position.y = cords2[number2]
+			get_parent().get_parent().get_node("zombies").call_deferred("add_child", navigation)
+			var world = get_parent()
+			var exit_scene = load("res://exit.tscn")
+			var _exit_intance = exit_scene.instance()
+			_exit_intance.position = position
+			world.call_deferred("add_child", _exit_intance)
+			_exit_intance.position = position
+			var drop_scene = load("res://world/drop/ItemDrop.tscn") 
+			var _drop_intance = drop_scene.instance()
+			_drop_intance.item_name = "cobblestone"
+			_drop_intance.position = position
+			world.call_deferred("add_child", _drop_intance)
+			
+			queue_free()
 func _ready():
+	visible = false
 	while cooldown32 <= map_size:
 		cooldown32 += 32
 		needed += 1 

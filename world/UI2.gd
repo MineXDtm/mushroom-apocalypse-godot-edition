@@ -20,17 +20,18 @@ func _physics_process(_delta):
 		get_tree().get_nodes_in_group("player")[0].velocity = move_vector
 		
 	if Input.is_action_just_pressed("menu") and get_parent().get_node(str(WorldData.map,"/sort/player")).opened == false and get_node("inventory").visible == false:
-		if $game_menu.visible == false:
-			$game_menu.visible = true
-			get_tree().paused = true
-			get_parent().get_node(str(WorldData.map,"/sort/player")).in_menu = true
-		else:
-			$game_menu.visible = false
-			get_tree().paused = false
-			get_parent().get_node(str(WorldData.map,"/sort/player")).in_menu = false
+		show_pause_menu()
+
+func show_pause_menu():
+	if $game_menu.visible == false:
+		$game_menu.visible = true
+		get_tree().paused = true
+		get_parent().get_node(str(WorldData.map,"/sort/player")).in_menu = true
+	else:
+		$game_menu.visible = false
+		get_tree().paused = false
+		get_parent().get_node(str(WorldData.map,"/sort/player")).in_menu = false
 	
-
-
 func _input(event):
 	if event.is_action_pressed("emotebar"):
 		$emotes.visible = true
@@ -76,8 +77,13 @@ func _on_joystick_attack_gui_input(event):
 			get_tree().get_nodes_in_group("player")[0].attack()
 			$joystick_attack/stick.rect_position = Vector2($joystick_attack.rect_size.x/2,$joystick_attack.rect_size.y/2) - Vector2($joystick_attack/stick.rect_size.x/2,$joystick_attack/stick.rect_size.y/2)
 			return
-		get_tree().get_nodes_in_group("player")[0].direction_attack_js =(event.position- Vector2($joystick_movement.rect_size.x/2,$joystick_movement.rect_size.y/2)).normalized()
+		get_tree().get_nodes_in_group("player")[0].direction_attack_js =(event.position- Vector2($joystick_attack.rect_size.x/2,$joystick_attack.rect_size.y/2))
 		joystick_attack_pressed = event.pressed
 	if event is InputEventScreenDrag:
-		get_tree().get_nodes_in_group("player")[0].direction_attack_js  = (event.position- Vector2($joystick_movement.rect_size.x/2,$joystick_movement.rect_size.y/2)).normalized()
+		get_tree().get_nodes_in_group("player")[0].direction_attack_js  = (event.position- Vector2($joystick_attack.rect_size.x/2,$joystick_attack.rect_size.y/2))
+		
 		$joystick_attack/stick.rect_position =(event.position- Vector2($joystick_attack.rect_size.x/2,$joystick_attack.rect_size.y/2)).clamped($joystick_attack.rect_size.x/2) + Vector2(60,60) - Vector2($joystick_attack/stick.rect_size.x/2,$joystick_attack/stick.rect_size.y/2)
+
+
+func _on_pause_but_pressed():
+	show_pause_menu()

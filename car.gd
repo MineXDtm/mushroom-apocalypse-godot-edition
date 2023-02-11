@@ -55,12 +55,12 @@ func _on_car_area2_area_entered(area):
 	if area.is_in_group("body") and area.is_in_group("player"):
 		if inmenu == false:
 			area.get_parent().opened = true
-			get_parent().get_parent().get_parent().get_node("UI2/Control").visible = true
-			get_parent().get_parent().get_parent().get_node("UI2/Control/ViewportContainer/Viewport").gui_disable_input = false
+			get_parent().get_parent().get_parent().get_node("UI2/map").visible = true
+			get_parent().get_parent().get_parent().get_node("UI2/map/ViewportContainer/Viewport").gui_disable_input = false
 			inmenu = true
 		else:
-			get_parent().get_parent().get_parent().get_node("UI2/Control").visible = false
-			get_parent().get_parent().get_parent().get_node("UI2/Control/ViewportContainer/Viewport").gui_disable_input = true
+			get_parent().get_parent().get_parent().get_node("UI2/map").visible = false
+			get_parent().get_parent().get_parent().get_node("UI2/map/ViewportContainer/Viewport").gui_disable_input = true
 			inmenu = false
 			area.get_parent().opened = false
 
@@ -69,11 +69,9 @@ func _on_Area2D_area_entered(area):
 	if area.is_in_group("body") and area.is_in_group("player"):
 		if inmenu == false:
 			area.get_parent().opened = true
-			get_parent().get_parent().get_parent().get_node("UI2/Control").visible = true
-			get_parent().get_parent().get_parent().get_node("UI2/Control/ViewportContainer/Viewport").gui_disable_input = false
+			get_parent().get_parent().get_parent().get_node("UI2/map").visible = true
 			inmenu = true
 		else:
-			get_parent().get_parent().get_parent().get_node("UI2/Control").visible = false
-			get_parent().get_parent().get_parent().get_node("UI2/Control/ViewportContainer/Viewport").gui_disable_input = true
+			get_parent().get_parent().get_parent().get_node("UI2/map").visible = false
 			inmenu = false
 			area.get_parent().opened = false
