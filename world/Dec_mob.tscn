@@ -13,9 +13,9 @@
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 5 ), ExtResource( 4 ) ],
+"frames": [ ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
-"name": "red_butterfly",
+"name": "Firefly",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
@@ -23,18 +23,16 @@ animations = [ {
 "name": "blue_butterfly",
 "speed": 6.0
 }, {
-"frames": [ ExtResource( 6 ), ExtResource( 7 ) ],
+"frames": [ ExtResource( 5 ), ExtResource( 4 ) ],
 "loop": true,
-"name": "Firefly",
+"name": "red_butterfly",
 "speed": 5.0
 } ]
 
 [sub_resource type="CanvasItemMaterial" id=3]
 light_mode = 1
 
-[node name="Dec_mob" type="AnimatedSprite" groups=[
-"decoration",
-]]
+[node name="Dec_mob" type="AnimatedSprite" groups=["decoration"]]
 visible = false
 material = SubResource( 1 )
 frames = SubResource( 2 )
@@ -47,7 +45,7 @@ position = Vector2( 0.00827206, 0 )
 [node name="light" type="Sprite" parent="."]
 visible = false
 material = SubResource( 3 )
-position = Vector2( -0.504596, 0.5 )
+position = Vector2( 0, 1 )
 texture = ExtResource( 8 )
 
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]

@@ -13,8 +13,9 @@ func _ready():
 
 func openinv():
 	$inventory.visible = !$inventory.visible
+	get_tree().get_nodes_in_group("player")[0].inventory_opened = !get_tree().get_nodes_in_group("player")[0].inventory_opened
 func _physics_process(_delta):
-	if joystick_pressed:
+	if joystick_movement_pressed:
 		
 		get_tree().get_nodes_in_group("player")[0].velocity = move_vector
 		
@@ -47,16 +48,36 @@ func _input(event):
 func _on_inv_but_pressed():
 	openinv()
 var move_vector = Vector2.ZERO
-var joystick_pressed = false
+var joystick_movement_pressed = false
+var joystick_attack_pressed = false
 func _on_joystick_movement_gui_input(event):
 	if event is InputEventScreenTouch:
 		if not event.pressed:
-			joystick_pressed = event.pressed
+			joystick_movement_pressed = event.pressed
+			#e
 			$joystick_movement/stick.rect_position = Vector2($joystick_movement.rect_size.x/2,$joystick_movement.rect_size.y/2) - Vector2($joystick_movement/stick.rect_size.x/2,$joystick_movement/stick.rect_size.y/2)
 			return
 		move_vector = (event.position- Vector2($joystick_movement.rect_size.x/2,$joystick_movement.rect_size.y/2)).normalized() 
 		$joystick_movement/stick.rect_position = (event.position- Vector2($joystick_movement.rect_size.x/2,$joystick_movement.rect_size.y/2)).clamped($joystick_movement.rect_size.x/2) + Vector2(60,60) - Vector2($joystick_movement/stick.rect_size.x/2,$joystick_movement/stick.rect_size.y/2)
-		joystick_pressed = event.pressed
+		joystick_movement_pressed = event.pressed
 	if event is InputEventScreenDrag:
 		move_vector = (event.position- Vector2($joystick_movement.rect_size.x/2,$joystick_movement.rect_size.y/2)).normalized()
 		$joystick_movement/stick.rect_position =(event.position- Vector2($joystick_movement.rect_size.x/2,$joystick_movement.rect_size.y/2)).clamped($joystick_movement.rect_size.x/2) + Vector2(60,60) - Vector2($joystick_movement/stick.rect_size.x/2,$joystick_movement/stick.rect_size.y/2)
+
+
+func _on_pick_up_pressed():
+	get_tree().get_nodes_in_group("player")[0].get_node("body/CollisionShape2D2").disabled = false
+
+
+func _on_joystick_attack_gui_input(event):
+	if event is InputEventScreenTouch:
+		if not event.pressed:
+			joystick_attack_pressed = event.pressed
+			get_tree().get_nodes_in_group("player")[0].attack()
+			$joystick_attack/stick.rect_position = Vector2($joystick_attack.rect_size.x/2,$joystick_attack.rect_size.y/2) - Vector2($joystick_attack/stick.rect_size.x/2,$joystick_attack/stick.rect_size.y/2)
+			return
+		get_tree().get_nodes_in_group("player")[0].direction_attack_js =(event.position- Vector2($joystick_movement.rect_size.x/2,$joystick_movement.rect_size.y/2)).normalized()
+		joystick_attack_pressed = event.pressed
+	if event is InputEventScreenDrag:
+		get_tree().get_nodes_in_group("player")[0].direction_attack_js  = (event.position- Vector2($joystick_movement.rect_size.x/2,$joystick_movement.rect_size.y/2)).normalized()
+		$joystick_attack/stick.rect_position =(event.position- Vector2($joystick_attack.rect_size.x/2,$joystick_attack.rect_size.y/2)).clamped($joystick_attack.rect_size.x/2) + Vector2(60,60) - Vector2($joystick_attack/stick.rect_size.x/2,$joystick_attack/stick.rect_size.y/2)

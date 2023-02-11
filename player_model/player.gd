@@ -89,10 +89,7 @@ func _input(event):
 	if event.is_action_pressed("inv") and isattacking == false and opened == false  and died == false:
 		var inv = get_parent().get_parent().get_parent().get_node("UI2")
 		inv.openinv()
-		if inventory_opened == false:
-			inventory_opened = true
-		else:
-			inventory_opened = false
+		
 
 onready var player = get_node("player")
 onready var shadow = get_node("model/shadow")
@@ -102,11 +99,15 @@ func loadskin():
 	for i in get_node("model").get_children():
 		if i.name == "shadow":continue
 		i.texture.set_atlas(SkinManager.skin)
-		
+
+
+var direction_attack_js = Vector2.ZERO
 func _physics_process(_delta):
 	if in_console == false and in_menu == false:
-		
-		$RayCast2D.look_at(get_global_mouse_position())
+		if gamesettings.device_mode == "pc":
+			$RayCast2D.look_at(get_global_mouse_position())
+		elif direction_attack_js != Vector2.ZERO:
+			$RayCast2D.look_at(position + direction_attack_js)
 		$RayCast2D.global_rotation_degrees -= 90
 		$Line2D.global_rotation_degrees = $RayCast2D.global_rotation_degrees
 		
@@ -171,45 +172,33 @@ func get_input(_delta):
 			invenory_slot = i
 	if Input.is_action_just_pressed("open")  and died == false:
 		$body/CollisionShape2D2.disabled = false
-	if Input.is_action_just_pressed("click_left") and opened == false and isattacking == false and inventory_opened == false and died == false:
+	if gamesettings.device_mode == "mobile" and direction_attack_js != Vector2.ZERO:
+		$Line2D.visible = true
+	elif gamesettings.device_mode == "mobile":
+		$Line2D.visible = false
+	if Input.is_action_just_pressed("click_left") and gamesettings.device_mode == "pc" and opened == false and isattacking == false and inventory_opened == false and died == false:
 		$Line2D.visible = true
 		
-	if Input.is_action_just_released("click_left") and opened == false and isattacking == false and inventory_opened == false and died == false :
-		get_parent().get_node("select").visible = false
-		$Line2D.visible = false
+	if Input.is_action_just_released("click_left")and gamesettings.device_mode == "pc" and opened == false and isattacking == false and inventory_opened == false and died == false :
 		
-		var rand = randi() % 2
-		rands = rand
-		
-		if selected_item == "arm":
-			isattacking = true
-			if !$RayCast2D.is_colliding():return
-			$RayCast2D.get_collider().damage()
-			
-		elif JsonData.item_data[selected_item]["ItemCategory"] == "food" and health < 20 and eating == false:
-			eating = true
-		elif JsonData.item_data[selected_item]["ItemCategory"] == "resurse":
-			isattacking = true
-			if !$RayCast2D.is_colliding():return
-			print($RayCast2D.get_collider().name)
-		elif JsonData.item_data[selected_item]["ItemCategory"] == "instrument":
-			isattacking = true
-			if !$RayCast2D.is_colliding():return
-			print($RayCast2D.get_collider().name)
-	if Input.is_action_just_pressed("inv1") and isattacking == false and opened == false  and died == false and eating == false:
-		invenory_slot = 1
-	elif Input.is_action_just_pressed("inv2") and isattacking == false and opened == false and died == false  and eating == false:
-		invenory_slot = 2
-	elif Input.is_action_just_pressed("inv3") and isattacking == false and opened == false and died == false  and eating == false:
-		invenory_slot = 3
-	if Input.is_action_pressed("player_right") and isattacking == false and opened == false and died == false  and eating == false:
-		velocity.x += 1
-	elif Input.is_action_pressed("player_left") and isattacking == false and opened == false and died == false and eating == false:
-		velocity.x -= 1
-	if Input.is_action_pressed("Player_down") and isattacking == false and opened == false and died == false and eating == false:
-		velocity.y += 1
-	if Input.is_action_pressed("player_up") and isattacking == false and opened == false and died == false and eating == false:
-		velocity.y -= 1
+		attack()
+	
+	if  isattacking == false and opened == false  and died == false and eating == false:
+		if gamesettings.device_mode == "pc":
+			if Input.is_action_just_pressed("inv1") :
+				invenory_slot = 1
+			elif Input.is_action_just_pressed("inv2") and isattacking == false and opened == false and died == false  and eating == false:
+				invenory_slot = 2
+			elif Input.is_action_just_pressed("inv3") and isattacking == false and opened == false and died == false  and eating == false:
+				invenory_slot = 3
+			if Input.is_action_pressed("player_right") and isattacking == false and opened == false and died == false  and eating == false:
+				velocity.x += 1
+			elif Input.is_action_pressed("player_left") and isattacking == false and opened == false and died == false and eating == false:
+				velocity.x -= 1
+			if Input.is_action_pressed("Player_down") and isattacking == false and opened == false and died == false and eating == false:
+				velocity.y += 1
+			if Input.is_action_pressed("player_up") and isattacking == false and opened == false and died == false and eating == false:
+				velocity.y -= 1
 	velocity *= speed
 	if velocity.x > 0:
 		fliped = false
@@ -410,3 +399,23 @@ func  add_item_to_empty_slot(item, slot):
 	print("e")
 	print(inventory)
 	inventory.append([item.item_name, item.item_quantity])
+func attack():
+	direction_attack_js = Vector2.ZERO;
+	get_parent().get_node("select").visible = false
+	$Line2D.visible = false
+	var rand = randi() % 2
+	rands = rand
+	
+	if selected_item == "arm":
+		isattacking = true
+		if !$RayCast2D.is_colliding():return
+		$RayCast2D.get_collider().call("damage")
+		
+	elif JsonData.item_data[selected_item]["ItemCategory"] == "food" and health < 20 and eating == false:
+		eating = true
+	elif JsonData.item_data[selected_item]["ItemCategory"] == "resurse":
+		isattacking = true
+		if !$RayCast2D.is_colliding():return
+	elif JsonData.item_data[selected_item]["ItemCategory"] == "instrument":
+		isattacking = true
+		if !$RayCast2D.is_colliding():return
