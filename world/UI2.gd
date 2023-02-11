@@ -14,6 +14,10 @@ func _ready():
 func openinv():
 	$inventory.visible = !$inventory.visible
 func _physics_process(_delta):
+	if joystick_pressed:
+		
+		get_tree().get_nodes_in_group("player")[0].velocity = move_vector
+		
 	if Input.is_action_just_pressed("menu") and get_parent().get_node(str(WorldData.map,"/sort/player")).opened == false and get_node("inventory").visible == false:
 		if $game_menu.visible == false:
 			$game_menu.visible = true
@@ -42,10 +46,17 @@ func _input(event):
 
 func _on_inv_but_pressed():
 	openinv()
-
-
+var move_vector = Vector2.ZERO
+var joystick_pressed = false
 func _on_joystick_movement_gui_input(event):
-	if event is InputEventScreenTouch or event is InputEventScreenDrag:
-		print(event.position)
-		var move_vector =event.position.normalized()
-		get_tree().get_nodes_in_group("player")[0].velocity = move_vector;
+	if event is InputEventScreenTouch:
+		if not event.pressed:
+			joystick_pressed = event.pressed
+			$joystick_movement/stick.rect_position = Vector2($joystick_movement.rect_size.x/2,$joystick_movement.rect_size.y/2) - Vector2($joystick_movement/stick.rect_size.x/2,$joystick_movement/stick.rect_size.y/2)
+			return
+		move_vector = (event.position- Vector2($joystick_movement.rect_size.x/2,$joystick_movement.rect_size.y/2)).normalized() 
+		$joystick_movement/stick.rect_position = (event.position- Vector2($joystick_movement.rect_size.x/2,$joystick_movement.rect_size.y/2)).clamped($joystick_movement.rect_size.x/2) + Vector2(60,60) - Vector2($joystick_movement/stick.rect_size.x/2,$joystick_movement/stick.rect_size.y/2)
+		joystick_pressed = event.pressed
+	if event is InputEventScreenDrag:
+		move_vector = (event.position- Vector2($joystick_movement.rect_size.x/2,$joystick_movement.rect_size.y/2)).normalized()
+		$joystick_movement/stick.rect_position =(event.position- Vector2($joystick_movement.rect_size.x/2,$joystick_movement.rect_size.y/2)).clamped($joystick_movement.rect_size.x/2) + Vector2(60,60) - Vector2($joystick_movement/stick.rect_size.x/2,$joystick_movement/stick.rect_size.y/2)

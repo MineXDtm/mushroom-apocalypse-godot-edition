@@ -204,19 +204,21 @@ func get_input(_delta):
 		invenory_slot = 3
 	if Input.is_action_pressed("player_right") and isattacking == false and opened == false and died == false  and eating == false:
 		velocity.x += 1
-		fliped = false
-		$Particles2D.position.x = -7
-		$Particles2D.process_material.gravity.x = -50
 	elif Input.is_action_pressed("player_left") and isattacking == false and opened == false and died == false and eating == false:
 		velocity.x -= 1
-		fliped = true
-		$Particles2D.position.x = 7
-		$Particles2D.process_material.gravity.x = 50
 	if Input.is_action_pressed("Player_down") and isattacking == false and opened == false and died == false and eating == false:
 		velocity.y += 1
 	if Input.is_action_pressed("player_up") and isattacking == false and opened == false and died == false and eating == false:
 		velocity.y -= 1
 	velocity *= speed
+	if velocity.x > 0:
+		fliped = false
+		$Particles2D.position.x = -7
+		$Particles2D.process_material.gravity.x = -50
+	else:
+		fliped = true
+		$Particles2D.position.x = 7
+		$Particles2D.process_material.gravity.x = 50
 	move_and_slide(velocity)
 
 func inventory():
