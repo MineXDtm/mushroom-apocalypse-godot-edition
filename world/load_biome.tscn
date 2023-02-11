@@ -205,7 +205,6 @@ script = ExtResource( 3 )
 
 [node name="zombie_spawn" type="Timer" parent="."]
 wait_time = 5.0
-autostart = true
 
 [node name="TileMap2" type="TileMap" parent="."]
 cell_size = Vector2( 32, 32 )

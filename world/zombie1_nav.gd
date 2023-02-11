@@ -27,6 +27,7 @@ var indexes = {}
 onready var astar = AStar2D.new()
 var walk_zone = {}
 func _ready():
+	return
 	while cooldown32 <= map_size:
 		cooldown32 += 32
 		needed += 1 
