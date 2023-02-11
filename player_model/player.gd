@@ -214,6 +214,7 @@ func get_input(_delta):
 
 func inventory():
 	if selected_item != "arm" and JsonData.item_data[selected_item]["ItemCategory"] == "build"  and JsonData.item_data[selected_item]["layer"] == 1:
+		
 		var block = get_parent().get_parent().get_parent().get_node("TileMap")
 		block.visible = true
 		if block.empty != load("res://textures/build_player/" + selected_item +"_true.png"):
@@ -223,23 +224,8 @@ func inventory():
 				block.full_rotare = load("res://textures/build_player/" + selected_item +"_rotare_false.png")
 			block.full  = load("res://textures/build_player/" + selected_item +"_false.png")
 			block.type = selected_item
-		if Input.is_action_just_pressed("click_left") and full ==  false and opened == false and inventory_opened == false and died == false:
-			var _map = get_parent().get_parent().get_parent().get_node(str(WorldData.map,"/sort"))
-			var fruit = load("res://builds/"+selected_item+".tscn")
-			var fruits = fruit.instance()
-			fruits.position = get_parent().get_parent().get_parent().get_node("TileMap/Node2D").position
-			fruits.position.x += 16
-			fruits.position.y += 16
-			_map.add_child(fruits)
-			if invenory_slot == 1:
-				var inventory1 = get_parent().get_parent().get_parent().get_node("UI2/inventory")
-				inventory1.place("slot1")
-			elif  invenory_slot == 2:
-				var inventory1 = get_parent().get_parent().get_parent().get_node("UI2/inventory")
-				inventory1.place("slot2")
-			elif  invenory_slot == 3:
-				var inventory1 = get_parent().get_parent().get_parent().get_node("UI2/inventory")
-				inventory1.place("slot3")
+		if Input.is_action_just_pressed("click_left") and gamesettings.device_mode == "pc" and full ==  false and opened == false and inventory_opened == false and died == false:
+			place_build()
 	else:
 		var block = get_node("/root/world/TileMap")
 		block.visible = false
@@ -254,27 +240,36 @@ func inventory():
 				block.full_rotare = load("res://textures/build_player/" + selected_item +"_rotare_false.png")
 			block.full  = load("res://textures/build_player/" + selected_item +"_false.png")
 			block.type = selected_item
-		if Input.is_action_just_pressed("click_left") and full2 ==  false and opened == false and inventory_opened == false and died == false:
-			var _map = get_parent().get_parent().get_node("b/builds")
-			var fruit = load("res://builds/"+selected_item+".tscn")
-			var fruits = fruit.instance()
-			fruits.position = get_parent().get_parent().get_node("b/TileMap/Node2D").position
-			fruits.position.x += 16
-			fruits.position.y += 16
-			_map.add_child(fruits)
-			if invenory_slot ==1:
-				var inventory1 = get_parent().get_parent().get_parent().get_node("UI2/inventory")
-				inventory1.place("slot1")
-			elif  invenory_slot == 2:
-				var inventory1 = get_parent().get_parent().get_parent().get_node("UI2/inventory")
-				inventory1.place("slot2")
-			elif  invenory_slot == 3:
-				var inventory1 = get_parent().get_parent().get_parent().get_node("UI2/inventory")
-				inventory1.place("slot3")
+		if Input.is_action_just_pressed("click_left") and gamesettings.device_mode == "pc" :
+			place_build()
 	else:
 		var block = get_parent().get_parent().get_node("b/TileMap")
 		block.visible = false
 var emote = false
+func place_build():
+	if JsonData.item_data[selected_item]["layer"] == 0:
+		if  full2 ==  false and opened == false and inventory_opened == false and died == false:
+			var _map = get_parent().get_parent().get_node("b/builds")
+			var build = load("res://builds/"+selected_item+".tscn")
+			var build_s = build.instance()
+			build_s.position = get_parent().get_parent().get_node("b/TileMap/Node2D").position
+			build_s.position.x += 16
+			build_s.position.y += 16
+			_map.add_child(build_s)
+			arm[invenory_slot-1][1] -=1 
+			if arm[invenory_slot-1][1] == 0:arm.erase(invenory_slot-1)
+	elif JsonData.item_data[selected_item]["layer"] == 1:
+		if full ==  false and opened == false and inventory_opened == false and died == false:
+			var _map = get_parent().get_parent().get_parent().get_node(str(WorldData.map,"/sort"))
+			var build = load("res://builds/"+selected_item+".tscn")
+			var build_s = build.instance()
+			build_s.position = get_parent().get_parent().get_parent().get_node("TileMap/Node2D").position
+			build_s.position.x += 16
+			build_s.position.y += 16
+			_map.add_child(build_s)
+			arm[invenory_slot-1][1] -=1
+			if arm[invenory_slot-1][1] == 0:arm.erase(invenory_slot-1)
+
 func animate():
 	var anim
 	if isattacking == false and emote == false :

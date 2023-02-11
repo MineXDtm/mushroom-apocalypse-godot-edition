@@ -164,42 +164,8 @@ func drop():
 				holding_item = null
 			else:
 				holding_item.item_quantity -= 1
-func place(slot):
-	if slot == "slot1" :
-		if $GridContainer2/slot1/item.item_quantity > 1:
-			$GridContainer2/slot1/item.decrease_item_quantity(1)
-			get_tree().get_nodes_in_group("player")[0].arm[0][1] -= 1
-		else:
-			$GridContainer2/slot1/item.item_quantity -= 1
-			$GridContainer2/slot1.pickFromSlot()
-			get_tree().get_nodes_in_group("player")[0].arm.erase(0)
-		
-	if slot == "slot2" :
-		if $GridContainer2/slot2/item.item_quantity > 1:
-			$GridContainer2/slot2/item.decrease_item_quantity(1)
-			get_tree().get_nodes_in_group("player")[0].arm[1][1] -= 1
-		else:
-			$GridContainer2/slot2/item.item_quantity -= 1
-			$GridContainer2/slot2.pickFromSlot()
-			get_tree().get_nodes_in_group("player")[0].arm.erase(1)
-	if slot == "slot3" :
-		if $GridContainer2/slot3/item.item_quantity > 1:
-			$GridContainer2/slot3/item.decrease_item_quantity(1)
-			get_tree().get_nodes_in_group("player")[0].arm[2][1] -= 1
-		else:
-			$GridContainer2/slot3/item.item_quantity -= 1
-			$GridContainer2/slot3.pickFromSlot()
-			get_tree().get_nodes_in_group("player")[0].arm.erase(2)
-func finder(slotnumber):
-		for slot in range(1,4):
-			if inventory_slots2.get_node("slot" + str(slot)).slot_index == slotnumber:
-				var slotr = inventory_slots2.get_node("slot" + str(slot))
-				slotr.pickFromSlot()
-func finder1(slotnumber):
-		for slot in range(4,16):
-			if inventory_slots.get_node("slot" + str(slot)).slot_index == slotnumber:
-				var slotr = inventory_slots.get_node("slot" + str(slot))
-				slotr.pickFromSlot()
+
+
 func _physics_process(_delta):
 	if holding_item:
 		holding_item.rect_position = get_global_mouse_position()

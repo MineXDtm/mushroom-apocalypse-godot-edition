@@ -18,7 +18,10 @@ var pos = null
 func _ready():
 	$Node2D/Sprite.texture = empty
 func _physics_process(_delta):
-	tile = world_to_map(get_global_mouse_position())
+	if  get_tree().get_nodes_in_group("player")[0].fliped:
+		tile = world_to_map( get_tree().get_nodes_in_group("player")[0].position- Vector2(32,0))
+	else:
+		tile = world_to_map( get_tree().get_nodes_in_group("player")[0].position+ Vector2(32,0))
 	$Node2D.position = map_to_world(tile)
 	if $Node2D/checker.is_colliding():
 		if rotared == false:

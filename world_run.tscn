@@ -47,7 +47,6 @@ font_data = ExtResource( 27 )
 [node name="world" type="Node"]
 
 [node name="map" parent="." instance=ExtResource( 1 )]
-position = Vector2( -24, 0 )
 
 [node name="UI2" type="CanvasLayer" parent="."]
 pause_mode = 2
@@ -330,6 +329,18 @@ margin_bottom = 20.0
 mouse_filter = 2
 color = Color( 1, 1, 1, 0.588235 )
 
+[node name="place_but" type="Button" parent="UI2"]
+visible = false
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -144.0
+margin_top = -124.0
+margin_right = -80.0
+margin_bottom = -60.0
+text = "place"
+
 [node name="builds" type="Control" parent="UI2"]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -465,6 +476,7 @@ visible = false
 
 [connection signal="gui_input" from="UI2/joystick_movement" to="UI2" method="_on_joystick_movement_gui_input"]
 [connection signal="gui_input" from="UI2/joystick_attack" to="UI2" method="_on_joystick_attack_gui_input"]
+[connection signal="pressed" from="UI2/place_but" to="UI2" method="_on_place_but_pressed"]
 [connection signal="pressed" from="UI2/inv_but" to="UI2" method="_on_inv_but_pressed"]
 [connection signal="pressed" from="UI2/pick_up" to="UI2" method="_on_pick_up_pressed"]
 [connection signal="pressed" from="UI2/pause_but" to="UI2" method="_on_pause_but_pressed"]

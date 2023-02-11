@@ -10,7 +10,13 @@ func _ready():
 #			if $emotes.emoteslist.size() < int(i.name):continue
 #			i.get_node("CenterContainer/TextureRect/Viewport/playerview/player").play($emotes.emoteslist[int(i.name)])
 
-
+func _process(delta):
+	if get_tree().get_nodes_in_group("player")[0].selected_item != "arm" and JsonData.item_data[get_tree().get_nodes_in_group("player")[0].selected_item]["ItemCategory"] == "build" :
+		$joystick_attack.visible = false
+		$place_but.visible = true
+	else:
+		$joystick_attack.visible = true
+		$place_but.visible = false
 func openinv():
 	$inventory.visible = !$inventory.visible
 	get_tree().get_nodes_in_group("player")[0].inventory_opened = !get_tree().get_nodes_in_group("player")[0].inventory_opened
@@ -71,6 +77,7 @@ func _on_pick_up_pressed():
 
 
 func _on_joystick_attack_gui_input(event):
+	if get_tree().get_nodes_in_group("player")[0].isattacking:return
 	if event is InputEventScreenTouch:
 		if not event.pressed:
 			joystick_attack_pressed = event.pressed
@@ -87,3 +94,7 @@ func _on_joystick_attack_gui_input(event):
 
 func _on_pause_but_pressed():
 	show_pause_menu()
+
+
+func _on_place_but_pressed():
+	 get_tree().get_nodes_in_group("player")[0].place_build()
