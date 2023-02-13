@@ -1,27 +1,20 @@
 extends Node2D
 var time = "day"
 var cooldown = false
-var random_x
-var random_y
-var map_size = 1536
-var needed = 0
-var cooldown32 = 0
-var added = 0
-var cords = [0]
-var cords2 = [0]
 var number = 0
 var evning_start_in = 25
 var darknes_start_in = 10
 var number2 = 0
 var check
 var chunks = 0
+var build_memory_layer1={}
 onready var load_menu = get_tree().get_root().get_node("world").get_node("UI2/loding_world")
 var types = {
 	"forrest":{
 		"structures":{
 			"kust":100,
-			"kust_fruit":50,
-			"stone":100
+			#"kust_fruit":50,
+			#"stone":100
 			},
 		"decs":{
 			"grass":{
@@ -115,6 +108,20 @@ func _process(delta):
 			$CanvasModulate/AnimationPlayer.play("darkens")
 		else:
 			$CanvasModulate/AnimationPlayer.play_backwards("darkens")
+var rsl1 = RandomNumberGenerator.new()
+var map_size = 50
+func randomize_slot_layer1():
+	var x =16+ (rsl1.randi()%map_size)*32
+	var y = 16+(rsl1.randi()%map_size)*32
+	var try = 1
+	while build_memory_layer1.has(Vector2(x,y)) and try!= 100:
+		try+=1
+		x=16+ (rsl1.randi()%map_size)*32
+		y=16+ (rsl1.randi()%map_size)*32
+	return Vector2(x,y)
+
+
+
 func _ready():
 	
 	set_name("map")
@@ -127,6 +134,7 @@ func _ready():
 			.set_description('locking time')\
 			.add_argument('true/false', TYPE_BOOL)\
 			.register()
+	print(ProjectSettings.globalize_path("user://worlds"))
 	var file = File.new()
 	if not file.file_exists(save_path):
 		WorldData.new = true
@@ -144,13 +152,17 @@ func _ready():
 		dir.make_dir(WorldData.world_name)
 		for structure_val in types[WorldData.world_type]["structures"]:
 			load_menu.get_node("ProgressBar").max_value += types[WorldData.world_type]["structures"][structure_val]
+		var rand = RandomNumberGenerator.new()
 		for structure in types[WorldData.world_type]["structures"].keys():
-			var enemyscene = load("res://world/"+ structure+".tscn")
+			var build_scene = load("res://world/"+ structure+".tscn")
 			for _i in range(0,types[WorldData.world_type]["structures"][structure]):
 				yield(get_tree().create_timer(0.01), "timeout")
 				load_menu.get_node("ProgressBar").value += 1
-				var enemy = enemyscene.instance()
-				get_node("sort").add_child(enemy)
+				var build = build_scene.instance()
+				var v = randomize_slot_layer1()
+				build_memory_layer1[v]= structure
+				build.position = v
+				get_node("sort").add_child(build)
 		generate_decs()
 		pre_save()
 		save_date()

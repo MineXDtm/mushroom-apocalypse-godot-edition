@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://builds/broke_bar.tres" type="StyleBox" id=1]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+light_mode = 1
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.380392, 0.670588, 0.180392, 1 )
+
+[node name="HealthBar" type="ProgressBar"]
+material = SubResource( 1 )
+margin_left = -15.0
+margin_top = -20.0
+margin_right = 15.0
+margin_bottom = -16.0
+custom_colors/font_color = Color( 0.431373, 1, 0, 1 )
+custom_colors/font_color_shadow = Color( 0.313726, 1, 0, 1 )
+custom_styles/fg = SubResource( 2 )
+custom_styles/bg = ExtResource( 1 )
+max_value = 5.0
+value = 5.0
+percent_visible = false

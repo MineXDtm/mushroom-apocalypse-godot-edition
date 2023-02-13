@@ -23,6 +23,8 @@ _global_script_class_icons={
 config/name="mushroom apocalypse"
 run/main_scene="res://menu.tscn"
 config/use_custom_user_dir=true
+config/custom_user_dir_name="mushroom"
+run/flush_stdout_on_print=true
 boot_splash/image="res://minexd.png"
 boot_splash/fullsize=false
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
@@ -34,7 +36,6 @@ config/windows_native_icon="res://icon.ico"
 JsonData="*res://JSONData.gd"
 Ganaretor="*res://ganaretor.gd"
 Console="*res://addons/quentincaffeino/console/src/Console.tscn"
-LayerSystem="*res://LayerSystem.gd"
 gamesettings="*res://settings.gd"
 SkinManager="*res://skinmanager.gd"
 FriendsSystem="*res://FriendsSystem.gd"
@@ -62,8 +63,6 @@ enabled=PoolStringArray( "res://addons/quentincaffeino/console/plugin.cfg" )
 
 [global]
 
-vsy=false
-v=false
 input_devices=false
 
 [importer_defaults]
@@ -212,6 +211,10 @@ pointing/emulate_touch_from_mouse=true
 2d_physics/layer_2="cant_build"
 2d_physics/layer_3="zombie_can_break"
 
+[logging]
+
+file_logging/enable_file_logging=true
+
 [mono]
 
 project/assembly_name="mushroom apocalypse"
@@ -228,7 +231,6 @@ quality/shadows/filter_mode=2
 quality/filters/use_nearest_mipmap_filter=true
 2d/opengl/batching_stream=2
 quality/subsurface_scattering/quality=2
-quality/filters/msaa=4
 quality/filters/use_fxaa=true
 
 [world]

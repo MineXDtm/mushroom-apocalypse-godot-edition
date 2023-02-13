@@ -405,7 +405,7 @@ func attack():
 	if selected_item == "arm":
 		isattacking = true
 		if !$RayCast2D.is_colliding():return
-		$RayCast2D.get_collider().call("damage")
+		$RayCast2D.get_collider().get_node("healthsystem").call("damage")
 		
 	elif JsonData.item_data[selected_item]["ItemCategory"] == "food" and health < 20 and eating == false:
 		eating = true

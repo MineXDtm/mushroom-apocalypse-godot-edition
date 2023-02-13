@@ -47,6 +47,7 @@ font_data = ExtResource( 27 )
 [node name="world" type="Node"]
 
 [node name="map" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, 2 )
 
 [node name="UI2" type="CanvasLayer" parent="."]
 pause_mode = 2
