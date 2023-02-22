@@ -10,7 +10,7 @@ extents = Vector2( 4.41238, 4.98715 )
 [sub_resource type="Animation" id=2]
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("wooden_exe:position")
+tracks/0/path = NodePath("tex:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -25,7 +25,7 @@ tracks/0/keys = {
 [node name="ItemDrop" type="Area2D" groups=["drop"]]
 script = ExtResource( 2 )
 
-[node name="wooden_exe" type="Sprite" parent="."]
+[node name="tex" type="Sprite" parent="."]
 material = ExtResource( 3 )
 position = Vector2( 0, -0.119056 )
 texture = ExtResource( 1 )

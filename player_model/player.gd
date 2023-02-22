@@ -36,7 +36,6 @@ func changed_settings():
 		shadow.visible = false
 
 func _process(_delta):
-	
 	$Label.text = str(position)
 	if health <= 0 and cd == false:
 		cd = true
@@ -50,7 +49,7 @@ func _process(_delta):
 	if arm.has(invenory_slot-1):
 		$model/arm1/item.visible = true
 		$model/arm1/item.texture = load("res://textures/items/" +arm[invenory_slot-1][0] + ".png")
-		selected_item = arm[invenory_slot-1][0] 
+		selected_item = arm[invenory_slot-1][0]
 	elif isattacking == false:
 		selected_item = "arm"
 		$model/arm1/item.visible = false
@@ -89,7 +88,7 @@ func _input(event):
 	if event.is_action_pressed("inv") and isattacking == false and opened == false  and died == false:
 		var inv = get_parent().get_parent().get_parent().get_node("UI2")
 		inv.openinv()
-		
+
 
 onready var player = get_node("player")
 onready var shadow = get_node("model/shadow")
@@ -103,6 +102,7 @@ func loadskin():
 
 var direction_attack_js = Vector2.ZERO
 func _physics_process(_delta):
+	
 	if in_console == false and in_menu == false:
 		if gamesettings.device_mode == "pc":
 			$RayCast2D.look_at(get_global_mouse_position())
@@ -110,15 +110,13 @@ func _physics_process(_delta):
 		elif direction_attack_js != Vector2.ZERO:
 			$RayCast2D.look_at(position+(direction_attack_js))
 			$RayCast2D.global_rotation_degrees -= 90
-	
 		$Line2D.global_rotation_degrees = $RayCast2D.global_rotation_degrees
-		
 		if $RayCast2D.is_colliding():
 			if $Line2D.visible == true:
 				get_parent().get_node("select").visible = true
 			get_parent().get_node("select").position = $RayCast2D.get_collider().position
 			get_parent().get_node("select").texture = $RayCast2D.get_collider().get_node("tex").texture
-			
+
 			var origin = $RayCast2D.global_transform.origin
 			var collision_point = $RayCast2D.get_collision_point()
 			var distance = origin.distance_to(collision_point)
@@ -127,11 +125,9 @@ func _physics_process(_delta):
 			get_parent().get_node("select").visible = false
 			$Line2D.points[1].y = 25
 		get_input(_delta)
-		
 		animate()
 		inventory()
 		$Label.text = str(position)
-		
 		get_node("/root/world/UI2/bars/health/bg/bar_health").value = health
 		if selected_item != "arm":
 			if JsonData.item_data[selected_item]["ItemCategory"] == "instrument":
@@ -159,7 +155,6 @@ func get_input(_delta):
 			#inv.select(str("slot",i))
 			invenory_slot =i
 	elif Input.is_action_just_released("scrolling_down") and isattacking == false and opened == false  and died == false and eating == false:
-		
 		if invenory_slot != 1:
 			var inv = get_node("/root/world/UI2/hand_slots")
 			var i = invenory_slot
@@ -178,13 +173,13 @@ func get_input(_delta):
 		$Line2D.visible = true
 	elif gamesettings.device_mode == "mobile":
 		$Line2D.visible = false
+		
 	if Input.is_action_just_pressed("click_left") and gamesettings.device_mode == "pc" and opened == false and isattacking == false and inventory_opened == false and died == false:
 		$Line2D.visible = true
-		
-	if Input.is_action_just_released("click_left")and gamesettings.device_mode == "pc" and opened == false and isattacking == false and inventory_opened == false and died == false :
-		
-		attack()
 	
+	if Input.is_action_just_released("click_left")and gamesettings.device_mode == "pc" and opened == false and isattacking == false and inventory_opened == false and died == false :
+		attack()
+		
 	if  isattacking == false and opened == false  and died == false and eating == false:
 		if gamesettings.device_mode == "pc":
 			if Input.is_action_just_pressed("inv1") :
@@ -214,7 +209,7 @@ func get_input(_delta):
 
 func inventory():
 	if selected_item != "arm" and JsonData.item_data[selected_item]["ItemCategory"] == "build"  and JsonData.item_data[selected_item]["layer"] == 1:
-		
+
 		var block = get_parent().get_parent().get_parent().get_node("TileMap")
 		block.visible = true
 		if block.empty != load("res://textures/build_player/" + selected_item +"_true.png"):
@@ -256,7 +251,7 @@ func place_build():
 			build_s.position.x += 16
 			build_s.position.y += 16
 			_map.add_child(build_s)
-			arm[invenory_slot-1][1] -=1 
+			arm[invenory_slot-1][1] -=1
 			if arm[invenory_slot-1][1] == 0:arm.erase(invenory_slot-1)
 	elif JsonData.item_data[selected_item]["layer"] == 1:
 		if full ==  false and opened == false and inventory_opened == false and died == false:
@@ -333,10 +328,10 @@ func _on_Timer2_timeout():
 
 func _on_Timer3_timeout():
 	if $player.current_animation == "attack" :
-		
+
 		isattacking = false
 	elif $player.current_animation == "attack_2" :
-		
+
 		isattacking = false
 
 func _on_player_animation_finished(_anim_name):
@@ -380,7 +375,7 @@ func add_item(item_name, item_quantity):
 	print("t")
 	for item_index in range(inventory.size()):
 		if inventory[item_index][0] == item_name:
-			
+
 			var stack_size = int(JsonData.item_data[item_name]["StackSize"])
 			var able_to_add = stack_size - inventory[item_index][1]
 			if able_to_add >= item_quantity:
@@ -390,23 +385,61 @@ func add_item(item_name, item_quantity):
 				inventory[item_index][1] += able_to_add
 				item_quantity = item_quantity - able_to_add
 	inventory.append([item_name, item_quantity])
-func remove_item(slot):
-	inventory.erase(slot.slot_index)
+
+
+
+func check_for_item(ItemName,count):
+	var needto = count
+	for i in range(inventory.count()):
+		if inventory[i][0] == ItemName:
+			var check_count = inventory[i][1] 
+			while check_count != 0 or needto != 0:
+				needto -= 1
+				check_count -=1
+	Console.write_line(needto)
+	if needto > 0:
+		for item_index in arm:
+			if arm[item_index][0] == ItemName:
+				var check_count =arm[item_index][1] 
+				while check_count != 0 or needto != 0:
+					needto -= 1
+					check_count -=1
+	if needto >0:return false
+	return true
+
+func remove_item(ItemName,count):
+	if check_for_item(ItemName,count):
+		Console.write_line("rr")
+		var needto = count
+		for i in range(inventory.count()):
+			if inventory[i][0] == ItemName:
+				while inventory[i][1]  != 0 or needto != 0:
+					needto -= 1
+					inventory[i][1]  -=1
+		if needto > 0:
+			for item_index in arm:
+				if arm[item_index][0] == ItemName:
+					while arm[item_index][1]  != 0 or needto != 0:
+						needto -= 1
+						arm[item_index][1] -=1
+
+
 func  add_item_to_empty_slot(item, slot):
-	print(inventory)
 	inventory.append([item.item_name, item.item_quantity])
 func attack():
+	Console.write_line("elele")
 	direction_attack_js = Vector2.ZERO;
 	get_parent().get_node("select").visible = false
 	$Line2D.visible = false
 	var rand = randi() % 2
 	rands = rand
-	
+
 	if selected_item == "arm":
 		isattacking = true
 		if !$RayCast2D.is_colliding():return
-		$RayCast2D.get_collider().get_node("healthsystem").call("damage")
-		
+		print($RayCast2D.get_collider().get_node("healthsystem").health)
+		$RayCast2D.get_collider().get_node("healthsystem").demage(1)
+
 	elif JsonData.item_data[selected_item]["ItemCategory"] == "food" and health < 20 and eating == false:
 		eating = true
 	elif JsonData.item_data[selected_item]["ItemCategory"] == "resurse":

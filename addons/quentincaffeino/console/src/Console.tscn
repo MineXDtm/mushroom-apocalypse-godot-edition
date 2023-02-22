@@ -85,3 +85,12 @@ focus_previous = NodePath(".")
 size_flags_horizontal = 3
 script = ExtResource( 6 )
 _sections_unfolded = [ "Anchor", "Caret", "Grow Direction", "Margin", "Material", "Pause", "Placeholder", "Rect", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
+
+[node name="close" type="Button" parent="ConsoleBox"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -47.0
+margin_bottom = 20.0
+text = "Close"
+
+[connection signal="pressed" from="ConsoleBox/close" to="." method="_on_close_pressed"]

@@ -13,8 +13,8 @@ var types = {
 	"forrest":{
 		"structures":{
 			"kust":100,
-			#"kust_fruit":50,
-			#"stone":100
+			"kust_fruit":50,
+			"stone":100
 			},
 		"decs":{
 			"grass":{
@@ -58,7 +58,7 @@ var types = {
 			"bucket":100,
 			},
 		"decs":{
-			
+
 		},
 		"graund": "sand"
 	}
@@ -71,7 +71,7 @@ var save_path2 = SAVE_DIR + WorldData.world_name
 var save_path4 = SAVE_DIR + WorldData.world_name + "/players/player_beta.json"
 var save_path6 = SAVE_DIR + WorldData.world_name + "/world_data.json"
 var zombies = {
-	
+
 }
 var save_data = {
 
@@ -93,7 +93,7 @@ var virables_data = {
 }
 var zombie = 0
 var player_data = {
-	
+
 }
 func _process(delta):
 	var time_left = int($time.time_left)
@@ -102,7 +102,7 @@ func _process(delta):
 			$CanvasModulate/AnimationPlayer.play("evening")
 		else:
 			$CanvasModulate/AnimationPlayer.play_backwards("night")
-			
+
 	if darknes_start_in  == time_left :
 		if time == "day":
 			$CanvasModulate/AnimationPlayer.play("darkens")
@@ -111,19 +111,28 @@ func _process(delta):
 var rsl1 = RandomNumberGenerator.new()
 var map_size = 50
 func randomize_slot_layer1():
-	var x =16+ (rsl1.randi()%map_size)*32
-	var y = 16+(rsl1.randi()%map_size)*32
+	rsl1.randomize()
+	var x = ((rsl1.randi()%map_size)*32)
+	var y = ((rsl1.randi()%map_size)*32)
 	var try = 1
 	while build_memory_layer1.has(Vector2(x,y)) and try!= 100:
 		try+=1
-		x=16+ (rsl1.randi()%map_size)*32
-		y=16+ (rsl1.randi()%map_size)*32
+		x=((rsl1.randi()%map_size)*32)
+		y=((rsl1.randi()%map_size)*32)
 	return Vector2(x,y)
 
-
+func place_on_slot(position_: Vector2,Build):
+	var fixedslotx = (int(position_.x)/32)*32
+	var fixedsloty = (int(position_.y)/32)*32
+	build_memory_layer1[Vector2(fixedslotx,fixedsloty)]=Build
+func remove_from_slot(position_: Vector2,Build):
+	var fixedslotx = (int(position_.x)/32)*32
+	var fixedsloty = (int(position_.y)/32)*32
+	if not build_memory_layer1.has(Vector2(fixedslotx,fixedsloty)) or build_memory_layer1.has(Vector2(fixedslotx,fixedsloty)) and build_memory_layer1[Vector2(fixedslotx,fixedsloty)] != Build:return
+	build_memory_layer1.erase(Vector2(fixedslotx,fixedsloty))
 
 func _ready():
-	
+
 	set_name("map")
 	load_menu.visible = true
 	Console.add_command('time', self, 'settime')\
@@ -160,8 +169,8 @@ func _ready():
 				load_menu.get_node("ProgressBar").value += 1
 				var build = build_scene.instance()
 				var v = randomize_slot_layer1()
-				build_memory_layer1[v]= structure
-				build.position = v
+				place_on_slot(v,build)
+				build.position = v + Vector2(16,16)
 				get_node("sort").add_child(build)
 		generate_decs()
 		pre_save()
@@ -173,12 +182,12 @@ func _ready():
 		$time.start()
 		$time_move.wait_time = $time.wait_time / 15
 		$time_move.start()
-		
+
 	else:
-		
+
 		WorldData.new = false
 		WorldData.new2 = false
-		
+
 		load_menu.get_node("ProgressBar").max_value = 5
 		load_menu.get_node("Label").text = "loading virables.."
 		load_menu.get_node("ProgressBar").value += 1
@@ -206,8 +215,8 @@ func _ready():
 		load_chunks_layer0()
 		load_menu.get_node("ProgressBar").value += 1
 		load_menu.visible = false
-	
-	
+
+
 	get_node("b/Sprite").texture = load("res://textures/" + types[WorldData.world_type]["graund"]+".png")
 	#discord_rpc.details = str("In World: "  + WorldData.world_name)
 	#discord_rpc.icon = WorldData.world_type
@@ -215,7 +224,7 @@ func _ready():
 	#discord_rpc.small_icon = "icon"
 	#discord_rpc.small_icon_desc = "Game Icon"
 	#discord_rpc.UpdatePresence()
-	
+
 var random = RandomNumberGenerator.new()
 
 func _on_kust_spawn_timeout():
@@ -225,7 +234,7 @@ func _on_kust_spawn_timeout():
 			Ganaretor.kustes += 1
 			var enemy = enemyscene.instance()
 			get_node("sort").add_child(enemy)
-	
+
 func lock_time(value = false):
 	if value == true:
 		$time.stop()
@@ -266,35 +275,35 @@ func _on_kust_fruit_spawn_timeout():
 
 func generate_decs():
 	for _i in types[WorldData.world_type]["decs"]:
-			
+
 			#types[WorldData.world_type]["decs"][_i]
 			if types[WorldData.world_type]["decs"][_i]["caunt"][2] == false:
 				for i in types[WorldData.world_type]["decs"][_i]["caunt"][0]:
 					var dec = types[WorldData.world_type]["decs"][_i]["scene"].instance()
-					
+
 					for ii in types[WorldData.world_type]["decs"][_i][time]["random_properties"]:
 						randomize()
-						
+
 						dec.set(ii, types[WorldData.world_type]["decs"][_i][time]["random_properties"][ii][randi() % types[WorldData.world_type]["decs"][_i][time]["random_properties"][ii].size()])
 					var random_pos = Vector2(random.randi_range(0, 1536),random.randi_range(0, 1536))
 					dec.position = random_pos
-					
+
 					if types[WorldData.world_type]["decs"][_i]["layer"] == 2:
 						get_node("layer2").add_child(dec)
 					elif types[WorldData.world_type]["decs"][_i]["layer"] == 0:
 						get_node("b/decorations").add_child(dec)
 func clear_decs():
 	var decs = get_tree().get_nodes_in_group("decoration")
-	
+
 	for i in decs:
 		i.queue_free()
 func _on_time_timeout():
-	
+
 	if time == "day" :
 		time = "night"
 		get_node("/root/world/UI2/bg/ViewportContainer/Viewport/CLockBar").set_clock(1)
 		$CanvasModulate/AnimationPlayer.play("night")
-		
+
 	else:
 		$time_move.stop()
 		$time.stop()
@@ -375,7 +384,7 @@ func change_biome():
 		load_chunks_layer0()
 		load_menu.get_node("ProgressBar").value += 1
 		load_menu.visible = false
-		
+
 	#discord_rpc.details = str("In World: " ,WorldData.world_name)
 	#discord_rpc.icon = WorldData.world_type
 	#discord_rpc.icon_desc =  WorldData.world_type
@@ -491,10 +500,10 @@ func save_chunksinlayer0():
 	var dir = Directory.new()
 	dir.open(save_path2)
 	var object_data_layer0 = {
-		
+
 	}
 	var save_data_layer0 = {
-		
+
 	}
 	dir.make_dir(WorldData.world_type)
 	for i in world.size():
@@ -738,7 +747,7 @@ func save_date():
 		save_data3.clear()
 func update_date():
 	save_path6 = SAVE_DIR + WorldData.world_name + "/world_data.json"
-	
+
 	var file = File.new()
 	#var error = file.open(save_path, File.READ)
 	var error = file.open_encrypted_with_pass(save_path6, File.READ, "P@paB3ar6969")
@@ -747,11 +756,11 @@ func update_date():
 	var save_data3 = parse_json(text)
 	save_data3["last_join"] = OS.get_datetime()
 	var save_data4 = save_data3
-	
+
 	var file2 = File.new()
 	#var error = file.open(save_path, File.WRITE)
 	var error2 = file2.open_encrypted_with_pass(save_path6, File.WRITE, "P@paB3ar6969")
-	
+
 	if error == OK:
 		file2.store_line(to_json(save_data4) )
 		file2.close()
@@ -774,7 +783,7 @@ func save_player(player):
 	dir.make_dir("players")
 	player_data["position_x"] = player.position.x
 	player_data["position_y"] = player.position.y
-	player_data["inv"] = get_tree().get_nodes_in_group("player")[0].inventory 
+	player_data["inv"] = get_tree().get_nodes_in_group("player")[0].inventory
 	player_data["inv1"] =  get_tree().get_nodes_in_group("player")[0].arm
 	player_data["health"] = player.health
 	var save_data3 = player_data.duplicate(true)

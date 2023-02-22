@@ -10,7 +10,7 @@
 [ext_resource path="res://map.gd" type="Script" id=8]
 [ext_resource path="res://textures/gui/point/point-here_clicked.png" type="Texture" id=9]
 [ext_resource path="res://textures/gui/but.png" type="Texture" id=10]
-[ext_resource path="res://Dpix_8pt.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://textures/gui/but_disabled.png" type="Texture" id=12]
 [ext_resource path="res://textures/gui/but_clicked.png" type="Texture" id=13]
 [ext_resource path="res://textures/gui/but_on_mause.png" type="Texture" id=14]
@@ -50,7 +50,6 @@ script = ExtResource( 16 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="list" type="TextureRect" parent="CanvasLayer"]
-visible = false
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -124,9 +123,6 @@ margin_top = 65.0
 margin_right = -40.0
 margin_bottom = -90.0
 custom_constants/separation = 10
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="buttons" type="Node2D" parent="."]
 

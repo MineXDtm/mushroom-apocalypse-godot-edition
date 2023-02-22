@@ -105,7 +105,7 @@ func _process(_delta):
 			get_node(str("buttons/point",point)).texture_pressed = load("res://textures/gui/point/point-here_clicked.png")
 			get_node(str("buttons/point",point)).texture_hover = load("res://textures/gui/point/point-here_ON_mause.png")
 		check = 0
-	
+
 
 
 func _on_but_pressed():

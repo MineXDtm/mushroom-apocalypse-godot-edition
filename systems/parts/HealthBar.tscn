@@ -10,10 +10,8 @@ bg_color = Color( 0.380392, 0.670588, 0.180392, 1 )
 
 [node name="HealthBar" type="ProgressBar"]
 material = SubResource( 1 )
-margin_left = -15.0
-margin_top = -20.0
-margin_right = 15.0
-margin_bottom = -16.0
+margin_right = 30.0
+margin_bottom = 4.0
 custom_colors/font_color = Color( 0.431373, 1, 0, 1 )
 custom_colors/font_color_shadow = Color( 0.313726, 1, 0, 1 )
 custom_styles/fg = SubResource( 2 )

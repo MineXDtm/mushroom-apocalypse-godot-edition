@@ -146,11 +146,13 @@ outlines = [ PoolVector2Array( 99, 1728, 99, 189, 1638, 189, 1638, 1731 ) ]
 [sub_resource type="CanvasItemMaterial" id=7]
 light_mode = 1
 
-[node name="map" type="Node2D"]
+[node name="map" type="Node2D" groups=["map"]]
 script = ExtResource( 1 )
 
 [node name="b" parent="." instance=ExtResource( 6 )]
-position = Vector2( -1, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="sort" type="YSort" parent="."]
 

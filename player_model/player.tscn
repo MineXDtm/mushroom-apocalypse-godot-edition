@@ -1011,7 +1011,7 @@ smoothing_enabled = true
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource( 2 )
 
-[node name="body" type="Area2D" parent="." groups=["body", "player"]]
+[node name="body" type="Area2D" parent="." groups=["body"]]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="body" groups=["body"]]
 position = Vector2( 0.0620769, 10.4354 )

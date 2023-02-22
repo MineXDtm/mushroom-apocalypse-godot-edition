@@ -188,3 +188,7 @@ func _toggle_animation_finished(animation):
 # @returns  void
 func _set_readonly(value):
 	Log.warn('qc/console: _set_readonly: Attempted to set a protected variable, ignoring.')
+
+
+func _on_close_pressed():
+	self.toggle_console()

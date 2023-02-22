@@ -31,13 +31,13 @@ func _ready():
 		world_file_instance.get_node("icon/name").text = i
 		world_file_instance.name = i
 		world_file_instance.name_world = i
-		world_file_instance.directory = save_path 
+		world_file_instance.directory = save_path
 		var file = File.new()
 		#var error = file.open(save_path, File.READ)
 		var save_path5 = SAVE_DIR + i + "/world_data.json"
 		var error = file.open_encrypted_with_pass(save_path5, File.READ, "P@paB3ar6969")
 		var text = file.get_as_text()
-		
+
 		file.close()
 		var save_data3 = parse_json(text)
 		if save_data3 == null|| save_data3.has("creation_date") == false|| save_data3["creation_date"].size() == 0|| save_data3.has("last_join") == false || save_data3["last_join"].size() == 0:
@@ -60,12 +60,12 @@ func _on_join_pressed():
 		var save_path5 = SAVE_DIR + selected + "/world_data.json"
 		var error = file.open_encrypted_with_pass(save_path5, File.READ, "P@paB3ar6969")
 		var text = file.get_as_text()
-		
+
 		file.close()
 		var save_data3 = parse_json(text)
 		if save_data3 == null|| save_data3.has("creation_date") == false|| save_data3["creation_date"].size() == 0|| save_data3.has("last_join") == false || save_data3["last_join"].size() == 0:
 			WorldData.world_date_is_required = true
-		
+
 		WorldData.new = false
 		WorldData.world_path = get_node(str("VBoxContainer/HBoxContainer2/container/VBoxContainer/",selected)).directory
 		WorldData.world_name = get_node(str("VBoxContainer/HBoxContainer2/container/VBoxContainer/",selected,"/icon/name")).text

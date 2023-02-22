@@ -12,7 +12,7 @@
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 4 )
 
-[node name="buy1" type="TextureButton"]
+[node name="buy" type="TextureButton"]
 margin_right = 192.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 192, 48 )
@@ -23,9 +23,6 @@ texture_disabled = ExtResource( 3 )
 expand = true
 stretch_mode = 5
 script = ExtResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="done" type="TextureRect" parent="."]
 margin_left = 145.0
@@ -93,4 +90,4 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="." to="." method="_on_buy1_pressed"]
+[connection signal="pressed" from="." to="." method="_on_buy_pressed"]

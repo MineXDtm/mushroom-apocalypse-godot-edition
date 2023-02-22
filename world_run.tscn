@@ -47,7 +47,9 @@ font_data = ExtResource( 27 )
 [node name="world" type="Node"]
 
 [node name="map" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0, 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="UI2" type="CanvasLayer" parent="."]
 pause_mode = 2
@@ -63,6 +65,7 @@ __meta__ = {
 }
 
 [node name="GridContainer" type="GridContainer" parent="UI2/emotes"]
+visible = false
 margin_left = 220.0
 margin_top = 70.0
 margin_right = 420.0
@@ -152,19 +155,14 @@ texture = ExtResource( 23 )
 
 [node name="bar_health" type="ProgressBar" parent="UI2/bars/health/bg"]
 modulate = Color( 1, 0, 0, 1 )
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 35.0
-margin_bottom = 8.0
+margin_right = 34.0
+margin_bottom = 7.0
 custom_fonts/font = SubResource( 3 )
 custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
 max_value = 20.0
 value = 20.0
 percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="car" type="Control" parent="UI2/bars"]
 margin_top = 14.0
@@ -472,6 +470,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Console" type="Button" parent="UI2"]
+margin_left = 3.0
+margin_top = 80.0
+margin_right = 80.0
+margin_bottom = 117.0
+text = "Console"
+
 [node name="TileMap" parent="." instance=ExtResource( 30 )]
 visible = false
 
@@ -481,3 +486,4 @@ visible = false
 [connection signal="pressed" from="UI2/inv_but" to="UI2" method="_on_inv_but_pressed"]
 [connection signal="pressed" from="UI2/pick_up" to="UI2" method="_on_pick_up_pressed"]
 [connection signal="pressed" from="UI2/pause_but" to="UI2" method="_on_pause_but_pressed"]
+[connection signal="pressed" from="UI2/Console" to="UI2" method="_on_Console_pressed"]

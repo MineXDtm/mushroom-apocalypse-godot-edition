@@ -117,7 +117,7 @@ func get_drag_data(position):
 	get_parent().get_parent().selected_name = name
 	get_parent().get_parent().holding_item = item
 	get_parent().get_parent().selected = str("GridContainer/",name)
-	get_tree().get_nodes_in_group("player")[0].remove_item(self)
+	get_tree().get_nodes_in_group("player")[0].inventory.erase(slot_index)
 	tex = false
 	if get_parent().get_parent().get_node("GridContainer/"+"slot"+str(int(name) + 1)).item != null and get_parent().get_parent().get_node("GridContainer/"+"slot"+str(int(name) + 2)).item == null:
 		moved = true

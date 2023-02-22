@@ -123,7 +123,7 @@ func get_drag_data(position):
 	slot_hand_s.rect_position = -0.5 * slot_hand_s.rect_size
 	set_drag_preview(c)
 	get_tree().get_nodes_in_group("player")[0].arm.erase(int(name)-1)
-	print(get_tree().get_nodes_in_group("player")[0].arm)
+	
 	return data
 func can_drop_data(position, data):
 	return true

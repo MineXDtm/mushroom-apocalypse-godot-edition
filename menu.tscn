@@ -1,18 +1,15 @@
-[gd_scene load_steps=83 format=2]
+[gd_scene load_steps=81 format=2]
 
 [ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://textures/GRIB_ATAKYET.png" type="Texture" id=2]
 [ext_resource path="res://worlds_list.gd" type="Script" id=3]
 [ext_resource path="res://menu.gd" type="Script" id=4]
 [ext_resource path="res://textures/gui/menu_bg.png" type="Texture" id=5]
-[ext_resource path="res://Fonts/FFFFORWA.TTF" type="DynamicFontData" id=6]
 [ext_resource path="res://textures/gui/name_edit.png" type="Texture" id=7]
 [ext_resource path="res://textures/mode-menu_bg.png" type="Texture" id=8]
 [ext_resource path="res://textures/mode_survival.png" type="Texture" id=9]
 [ext_resource path="res://textures/mode_survival_mause.png" type="Texture" id=10]
 [ext_resource path="res://textures/mode_survival_clicked.png" type="Texture" id=11]
-[ext_resource path="res://Fonts/small_pixel.ttf" type="DynamicFontData" id=12]
-[ext_resource path="res://Dpix_8pt.ttf" type="DynamicFontData" id=13]
 [ext_resource path="res://textures/gui/backgraundbutton_play.png" type="Texture" id=14]
 [ext_resource path="res://buttons.gd" type="Script" id=15]
 [ext_resource path="res://textures/gui/multiplayericon.png" type="Texture" id=16]
@@ -57,6 +54,12 @@ font_data = ExtResource( 1 )
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 0.596078 )
 
+[sub_resource type="DynamicFont" id=49]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=8]
+font_data = ExtResource( 1 )
+
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0, 0, 0, 0.627451 )
 
@@ -69,12 +72,8 @@ region = Rect2( 0, 0, 22, 17 )
 [sub_resource type="DynamicFont" id=7]
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=8]
-size = 10
-font_data = ExtResource( 13 )
-
 [sub_resource type="DynamicFont" id=10]
-font_data = ExtResource( 6 )
+font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxEmpty" id=9]
 
@@ -114,10 +113,8 @@ VScrollBar/styles/grabber_pressed = SubResource( 16 )
 VScrollBar/styles/scroll = SubResource( 17 )
 VScrollBar/styles/scroll_focus = SubResource( 18 )
 
-[sub_resource type="DynamicFont" id=20]
-outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 12 )
+[sub_resource type="DynamicFont" id=50]
+font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=23]
 font_data = ExtResource( 1 )
@@ -270,6 +267,9 @@ border_width_bottom = 1
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="bg" type="TextureRect" parent="."]
 show_behind_parent = true
@@ -279,9 +279,6 @@ mouse_filter = 2
 texture = ExtResource( 5 )
 expand = true
 stretch_mode = 7
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Particles2D" type="Particles2D" parent="."]
 position = Vector2( 320, 280 )
@@ -307,9 +304,6 @@ margin_right = -9.0
 margin_bottom = -12.0
 custom_constants/separation = 5
 script = ExtResource( 15 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="play" type="TextureButton" parent="menu_1/buttons"]
 margin_right = 170.0
@@ -333,9 +327,6 @@ custom_fonts/font = SubResource( 3 )
 custom_styles/normal = SubResource( 2 )
 text = " play"
 valign = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="customization" type="TextureButton" parent="menu_1/buttons"]
 visible = false
@@ -409,20 +400,27 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -13.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 49 )
 custom_styles/normal = SubResource( 2 )
 text = " quit"
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
+[node name="Label" type="Label" parent="menu_1"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -17.0
+margin_right = 154.0
+custom_fonts/font = SubResource( 8 )
+text = "Version: 0.0.6 DEMO"
+
 [node name="VBoxContainer" type="VBoxContainer" parent="menu_1"]
 anchor_bottom = 1.0
-margin_right = 300.0
-margin_bottom = -17.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 299.0
+margin_bottom = -18.0
 
 [node name="title" type="TextureRect" parent="menu_1/VBoxContainer"]
 margin_right = 300.0
@@ -478,6 +476,7 @@ __meta__ = {
 }
 
 [node name="CenterContainer" type="CenterContainer" parent="menu_1/VBoxContainer/MarginContainer/VBoxContainer/p/MarginContainer/HBoxContainer"]
+visible = false
 margin_right = 68.0
 margin_bottom = 80.0
 size_flags_horizontal = 3
@@ -529,22 +528,11 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
-[node name="Label" type="Label" parent="."]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_top = -17.0
-margin_right = 154.0
-custom_fonts/font = SubResource( 8 )
-text = "Version: 0.0.6 DEMO"
-
 [node name="worlds_list" type="Control" parent="."]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect2" type="ColorRect" parent="worlds_list"]
 anchor_right = 1.0
@@ -716,9 +704,6 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 0.301961 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="mode_select" type="CenterContainer" parent="worlds_list/ColorRect"]
 anchor_left = 0.0015625
@@ -778,7 +763,7 @@ stretch_mode = 5
 [node name="Label" type="Label" parent="worlds_list/ColorRect/mode_select/bg/MarginContainer/Modes/survival_mode"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 20 )
+custom_fonts/font = SubResource( 50 )
 text = "survival mode"
 align = 2
 valign = 1
@@ -1136,9 +1121,6 @@ size_flags_vertical = 3
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="bg" type="TextureRect" parent="accountmenu"]
 anchor_right = 1.0
@@ -1161,9 +1143,6 @@ __meta__ = {
 [node name="CenterContainer" type="CenterContainer" parent="accountmenu/bg"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="box" type="Panel" parent="accountmenu/bg/CenterContainer"]
 margin_left = 195.0
@@ -1190,6 +1169,7 @@ __meta__ = {
 }
 
 [node name="ScrollContainer" type="ScrollContainer" parent="accountmenu/bg/CenterContainer/box/CenterContainer"]
+visible = false
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 240.0
