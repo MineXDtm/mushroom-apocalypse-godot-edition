@@ -22,7 +22,7 @@ func _ready():
 func _physics_process(_delta):
 	tile = world_to_map(get_global_mouse_position())
 	$Node2D.position = map_to_world(tile)
-	if $Node2D/checker.is_colliding() and not $Node2D/checker.get_collider().layer in collides :
+	if $Node2D/checker.is_colliding() :
 		if rotared == false:
 			$Node2D/Sprite.texture = empty
 		else:

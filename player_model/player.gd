@@ -227,6 +227,7 @@ func inventory():
 	if selected_item != "arm" and JsonData.item_data[selected_item]["ItemCategory"] == "build" and JsonData.item_data[selected_item]["layer"] == 0:
 		var block = get_parent().get_parent().get_node("b/TileMap")
 		block.visible = true
+		
 		if block.empty != load("res://textures/build_player/" + selected_item +"_true.png"):
 			block.collides = JsonData.item_data[selected_item]["collides"]
 			block.empty = load("res://textures/build_player/" + selected_item +"_true.png")
@@ -372,10 +373,8 @@ func remove(point):
 	position = Vector2(752,656)
 
 func add_item(item_name, item_quantity):
-	print("t")
 	for item_index in range(inventory.size()):
 		if inventory[item_index][0] == item_name:
-
 			var stack_size = int(JsonData.item_data[item_name]["StackSize"])
 			var able_to_add = stack_size - inventory[item_index][1]
 			if able_to_add >= item_quantity:
@@ -390,36 +389,41 @@ func add_item(item_name, item_quantity):
 
 func check_for_item(ItemName,count):
 	var needto = count
-	for i in range(inventory.count()):
+	for i in range(inventory.size()):
 		if inventory[i][0] == ItemName:
+			var t = 0
 			var check_count = inventory[i][1] 
-			while check_count != 0 or needto != 0:
+			while check_count > 0 and needto > 0 :
 				needto -= 1
+				t +=1
 				check_count -=1
-	Console.write_line(needto)
 	if needto > 0:
 		for item_index in arm:
 			if arm[item_index][0] == ItemName:
+				
 				var check_count =arm[item_index][1] 
-				while check_count != 0 or needto != 0:
+				var t = 0
+				while check_count > 0 and needto > 0:
+					break
 					needto -= 1
+					t +=1 
+					
 					check_count -=1
 	if needto >0:return false
 	return true
 
 func remove_item(ItemName,count):
 	if check_for_item(ItemName,count):
-		Console.write_line("rr")
 		var needto = count
-		for i in range(inventory.count()):
+		for i in range(inventory.size()):
 			if inventory[i][0] == ItemName:
-				while inventory[i][1]  != 0 or needto != 0:
+				while inventory[i][1]  > 0 and needto > 0:
 					needto -= 1
 					inventory[i][1]  -=1
 		if needto > 0:
 			for item_index in arm:
 				if arm[item_index][0] == ItemName:
-					while arm[item_index][1]  != 0 or needto != 0:
+					while arm[item_index][1] > 0 and needto > 0:
 						needto -= 1
 						arm[item_index][1] -=1
 

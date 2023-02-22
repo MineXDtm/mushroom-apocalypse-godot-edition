@@ -413,8 +413,8 @@ func save_chunks():
 		object_data["type"] = world[i].type
 		if world[i].type == "drop":
 			object_data["drop_name"] = world[i].item_name
-		else:
-			object_data["health"] = world[i].health
+		elif world[i].get_node("healthsystem") !=null:
+			object_data["health"] = world[i].get_node("healthsystem").health
 		object_data["name"] = world[i].name
 		if world[i].type == "block":
 			object_data["rotare"] = world[i].rotare
@@ -464,8 +464,8 @@ func update_chunks():
 		object_data["name"] = world[i].name
 		if world[i].type == "drop":
 			object_data["drop_name"] = world[i].item_name
-		elif world[i].type != "exit":
-			object_data["health"] = world[i].health
+		elif world[i].get_node("healthsystem") != null:
+			object_data["health"] = world[i].get_node("healthsystem").health
 		if world[i].type == "block":
 			object_data["rotare"] = world[i].rotare
 		if world[i].type == "stone_block":
